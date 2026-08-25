@@ -1,8 +1,9 @@
 import './RegisterUser.css'
 import 'react-day-picker/style.css'
 import { useState } from 'react'
-export default function RegisterUser({user, setUser}) {
+export default function RegisterUser({ user, setUser }) {
     const [loading, setLoading] = useState(false)
+    
     const [error, setError] = useState(false)
     const [errorMessage, setErrorMessage] = useState('')
     const handleSubmit = async (e) => {
@@ -10,6 +11,8 @@ export default function RegisterUser({user, setUser}) {
 
         const data = Object.fromEntries(new FormData(e.target))
         try {
+            setError(false)
+            setErrorMessage('')
             setLoading(true)
             const response = await fetch(`${import.meta.env.VITE_API_URL}/registerUser`, {
                 method: 'POST',
@@ -20,7 +23,7 @@ export default function RegisterUser({user, setUser}) {
                 body: JSON.stringify(data)
             })
             const result = await response.json()
-            if(result?.authenticated){
+            if (result?.authenticated) {
                 setUser(true)
             }
             if (result?.Error) {
@@ -79,6 +82,10 @@ export default function RegisterUser({user, setUser}) {
                         <div className="mb-3">
                             <label htmlFor="email" className='form-label'>Your Email</label>
                             <input type="email" name="email" id="email" className='form-control' minLength={5} maxLength={400} placeholder='Example: JohnMarston@gmail.com    ' />
+                        </div>
+                        <div className="mb-3">
+                            <label htmlFor="cpf" className='form-label'>Your CPF</label>
+                            <input type="number" name="cpf" id="cpf" className='form-control' minLength={3} maxLength={14} placeholder='Example: 12345678888901234' />
                         </div>
                         <div className="mb-3">
                             <label htmlFor="password" className='form-label'>Your Password</label>

@@ -9,7 +9,8 @@ def database():
         name varchar(150)  not null,
         email  varchar(254) not null,
         password  varchar(255) not null,
-        session_token UUID)""")
+        session_token UUID,
+        cpf varchar(14) not null ,)""")
         conn.commit()
     except Exception:
         if conn:

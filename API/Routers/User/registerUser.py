@@ -24,7 +24,7 @@ def registerUser(data: registerUser, responseCookie:Response):
         hashPassword = ph.hash(data.password)
         cursor.execute("""
         INSERT INTO usersPousae(
-     name, email, password, session_token) values(%s, %s,%s,%s)""",(data.name, data.email, hashPassword, session_token))
+     name, email, password, session_token, cpf) values(%s, %s,%s,%s,%s)""",(data.name, data.email, hashPassword, session_token, data.cpf))
         conn.commit()
         responseCookie.set_cookie(
             key='user_session_token',
@@ -35,7 +35,7 @@ def registerUser(data: registerUser, responseCookie:Response):
             path='/',
         )
         return{'Status': True}
-    except Exception :
-        return {"Status": False, "Error": "An error occurred."}
+    except Exception as e:
+        return {"Status": False, "Error": "An error occurred.", 'ErrorGross': str(e)}
 
 

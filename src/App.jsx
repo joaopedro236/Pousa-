@@ -2,6 +2,7 @@ import './StylesGlobals/reset.css'
 import './StylesGlobals/assets.css'
 import './StylesGlobals/root.css'
 import RegisterUser from './Components/RegisterUser/RegisterUser'
+import Navbar from './Components/Navbar/Navbar'
 import { useState, useEffect } from 'react'
 function App() {
   const [user, setUser] = useState(false)
@@ -18,12 +19,18 @@ function App() {
       }
     }
     checkUser()
+    const interval = setInterval(checkUser, 2000)
+
+    return () => clearInterval(interval)
+
   }, [])
   
   return (
     <>
       <RegisterUser user={user} setUser={setUser}/>
-      <main className={`${user ? 'Active': ''}`}></main>
+      <main className={`${user ? 'Active': ''}`}>
+        <Navbar/>
+      </main>
     </>
   )
 }

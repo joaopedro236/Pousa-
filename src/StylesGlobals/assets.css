@@ -6,6 +6,7 @@ body {
     font-weight: bold;
 }
 main{
+    width: 100%;
     display: none;
 }
 main.Active {
