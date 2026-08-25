@@ -1,8 +1,8 @@
-from ....Databases.Conn.users import connect_database
+from ...Databases.Conn.users import connect_database
 from fastapi import APIRouter, Response
 import uuid
 from argon2 import PasswordHasher
-from ....Validation.registerUser.registerUser import registerUser
+from ...Validation.User.registerUser import registerUser
 
 router = APIRouter()
 ph = PasswordHasher()
