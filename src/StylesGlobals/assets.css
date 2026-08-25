@@ -1,0 +1,7 @@
+body {
+    font-family: sans-serif;
+    background-color: var(--background);
+}h1{
+    font-size: 23px;
+    font-weight: bold;
+}
