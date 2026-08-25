@@ -1,7 +1,7 @@
 import './RegisterUser.css'
 import 'react-day-picker/style.css'
 import { useState } from 'react'
-export default function RegisterUser() {
+export default function RegisterUser({user, setUser}) {
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState(false)
     const [errorMessage, setErrorMessage] = useState('')
@@ -20,6 +20,9 @@ export default function RegisterUser() {
                 body: JSON.stringify(data)
             })
             const result = await response.json()
+            if(result?.authenticated){
+                setUser(true)
+            }
             if (result?.Error) {
                 setError(true)
                 setErrorMessage(
@@ -44,7 +47,7 @@ export default function RegisterUser() {
     }
     return (
         <>
-            <section className="registerUser">
+            <section className={`registerUser ${user ? 'Active' : ''}`}>
                 <form onSubmit={handleSubmit}>
                     <div className="userIcon">
                         <svg

@@ -5,3 +5,9 @@ body {
     font-size: 23px;
     font-weight: bold;
 }
+main{
+    display: none;
+}
+main.Active {
+    display: flex;
+}

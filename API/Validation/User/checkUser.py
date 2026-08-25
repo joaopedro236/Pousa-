@@ -3,7 +3,7 @@ router = APIRouter()
 @router.get('/checkUser')
 def checkCookie(request: Request):
     try:
-        token = request.cookies.get("restaurant_session_token")
+        token = request.cookies.get("user_session_token")
         if token:
             return {"authenticated": True}
 
