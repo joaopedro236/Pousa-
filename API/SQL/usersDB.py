@@ -8,4 +8,4 @@ def selectAll():
             print(user)
     except Exception as e:
         print(e)
-selectAll()
+selectAll() 

@@ -1,47 +1,77 @@
 import './Navbar.css'
-import logo from '../../assets/154622676-design-de-ilustração-de-ícone-de-vetor-de-logotipo-de-letra-p.jpg'
-export default function Navbar() {
+import { useEffect } from 'react'
+export default function Navbar({ ItemsNavbar, user }) {
+    const itemsNavbar = [
+        { name: 'Explore', href: '#', value: 'explore' },
+        { name: 'Trips', href: '#', value: 'trips' },
+        { name: 'Stays', href: '#', value: 'stays'},
+        { name: 'User Dashboard', href: '#', value: 'User Dashboard'},
+        { name: 'Create Trip', href: '#', value: 'create-trip'}
+    ]
+    useEffect(() => {
+        const handleKeyDown = (event) => {
+
+            if (!user) return
+            if (!event.ctrlKey) return
+            const sections = {
+                '1': 'explore',
+                '2': 'trips',
+                '3': 'stays',
+                '4': 'User Dashboard',
+                '5': 'create-trip'
+            }
+
+            const section = sections[event.key]
+
+            if (section) {
+                event.preventDefault()
+                ItemsNavbar(section)
+            }
+        }
+
+        window.addEventListener('keydown', handleKeyDown)
+
+        return () => {
+            window.removeEventListener('keydown', handleKeyDown)
+        }
+
+    }, [ItemsNavbar, user])
     return (
         <>
-            <nav className=" navbar navbar-expand-lg bg-primary ">
-                <div class="container-fluid p-0">
-                    <a className="navbar-brand" href="#">
-                        <img src={logo} alt="logo" width={56} className='logo' />
-                    </a>
+            <nav className=" navbar navbar-expand-lg bg-primary px-2 d-flex">
+                <div className="container-fluid d-flex align-items-center  justify-content-between">
+                    <h1 className="navbar-brand text-white m-0">
+                        PousaÊ
+                    </h1>
                     <button
-                        className="navbar-toggler p-3 border-0 shadow-none"
+                        className="navbar-toggler p-0 border-0 shadow-none"
                         type="button"
                         data-bs-toggle="collapse"
-                        
+
                         data-bs-target="#navbarSupportedContent"
                     >
                         <span className="navbar-toggler-icon"></span>
                     </button>
-                    <div class="collapse navbar-collapse bg-primary p-3" id="navbarSupportedContent">
-                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                            <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="#">Home</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Link</a>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    Dropdown
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="#">Action</a></li>
-                                    <li><a class="dropdown-item" href="#">Another action</a></li>
-                                    <li><a class="dropdown-item" href="#">Something else here</a></li>
-                                </ul>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link disabled" aria-disabled="true">Disabled</a>
-                            </li>
+                    <div className="collapse navbar-collapse bg-primary p-3" id="navbarSupportedContent">
+                        <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+                            {itemsNavbar.map((item, index) => (
+                                <li className="nav-item" key={index}>
+                                    <a
+                                        href={item.href}
+                                        onClick={() => ItemsNavbar(item.value)}
+                                        className={`nav-link text-white ${item.active ? 'active' : ''
+                                            } ${item.disabled ? 'disabled' : ''
+                                            }`}
+                                    >
+                                        {item.name}
+                                    </a>
+                                </li>
+                            ))}
+
                         </ul>
-                        <form class="d-flex p-1" role="search">
-                            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
-                            <button class="btn  btn-light" type="submit">Search</button>
+                        <form className="d-flex p-1 align-items-center" role="search">
+                            <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
+                            <button className="btn  btn-light search-btn" type="submit">Search</button>
                         </form>
                     </div>
                 </div>

@@ -10,7 +10,8 @@ def database():
         email  varchar(254) not null,
         password  varchar(255) not null,
         session_token UUID,
-        cpf varchar(14) not null ,)""")
+        cpf varchar(14) not null ,
+        image_url text)""")
         conn.commit()
     except Exception:
         if conn:

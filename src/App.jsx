@@ -2,10 +2,12 @@ import './StylesGlobals/reset.css'
 import './StylesGlobals/assets.css'
 import './StylesGlobals/root.css'
 import RegisterUser from './Components/RegisterUser/RegisterUser'
+import UserDashboard from './Components/UserDashboard/UserDashboard'
 import Navbar from './Components/Navbar/Navbar'
 import { useState, useEffect } from 'react'
 function App() {
   const [user, setUser] = useState(false)
+  const [itemsNavbar, setItemsNavbar] = useState(0)
   useEffect(() => {
     const checkUser = async () => {
       try {
@@ -28,8 +30,9 @@ function App() {
   return (
     <>
       <RegisterUser user={user} setUser={setUser}/>
-      <main className={`${user ? 'Active': ''}`}>
-        <Navbar/>
+      <main className={`d-flex flex-column ${user ? 'Active': ''}`}>
+        <Navbar ItemsNavbar={setItemsNavbar} user={user}/>
+        <UserDashboard itemsNavbar={itemsNavbar}/>
       </main>
     </>
   )

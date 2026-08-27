@@ -1,6 +1,8 @@
 body {
     font-family: sans-serif;
     background-color: var(--background);
+    padding-top:105px;
+    color: var(--black);
 }h1{
     font-size: 23px;
     font-weight: bold;

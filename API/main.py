@@ -2,6 +2,8 @@ from fastapi import FastAPI
 from API.Databases.DB.users import database as db_registerUser
 from API.Routers.User.registerUser import router as registerUser
 from API.Validation.User.checkUser import router as checkUser
+from API.Routers.User.get_user import router as getUser
+from API.Routers.User.updateImage import router as updateImage
 import os
 from dotenv import load_dotenv
 app = FastAPI()
@@ -19,6 +21,8 @@ app.add_middleware(
 )   
 app.include_router(registerUser)
 app.include_router(checkUser)
+app.include_router(getUser)
+app.include_router(updateImage)
 @app.on_event('startup')
 def startup():
     db_registerUser()
