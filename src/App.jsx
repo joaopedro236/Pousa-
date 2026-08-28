@@ -26,13 +26,15 @@ function App() {
     return () => clearInterval(interval)
 
   }, [])
-  
+  useEffect(() => {
+    document.body.classList.toggle('user-active', user)
+  }, [user])
   return (
     <>
-      <RegisterUser user={user} setUser={setUser}/>
-      <main className={`d-flex flex-column ${user ? 'Active': ''}`}>
-        <Navbar ItemsNavbar={setItemsNavbar} user={user}/>
-        <UserDashboard itemsNavbar={itemsNavbar}/>
+      <RegisterUser user={user} setUser={setUser} />
+      <main className={`d-flex flex-column ${user ? 'Active' : ''}`}>
+        <Navbar ItemsNavbar={setItemsNavbar} user={user} />
+        <UserDashboard itemsNavbar={itemsNavbar} user={user} />
       </main>
     </>
   )

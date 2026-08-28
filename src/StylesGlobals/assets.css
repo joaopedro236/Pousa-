@@ -1,16 +1,24 @@
 body {
     font-family: sans-serif;
     background-color: var(--background);
-    padding-top:105px;
+    padding-top: 0;
     color: var(--black);
-}h1{
+}
+
+body.user-active {
+    padding-top: 105px;
+}
+
+h1 {
     font-size: 23px;
     font-weight: bold;
 }
-main{
+
+main {
     width: 100%;
     display: none;
 }
+
 main.Active {
     display: flex;
 }

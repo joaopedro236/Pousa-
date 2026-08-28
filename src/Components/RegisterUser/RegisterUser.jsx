@@ -1,9 +1,9 @@
 import './RegisterUser.css'
-import 'react-day-picker/style.css'
+import inputs from './inputs'
 import { useState } from 'react'
 export default function RegisterUser({ user, setUser }) {
     const [loading, setLoading] = useState(false)
-    
+
     const [error, setError] = useState(false)
     const [errorMessage, setErrorMessage] = useState('')
     const handleSubmit = async (e) => {
@@ -75,22 +75,25 @@ export default function RegisterUser({ user, setUser }) {
                         <p>Join us today, Please fill un the details below.</p>
                     </header>
                     <div className='registerUserFormDiv'>
-                        <div className="mb-3">
-                            <label htmlFor="name" className='form-label'> You Name</label>
-                            <input type="text" name="name" id="name" minLength={5} maxLength={400} className='form-control' placeholder='Example: John Marston    ' />
-                        </div>
-                        <div className="mb-3">
-                            <label htmlFor="email" className='form-label'>Your Email</label>
-                            <input type="email" name="email" id="email" className='form-control' minLength={5} maxLength={400} placeholder='Example: JohnMarston@gmail.com    ' />
-                        </div>
-                        <div className="mb-3">
-                            <label htmlFor="cpf" className='form-label'>Your CPF</label>
-                            <input type="number" name="cpf" id="cpf" className='form-control' minLength={3} maxLength={14} placeholder='Example: 12345678888901234' />
-                        </div>
-                        <div className="mb-3">
-                            <label htmlFor="password" className='form-label'>Your Password</label>
-                            <input type="password" name="password" id="password" className='form-control' minLength={5} maxLength={100} placeholder='Password' />
-                        </div>
+                        {inputs.map((inputsMap) => (
+                            <div className="mb-3" key={inputsMap.id}>
+                                <label htmlFor={inputsMap.name} className="form-label">
+                                    {inputsMap.label}
+                                </label>
+
+                                <input
+                                    type={inputsMap.type}
+                                    name={inputsMap.name}
+                                    id={inputsMap.name}
+                                    minLength={inputsMap.minLength}
+                                    maxLength={inputsMap.maxLength}
+                                    className="form-control"
+                                    placeholder={inputsMap.placeholder}
+                                />
+                            </div>
+                        ))}
+
+
                     </div>
                     <button
                         type="submit"

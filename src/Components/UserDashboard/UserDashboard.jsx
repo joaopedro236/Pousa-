@@ -1,7 +1,7 @@
 import './userDashboard.css'
 import { useState, useEffect } from 'react'
 import photoUser from '../../assets/user.png'
-export default function User() {
+export default function User({user}) {
     const [loading, setLoading] = useState(false)
     const [json, setJson] = useState({})
     const [activeFile, setActiveFile] = useState(false)
@@ -24,7 +24,7 @@ export default function User() {
                 setLoading(false)
             }
         }
-        setTimeout(user, 500)
+        setTimeout(user, 700)
         const interval = setInterval(user, 500000)
 
         return () => clearInterval(interval)
@@ -65,7 +65,7 @@ export default function User() {
     }
     return (
         <>
-            <section className='userDashboard d-flex flex-column align-items-center justify-content-center padding-top-2'>
+            <section className={`userDashboard ${user ? 'd-flex': 'd-none'} flex-column align-items-center justify-content-center padding-top-2`}>
                 <header className='d-flex flex-column  align-items-center justify-content-center '>
                     <picture className='position-relative' onClick={() => setActiveFile(prev => !prev)}>
                         <img

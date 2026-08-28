@@ -38,7 +38,7 @@ export default function Navbar({ ItemsNavbar, user }) {
     }, [ItemsNavbar, user])
     return (
         <>
-            <nav className=" navbar navbar-expand-lg bg-primary px-2 d-flex">
+            <nav className={`navbar navbar-expand-lg bg-primary px-2 ${user ? 'd-flex': 'd-none'}`}>
                 <div className="container-fluid d-flex align-items-center  justify-content-between">
                     <h1 className="navbar-brand text-white m-0">
                         PousaÊ
