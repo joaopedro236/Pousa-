@@ -4,9 +4,9 @@ export default function Navbar({ ItemsNavbar, user }) {
     const itemsNavbar = [
         { name: 'Explore', href: '#', value: 'explore' },
         { name: 'Trips', href: '#', value: 'trips' },
-        { name: 'Stays', href: '#', value: 'stays'},
-        { name: 'User Dashboard', href: '#', value: 'User Dashboard'},
-        { name: 'Create Trip', href: '#', value: 'create-trip'}
+        { name: 'Stays', href: '#', value: 'stays' },
+        { name: 'User Dashboard', href: '#', value: 'User Dashboard' },
+        { name: 'Create Trip', href: '#', value: 'create-trip' }
     ]
     useEffect(() => {
         const handleKeyDown = (event) => {
@@ -38,7 +38,7 @@ export default function Navbar({ ItemsNavbar, user }) {
     }, [ItemsNavbar, user])
     return (
         <>
-            <nav className={`navbar navbar-expand-lg bg-primary px-2 ${user ? 'd-flex': 'd-none'}`}>
+            <nav className={`navbar navbar-expand-lg bg-primary px-2 ${user ? 'd-flex' : 'd-none'}`}>
                 <div className="container-fluid d-flex align-items-center  justify-content-between">
                     <h1 className="navbar-brand text-white m-0">
                         PousaÊ
@@ -58,7 +58,10 @@ export default function Navbar({ ItemsNavbar, user }) {
                                 <li className="nav-item" key={index}>
                                     <a
                                         href={item.href}
-                                        onClick={() => ItemsNavbar(item.value)}
+                                        onClick={(e) => {
+                                            e.preventDefault()
+                                            ItemsNavbar(item.value)
+                                        }}
                                         className={`nav-link text-white ${item.active ? 'active' : ''
                                             } ${item.disabled ? 'disabled' : ''
                                             }`}

@@ -7,7 +7,7 @@ import Navbar from './Components/Navbar/Navbar'
 import { useState, useEffect } from 'react'
 function App() {
   const [user, setUser] = useState(false)
-  const [itemsNavbar, setItemsNavbar] = useState(0)
+  const [itemsNavbar, setItemsNavbar] =  useState('explore')
   useEffect(() => {
     const checkUser = async () => {
       try {

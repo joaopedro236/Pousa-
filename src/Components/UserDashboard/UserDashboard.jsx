@@ -2,14 +2,12 @@ import './userDashboard.css'
 import cards from './cardsUsers'
 import { useState, useEffect } from 'react'
 import photoUser from '../../assets/user.png'
-export default function User({ user }) {
-    const [loading, setLoading] = useState(false)
+export default function User({ user, itemsNavbar }) {
     const [json, setJson] = useState({})
     const [activeFile, setActiveFile] = useState(false)
     const [photo, setPhoto] = useState(null)
     useEffect(() => {
         const user = async () => {
-            setLoading(true)
             try {
                 const response = await fetch(`${import.meta.env.VITE_API_URL}/getUser`, {
                     'credentials': 'include'
@@ -66,7 +64,7 @@ export default function User({ user }) {
     }
     return (
         <>
-            <section className={`userDashboard ${user ? 'd-flex' : 'd-none'} flex-column align-items-center justify-content-center padding-top-2`}>
+            <section className={`userDashboard ${user && itemsNavbar == 'User Dashboard'? 'd-flex' : 'd-none'} flex-column align-items-center justify-content-center padding-top-2`}>
                 <header className='d-flex flex-column  align-items-center justify-content-center '>
                     <picture className='position-relative' onClick={() => setActiveFile(prev => !prev)}>
                         <img
@@ -84,9 +82,9 @@ export default function User({ user }) {
                             <div key={cardsMap.id} className='d-flex flex-column align-items-center justify-content-center text-center ' >
                                 <h1>
                                     {cardsMap.json === 'moneyalreadyspent'
-                                        ? new Intl.NumberFormat('pt-BR', {
+                                        ? new Intl.NumberFormat('en-us', {
                                             style: 'currency',
-                                            currency: 'BRL'
+                                            currency: 'usd'
                                         }).format(json?.[cardsMap.json] || 0)
                                         : json?.[cardsMap.json] || 0
                                     }
