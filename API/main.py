@@ -4,7 +4,8 @@ from API.Routers.User.registerUser import router as registerUser
 from API.Validation.User.checkUser import router as checkUser
 from API.Routers.User.get_user import router as getUser
 from API.Routers.User.updateImage import router as updateImage
-from API.Routers.User.trips import router as trips
+from API.Routers.Trips.trips import router as trips
+from API.Routers.Trips.get_trips import router as get_trips
 import os
 from dotenv import load_dotenv
 app = FastAPI()
@@ -25,6 +26,7 @@ app.include_router(checkUser)
 app.include_router(getUser)
 app.include_router(updateImage)
 app.include_router(trips)
+app.include_router(get_trips)
 @app.on_event('startup')
 def startup():
     db_registerUser()

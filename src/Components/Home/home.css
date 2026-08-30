@@ -1,0 +1,154 @@
+.home header {
+    width: 100%;
+
+    max-width: 500px;
+}
+
+.home header input {
+    border-radius: 30px;
+}
+
+.search-form {
+    width: 100%;
+    max-width: 650px;
+}
+
+.search-box {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 58px;
+    padding: 0 20px;
+    gap: 12px;
+
+     background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 16px;
+
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.06);
+
+    transition: all 0.25s ease;
+    
+}
+
+.search-box:hover {
+    border-color: #cfd5dc;
+    box-shadow: 0 6px 22px rgba(0, 0, 0, 0.09);
+}
+
+.search-box:focus-within {
+    border-color: #0d6efd;
+    box-shadow: 0 0 0 4px rgba(13, 110, 253, 0.10);
+}
+
+.search-box svg {
+    color: #6b7280;
+    flex-shrink: 0;
+}
+
+.search-box .form-control {
+    width: 100%;
+    border: none;
+    outline: none;
+    box-shadow: none;
+    background: transparent;
+
+     padding: 0;
+    font-size: 15px;
+    color: #1f2937;
+    
+}
+
+.search-box .form-control::placeholder {
+    color: #9ca3af;
+}
+
+.search-box .form-control:focus {
+    border: none;
+    outline: none;
+    box-shadow: none;
+}
+.userInfo div {
+    gap: 2px;
+}
+.userInfo p{
+    color: var(--text-gray);
+}
+.userInfo h1 {
+    font-size: 31px;    
+
+}
+.userInfo img {
+    width: 100%;
+    height: 100%;
+    border-radius:50%;
+    max-width: 60px;
+}
+.trips {
+    padding: 0 24px 30px;
+    width: 100%;
+}
+
+.trip {
+    background: #fff;
+    border: 1px solid #e8e8e8;
+    border-radius: 18px;
+    padding: 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    transition: 0.2s ease;
+}
+
+.trip:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+}
+
+.trip h2 {
+    margin: 0;
+    font-size: 21px;
+    font-weight: 700;
+    color: #222;
+}
+
+.trip > div:first-child p {
+    margin: 6px 0 0;
+    color: #777;
+    font-size: 14px;
+}
+
+.trip-info {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 18px;
+}
+
+.trip-info span {
+    background: #f5f6f8;
+    padding: 8px 12px;
+    border-radius: 10px;
+    font-size: 13px;
+    color: #555;
+}
+
+.trip-owner {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 18px;
+    padding-top: 15px;
+    border-top: 1px solid #eee;
+}
+
+.trip-owner img {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.trip-owner span {
+    font-size: 14px;
+    font-weight: 600;
+    color: #444;
+}

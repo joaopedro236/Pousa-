@@ -61,7 +61,7 @@ export default function Navbar({ ItemsNavbar, user }) {
                                         onClick={(e) => {
                                             e.preventDefault()
                                             ItemsNavbar(item.value)
-                                        }}
+                                        }}  
                                         className={`nav-link text-white ${item.active ? 'active' : ''
                                             } ${item.disabled ? 'disabled' : ''
                                             }`}
@@ -72,10 +72,7 @@ export default function Navbar({ ItemsNavbar, user }) {
                             ))}
 
                         </ul>
-                        <form className="d-flex p-1 align-items-center" role="search">
-                            <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
-                            <button className="btn  btn-light search-btn" type="submit">Search</button>
-                        </form>
+                        
                     </div>
                 </div>
             </nav >

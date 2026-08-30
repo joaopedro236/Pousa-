@@ -1,11 +1,11 @@
-from ..Conn.trips import connect_database
+from ..Conn.trips import connect_database_trip
 
 
 def database():
     conn = None
     cursor = None
     try:
-        conn, cursor = connect_database()
+        conn, cursor = connect_database_trip()
         cursor.execute("""
         create table if not exists trips(
         id serial primary key,

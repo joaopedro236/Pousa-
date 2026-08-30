@@ -51,8 +51,8 @@ async def upload_image(
         )
         conn.commit()
         return {"status": True, "url": data["data"]["url"]}
-    except Exception as error:
-        return {"Status": False}
+    except Exception :
+        return {"Status": False,'Error': 'An error occurred'}
     finally:
         if cursor:
             cursor.close()

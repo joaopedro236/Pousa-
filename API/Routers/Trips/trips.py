@@ -1,4 +1,4 @@
-from ...Databases.Conn.trips import connect_database
+from ...Databases.Conn.trips import connect_database_trip
 from ...Validation.User.trips import Trips
 from fastapi import APIRouter, Request
 from datetime import date, datetime
@@ -12,7 +12,7 @@ def trips(dataValidation: Trips, request: Request):
     cursor = None
     session_token = request.cookies.get("user_session_token")
     try:
-        conn, cursor = connect_database()
+        conn, cursor = connect_database_trip()
         start_date = datetime.strptime(dataValidation.startDate, "%Y-%m-%d").date()
         end_date = datetime.strptime(dataValidation.endDate, "%Y-%m-%d").date()
 

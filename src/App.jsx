@@ -5,6 +5,7 @@ import RegisterUser from './Components/RegisterUser/RegisterUser'
 import UserDashboard from './Components/UserDashboard/UserDashboard'
 import Navbar from './Components/Navbar/Navbar'
 import CreateTrip from './Components/createTrip/CreateTrip'
+import Home from './Components/Home/Home'
 import { useState, useEffect } from 'react'
 function App() {
   const [user, setUser] = useState(false)
@@ -35,6 +36,7 @@ function App() {
       <RegisterUser user={user} setUser={setUser} />
       <main className={`d-flex flex-column ${user ? 'Active' : ''}`}>
         <Navbar ItemsNavbar={setItemsNavbar} user={user} />
+        <Home user={user} itemsNavbar={itemsNavbar} setItemsNavbar={setItemsNavbar}/>
         <UserDashboard itemsNavbar={itemsNavbar} user={user} />
         <CreateTrip user={user} itemsNavbar={itemsNavbar} setItemsNavbar={setItemsNavbar}/>
       </main>

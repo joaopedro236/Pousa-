@@ -7,7 +7,7 @@ DB_PORT = os.getenv('DB_PORT')
 DB_NAME = os.getenv('DB_NAME_TRIP')
 DB_USER = os.getenv('DB_USER')
 DB_PASSWORD = os.getenv('DB_PASSWORD')
-def connect_database():
+def connect_database_trip():
     try:
         conn = psycopg2.connect(
             host=DB_HOST,

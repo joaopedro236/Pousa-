@@ -7,7 +7,7 @@ export default function User({ user, itemsNavbar }) {
     const [activeFile, setActiveFile] = useState(false)
     const [photo, setPhoto] = useState(null)
     useEffect(() => {
-        const user = async () => {
+        const userFetch = async () => {
             try {
                 const response = await fetch(`${import.meta.env.VITE_API_URL}/getUser`, {
                     'credentials': 'include'
@@ -21,8 +21,8 @@ export default function User({ user, itemsNavbar }) {
                 console.error(error)
             } 
         }
-        setTimeout(user, 700)
-        const interval = setInterval(user, 500000)
+        setTimeout(userFetch, 700)
+        const interval = setInterval(userFetch, 500000)
 
         return () => clearInterval(interval)
 
