@@ -1,12 +1,13 @@
 body {
     font-family: sans-serif;
-    background-color: var(--background);
+    background: var(--background);
     padding-top: 0;
+    min-height: 100ch;
     color: var(--black);
 }
 
 body.user-active {
-    padding-top: 105px;
+    padding-top: 85px;
 }
 
 h1 {

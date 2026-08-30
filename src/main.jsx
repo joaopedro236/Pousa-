@@ -40,7 +40,7 @@ window.fetch = async (...args) => {
         const response = await originalFetch(...args)
 
         if (!response.ok) {
-            console.error('API Error:', response.status, args[0])
+            console.error("API Error:", response.status)
 
             showError(
                 'We could not complete your request. Please try again later.'

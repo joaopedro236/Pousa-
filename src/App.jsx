@@ -4,6 +4,7 @@ import './StylesGlobals/root.css'
 import RegisterUser from './Components/RegisterUser/RegisterUser'
 import UserDashboard from './Components/UserDashboard/UserDashboard'
 import Navbar from './Components/Navbar/Navbar'
+import CreateTrip from './Components/createTrip/CreateTrip'
 import { useState, useEffect } from 'react'
 function App() {
   const [user, setUser] = useState(false)
@@ -35,6 +36,7 @@ function App() {
       <main className={`d-flex flex-column ${user ? 'Active' : ''}`}>
         <Navbar ItemsNavbar={setItemsNavbar} user={user} />
         <UserDashboard itemsNavbar={itemsNavbar} user={user} />
+        <CreateTrip user={user} itemsNavbar={itemsNavbar} setItemsNavbar={setItemsNavbar}/>
       </main>
     </>
   )

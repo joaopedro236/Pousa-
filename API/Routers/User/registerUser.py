@@ -37,5 +37,9 @@ def registerUser(data: registerUser, responseCookie:Response):
         return{'Status': True}
     except Exception as e:
         return {"Status": False, "Error": "An error occurred.", 'ErrorGross': str(e)}
-
+    finally:
+        if cursor:
+            cursor.close()
+        if conn:
+            conn.close() 
 

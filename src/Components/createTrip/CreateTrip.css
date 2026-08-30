@@ -1,0 +1,8 @@
+.createTrip {
+    z-index: 1;
+    display: none;
+}
+
+.createTrip.Active {
+    display: flex;
+}   

@@ -19,9 +19,7 @@ export default function User({ user, itemsNavbar }) {
                 setJson(data)
             } catch (error) {
                 console.error(error)
-            } finally {
-                setLoading(false)
-            }
+            } 
         }
         setTimeout(user, 700)
         const interval = setInterval(user, 500000)

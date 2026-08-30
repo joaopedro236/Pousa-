@@ -20,7 +20,7 @@ async def upload_image(
     session_token = request.cookies.get("user_session_token")
 
     cursor = None
-    allowed_extensions = {"image/jpeg", "image/png", "image/webp"}
+    allowed_extensions = {"image/jpe'g", "image/png", "image/webp"}
     if file.content_type not in allowed_extensions:
         return {"Error": "Only JPG, PNG, or WEBP are allowed", "Status": False}
 
