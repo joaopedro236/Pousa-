@@ -20,16 +20,17 @@ def getUser(request: Request):
         response = cursor.fetchone()
         if not response:
             return {"Status": False, "Error": "The user does not exist."}
+       
         return {
+            "Status": True,
             "name": response[0],
             "email": response[1],
-            "password": response[2],
             "cpf": response[3],
             "image_url": response[5],
             "moneyalreadyspent": response[6],
-            "tripsTaken": response[7]
+            "tripsTaken": response[7],
         }
-    except Exception as e :
+    except Exception as e:
         return {"Status": False, "Error": str(e)}
 
     finally:

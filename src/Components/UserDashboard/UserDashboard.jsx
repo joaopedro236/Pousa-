@@ -3,7 +3,7 @@ import cards from './cardsUsers'
 import { useState, useEffect } from 'react'
 import photoUser from '../../assets/user.png'
 export default function User({ user, itemsNavbar }) {
-    const [json, setJson] = useState({})
+    const [json, setJson] = useState(null)
     const [activeFile, setActiveFile] = useState(false)
     const [photo, setPhoto] = useState(null)
     useEffect(() => {
@@ -17,11 +17,12 @@ export default function User({ user, itemsNavbar }) {
                     console.error(data?.Error)
                 }
                 setJson(data)
+                setPhoto(prev => prev || data?.image_url)
             } catch (error) {
                 console.error(error)
-            } 
+            }
         }
-        setTimeout(userFetch, 700)
+        userFetch()
         const interval = setInterval(userFetch, 500000)
 
         return () => clearInterval(interval)
@@ -62,13 +63,14 @@ export default function User({ user, itemsNavbar }) {
     }
     return (
         <>
-            <section className={`userDashboard ${user && itemsNavbar == 'User Dashboard'? 'd-flex' : 'd-none'} flex-column align-items-center justify-content-center padding-top-2`}>
+            <section className={`userDashboard ${user && itemsNavbar == 'User Dashboard' ? 'd-flex' : 'd-none'} flex-column align-items-center justify-content-center padding-top-2`}>
                 <header className='d-flex flex-column  align-items-center justify-content-center '>
                     <picture className='position-relative' onClick={() => setActiveFile(prev => !prev)}>
                         <img
                             src={photo || json?.image_url || photoUser}
                             alt="photo user"
                             className="photo w-100"
+                            
                         />
                     </picture>
                     <h1>{json?.name}</h1>

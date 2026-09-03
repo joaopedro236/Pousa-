@@ -1,7 +1,7 @@
 import './RegisterUser.css'
 import inputs from './inputs'
 import { useState } from 'react'
-export default function RegisterUser({ user, setUser }) {
+export default function RegisterUser({ user, setUser, setLogin ,login, checkUser}) {
     const [loading, setLoading] = useState(false)
 
     const [error, setError] = useState(false)
@@ -23,11 +23,13 @@ export default function RegisterUser({ user, setUser }) {
                 body: JSON.stringify(data)
             })
             const result = await response.json()
-            if (result?.authenticated) {
+            if (result?.Status) {
                 setUser(true)
+                await checkUser
             }
             if (result?.Error) {
                 setError(true)
+                console.error(result?.Error)
                 setErrorMessage(
                     typeof result.Error === 'string'
                         ? result.Error
@@ -50,7 +52,7 @@ export default function RegisterUser({ user, setUser }) {
     }
     return (
         <>
-            <section className={`registerUser ${user ? 'Active' : ''}`}>
+            <section className={`registerUser ${user || login? 'Active' : ''}`}>
                 <form onSubmit={handleSubmit}>
                     <div className="userIcon">
                         <svg
@@ -110,7 +112,7 @@ export default function RegisterUser({ user, setUser }) {
                     )}
 
 
-                    <p className='mt-2'>Already have an account? <span className='link-primary'>Login</span></p>
+                    <p className='mt-2'>Already have an account? <span onClick={()=> setLogin(true)} role='button' className='link-primary' >Login</span></p>
                 </form>
             </section>
         </>

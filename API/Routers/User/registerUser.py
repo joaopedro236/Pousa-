@@ -9,37 +9,42 @@ ph = PasswordHasher()
 
 
 @router.post("/registerUser")
-def registerUser(data: registerUser, responseCookie:Response):
+def registerUser(data: registerUser, responseCookie: Response):
     try:
         conn, cursor = connect_database()
         cursor.execute(
             """select name, email from usersPousae
-        WHERE name = %s OR email = %s""",
-            (data.name, data.email),
+        WHERE email = %s""",
+            (data.email,),
         )
+
+
         response = cursor.fetchone()
         if response:
-            return {"Status": False, "Error": "A name or email already exists."}
+            return {"Status": False, "Error": "email already exists."}
         session_token = str(uuid.uuid4())
         hashPassword = ph.hash(data.password)
-        cursor.execute("""
-        INSERT INTO usersPousae(
-     name, email, password, session_token, cpf) values(%s, %s,%s,%s,%s)""",(data.name, data.email, hashPassword, session_token, data.cpf))
+        cursor.execute(
+            """
+            INSERT INTO usersPousae(
+     name, email, password, session_token, cpf) values(%s, %s,%s,%s,%s)""",
+            (data.name, data.email, hashPassword, session_token, data.cpf),
+        )
         conn.commit()
         responseCookie.set_cookie(
-            key='user_session_token',
+            key="user_session_token",
             value=session_token,
             httponly=True,
-            max_age= 60 * 60 * 24 * 7,
-            samesite='lax',
-            path='/',
+            max_age=60 * 60 * 24 * 7,
+            samesite="lax",
+            secure=False,
+            path="/",
         )
-        return{'Status': True}
-    except Exception :
+        return {"Status": True}
+    except Exception as e:
         return {"Status": False, "Error": "An error occurred."}
     finally:
         if cursor:
             cursor.close()
         if conn:
-            conn.close() 
-
+            conn.close()

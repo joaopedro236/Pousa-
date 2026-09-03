@@ -111,18 +111,28 @@
         justify-content: center;
     }
 }
-
 @media (min-width: 992px) {
+
     .navbar {
-        height: 85px;
-        padding: 10px 20px;
+        height: 70px;
+        padding: 8px 18px;
         justify-content: space-between;
     }
-    .navbar-collapse{
+
+    .navbar-collapse {
         flex-grow: 0;
     }
+
     .navbar .nav-link {
-        font-size: 14.5px;
-        padding: 8px 10px;
+        font-size: 13.5px;
+        padding: 6px 8px;
+    }
+
+    .logo {
+        margin-left: 15px;
+    }
+
+    .navbar-toggler {
+        margin-right: 15px;
     }
 }

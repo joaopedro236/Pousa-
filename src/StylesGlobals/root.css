@@ -1,46 +1,36 @@
 :root {
-    --black:black;
-    --white:white;
-    --shadow-black:rgba(0, 0, 0, 0.225);
-    --border-black:rgba(0, 0, 0, 0.148);
+    --black: black;
+    --white: white;
+    --glass-background:#ffffff40;
+    --shadow-black: rgba(0, 0, 0, 0.225);
+    --shadow-glass:#1f26875e;
+    --border-glass:rgba(255, 255, 255, 0.18);
+    --border-black: rgba(0, 0, 0, 0.148);
     --background:
-    radial-gradient(
-        circle at 10% 0%,
-        #dbeafe 0%,
-        transparent 32%
-    ),
-    radial-gradient(
-        circle at 100% 100%,
-        #e0f2fe 0%,
-        transparent 30%
-    ),
-    linear-gradient(
-        135deg,
-        #ffffff 0%,
-        #f9fbff 45%,
-        #eff6ff 100%
-    );
-    --background-registerUser:radial-gradient(
-            circle at 20% 20%,
+        radial-gradient(circle at 10% 0%,
+            #dbeafe 0%,
+            transparent 32%),
+        radial-gradient(circle at 100% 100%,
+            #e0f2fe 0%,
+            transparent 30%),
+        linear-gradient(135deg,
+            #ffffff 0%,
+            #f9fbff 45%,
+            #eff6ff 100%);
+    --background-registerUser: radial-gradient(circle at 20% 20%,
             rgba(59, 130, 246, 0.18),
-            transparent 35%
-        ),
-        radial-gradient(
-            circle at 85% 25%,
+            transparent 35%),
+        radial-gradient(circle at 85% 25%,
             rgba(96, 165, 250, 0.20),
-            transparent 40%
-        ),
-        radial-gradient(
-            circle at 50% 100%,
+            transparent 40%),
+        radial-gradient(circle at 50% 100%,
             rgba(147, 197, 253, 0.15),
-            transparent 40%
-        ),
-        linear-gradient(
-            135deg,
+            transparent 40%),
+        linear-gradient(135deg,
             #f8fbff 0%,
             #eef5ff 50%,
-            #e8f1ff 100%
-        );
-;
---text-gray:rgb(98, 96, 96);
+            #e8f1ff 100%);
+    ;
+    --text-gray: rgb(98, 96, 96);
+    --border-white: rgba(255, 255, 255, 0.058);
 }

@@ -6,7 +6,7 @@ export default function Navbar({ ItemsNavbar, user }) {
         { name: 'Trips', href: '#', value: 'trips' },
         { name: 'Stays', href: '#', value: 'stays' },
         { name: 'User Dashboard', href: '#', value: 'User Dashboard' },
-        { name: 'Create Trip', href: '#', value: 'create-trip' }
+        { name: 'Create Trip', href: '#', value: 'create-trip' },
     ]
     useEffect(() => {
         const handleKeyDown = (event) => {

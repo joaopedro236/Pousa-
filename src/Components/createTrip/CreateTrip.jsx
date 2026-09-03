@@ -4,7 +4,7 @@ import './CreateTrip.css'
 import { useState, useEffect } from 'react'
 export default function CreateTrip({ user, itemsNavbar, setItemsNavbar }) {
     const [loading, setLoading] = useState(false)
-
+    const today = new Date().toISOString().split('T')[0]
     const [error, setError] = useState(false)
     const [errorMessage, setErrorMessage] = useState('')
     const handleSubmit = async (e) => {
@@ -29,6 +29,7 @@ export default function CreateTrip({ user, itemsNavbar, setItemsNavbar }) {
             }
             if (result?.Error) {
                 setError(true)
+                console.error(result?.Error)
                 setErrorMessage(
                     typeof result.Error === 'string'
                         ? result.Error
@@ -37,8 +38,8 @@ export default function CreateTrip({ user, itemsNavbar, setItemsNavbar }) {
 
                 return
             }
-            if(result?.Status){
-                 setItemsNavbar('create-tripxR')
+            if (result?.Status) {
+                setItemsNavbar('create-tripxR')
             }
 
         }
@@ -54,7 +55,7 @@ export default function CreateTrip({ user, itemsNavbar, setItemsNavbar }) {
 
     return (
         <>
-            <section className={`registerUser createTrip ${user  && itemsNavbar=='create-trip'?'Active' : ''}`}>
+            <section className={`registerUser createTrip ${user && itemsNavbar == 'create-trip' ? 'Active' : ''}`}>
                 <form onSubmit={handleSubmit}>
                     <div className="userIcon">
                         <svg
@@ -91,6 +92,7 @@ export default function CreateTrip({ user, itemsNavbar, setItemsNavbar }) {
                                     type={inputsMap.type}
                                     name={inputsMap.name}
                                     id={inputsMap.name}
+                                     min={inputsMap.type === 'date' ? today : undefined}
                                     minLength={inputsMap?.minLength}
                                     maxLength={inputsMap?.maxLength}
                                     className="form-control"
