@@ -39,7 +39,8 @@ export default function CreateTrip({ user, itemsNavbar, setItemsNavbar }) {
                 return
             }
             if (result?.Status) {
-                setItemsNavbar('create-tripxR')
+                setItemsNavbar('explore')
+                window.location.reload();
             }
 
         }

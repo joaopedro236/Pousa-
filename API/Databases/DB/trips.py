@@ -10,16 +10,18 @@ def database():
         create table if not exists trips(
         id serial primary key,
         name text,
-        destination text,
+        description text,
         startDate text,
         endDate text,
         numberOfTravelers integer,
         petsAllowed text,
          price DECIMAL(10,2),
-         session_token uuid""")
+         session_token uuid,
+        review numeric(3,2) default 5,
+        usersPurchased uuid[]""")
         conn.commit()
     except Exception:
-           return {"Status": False, "Error": "Error Create Database"}
+        return {"Status": False, "Error": "Error Create Database"}
     finally:
         if cursor:
             cursor.close()

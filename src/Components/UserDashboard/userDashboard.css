@@ -89,11 +89,15 @@
     border-radius: 16px;
     border: 1px solid var(--border-black);
     background: var(--background-white);
-    box-shadow: 0 4px 14px var(--shadow-black);
+    box-shadow: 0 0px 7px var(--shadow-black);
     transition: all 0.25s ease;
     cursor: pointer;
 }
-
+.cards_usersDashboards div img{
+    border-radius: 50%;
+    width: 48px;
+    padding:10px;
+}
 .cards_usersDashboards div:hover {
     transform: translateY(-5px);
     box-shadow: 0 10px 25px var(--shadow-black);

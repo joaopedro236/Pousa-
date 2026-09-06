@@ -1,5 +1,5 @@
 from ...Databases.Conn.trips import connect_database_trip
-from ...Validation.User.trips import Trips
+from ...Validation.Trip.trips import Trips
 from fastapi import APIRouter, Request
 from datetime import date, datetime
 
@@ -30,10 +30,10 @@ def trips(dataValidation: Trips, request: Request):
             return {"Status": False, "Error": "Not session token"}
         cursor.execute(
             """insert into trips(
-        name, destination, startDate, endDate, numberOfTravelers, petsAllowed,price, session_token) values(%s, %s, %s, %s, %s, %s, %s,%s)""",
+        name, description, startDate, endDate, numberOfTravelers, petsAllowed,price, session_token) values(%s, %s, %s, %s, %s, %s, %s,%s)""",
             (
                 dataValidation.name,
-                dataValidation.destination,
+                dataValidation.description,
                 start_date,
                 end_date,
                 dataValidation.numbertravelers,

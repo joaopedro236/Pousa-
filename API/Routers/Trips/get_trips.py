@@ -15,9 +15,9 @@ def get_trips():
         conn, cursor = connect_database_trip()
         connUser, cursorUser = connect_database()
         cursor.execute("""
-    SELECT t.name, t.destination, t.startDate, t.endDate,
+    SELECT t.name, t.description, t.startDate, t.endDate,
            t.numberOfTravelers, t.petsAllowed, t.price,
-           u.name, u.image_url, t.session_token
+           u.name, u.image_url, t.session_token, t.review, t.id
     FROM trips t
     LEFT JOIN usersPousae u
     ON t.session_token = u.session_token
@@ -34,7 +34,7 @@ def get_trips():
             trips.append(
                 {
                     "name": trip[0],
-                    "destination": trip[1],
+                    "description": trip[1],
                     "startDate": trip[2],
                     "endDate": trip[3],
                     "numberOfTravelers": trip[4],
@@ -42,6 +42,8 @@ def get_trips():
                     "price": trip[6],
                     "ownerName": resultUser[0] if resultUser else None,
                     "ownerImage": resultUser[1] if resultUser else None,
+                    "review": trip[10],
+                    'id': trip[11]
                 }
             )
 

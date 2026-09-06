@@ -10,6 +10,7 @@ def database():
         email  varchar(254) not null,
         password  varchar(255) not null,
         session_token UUID,
+        money numeric(10,2 ) default 1000.00, 
         cpf varchar(14) not null ,
         image_url text,
         moneyalreadyspent numeric(10,2)) default 0.0,

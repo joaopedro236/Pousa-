@@ -1,7 +1,7 @@
 from pydantic import BaseModel
 class Trips(BaseModel):
     name: str
-    destination:str
+    description:str
     startDate: str
     endDate:str
     numbertravelers:int

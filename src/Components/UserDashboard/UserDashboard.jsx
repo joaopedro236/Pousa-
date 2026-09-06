@@ -6,28 +6,35 @@ export default function User({ user, itemsNavbar }) {
     const [json, setJson] = useState(null)
     const [activeFile, setActiveFile] = useState(false)
     const [photo, setPhoto] = useState(null)
-    useEffect(() => {
-        const userFetch = async () => {
-            try {
-                const response = await fetch(`${import.meta.env.VITE_API_URL}/getUser`, {
-                    'credentials': 'include'
-                })
-                const data = await response.json()
-                if (!data?.Status) {
-                    console.error(data?.Error)
-                }
-                setJson(data)
-                setPhoto(prev => prev || data?.image_url)
-            } catch (error) {
-                console.error(error)
+
+    const userFetch = async () => {
+        try {
+            const response = await fetch(`${import.meta.env.VITE_API_URL}/getUser`, {
+                'credentials': 'include'
+            })
+            const data = await response.json()
+            if (!data?.Status) {
+                console.error(data?.Error)
             }
+            setJson(data)
+            setPhoto(data?.image_url || null)
+        } catch (error) {
+            console.error(error)
         }
+    }
+
+
+
+
+    useEffect(() => {
+        if (itemsNavbar !== 'User Dashboard') return
+
         userFetch()
-        const interval = setInterval(userFetch, 500000)
+
+        const interval = setInterval(userFetch, 300000)
 
         return () => clearInterval(interval)
-
-    }, [])
+    }, [itemsNavbar])
     const handleFile = async (event) => {
         const file = event.target.files[0]
 
@@ -52,8 +59,9 @@ export default function User({ user, itemsNavbar }) {
                 console.error(data?.detail || 'Error sending image')
 
             }
-
-            setPhoto(data.url)
+            if (data?.url) {
+                setPhoto(data.url)
+            }
             setActiveFile(false)
 
         } catch (error) {
@@ -63,14 +71,19 @@ export default function User({ user, itemsNavbar }) {
     }
     return (
         <>
-            <section className={`userDashboard ${user && itemsNavbar == 'User Dashboard' ? 'd-flex' : 'd-none'} flex-column align-items-center justify-content-center padding-top-2`}>
+            <section className={`userDashboard ${user && itemsNavbar == 'User Dashboard' ? 'show-home'
+                : 'hide-home'} flex-column align-items-center justify-content-center padding-top-2`}>
                 <header className='d-flex flex-column  align-items-center justify-content-center '>
                     <picture className='position-relative' onClick={() => setActiveFile(prev => !prev)}>
                         <img
                             src={photo || json?.image_url || photoUser}
                             alt="photo user"
+                            onError={(e) => {
+                                e.currentTarget.onerror = null
+                                e.currentTarget.src = photoUser
+                            }}
                             className="photo w-100"
-                            
+
                         />
                     </picture>
                     <h1>{json?.name}</h1>
@@ -79,12 +92,14 @@ export default function User({ user, itemsNavbar }) {
                 <div className="cards_usersDashboards d-flex flex-wrap gap-3 mt-3 px-3 aligh-items-center justify-content-center ">
                     {
                         cards.map((cardsMap) => (
-                            <div key={cardsMap.id} className='d-flex flex-column align-items-center justify-content-center text-center ' >
-                                <h1>
-                                    {cardsMap.json === 'moneyalreadyspent'
+                            <div key={cardsMap.id} className='d-flex  flex-column  ' >
+                                <img src={cardsMap?.image} alt={cardsMap.name} style={{ background: cardsMap.color, filter: 'invert(100)' }} />
+                                <h1 className='mt-3'>
+                                    {cardsMap.json === 'moneyalreadyspent' || cardsMap.json === 'money'
                                         ? new Intl.NumberFormat('en-us', {
                                             style: 'currency',
-                                            currency: 'usd'
+                                            currency: 'usd',
+                                            notation: 'compact',
                                         }).format(json?.[cardsMap.json] || 0)
                                         : json?.[cardsMap.json] || 0
                                     }

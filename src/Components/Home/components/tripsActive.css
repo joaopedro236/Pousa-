@@ -1,0 +1,82 @@
+.tripsActive {
+    background: var(--background);
+    width: 100%;
+    min-height: 100vh;
+}
+
+.tripsActive header button {
+    left: 10px;
+    top: 7px;
+    width: 40px;
+    border: 1px solid var(--border-button);
+    height: 40px;
+    border-radius: 50%;
+}
+
+.star {
+    color: #ccc;
+}
+
+.star.filled {
+    color: var(--bs-primary);
+}
+
+.ownerTrip,
+.descriptionTrip {
+    width: 100%;
+
+    
+}
+
+.ownerTrip {
+    min-height: 80px;
+        
+
+}
+.descriptionTrip p {
+    margin: 0 0 16px 0;
+    line-height: 1.6;
+}
+.ownerTrip img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+}
+
+.ownerTrip h1 {
+    font-size: 15px;
+}
+
+.ownerTrip p {
+    font-size: 13.5px;
+    color: var(--text-gray);
+}
+
+.tripsActiveContent {
+    gap: 33px;
+}
+
+.tripsActiveContent header p {
+    font-size: 13px;
+    color: var(--text-gray);
+    max-width: 300px;
+}
+.tripsActiveContent header, .ownerTrip, .descriptionTrip, .butTrip    {
+    box-shadow: 0px 0px 10px var(--shadow-black);
+}
+.descriptionTrip p.collapsed {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.read-more {
+    border: none;
+    background: none;
+    color: var(--bs-primary);
+    width: fit-content;
+    font-weight: 600;
+    cursor: pointer;
+    padding: 0;
+}

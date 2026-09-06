@@ -9,7 +9,7 @@ body {
 }
 
 body.user-active {
-    padding-top: 70px;
+    padding-top: 75px;
 }
 
 h1 {
@@ -24,4 +24,11 @@ main {
 
 main.Active {
     display: flex;
+}
+.show-home {
+    display: flex;
+}
+
+.hide-home {
+    display: none;
 }

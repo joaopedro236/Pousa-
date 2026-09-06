@@ -1,4 +1,4 @@
-import './Navbar.css'
+import './Navbar.css'   
 import { useEffect } from 'react'
 export default function Navbar({ ItemsNavbar, user }) {
     const itemsNavbar = [

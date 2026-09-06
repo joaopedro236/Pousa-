@@ -1,5 +1,7 @@
 :root {
     --black: black;
+    --border-button:rgba(0, 0, 0, 0.391);
+    --bg-gray:rgb(247, 247, 247);
     --white: white;
     --glass-background:#ffffff40;
     --shadow-black: rgba(0, 0, 0, 0.225);

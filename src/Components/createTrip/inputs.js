@@ -10,21 +10,21 @@ const inputs = [
     },
     {
         id: 2,
+        type: 'text',
+        name: 'description',
+        label: 'Description',
+        minLength: 100,
+        maxLength: 600,
+        placeholder: 'Your Description'
+    },
+    {
+        id: 3,
         type: 'number',
         name: 'price',
         label:'Price',
         minLength: 2,
         maxLength: 200,
         placeholder: 'Price'
-    },
-    {
-        id: 3,
-        type: 'text',
-        name: 'destination',
-        label: 'Destination',
-        minLength: 2,
-        maxLength: 200,
-        placeholder: 'Example: Rio de Janeiro'
     },
     {
         id: 4,
