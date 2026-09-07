@@ -134,6 +134,7 @@ export default function Home({ user, itemsNavbar, setItemsNavbar }) {
                                     <span>👥 {trip.numberOfTravelers} travelers</span>
                                     <span>💰 {trip.price.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</span>
                                     <span>⭐ {trip?.review}</span>
+                                    <span>🙍travelers {trip?.travelers }</span>
                                 </div>
 
                                 <div className="trip-owner">

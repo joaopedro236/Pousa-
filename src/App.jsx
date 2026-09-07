@@ -9,7 +9,7 @@ import Home from './Components/Home/Home'
 import Login from './Components/Login/Login'
 import { useState, useEffect } from 'react'
 function App() {
-  const [user, setUser] = useState(false)  
+  const [user, setUser] = useState(false)
   const [login, setLogin] = useState(false)
   const [itemsNavbar, setItemsNavbar] = useState('explore')
   const [userData, setUserData] = useState(null)
@@ -30,6 +30,7 @@ function App() {
   useEffect(() => {
     document.body.classList.toggle('user-active', user)
   }, [user])
+  
   return (
     <>
       <RegisterUser checkUser={checkUser} user={user} setUser={setUser} login={login} setLogin={setLogin} />

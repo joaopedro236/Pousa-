@@ -80,6 +80,18 @@ export default function TripsActive({ itemsNavbar, user, selectedRestaurant, set
                             <h1 className='mb-0'>{selectedRestaurant?.ownerName}</h1>
                         </div>
                     </div>
+                    <div className="tagsTrip d-flex flex-column gap-3 rounded p-4 ">
+                        <h1 className='fw-normal text-center'>Tags</h1>
+                        <div className='d-flex flex-wrap gap-3'>
+
+                            <span>📅 {selectedRestaurant?.startDate} - {selectedRestaurant?.endDate}</span>
+                            <span>👥 {selectedRestaurant?.numberOfTravelers} travelers</span>
+                            <span>💰 {selectedRestaurant?.price.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</span>
+                            <span>⭐ {selectedRestaurant?.review}</span>
+                            <span>😺 Pets {selectedRestaurant?.petsAllowed}</span>
+                            <span>🙍travelers {selectedRestaurant?.travelers}</span>
+                        </div>
+                    </div>
                     <div className="descriptionTrip d-flex flex-column rounded gap-2 p-4">
                         <h2>Description</h2>
 

@@ -69,23 +69,24 @@ export default function User({ user, itemsNavbar }) {
             alert('Error sending image')
         }
     }
+    const imageUrl = photo || json?.image_url;
     return (
         <>
             <section className={`userDashboard ${user && itemsNavbar == 'User Dashboard' ? 'show-home'
                 : 'hide-home'} flex-column align-items-center justify-content-center padding-top-2`}>
                 <header className='d-flex flex-column  align-items-center justify-content-center '>
-                    <picture className='position-relative' onClick={() => setActiveFile(prev => !prev)}>
-                        <img
-                            src={photo || json?.image_url || photoUser}
-                            alt="photo user"
-                            onError={(e) => {
-                                e.currentTarget.onerror = null
-                                e.currentTarget.src = photoUser
-                            }}
-                            className="photo w-100"
-
-                        />
-                    </picture>
+                    {imageUrl && (
+                        <picture className='position-relative' onClick={() => setActiveFile(prev => !prev)}>
+                            <img
+                                src={imageUrl}
+                                alt="photo user"
+                                className="photo w-100"
+                                onError={(e) => {
+                                    e.currentTarget.style.display = 'none';
+                                }}
+                            />
+                        </picture>
+                    )}
                     <h1>{json?.name}</h1>
                     <p>Welcome Back!</p>
                 </header>

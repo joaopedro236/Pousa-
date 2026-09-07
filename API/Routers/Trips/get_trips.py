@@ -17,7 +17,7 @@ def get_trips():
         cursor.execute("""
     SELECT t.name, t.description, t.startDate, t.endDate,
            t.numberOfTravelers, t.petsAllowed, t.price,
-           u.name, u.image_url, t.session_token, t.review, t.id
+           u.name, u.image_url, t.session_token, t.review, t.id,t.numberOfTravelers
     FROM trips t
     LEFT JOIN usersPousae u
     ON t.session_token = u.session_token
@@ -43,7 +43,8 @@ def get_trips():
                     "ownerName": resultUser[0] if resultUser else None,
                     "ownerImage": resultUser[1] if resultUser else None,
                     "review": trip[10],
-                    'id': trip[11]
+                    'id': trip[11],
+                    'travelers': trip[12]
                 }
             )
 

@@ -25,18 +25,20 @@
 .descriptionTrip {
     width: 100%;
 
-    
+
 }
 
 .ownerTrip {
     min-height: 80px;
-        
+
 
 }
+
 .descriptionTrip p {
     margin: 0 0 16px 0;
     line-height: 1.6;
 }
+
 .ownerTrip img {
     width: 60px;
     height: 60px;
@@ -61,9 +63,28 @@
     color: var(--text-gray);
     max-width: 300px;
 }
-.tripsActiveContent header, .ownerTrip, .descriptionTrip, .butTrip    {
+
+.tripsActiveContent header,
+.ownerTrip,
+.descriptionTrip,
+.butTrip,
+.tagsTrip {
     box-shadow: 0px 0px 10px var(--shadow-black);
 }
+
+.tagsTrip span {
+    background: #f5f6f8;
+    padding: 8px 12px;
+    border-radius: 10px;
+    font-size: 13px;
+    color: var(--text-gray);
+
+}
+
+.tagsTrip h1 {
+    font-size: 18px;
+}
+
 .descriptionTrip p.collapsed {
     display: -webkit-box;
     -webkit-line-clamp: 3;
@@ -79,4 +100,18 @@
     font-weight: 600;
     cursor: pointer;
     padding: 0;
+}
+
+@media (hover:hover) {
+
+    .tripsActiveContent header:hover,
+    .ownerTrip:hover,
+    .descriptionTrip:hover,
+    .butTrip:hover,
+    .tagsTrip:hover {
+        transform: translateY(-5px);
+        transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        box-shadow: 0px 0px 15px var(--shadow-black);
+
+    }
 }
