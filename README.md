@@ -49,13 +49,6 @@ The application provides user authentication, trip creation and discovery, user 
 
 ---
 
-## 📸 Preview
-
-<p align="center">
-  <img src="./banner.jpeg" alt="PousaÊ preview" width="900">
-</p>
-
----
 
 # ✨ Features
 
