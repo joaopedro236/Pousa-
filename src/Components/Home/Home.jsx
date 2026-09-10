@@ -2,37 +2,40 @@ import './home.css'
 import TripsActive from './components/TripsActive'
 import { useState, useEffect } from 'react'
 import photoUser from '../../assets/user.png'
+import { useNavigate, useParams } from 'react-router-dom'
 
-export default function Home({ user, itemsNavbar, setItemsNavbar }) {
+export default function Home({ user, userData, selectedRestaurant, setSelectedRestaurant, itemsNavbar, setItemsNavbar, starTrip, stars }) {
     const [json, setJson] = useState({
 
         trips: []
     })
-    const [selectedRestaurant, setSelectedRestaurant] = useState(null);
-    const [userData, setUserData] = useState(null)
-    const [userImage, setUserImage] = useState(photoUser)
     const [search, setSearch] = useState('')
+    const { tripId } = useParams()
+    useEffect(() => {
+    if (!tripId || !json.trips.length) return
+
+    const trip = json.trips.find(
+        trip => String(trip.id) === String(tripId)
+    )
+
+    if (trip) {
+        setSelectedRestaurant(trip)
+    }
+}, [tripId, json.trips])
+    const navigate = useNavigate()
 
     const fetchData = async () => {
         try {
-            const [tripsResponse, userResponse] = await Promise.all([
-                fetch(`${import.meta.env.VITE_API_URL}/getTrips`),
-                fetch(`${import.meta.env.VITE_API_URL}/getUser`, {
-                    credentials: 'include'
-                })
-            ])
+            const tripsResponse = await fetch(
+                `${import.meta.env.VITE_API_URL}/getTrips`
+            )
 
             const tripsData = await tripsResponse.json()
-            const userDataFetch = await userResponse.json()
 
             setJson({
                 trips: tripsData?.trips || []
             })
-            if (userDataFetch?.image_url) {
-                setUserImage(userDataFetch.image_url)
-            }
 
-            setUserData(userDataFetch)
 
         } catch (error) {
             console.error(error)
@@ -103,7 +106,7 @@ export default function Home({ user, itemsNavbar, setItemsNavbar }) {
                             <p className='small'>Browse trips and buy them.</p>
                         </div>
                         <img
-                            src={userImage}
+                            src={userData?.image_url || photoUser}
                             alt="photo user"
                             role="button"
 
@@ -120,13 +123,15 @@ export default function Home({ user, itemsNavbar, setItemsNavbar }) {
                             trip.description.toLowerCase().includes(search.toLowerCase())
                         )
                         .map((trip, index) => (
-                            <div className="trip" role='button' key={index} onClick={() => setSelectedRestaurant(trip)}>
+                            <div className="trip" role='button' key={index} onClick={() => {
+                                sessionStorage.setItem('selectedTrip', JSON.stringify(trip))
+                                setSelectedRestaurant(trip)
+                                navigate(`/trip/${trip.id}`)
+                            }}>
 
                                 <div>
                                     <h2>{trip.name}</h2>
-                                    <p>{trip.description?.length > 80
-                                        ? trip.description.slice(0, 60) + "..."
-                                        : trip.description}</p>
+                                    <p>{trip.description}</p>
                                 </div>
 
                                 <div className="trip-info">
@@ -134,7 +139,8 @@ export default function Home({ user, itemsNavbar, setItemsNavbar }) {
                                     <span>👥 {trip.numberOfTravelers} travelers</span>
                                     <span>💰 {trip.price.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</span>
                                     <span>⭐ {trip?.review}</span>
-                                    <span>🙍travelers {trip?.travelers }</span>
+                                    <span>😺 Pets {trip?.petsAllowed}</span>
+
                                 </div>
 
                                 <div className="trip-owner">
@@ -155,7 +161,7 @@ export default function Home({ user, itemsNavbar, setItemsNavbar }) {
 
                 </div>
             </section>
-            <TripsActive selectedRestaurant={selectedRestaurant} user={user} itemsNavbar={itemsNavbar} setSelectedRestaurant={setSelectedRestaurant} />
+            <TripsActive selectedRestaurant={selectedRestaurant} stars={stars} starTrip={starTrip} user={user} itemsNavbar={itemsNavbar} setSelectedRestaurant={setSelectedRestaurant} />
         </>
     )
 }

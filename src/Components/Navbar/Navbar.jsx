@@ -3,8 +3,7 @@ import { useEffect } from 'react'
 export default function Navbar({ ItemsNavbar, user }) {
     const itemsNavbar = [
         { name: 'Explore', href: '#', value: 'explore' },
-        { name: 'Trips', href: '#', value: 'trips' },
-        { name: 'Stays', href: '#', value: 'stays' },
+        { name: 'Stars', href: '#', value: 'stars' },
         { name: 'User Dashboard', href: '#', value: 'User Dashboard' },
         { name: 'Create Trip', href: '#', value: 'create-trip' },
     ]
@@ -15,10 +14,9 @@ export default function Navbar({ ItemsNavbar, user }) {
             if (!event.ctrlKey) return
             const sections = {
                 '1': 'explore',
-                '2': 'trips',
-                '3': 'stays',
-                '4': 'User Dashboard',
-                '5': 'create-trip'
+                '2': 'stars',
+                '3': 'User Dashboard',
+                '4': 'create-trip'
             }
 
             const section = sections[event.key]

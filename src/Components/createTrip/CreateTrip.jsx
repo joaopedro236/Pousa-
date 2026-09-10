@@ -1,16 +1,20 @@
 import '../../Components/RegisterUser/RegisterUser.css'
 import inputs from './inputs'
+import Select from 'react-select';
+import itemsSelect from './selectTagsJSON'
 import './CreateTrip.css'
 import { useState, useEffect } from 'react'
 export default function CreateTrip({ user, itemsNavbar, setItemsNavbar }) {
     const [loading, setLoading] = useState(false)
     const today = new Date().toISOString().split('T')[0]
+    const [tags, setTags] = useState([])
     const [error, setError] = useState(false)
     const [errorMessage, setErrorMessage] = useState('')
     const handleSubmit = async (e) => {
         e.preventDefault()
 
         const data = Object.fromEntries(new FormData(e.target))
+        data.tags = tags.map(tag => tag.value)
         try {
             setError(false)
             setErrorMessage('')
@@ -53,7 +57,13 @@ export default function CreateTrip({ user, itemsNavbar, setItemsNavbar }) {
             setLoading(false)
         }
     }
+    const MAX_TAGS = 5
 
+    const handleTagsChange = (selected) => {
+        if (selected.length <= MAX_TAGS) {
+            setTags(selected)
+        }
+    }
     return (
         <>
             <section className={`registerUser createTrip ${user && itemsNavbar == 'create-trip' ? 'Active' : ''}`}>
@@ -89,20 +99,46 @@ export default function CreateTrip({ user, itemsNavbar, setItemsNavbar }) {
                                     {inputsMap.label}
                                 </label>
 
-                                <input
-                                    type={inputsMap.type}
-                                    name={inputsMap.name}
-                                    id={inputsMap.name}
-                                     min={inputsMap.type === 'date' ? today : undefined}
-                                    minLength={inputsMap?.minLength}
-                                    maxLength={inputsMap?.maxLength}
-                                    className="form-control"
-                                    placeholder={inputsMap.placeholder}
-                                    required
-                                />
+                                {inputsMap.type === 'textarea' ? (
+                                    <textarea
+                                        name={inputsMap.name}
+                                        id={inputsMap.name}
+                                        minLength={inputsMap.minLength}
+                                        maxLength={inputsMap.maxLength}
+                                        className="form-control"
+                                        placeholder={inputsMap.placeholder}
+                                        required
+                                        onInput={(e) => {
+                                            const words = e.target.value.split(/(\s+)/)
+                                            const maxWordLength = inputsMap.maxWordLength
 
+                                            if (words.some(word => word.trim().length > maxWordLength)) {
+                                                console.error(`Each word can have a maximum of ${maxWordLength} characters`)
+
+                                                e.target.value = words
+                                                    .map(word =>
+                                                        word.trim().length > maxWordLength
+                                                            ? word.slice(0, maxWordLength)
+                                                            : word
+                                                    )
+                                                    .join('')
+                                            }
+                                        }}
+                                    />
+                                ) : (
+                                    <input
+                                        type={inputsMap.type}
+                                        name={inputsMap.name}
+                                        id={inputsMap.name}
+                                        min={inputsMap.type === 'date' ? today : undefined}
+                                        minLength={inputsMap.minLength}
+                                        maxLength={inputsMap.maxLength}
+                                        className="form-control"
+                                        placeholder={inputsMap.placeholder}
+                                        required
+                                    />
+                                )}
                             </div>
-
                         ))}
                         <div className="mb-3">
                             <label htmlFor="petsAllowed" className="form-label">
@@ -123,7 +159,48 @@ export default function CreateTrip({ user, itemsNavbar, setItemsNavbar }) {
                                 <option value="no">No</option>
                             </select>
                         </div>
+                        <div className="mb-3">
+                            <label htmlFor="tags" className='text-sm'>Tags</label>
+                            <Select
+                                options={itemsSelect}
+                                isMulti
+                                value={tags}
+                                onChange={handleTagsChange}
+                                isOptionDisabled={(option) =>
+                                    tags.length >= MAX_TAGS && !tags.some(tag => tag.value === option.value)
+                                }
+                                styles={{
+                                    control: (base) => ({
+                                        ...base,
+                                        cursor: "pointer",
+                                    }),
+                                    option: (base) => ({
+                                        ...base,
+                                        cursor: "pointer",
+                                    }),
+                                    multiValueRemove: (base) => ({
+                                        ...base,
+                                        cursor: "pointer",
+                                    }),
+                                    dropdownIndicator: (base) => ({
+                                        ...base,
+                                        cursor: "pointer",
+                                    }),
+                                    clearIndicator: (base) => ({
+                                        ...base,
+                                        cursor: "pointer",
+                                    }), menuList: (base) => ({
+                                        ...base,
+                                        maxHeight: '210px',
+                                        overflowY: 'auto',
+                                    }),
+                                }} menuPlacement="top"
+                                placeholder='Select tags for your trip'
+                                closeMenuOnSelect={false}
+                                required
 
+                            />
+                        </div>
                     </div>
                     <button
                         type="submit"

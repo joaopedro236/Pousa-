@@ -31,8 +31,8 @@ def getUser(request: Request):
             "tripsTaken": response[7],
             "money": response[8]
         }
-    except Exception as e:
-        return {"Status": False, "Error": str(e)}
+    except Exception :
+        return {"Status": False, "Error": 'An error occurred'}
 
     finally:
         if cursor:

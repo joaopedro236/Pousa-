@@ -23,6 +23,7 @@ export default function Login({ user, login, setUser,checkUser ,setLogin }) {
             if (result?.Status) {
                 setUser(true)
                 await checkUser()
+                window.location.reload()
             }
             if (result?.Error) {
                 console.error(result?.Error)

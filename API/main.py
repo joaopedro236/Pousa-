@@ -9,6 +9,10 @@ from API.Routers.Trips.trips import router as trips
 from API.Routers.Trips.get_trips import router as get_trips
 from API.Routers.User.login import router as login
 from API.Routers.Trips.buyTrip import router as buyTrip
+from API.Routers.Trips.Star.addStar import router as addStar
+from API.Routers.Trips.Star.removeStar import router as removeStar
+from API.Routers.Trips.Star.getStar import router as getStar
+from API.Routers.Chatbot.chatbot import router as chatbot
 from fastapi.responses import JSONResponse
 import time
 from collections import defaultdict
@@ -32,10 +36,10 @@ async def rate_limit_middleware(request: Request, call_next):
 
     requests_by_ip[ip] = [t for t in requests_by_ip[ip] if now - t < 1]
 
-    if len(requests_by_ip[ip]) >= 50:
+    if len(requests_by_ip[ip]) >= 30:
         return JSONResponse(
             status_code=429,
-            content={"message": "Limit of 50 requests/second exceeded"},
+            content={"message": "Limit of 30 requests/second exceeded"},
         )
 
     requests_by_ip[ip].append(now)
@@ -63,6 +67,10 @@ app.include_router(trips)
 app.include_router(get_trips)
 app.include_router(login)
 app.include_router(buyTrip)
+app.include_router(addStar)
+app.include_router(removeStar)
+app.include_router(getStar)
+app.include_router(chatbot)
 
 @app.on_event("startup")
 def startup():

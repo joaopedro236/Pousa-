@@ -10,18 +10,19 @@ const inputs = [
     },
     {
         id: 2,
-        type: 'text',
+        type: 'textarea',
         name: 'description',
         label: 'Description',
-        minLength: 100,
-        maxLength: 600,
+        minLength: 10,
+        maxLength: 350,
+        maxWordLength: 30,
         placeholder: 'Your Description'
     },
     {
         id: 3,
         type: 'number',
         name: 'price',
-        label:'Price',
+        label: 'Price',
         minLength: 2,
         maxLength: 200,
         placeholder: 'Price'

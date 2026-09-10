@@ -2,10 +2,14 @@ from ...Databases.Conn.trips import connect_database_trip
 from ...Validation.Trip.trips import Trips
 from fastapi import APIRouter, Request
 from datetime import date, datetime
-
+from google import genai
 router = APIRouter()
+import os
+from dotenv import load_dotenv
+load_dotenv(encoding='utf-8')
 
-
+GEMINI_API_KEY = os.getenv('GEMINI_API_KEY')
+client = genai.Client(api_key=GEMINI_API_KEY)
 @router.post("/trips")
 def trips(dataValidation: Trips, request: Request):
     conn = None
@@ -28,9 +32,36 @@ def trips(dataValidation: Trips, request: Request):
             }
         if not session_token:
             return {"Status": False, "Error": "Not session token"}
+        moderation = client.models.generate_content(
+        model="gemini-3.6-flash",
+        contents=f"""
+Analyze this travel trip content.
+
+Name: {dataValidation.name}
+Description: {dataValidation.description}
+
+Block only if the content contains:
+- Hate speech
+- Harassment or targeted insults
+- Sexually explicit content
+- Violent or graphic content
+- Discrimination
+- Clearly offensive or inappropriate content
+
+Normal travel-related content is SAFE.
+
+Respond with ONLY:
+SAFE
+or
+BLOCK
+"""
+    )
+
+        if moderation.text.strip().upper() == "BLOCK":
+            return {"Status": False, "Error": "Inappropriate content."}
         cursor.execute(
             """insert into trips(
-        name, description, startDate, endDate, numberOfTravelers, petsAllowed,price, session_token) values(%s, %s, %s, %s, %s, %s, %s,%s)""",
+        name, description, startDate, endDate, numberOfTravelers, petsAllowed,price, session_token, tags) values(%s, %s,%s, %s, %s, %s, %s, %s,%s)""",
             (
                 dataValidation.name,
                 dataValidation.description,
@@ -40,12 +71,14 @@ def trips(dataValidation: Trips, request: Request):
                 dataValidation.petsAllowed,
                 dataValidation.price,
                 session_token,
+                dataValidation.tags
             ),
         )
         conn.commit()
+
         return{'Status': True}
-    except Exception:
-        return {"Status": False, "Error": "An error occurred"}
+    except Exception :
+        return {"Status": False, "Error": 'An occurred error'}
 
     finally:
         if cursor:

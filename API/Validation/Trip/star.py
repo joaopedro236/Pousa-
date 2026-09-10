@@ -1,3 +1,3 @@
 from pydantic import BaseModel
-class id(BaseModel):
+class buy_trip(BaseModel):
     id: int

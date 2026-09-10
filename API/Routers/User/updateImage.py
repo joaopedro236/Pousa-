@@ -17,7 +17,7 @@ async def upload_image(
     file: UploadFile = File(...)
 ):
     conn = None
-    session_token = request.cookies.get("user_session_token")
+    session_token = request.cookies.get("user_session_token") 
 
     cursor = None
     allowed_extensions = {"image/jpe'g", "image/png", "image/webp"}

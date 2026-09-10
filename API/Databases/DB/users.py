@@ -14,7 +14,8 @@ def database():
         cpf varchar(14) not null ,
         image_url text,
         moneyalreadyspent numeric(10,2)) default 0.0,
-        tripsTaken integer default 0""")
+        tripsTaken integer default 0,
+        star int[] default null""")
         conn.commit()
     except Exception:
         if conn:

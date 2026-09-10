@@ -87,6 +87,9 @@
 .trips {
     padding: 0 24px 30px;
     width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
 }
 
 .trip {
@@ -154,6 +157,12 @@
     font-size: 14px;
     font-weight: 600;
     color: var(--text-gray);
+}
+.trip p {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
 @media (min-width: 768px) {
 

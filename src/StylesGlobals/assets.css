@@ -32,3 +32,40 @@ main.Active {
 .hide-home {
     display: none;
 }
+
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 10px;
+    border: 2px solid transparent;
+    background-clip: padding-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #888;
+    border: 1px solid transparent;
+    background-clip: padding-box;
+}
+textarea::placeholder {
+    font-size: 14px;
+}
+textarea {
+    min-height: 100px;
+    max-height: 250px;
+    resize: vertical;
+}
+html {
+    scrollbar-width: thin;
+    scrollbar-color: #c1c1c1 transparent;
+}
+
+html {
+    scroll-behavior: smooth;
+}

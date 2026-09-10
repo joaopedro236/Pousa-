@@ -18,7 +18,8 @@ def database():
          price DECIMAL(10,2),
          session_token uuid,
         review numeric(3,2) default 5,
-        usersPurchased uuid[]""")
+        usersPurchased uuid[],
+        tags text[]""")
         conn.commit()
     except Exception:
         return {"Status": False, "Error": "Error Create Database"}

@@ -2,39 +2,14 @@ import './userDashboard.css'
 import cards from './cardsUsers'
 import { useState, useEffect } from 'react'
 import photoUser from '../../assets/user.png'
-export default function User({ user, itemsNavbar }) {
-    const [json, setJson] = useState(null)
+export default function User({ user, itemsNavbar , userData}) {
     const [activeFile, setActiveFile] = useState(false)
     const [photo, setPhoto] = useState(null)
 
-    const userFetch = async () => {
-        try {
-            const response = await fetch(`${import.meta.env.VITE_API_URL}/getUser`, {
-                'credentials': 'include'
-            })
-            const data = await response.json()
-            if (!data?.Status) {
-                console.error(data?.Error)
-            }
-            setJson(data)
-            setPhoto(data?.image_url || null)
-        } catch (error) {
-            console.error(error)
-        }
-    }
+   
 
 
-
-
-    useEffect(() => {
-        if (itemsNavbar !== 'User Dashboard') return
-
-        userFetch()
-
-        const interval = setInterval(userFetch, 300000)
-
-        return () => clearInterval(interval)
-    }, [itemsNavbar])
+    
     const handleFile = async (event) => {
         const file = event.target.files[0]
 
@@ -69,7 +44,7 @@ export default function User({ user, itemsNavbar }) {
             alert('Error sending image')
         }
     }
-    const imageUrl = photo || json?.image_url;
+    const imageUrl = photo || userData?.image_url || photoUser;
     return (
         <>
             <section className={`userDashboard ${user && itemsNavbar == 'User Dashboard' ? 'show-home'
@@ -87,7 +62,7 @@ export default function User({ user, itemsNavbar }) {
                             />
                         </picture>
                     )}
-                    <h1>{json?.name}</h1>
+                    <h1>{userData?.name}</h1>
                     <p>Welcome Back!</p>
                 </header>
                 <div className="cards_usersDashboards d-flex flex-wrap gap-3 mt-3 px-3 aligh-items-center justify-content-center ">
@@ -101,8 +76,8 @@ export default function User({ user, itemsNavbar }) {
                                             style: 'currency',
                                             currency: 'usd',
                                             notation: 'compact',
-                                        }).format(json?.[cardsMap.json] || 0)
-                                        : json?.[cardsMap.json] || 0
+                                        }).format(userData?.[cardsMap.json] || 0)
+                                        : userData?.[cardsMap.json] || 0
                                     }
                                 </h1>
 

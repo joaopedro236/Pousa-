@@ -1,117 +1,652 @@
 .tripsActive {
-    background: var(--background);
+
     width: 100%;
+
     min-height: 100vh;
+
+    background: var(--background);
+
+    padding-bottom: 60px;
+
 }
 
-.tripsActive header button {
-    left: 10px;
-    top: 7px;
-    width: 40px;
-    border: 1px solid var(--border-button);
-    height: 40px;
+.tripsActiveHeader {
+
+    width: 100%;
+
+    position: relative;
+
+    overflow: hidden;
+
+}
+
+.tripsActiveHeader img {
+
+    width: 100%;
+
+    height: 220px;
+
+    display: block;
+
+    object-fit: cover;
+
+    object-position: center;
+
+}
+
+.tripsActiveHeader button {
+
+    position: absolute;
+
+    z-index: 10;
+
+    top: 15px;
+
+    left: 15px;
+
+    width: 42px;
+
+    height: 42px;
+
+    padding: 0;
+
+    border: 0;
+
     border-radius: 50%;
+
+    background: #fff;
+
+    color: #222;
+
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.18);
+
+    cursor: pointer;
+
+}
+
+.tripsActiveContent {
+
+    width: min(92%, 1050px) !important;
+
+    margin: 25px auto 0 !important;
+
+    padding: 0 !important;
+
+    display: grid !important;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 18px;
+
+    box-sizing: border-box;
+
+}
+
+.tripsActiveContent > header,
+.ownerTrip,
+.tagsTrip,
+.descriptionTrip {
+
+    background: #fff !important;
+
+    border: 1px solid rgba(0, 0, 0, 0.06);
+
+    border-radius: 18px;
+
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.07);
+
+    color: #222;
+
+}
+
+.tripsActiveContent > header {
+
+    min-height: 270px;
+
+    padding: 30px !important;
+
+    justify-content: center;
+
+    position: relative;
+
+}
+
+.tripsActiveContent > header h1 {
+
+    margin: 0;
+
+    padding: 0 45px;
+
+    font-size: 28px;
+
+    line-height: 1.25;
+
+}
+
+.tripsActiveContent > header > p {
+
+    max-width: 520px;
+
+    margin: 8px 0 0;
+
+    color: var(--text-gray);
+
+    font-size: 14px;
+
+    line-height: 1.6;
+
+}
+
+.stars {
+
+    margin-top: 8px;
+
+}
+
+.stars h1 {
+
+    margin: 0;
+
+    font-size: 24px;
+
+    color: #222;
+
 }
 
 .star {
-    color: #ccc;
+
+    color: #d5d5d5;
+
 }
 
 .star.filled {
+
     color: var(--bs-primary);
+
 }
 
-.ownerTrip,
-.descriptionTrip {
-    width: 100%;
+.starTrip {
 
+    position: absolute;
+
+    margin: 0;
+
+    width: 40px;
+
+    height: 40px;
+
+    padding: 0;
+
+    border: 0;
+
+    border-radius: 50%;
+
+    background: transparent;
+
+    color: #bdbdbd;
+
+    font-size: 21px;
+
+    line-height: 1;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+
+}
+
+.starTrip {
+
+    top: 6.5px;
+
+    right: 16px;
+
+}
+
+.starTrip\:hover {
+
+    transform: scale(1.1);
 
 }
 
 .ownerTrip {
-    min-height: 80px;
 
+    width: 100%;
 
-}
+    min-height: 115px;
 
-.descriptionTrip p {
-    margin: 0 0 16px 0;
-    line-height: 1.6;
+    padding: 20px !important;
+
+    box-sizing: border-box;
+
+    align-items: center;
+
 }
 
 .ownerTrip img {
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-}
 
-.ownerTrip h1 {
-    font-size: 15px;
+    width: 60px;
+
+    height: 60px;
+
+    flex-shrink: 0;
+
+    border-radius: 50%;
+
+    object-fit: cover;
+
 }
 
 .ownerTrip p {
-    font-size: 13.5px;
-    color: var(--text-gray);
+
+    margin: 0;
+
+    color: #999;
+
+    font-size: 12px;
+
 }
 
-.tripsActiveContent {
-    gap: 33px;
+.ownerTrip h1 {
+
+    margin: 2px 0 0;
+
+    color: #222;
+
+    font-size: 16px;
+
+    font-weight: 500;
+
 }
 
-.tripsActiveContent header p {
-    font-size: 13px;
-    color: var(--text-gray);
-    max-width: 300px;
-}
-
-.tripsActiveContent header,
-.ownerTrip,
-.descriptionTrip,
-.butTrip,
 .tagsTrip {
-    box-shadow: 0px 0px 10px var(--shadow-black);
-}
 
-.tagsTrip span {
-    background: #f5f6f8;
-    padding: 8px 12px;
-    border-radius: 10px;
-    font-size: 13px;
-    color: var(--text-gray);
+    width: 100%;
+
+    padding: 24px !important;
+
+    box-sizing: border-box;
 
 }
 
 .tagsTrip h1 {
-    font-size: 18px;
+
+    margin: 0;
+
+    color: #222;
+
+    font-size: 20px;
+
+    font-weight: 500;
+
 }
 
-.descriptionTrip p.collapsed {
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
+.tagsTrip > div {
+
+    width: 100%;
+
+    gap: 10px !important;
+
 }
 
-.read-more {
-    border: none;
-    background: none;
-    color: var(--bs-primary);
-    width: fit-content;
+.tagsTrip span {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 9px 13px;
+
+    border: 1px solid #eee;
+
+    border-radius: 10px;
+
+    background: #f8f9fa;
+
+    color: #666;
+
+    font-size: 12.5px;
+
+}
+
+.descriptionTrip {
+
+    width: 100%;
+
+    padding: 24px !important;
+
+    box-sizing: border-box;
+
+}
+
+.descriptionTrip h2 {
+
+    margin: 0;
+
+    color: #222;
+
+    font-size: 20px;
+
+    font-weight: 500;
+
+}
+
+.descriptionTrip p {
+
+    margin: 0;
+
+    color: #666;
+
+    font-size: 14px;
+
+    line-height: 1.7;
+
+}
+
+.tripsActiveContent > button {
+
+    width: 100%;
+
+    min-height: 52px;
+
+    border-radius: 12px;
+
     font-weight: 600;
-    cursor: pointer;
-    padding: 0;
+
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+
 }
 
-@media (hover:hover) {
+.tripsActiveContent > header > p.text-center {
 
-    .tripsActiveContent header:hover,
-    .ownerTrip:hover,
-    .descriptionTrip:hover,
-    .butTrip:hover,
-    .tagsTrip:hover {
-        transform: translateY(-5px);
-        transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-        box-shadow: 0px 0px 15px var(--shadow-black);
+    width: 100%;
+
+    max-width: 500px;
+
+    margin: 8px auto 0;
+
+    font-size: 14px;
+
+    line-height: 1.5;
+
+    color: var(--text-gray);
+
+    text-align: center;
+
+    overflow: hidden;
+
+    overflow-wrap: anywhere;
+
+    word-break: break-word;
+
+    display: -webkit-box;
+
+    -webkit-line-clamp: 2;
+
+    -webkit-box-orient: vertical;
+
+}
+
+@media (min-width: 900px) {
+
+    .tripsActiveContent {
+
+        grid-template-columns: minmax(0, 2fr) minmax(280px, 1fr);
+
+        grid-template-rows: auto auto auto;
+
+        align-items: start;
+
+        gap: 18px;
 
     }
+
+    .tripsActive header img {
+
+        margin-top: 10px;
+
+    }
+
+    .tripsActiveContent > header {
+
+        grid-column: 1;
+
+        grid-row: 1;
+
+    }
+
+    .ownerTrip {
+
+        grid-column: 2;
+
+        grid-row: 1;
+
+        align-self: start;
+
+    }
+
+    .tagsTrip {
+
+        grid-column: 2;
+
+        grid-row: 2;
+
+        align-self: start;
+
+    }
+
+    .descriptionTrip {
+
+        grid-column: 1;
+
+        grid-row: 2 / 4;
+
+        align-self: start;
+
+    }
+
+    .tripsActiveContent > button {
+
+        grid-column: 1 / 3;
+
+        grid-row: 3;
+
+        width: min(100%, 500px);
+
+        justify-self: center;
+
+    }
+
+    .tripsActiveHeader img {
+
+        max-width: 700px;
+
+        border-radius: 10px;
+
+        margin: 0 auto;
+
+    }
+
+    .buyTrip {
+
+        max-width: 600px;
+
+        margin: 0 auto;
+
+    }
+
+}
+
+@media (max-width: 899px) {
+
+    .tripsActiveContent {
+
+        width: min(92%, 700px) !important;
+
+        grid-template-columns: 1fr;
+
+    }
+
+    .tripsActiveContent > header,
+    .ownerTrip,
+    .tagsTrip,
+    .descriptionTrip,
+    .tripsActiveContent > button {
+
+        grid-column: 1;
+
+    }
+
+    .tripsActiveContent > header {
+
+        min-height: 240px;
+
+    }
+
+}
+
+@media (max-width: 575px) {
+
+    .tripsActive {
+
+        padding-bottom: 35px;
+
+    }
+
+    .tripsActiveHeader button {
+
+        top: 12px;
+
+        left: 12px;
+
+        width: 38px;
+
+        height: 38px;
+
+    }
+
+    .tripsActiveContent {
+
+        width: calc(100% - 24px) !important;
+
+        margin-top: 15px !important;
+
+        gap: 12px;
+
+    }
+
+    .tripsActiveContent > header {
+
+        min-height: 225px;
+
+        padding: 25px 18px !important;
+
+        border-radius: 15px;
+
+    }
+
+    .tripsActiveContent > header h1 {
+
+        padding: 0 35px;
+
+        font-size: 22px;
+
+    }
+
+    .tripsActiveContent > header > p {
+
+        font-size: 13px;
+
+    }
+
+    .starTrip {
+
+        font-size: 19px;
+
+        right: 12px;
+
+    }
+
+    .ownerTrip {
+
+        min-height: 85px;
+
+        padding: 15px !important;
+
+        border-radius: 15px;
+
+    }
+
+    .ownerTrip img {
+
+        width: 52px;
+
+        height: 52px;
+
+    }
+
+    .ownerTrip h1 {
+
+        font-size: 15px;
+
+    }
+
+    .tagsTrip {
+
+        padding: 20px !important;
+
+        border-radius: 15px;
+
+    }
+
+    .tagsTrip h1 {
+
+        font-size: 18px;
+
+    }
+
+    .tagsTrip > div {
+
+        gap: 7px !important;
+
+    }
+
+    .tagsTrip span {
+
+        padding: 7px 9px;
+
+        font-size: 11.5px;
+
+    }
+
+    .descriptionTrip {
+
+        padding: 20px !important;
+
+        border-radius: 15px;
+
+    }
+
+    .descriptionTrip h2 {
+
+        font-size: 18px;
+
+    }
+
+    .descriptionTrip p {
+
+        font-size: 13px;
+
+        line-height: 1.65;
+
+    }
+
+    .tripsActiveContent > button {
+
+        min-height: 50px;
+
+    }
+
 }

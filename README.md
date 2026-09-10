@@ -32,6 +32,7 @@ The application provides user authentication, trip creation and discovery, user 
 * Pydantic
 * PostgreSQL
 * psycopg2
+* gemini
 * python-dotenv
 * Argon2
 
@@ -39,6 +40,7 @@ The application provides user authentication, trip creation and discovery, user 
 
 * ImgBB API
 * Requests
+* Gemini API
 
 ### Development
 
@@ -63,7 +65,7 @@ The application provides user authentication, trip creation and discovery, user 
 * User balance
 * Trips taken information
 * Money spent information
-
+* chatbot 
 ## 🗺️ Trips
 
 * Create trips
@@ -148,6 +150,13 @@ The backend is built with **FastAPI**.
 |  `GET` | `/getTrips` | Retrieve available trips |
 | `POST` | `/buyTrip`  | Purchase a trip          |
 
+
+## Chatbot Router
+
+| Method | Endpoint        | Description                             |
+| :----: | --------------- | --------------------------------------- |
+| `POST` | `/chatbot`      | chatbot for user                        |
+
 ---
 
 # 🏗️ Architecture
@@ -196,6 +205,10 @@ API/
 │       └── users.py
 │
 ├── Routers/
+    |── Chatbot/
+    |   └── chatbot.py
+    |
+    |
 │   ├── Trips/
 │   │   ├── buyTrip.py
 │   │   ├── get_trips.py
@@ -212,6 +225,9 @@ API/
 │   └── usersDB.py
 │
 ├── Validation/
+    |── Chatbot/
+    |   └── chatbot.py
+    |
 │   ├── Trip/
 │   │   ├── buyTrip.py
 │   │   └── trips.py
@@ -259,6 +275,14 @@ src/
 │   │   ├── CreateTrip.jsx
 │   │   ├── CreateTrip.css
 │   │   └── inputs.js
+│   │
+|   ├── Stars/
+│   │   ├── Stars.jsx
+│   │   └── star.css
+│   │
+|   ├── Chatbot/
+│   │   ├── Chatbot.jsx
+│   │   └── Chatbot.css
 │   │
 │   └── loading/
 │       ├── Loading.jsx

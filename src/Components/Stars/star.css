@@ -1,0 +1,21 @@
+.star {
+    flex-direction: column;
+    gap: 15px;
+    padding: 10px;
+    padding-top: 30px;
+}
+.star header h1,
+.no-trips {
+    color: var(--black) ;
+    margin: 0;
+}
+.star header p{
+    color: var(--text-gray);
+    font-size: 13px;
+    max-width: 300px;
+    margin-left: 8px;
+}
+.no-trips {
+    margin: 0 auto;
+    margin-top: 30px;
+}

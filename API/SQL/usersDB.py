@@ -3,10 +3,12 @@ import pprint
 def selectAll():
     try:
         conn,cursor = connect_database()
-        cursor.execute('select * from  usersPousae')
-        users = cursor.fetchall()
-        for user in users:
-            pprint.pprint(user)
+        cursor.execute('select star from  usersPousae')
+       
+        rows = cursor.fetchall()
+
+
+        pprint.pprint(rows)
     except Exception as e:
         print(e)
 selectAll() 

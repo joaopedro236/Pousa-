@@ -1,13 +1,13 @@
 from fastapi import APIRouter, Request
 from ...Databases.Conn.trips import connect_database_trip
 from ...Databases.Conn.users import connect_database
-from ...Validation.Trip.buyTrip import buy_trip
+from ...Validation.Trip.buyTrip import id as validation
 
 router = APIRouter()
 
 
 @router.post("/buyTrip")
-def buy_trip(tripId: buy_trip, request: Request):
+def buy_trip(tripId: validation, request: Request):
     connUser = None
     conn = None
     cursor = None
@@ -64,7 +64,7 @@ def buy_trip(tripId: buy_trip, request: Request):
         
         return{'Status': True}
     except Exception :
-        return {"Status": False, "Error": 'An error ocorred'}
+        return {"Status": False, "Error": 'An error occurred'}
     finally:
         if cursor:
             cursor.close()
