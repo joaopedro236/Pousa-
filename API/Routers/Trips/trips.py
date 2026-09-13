@@ -57,7 +57,7 @@ BLOCK
 """
     )
 
-        if moderation.text.strip().upper() == "BLOCK":
+        if "BLOCK" in moderation.text.strip().upper():
             return {"Status": False, "Error": "Inappropriate content."}
         cursor.execute(
             """insert into trips(

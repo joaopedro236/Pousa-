@@ -119,8 +119,8 @@ export default function Home({ user, userData, selectedRestaurant, setSelectedRe
 
                     {json?.trips
                         ?.filter(trip =>
-                            trip.name.toLowerCase().includes(search.toLowerCase()) ||
-                            trip.description.toLowerCase().includes(search.toLowerCase())
+                            trip?.name?.toLowerCase().includes(search?.toLowerCase()) ||
+                            trip?.description?.toLowerCase().includes(search?.toLowerCase())
                         )
                         .map((trip, index) => (
                             <div className="trip" role='button' key={index} onClick={() => {

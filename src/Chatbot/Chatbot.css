@@ -12,7 +12,7 @@
 
     padding: 14px;
 
-    border: none;
+    border: 1px solid var(--border-glass);
     border-radius: 50%;
 
     background: var(--primary);

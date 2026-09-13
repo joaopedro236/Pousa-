@@ -25,7 +25,7 @@ export default function RegisterUser({ user, setUser, setLogin ,login, checkUser
             const result = await response.json()
             if (result?.Status) {
                 setUser(true)
-                await checkUser
+                await checkUser()
             }
             if (result?.Error) {
                 setError(true)

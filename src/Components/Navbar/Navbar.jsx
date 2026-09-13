@@ -1,4 +1,4 @@
-import './Navbar.css'   
+import './Navbar.css'
 import { useEffect } from 'react'
 export default function Navbar({ ItemsNavbar, user }) {
     const itemsNavbar = [
@@ -56,13 +56,14 @@ export default function Navbar({ ItemsNavbar, user }) {
                                 <li className="nav-item" key={index}>
                                     <a
                                         href={item.href}
+                                        data-bs-toggle="collapse"
+                                        data-bs-target="#navbarSupportedContent"
                                         onClick={(e) => {
                                             e.preventDefault()
                                             ItemsNavbar(item.value)
-                                        }}  
+                                        }}
                                         className={`nav-link text-white ${item.active ? 'active' : ''
-                                            } ${item.disabled ? 'disabled' : ''
-                                            }`}
+                                            } ${item.disabled ? 'disabled' : ''}`}
                                     >
                                         {item.name}
                                     </a>
@@ -70,7 +71,7 @@ export default function Navbar({ ItemsNavbar, user }) {
                             ))}
 
                         </ul>
-                        
+
                     </div>
                 </div>
             </nav >

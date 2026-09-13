@@ -13,6 +13,8 @@ from API.Routers.Trips.Star.addStar import router as addStar
 from API.Routers.Trips.Star.removeStar import router as removeStar
 from API.Routers.Trips.Star.getStar import router as getStar
 from API.Routers.Chatbot.chatbot import router as chatbot
+from API.Routers.Comments.comments import router as createComments
+from API.Routers.Comments.getComments import router as getComments
 from fastapi.responses import JSONResponse
 import time
 from collections import defaultdict
@@ -50,11 +52,7 @@ async def rate_limit_middleware(request: Request, call_next):
 origins = os.getenv("FRONTEND_URLS").split(",")
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        "http://localhost:5173",
-        "http://127.0.0.1:5173",
-        "https://gbvzfjrx-5173.brs.devtunnels.ms",
-    ],
+    allow_origins=origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -71,6 +69,8 @@ app.include_router(addStar)
 app.include_router(removeStar)
 app.include_router(getStar)
 app.include_router(chatbot)
+app.include_router(createComments)
+app.include_router(getComments)
 
 @app.on_event("startup")
 def startup():
