@@ -10,7 +10,7 @@ export default function Star({ itemsNavbar, setItemsNavbar, setSelectedRestauran
                     <h1>Your Stars</h1>
                     <p>Here you can see the stars you left on your trips.</p>
                 </header>
-                <div className="trips ">
+                <div className="trips position-relative">
                     {json?.length > 0 ? json.map((trip, index) => (
                         <div className="trip" role='button' key={index} onClick={() => {
                             setSelectedRestaurant(trip)
