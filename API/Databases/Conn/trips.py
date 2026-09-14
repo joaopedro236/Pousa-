@@ -14,7 +14,8 @@ def connect_database_trip():
             port=DB_PORT,
             dbname=DB_NAME,
             user=DB_USER,
-            password=DB_PASSWORD
+            password=DB_PASSWORD,
+            sslmode="require"
         )
         cursor = conn.cursor()
         return conn, cursor
