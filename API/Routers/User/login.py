@@ -28,7 +28,7 @@ def login(data: login, response: Response):
             httponly=True,
             max_age=60 * 60 * 24 * 7,
             samesite='lax',
-            secure=False,
+            secure=True,
             path='/',
         )
         return{'Status': True}          

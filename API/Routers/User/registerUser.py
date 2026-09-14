@@ -71,8 +71,8 @@ BLOCK
             value=session_token,
             httponly=True,
             max_age=60 * 60 * 24 * 7,
-            samesite="lax",
-            secure=False,
+            samesite="none",
+            secure=True,
             path="/",
         )
         return {"Status": True}
