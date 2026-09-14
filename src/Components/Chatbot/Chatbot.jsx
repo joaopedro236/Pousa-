@@ -1,7 +1,7 @@
 import './Chatbot.css'
 import { useState } from 'react';
-import iconGemini from '../../assets/gemini.png'
-export default function Chatbot({ selectedRestaurant, userData}) {
+import iconGemini from '../assets/gemini.png'
+export default function Chatbot({ selectedRestaurant, userData, user}) {
     const [message, setMessage] = useState("");
         const [chatbotActive, setChatBotActive] = useState(false)
         const [messages, setMessages] = useState([]);
@@ -23,21 +23,21 @@ export default function Chatbot({ selectedRestaurant, userData}) {
                         'Content-Type': "application/json",
                     },
                     body: JSON.stringify({
-     message: message,
+    message: message,
 
-     nameUser: userData?.name,
-     emailUser: userData?.email,
-     cpfUser: userData?.cpf,
+    nameUser: userData?.name,
+    emailUser: userData?.email,
+    cpfUser: userData?.cpf,
 
-     nameTrip: selectedRestaurant?.name,
-     descriptionTrip: selectedRestaurant?.description,
-     reviewTrip: selectedRestaurant?.review,
-     priceTrip: selectedRestaurant?.price,
-     dateStart: selectedRestaurant?.startDate,
-     dateEnd: selectedRestaurant?.endDate,
-     petsTrip: selectedRestaurant?.petsAllowed,
-     travelersTrip: selectedRestaurant?.numberOfTravelers
- })
+    nameTrip: selectedRestaurant?.name,
+    descriptionTrip: selectedRestaurant?.description,
+    reviewTrip: selectedRestaurant?.review,
+    priceTrip: selectedRestaurant?.price,
+    dateStart: selectedRestaurant?.startDate,
+    dateEnd: selectedRestaurant?.endDate,
+    petsTrip: selectedRestaurant?.petsAllowed,
+    travelersTrip: selectedRestaurant?.numberOfTravelers
+})
 
                 })
                 const data = await response.json()
@@ -65,7 +65,7 @@ export default function Chatbot({ selectedRestaurant, userData}) {
         }
     return (
         <>
-            <button className={`chatbotBtn bg-primary ${chatbotActive ? 'remove': ''}`} onClick={() => { setChatBotActive(true) }}>
+            <button className={`chatbotBtn bg-primary ${chatbotActive  || !user? 'remove': ''}`} onClick={() => { setChatBotActive(true) }}>
                 <img src={iconGemini} alt="iconGemini" />
             </button>
             <aside className={`chatbot ${chatbotActive ? 'active': ''}`}>

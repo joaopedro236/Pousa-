@@ -1,7 +1,7 @@
 import './StylesGlobals/reset.css'
 import './StylesGlobals/assets.css'
 import './StylesGlobals/root.css'
-import TripsActive from './Components/Home/components/TripsActive'  
+import TripsActive from './Components/Home/components/TripsActive'
 import { useNavigate } from 'react-router-dom'
 import RegisterUser from './Components/RegisterUser/RegisterUser'
 import UserDashboard from './Components/UserDashboard/UserDashboard'
@@ -196,8 +196,9 @@ function App() {
                     setItemsNavbar={setItemsNavbar}
                 />
                 <Chatbot
-                selectedRestaurant={selectedRestaurant}
-                userData={userData}/>
+                    user={user}
+                    selectedRestaurant={selectedRestaurant}
+                    userData={userData} />
             </main>
         </>
     )
