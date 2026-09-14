@@ -21,6 +21,6 @@ def connect_database():
             sslmode="require",
         )
         cursor = conn.cursor()
-        return conn, cursor
+        return conn, cursor 
     except Exception as e:
         raise Exception(f"Database Error: {e}")
