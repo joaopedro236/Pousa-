@@ -18,5 +18,5 @@ def connect_database():
         )
         cursor = conn.cursor()
         return conn, cursor
-    except Exception :
-        raise Exception('Database Error')
+    except Exception as e:
+        raise Exception(f'Database Error: {e}')
