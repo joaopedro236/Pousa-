@@ -11,7 +11,7 @@ import Home from './Components/Home/Home'
 import Login from './Components/Login/Login'
 import Loading from './Components/loading/Loading'
 import Star from './Components/Stars/Stars'
-import Chatbot from './Chatbot/Chatbot'
+import Chatbot from './Components/Chatbot/Chatbot'
 import { Routes, Route, Navigate } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 
