@@ -19,9 +19,9 @@ def database():
          session_token uuid,
         review numeric(3,2) default 5,
         usersPurchased uuid[],
-        tags text[]
-        comments text[]
-        note int[]
+        tags text[],
+        comments text[],
+        note int[],
         usersComments uuid[]""")
         conn.commit()
     except Exception:
