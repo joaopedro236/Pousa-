@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import hiddenPhoto from '../../../assets/banner.jpeg'
 import hiddenUser from '../../../assets/user.png'
-export default function TripsActive({ itemsNavbar, stars, user, starTrip, selectedRestaurant, setSelectedRestaurant }) {
+export default function TripsActive({ itemsNavbar, stars, user, starTrip, getTripHistory ,selectedRestaurant, setSelectedRestaurant }) {
     const [loading, setLoading] = useState(false)
     const [comments, setComments] = useState(null)
     const [notFound, setNotFound] = useState(false)
@@ -59,6 +59,7 @@ export default function TripsActive({ itemsNavbar, stars, user, starTrip, select
             const data = await response.json()
             if (data?.Status) {
                 alert('trip purchased')
+                getTripHistory()
             }
             if (data?.Error) {
                 console.error(data?.Error)

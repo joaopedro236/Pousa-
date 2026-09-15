@@ -121,7 +121,24 @@ function App() {
     if (loading) {
         return <Loading />
     }
-
+    const [tripHistory, setTripHistory] = useState(null)
+    const getTripHistory = async () => {
+        try {
+            const response = await fetch(`${import.meta.env.VITE_API_URL}/getTripsHistory`, {
+                credentials: 'include'
+            })
+            const data = await response.json()
+            if (data?.Error) {
+                console.error(data?.Error)
+            }
+            setTripHistory(data)
+        } catch (error) {
+            console.error(error)
+        }
+    }
+    useEffect(() => {
+        getTripHistory()
+    }, [])
     return (
         <>
             <RegisterUser
@@ -169,6 +186,7 @@ function App() {
                             <TripsActive
                                 stars={stars}
                                 user={user}
+                                getTripHistory={getTripHistory}
                                 starTrip={starTrip}
                                 selectedRestaurant={selectedRestaurant}
                                 setSelectedRestaurant={setSelectedRestaurant}
@@ -198,6 +216,7 @@ function App() {
                 />
                 <TripHistory
                     user={user}
+                    json={tripHistory}
                     setItemsNavbar={setItemsNavbar}
                     setSelectedRestaurant={setSelectedRestaurant}
                     itemsNavbar={itemsNavbar}

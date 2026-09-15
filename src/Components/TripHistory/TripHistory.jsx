@@ -1,21 +1,7 @@
 import './TripHistory.css'
 import { useState, useEffect } from 'react'
-export default function TripHistory({ user, itemsNavbar,setSelectedRestaurant, setItemsNavbar }) {
-    const [json, setJson] = useState(null)
-    const getTrip = async () => {
-        try {
-            const response = await fetch(`${import.meta.env.VITE_API_URL}/getTripsHistory`, {
-                credentials: 'include'
-            })
-            const data = await response.json()
-            if (data?.Error) {
-                console.error(data?.Error)
-            }
-            setJson(data)
-        } catch (error) {
-            console.error(error)
-        }
-    }
+export default function TripHistory({ user, itemsNavbar,setSelectedRestaurant, setItemsNavbar, json }) {
+    
     return (
         <>
             <section className={`tripHistory ${user && itemsNavbar == 'trip history' ? 'd-flex' : 'd-none'} flex-column gap-2 star home`}>
