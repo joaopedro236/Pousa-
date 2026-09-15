@@ -95,5 +95,5 @@ def chatbot(validation: data):
             "Response": response.text
         }
     except Exception :
-        print(str(e))
+        
         return {"Status": False, "Error": 'AN occured error'}
