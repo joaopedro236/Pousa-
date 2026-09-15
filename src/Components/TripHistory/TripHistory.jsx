@@ -18,7 +18,7 @@ export default function TripHistory({ user, itemsNavbar,setSelectedRestaurant, s
     }
     return (
         <>
-            <section className={`tripHistory star home${user && itemsNavbar == 'trip history' ? 'd-flex' : 'd-none'} flex-column gap-2`}>
+            <section className={`tripHistory ${user && itemsNavbar == 'trip history' ? 'd-flex' : 'd-none'} flex-column gap-2 star home`}>
                 <header className='d-flex flex-column gap-1 p-2'>
                     <h1>Purchased Trips</h1>
                     <p>Here is the history of the trips you have purchased.</p>
