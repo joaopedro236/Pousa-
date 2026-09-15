@@ -118,9 +118,6 @@ function App() {
         document.body.classList.toggle('user-active', user)
     }, [user])
 
-    if (loading) {
-        return <Loading />
-    }
     const [tripHistory, setTripHistory] = useState(null)
     const getTripHistory = async () => {
         try {
@@ -139,6 +136,9 @@ function App() {
     useEffect(() => {
         getTripHistory()
     }, [])
+    if (loading) {
+        return <Loading />
+    }
     return (
         <>
             <RegisterUser
