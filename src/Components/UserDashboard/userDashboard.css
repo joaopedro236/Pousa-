@@ -1,6 +1,7 @@
 .userDashboard header img {
     max-width: 160px;
     border-radius: 50%;
+    object-fit: cover;
 
 
 }
