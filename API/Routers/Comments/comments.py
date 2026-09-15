@@ -4,7 +4,7 @@ from ...Databases.Conn.trips import connect_database_trip
 from google import genai
 import os
 from dotenv import load_dotenv
-
+from datetime import date
 router = APIRouter()
 
 load_dotenv(encoding="utf-8")
@@ -22,7 +22,14 @@ def createComment(Data: data, request: Request):
         conn, cursor = connect_database_trip()
         cursor.execute('select userscomments from trips where id = %s AND %s = ANY(usersComments)', (Data.tripId, session_token))
         response = cursor.fetchone()
-        
+        if response:
+            return {'Status': False, 'Error': "Unfortunately, you've already commented!"}
+        cursor.execute('select endDate from trips where id = %s', (Data.tripId,))
+        endDate = cursor.fetchone()
+        if not endDate:
+            return{'Status': False, 'Error': 'The end date was not found.'}
+        if date.today() < endDate[0]:
+            return{'Status': False, 'Error':"The trip isn't over yet—you can comment once it's finished!"}
         moderation = client.models.generate_content(
             model="gemini-3.1-flash-lite",
             contents=f"""
