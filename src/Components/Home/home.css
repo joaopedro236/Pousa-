@@ -79,11 +79,10 @@
 
 }
 .userInfo img {
-    width: 100%;
+    width: 60px;
     object-fit: cover;
-    height: 100%;
+    height: 60px;
     border-radius:50%;
-    max-width: 60px;
 }
 .trips {
     padding: 0 24px 30px;
