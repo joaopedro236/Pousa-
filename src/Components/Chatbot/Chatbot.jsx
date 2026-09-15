@@ -1,6 +1,6 @@
 import './Chatbot.css'
 import { useState } from 'react';
-import iconGemini from '../assets/gemini.png'
+import iconGemini from '../../assets/gemini.png'
 export default function Chatbot({ selectedRestaurant, userData, user}) {
     const [message, setMessage] = useState("");
         const [chatbotActive, setChatBotActive] = useState(false)
