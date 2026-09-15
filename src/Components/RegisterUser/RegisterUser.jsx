@@ -26,6 +26,7 @@ export default function RegisterUser({ user, setUser, setLogin ,login, checkUser
             if (result?.Status) {
                 setUser(true)
                 await checkUser()
+                window.location.reload()
             }
             if (result?.Error) {
                 setError(true)
