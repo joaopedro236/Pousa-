@@ -28,7 +28,7 @@ def createComment(Data: data, request: Request):
         endDate = cursor.fetchone()
         if not endDate:
             return{'Status': False, 'Error': 'The end date was not found.'}
-        if date.today() < endDate[0]:
+        if date.today() < date.fromisoformat(endDate[0]):
             return{'Status': False, 'Error':"The trip isn't over yet—you can comment once it's finished!"}
         moderation = client.models.generate_content(
             model="gemini-3.1-flash-lite",
