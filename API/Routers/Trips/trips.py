@@ -33,7 +33,7 @@ def trips(dataValidation: Trips, request: Request):
         if not session_token:
             return {"Status": False, "Error": "Not session token"}
         moderation = client.models.generate_content(
-        model="gemini-3.6-flash",
+        model="gemini-3.1-flash-lite",
         contents=f"""
 Analyze this travel trip content.
 

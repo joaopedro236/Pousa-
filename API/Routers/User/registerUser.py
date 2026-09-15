@@ -33,7 +33,7 @@ def registerUser(data: registerUser, responseCookie: Response):
         session_token = str(uuid.uuid4())
         hashPassword = ph.hash(data.password)
         moderation = client.models.generate_content(
-            model="gemini-3.6-flash",
+            model="gemini-3.1-flash-lite",
             contents=f"""
 Analyze this travel trip content.
 

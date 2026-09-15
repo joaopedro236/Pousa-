@@ -24,7 +24,7 @@ def createComment(Data: data, request: Request):
         response = cursor.fetchone()
         
         moderation = client.models.generate_content(
-            model="gemini-3.6-flash",
+            model="gemini-3.1-flash-lite",
             contents=f"""
                 You are moderating a user comment about a travel experience.
 
