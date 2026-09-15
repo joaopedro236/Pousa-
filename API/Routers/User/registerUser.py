@@ -76,8 +76,8 @@ BLOCK
             path="/",
         )
         return {"Status": True}
-    except Exception:
-        return {"Status": False, "Error": "An error occurred."}
+    except Exception as e:
+        return {"Status": False, "Error": str(e)}
     finally:
         if cursor:
             cursor.close()
