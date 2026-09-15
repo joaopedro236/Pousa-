@@ -77,8 +77,8 @@ BLOCK
         conn.commit()
 
         return{'Status': True}
-    except Exception :
-        return {"Status": False, "Error": 'An occurred error'}
+    except Exception as e:
+        return {"Status": False, "Error": str(e)}
 
     finally:
         if cursor:
