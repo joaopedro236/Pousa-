@@ -21,7 +21,7 @@ const inputs = [
         id:3,
         type:'number',
         name:'cpf',
-        label:'Cpf',
+        label:'TIN',
         minLenght:3,
         maxLenght:14,
         placeholder:'Example: 12345678901234 '

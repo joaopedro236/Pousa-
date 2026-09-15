@@ -1,0 +1,62 @@
+import './TripHistory.css'
+import { useState, useEffect } from 'react'
+export default function TripHistory({ user, itemsNavbar,setSelectedRestaurant, setItemsNavbar }) {
+    const [json, setJson] = useState(null)
+    const getTrip = async () => {
+        try {
+            const response = await fetch(`${import.meta.env.VITE_API_URL}/getTripsHistory`, {
+                credentials: 'include'
+            })
+            const data = await response.json()
+            if (data?.Error) {
+                console.error(data?.Error)
+            }
+            setJson(data)
+        } catch (error) {
+            console.error(error)
+        }
+    }
+    return (
+        <>
+            <section className={`tripHistory star home${user && itemsNavbar == 'trip history' ? 'd-flex' : 'd-none'} flex-column gap-2`}>
+                <header className='d-flex flex-column gap-1 p-2'>
+                    <h1>Purchased Trips</h1>
+                    <p>Here is the history of the trips you have purchased.</p>
+                </header>
+                <div className="trips">
+                    {json?.length > 0 ? json.map((trip, index) => (
+                        <div className="trip" role='button' key={index} onClick={() => {
+                            setSelectedRestaurant(trip)
+                            setItemsNavbar('explore')
+                        }}>
+
+                            <div>
+                                <h2>{trip?.name}</h2>
+                                <p>{trip?.description?.length > 80
+                                    ? trip?.description.slice(0, 60) + "..."
+                                    : trip?.description}</p>
+                            </div>
+
+                            <div className="trip-info">
+                                <span>📅 {trip?.startdate} - {trip?.enddate}</span>
+                                <span>👥 {trip?.numberoftravelers} travelers</span>
+                                <span>💰 {trip?.price.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</span>
+                                <span>⭐ {trip?.review}</span>
+                                <span>😺 Pets {trip?.petsAllowed}</span>
+
+                            </div>
+
+                           
+
+                        </div>
+                    )) : (
+                        <div className="no-trips">
+                            <h2>No trips found</h2>
+                            <p>You don't have any trips yet.</p>
+                        </div>
+                    )}
+                </div>
+            </section>
+        </>
+    )
+}

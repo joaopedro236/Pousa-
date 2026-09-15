@@ -1,0 +1,30 @@
+from fastapi import APIRouter, Request  
+from ...Databases.Conn.trips import connect_database_trip
+from ...Databases.Conn.users import connect_database
+router = APIRouter()
+router.get('/getTripsHistory')
+def tripsHistory(request: Request):
+    session_token = request.cookies.get("user_session_token")
+    conn = None
+    connTrip = None
+    cursor = None
+    cursorTrip = None
+    try:
+        conn,cursor = connect_database()
+        connTrip, cursorTrip = connect_database_trip()
+        cursor.execute('select purchasedTrips from usersPousae where session_token = %s', (session_token,))
+        tripId = cursor.fetchone()[0]
+        cursorTrip.execute('select name, description,startDate, endDate,numberOfTravelers, petsAllowed, price , reviewfrom trips where id = ANY(%s)', (tripId,))
+        trip = [row[0] for row in cursorTrip.fetchall()]
+        return{'Status': True, 'Trip': trip}
+    except Exception :
+        return{'Status': False, 'Error': 'An occured Error'}
+    finally:
+        if cursor:
+            cursor.close()
+        if conn:
+            conn.close()
+        if cursorTrip:
+            cursorTrip.close()
+        if connTrip:
+            connTrip.close()

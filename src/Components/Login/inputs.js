@@ -11,7 +11,7 @@ const inputs = [
         id:2,
         type:'number',
         name:'cpf',
-        label:'Your Cpf',
+        label:'Your TIN',
         minLenght:3,
         maxLenght:14,
         placeholder:'Example: 12345678901234 '

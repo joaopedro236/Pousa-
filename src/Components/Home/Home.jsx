@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react'
 import photoUser from '../../assets/user.png'
 import { useNavigate, useParams } from 'react-router-dom'
 
-export default function Home({ user, userData, selectedRestaurant, setSelectedRestaurant, itemsNavbar, setItemsNavbar, starTrip, stars }) {
+export default function     Home({ user, userData, selectedRestaurant, setSelectedRestaurant, itemsNavbar, setItemsNavbar, starTrip, stars }) {
     const [json, setJson] = useState({
 
         trips: []

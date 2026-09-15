@@ -15,6 +15,7 @@ def database():
         image_url text,
         moneyalreadyspent numeric(10,2) default 0.0,
         tripsTaken integer default 0,
+        purchasedTrips int[],
         star int[] default null""")
         conn.commit()
     except Exception:

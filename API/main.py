@@ -15,6 +15,7 @@ from API.Routers.Trips.Star.getStar import router as getStar
 from API.Routers.Chatbot.chatbot import router as chatbot
 from API.Routers.Comments.comments import router as createComments
 from API.Routers.Comments.getComments import router as getComments
+from API.Routers.Trips.tripsHistory import router as tripsHistory
 from fastapi.responses import JSONResponse
 import time
 from collections import defaultdict
@@ -72,6 +73,7 @@ app.include_router(getStar)
 app.include_router(chatbot)
 app.include_router(createComments)
 app.include_router(getComments)
+app.include_router(tripsHistory)
 
 @app.on_event("startup")
 def startup():

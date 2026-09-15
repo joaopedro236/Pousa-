@@ -1,12 +1,17 @@
 import './Navbar.css'
 import { useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
+
 export default function Navbar({ ItemsNavbar, user }) {
     const itemsNavbar = [
         { name: 'Explore', href: '#', value: 'explore' },
         { name: 'Stars', href: '#', value: 'stars' },
         { name: 'User Dashboard', href: '#', value: 'User Dashboard' },
         { name: 'Create Trip', href: '#', value: 'create-trip' },
+        { name: 'Trip History', href: '#', value: 'trip history' },
     ]
+    const navigate = useNavigate()
+
     useEffect(() => {
         const handleKeyDown = (event) => {
 
@@ -16,7 +21,8 @@ export default function Navbar({ ItemsNavbar, user }) {
                 '1': 'explore',
                 '2': 'stars',
                 '3': 'User Dashboard',
-                '4': 'create-trip'
+                '4': 'create-trip',
+                '5': 'trip history'
             }
 
             const section = sections[event.key]
@@ -61,6 +67,8 @@ export default function Navbar({ ItemsNavbar, user }) {
                                         onClick={(e) => {
                                             e.preventDefault()
                                             ItemsNavbar(item.value)
+                                            navigate('/', { replace: true })
+
                                         }}
                                         className={`nav-link text-white ${item.active ? 'active' : ''
                                             } ${item.disabled ? 'disabled' : ''}`}
