@@ -71,7 +71,7 @@ BLOCK
             value=session_token,
             httponly=True,
             max_age=60 * 60 * 24 * 7,
-            samesite="lax",
+            samesite="none",
             secure=True,
             path="/",
         )
