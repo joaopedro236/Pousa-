@@ -24,8 +24,8 @@ export default function TripHistory({ user, itemsNavbar,setSelectedRestaurant, s
                             </div>
 
                             <div className="trip-info">
-                                <span>📅 {trip?.startdate} - {trip?.enddate}</span>
-                                <span>👥 {trip?.numberoftravelers} travelers</span>
+                                <span>📅 {trip?.startDate} - {trip?.endDate}</span>
+                                <span>👥 {trip?.numberOfTravelers} travelers</span>
                                 <span>💰 {trip?.price.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</span>
                                 <span>⭐ {trip?.review}</span>
                                 <span>😺 Pets {trip?.petsAllowed}</span>
