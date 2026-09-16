@@ -17,8 +17,8 @@ def tripsHistory(request: Request):
         cursorTrip.execute('select name, description,startDate, endDate,numberOfTravelers, petsAllowed, price , reviewfrom trips where id = ANY(%s)', (tripId,))
         trip = [row[0] for row in cursorTrip.fetchall()]
         return{'Status': True, 'Trip': trip}
-    except Exception :
-        return{'Status': False, 'Error': 'An occured Error'}
+    except Exception as e:
+        return{'Status': False, 'Error': str(e)}
     finally:
         if cursor:
             cursor.close()
