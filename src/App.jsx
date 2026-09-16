@@ -128,7 +128,7 @@ function App() {
             if (data?.Error) {
                 console.error(data?.Error)
             }
-            setTripHistory(data)
+            setTripHistory(data?.Trip)
         } catch (error) {
             console.error(error)
         }
