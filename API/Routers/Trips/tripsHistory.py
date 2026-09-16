@@ -2,7 +2,7 @@ from fastapi import APIRouter, Request
 from ...Databases.Conn.trips import connect_database_trip
 from ...Databases.Conn.users import connect_database
 router = APIRouter()
-router.get('/getTripsHistory')
+@router.get('/getTripsHistory')
 def tripsHistory(request: Request):
     session_token = request.cookies.get("user_session_token")
     conn = None
