@@ -21,9 +21,12 @@ def tripsHistory(request: Request):
         )
         tripId = cursor.fetchone()[0]
         cursorTrip.execute(
-            "select name, description,startdate, enddate,numberoftravelers, petsallowed, price , review from trips where id = ANY(%s)",
+            "select name, description,startdate, enddate,numberoftravelers, petsallowed, price , review,session_token from trips where id = ANY(%s)",
             (tripId,),
         )
+        session_tokenCT = cursorTrip.fetchall()[8]
+        cursor.execute('select name, image_url from usersPousae where session_token = ANY(%s)',(session_tokenCT,))
+        owners = cursor.fetchall()
         trip = [
             {
                 "name": row[0],
@@ -34,6 +37,8 @@ def tripsHistory(request: Request):
                 "petsAllowed": row[5],
                 "price": row[6],
                 "review": row[7],
+                "ownerName": owners[0],
+                "ownerImage": owners[1]
             }
             for row in cursorTrip.fetchall()
         ]

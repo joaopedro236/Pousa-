@@ -1,7 +1,9 @@
 import './TripHistory.css'
 import { useState, useEffect } from 'react'
-export default function TripHistory({ user, itemsNavbar,setSelectedRestaurant, setItemsNavbar, json }) {
-    
+import photoUser from '../../assets/user.png'
+
+export default function TripHistory({ user, itemsNavbar, setSelectedRestaurant, setItemsNavbar, json }) {
+
     return (
         <>
             <section className={`tripHistory ${user && itemsNavbar == 'trip history' ? 'd-flex' : 'd-none'} flex-column gap-2 star home`}>
@@ -31,8 +33,19 @@ export default function TripHistory({ user, itemsNavbar,setSelectedRestaurant, s
                                 <span>😺 Pets {trip?.petsAllowed}</span>
 
                             </div>
+                            <div className="trip-owner">
+                                <img
+                                    src={trip.ownerImage || photoUser}
+                                    alt={trip.ownerName}
+                                    onError={(e) => {
+                                        e.currentTarget.onerror = null
+                                        e.currentTarget.src = photoUser
+                                    }}
+                                />
 
-                           
+                                <span>{trip.ownerName}</span>
+                            </div>
+
 
                         </div>
                     )) : (
