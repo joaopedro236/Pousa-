@@ -27,7 +27,7 @@ def tripsHistory(request: Request):
         trips = cursorTrip.fetchall()
         session_tokenCT = [row[8] for row in trips]
         cursor.execute(
-            "select name, image_url from usersPousae where session_token = ANY(%s)",
+            "select session_token, name, image_url from usersPousae where session_token::text = ANY(%s)",
             (session_tokenCT,),
         )
         owners = cursor.fetchall()
@@ -41,8 +41,12 @@ def tripsHistory(request: Request):
                 "petsAllowed": row[5],
                 "price": row[6],
                 "review": row[7],
-                "ownerName": next(owner[0] for owner in owners if owner[0] == row[8]),
-                "ownerImage": next(owner[1] for owner in owners if owner[0] == row[8]),
+                "ownerName": next(
+                    owner[1] for owner in owners if str(owner[0]) == row[8]
+                ),
+                "ownerImage": next(
+                    owner[2] for owner in owners if str(owner[0]) == row[8]
+                ),
             }
             for row in trips
         ]
