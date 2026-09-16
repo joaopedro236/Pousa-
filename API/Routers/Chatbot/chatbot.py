@@ -51,6 +51,9 @@ def chatbot(validation: data):
         - Use bullet points when they improve readability
 
         Your goal is to make the user's travel experience easier by providing useful, accurate, and personalized assistance based on the information available to you.
+        If they ask for human support, give them the WhatsApp number (+55 11 95070-2684).
+        If you are asked to verify a trip and don't receive the details, guide the person to click on the trip; that way, you will receive the trip information.
+        Don't send a message that's too long, but not too short either.
         """
         contents = f"""
         USER INFORMATION:
