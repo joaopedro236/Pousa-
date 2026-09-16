@@ -22,7 +22,7 @@ def database():
         tags text[],
         comments text[],
         note int[],
-        usersComments uuid[]""")
+        usersComments uuid[])""")
         conn.commit()
     except Exception:
         return {"Status": False, "Error": "Error Create Database"}
