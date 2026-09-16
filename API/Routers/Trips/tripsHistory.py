@@ -14,7 +14,7 @@ def tripsHistory(request: Request):
         connTrip, cursorTrip = connect_database_trip()
         cursor.execute('select purchasedTrips from usersPousae where session_token = %s', (session_token,))
         tripId = cursor.fetchone()[0]
-        cursorTrip.execute('select name, description,startDate, endDate,numberOfTravelers, petsAllowed, price , reviewfrom trips where id = ANY(%s)', (tripId,))
+        cursorTrip.execute('select name, description,startdate, enddate,numberoftravelers, petsallowed, price , review from trips where id = ANY(%s)', (tripId,))
         trip = [row[0] for row in cursorTrip.fetchall()]
         return{'Status': True, 'Trip': trip}
     except Exception as e:
