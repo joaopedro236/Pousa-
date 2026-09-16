@@ -24,8 +24,12 @@ def tripsHistory(request: Request):
             "select name, description,startdate, enddate,numberoftravelers, petsallowed, price , review,session_token from trips where id = ANY(%s)",
             (tripId,),
         )
-        session_tokenCT = cursorTrip.fetchall()[8]
-        cursor.execute('select name, image_url from usersPousae where session_token = ANY(%s)',(session_tokenCT,))
+        trips = cursorTrip.fetchall()
+        session_tokenCT = [row[8] for row in trips]
+        cursor.execute(
+            "select name, image_url from usersPousae where session_token = ANY(%s)",
+            (session_tokenCT,),
+        )
         owners = cursor.fetchall()
         trip = [
             {
@@ -37,10 +41,10 @@ def tripsHistory(request: Request):
                 "petsAllowed": row[5],
                 "price": row[6],
                 "review": row[7],
-                "ownerName": owners[0],
-                "ownerImage": owners[1]
+                "ownerName": next(owner[0] for owner in owners if owner[0] == row[8]),
+                "ownerImage": next(owner[1] for owner in owners if owner[0] == row[8]),
             }
-            for row in cursorTrip.fetchall()
+            for row in trips
         ]
         return {"Status": True, "Trip": trip}
     except Exception as e:
