@@ -306,7 +306,7 @@ export default function TripsActive({ itemsNavbar, stars, user, starTrip, getTri
                     <div className="buyTripsDiv">
                         <form>
                             <button className="btn btn-primary p-3 buyTrip" onClick={() => buy()} disabled={loading}>{loading ? 'loading' : 'Book a trip'}</button>
-                            <input type="number" name="tripQuantity" id="tripQuantity" placeholder='trip Quantity' value={tripQuantity} onChange={(e) => {
+                            <input type="number" name="tripQuantity" id="tripQuantity" className='form-control' placeholder='trip Quantity' value={tripQuantity} onChange={(e) => {
                                 const value = e.target.value;
 
                                 if (value === "" || (Number(value) >= 1 && Number(value) <= Number(selectedRestaurant?.numberOfTravelers))) {
