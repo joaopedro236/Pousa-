@@ -303,9 +303,12 @@ export default function TripsActive({ itemsNavbar, stars, user, starTrip, getTri
                             </form>
                         </div>
                     </div>
-                    <div className="buyTripsDiv">
-                        <form>
-                            <button className="btn btn-primary p-3 buyTrip" onClick={() => buy()} disabled={loading}>{loading ? 'loading' : 'Book a trip'}</button>
+                    <div className="buyTripsDiv mt-1">
+                        <form onSubmit={(e) => {
+        e.preventDefault()
+        buy()
+    }}>
+                            <button type='submit' className="btn btn-primary p-3 buyTrip" disabled={loading}>{loading ? 'loading' : 'Book a trip'}</button>
                             <input type="number" name="tripQuantity" id="tripQuantity" className='form-control' placeholder='trip Quantity' value={tripQuantity} onChange={(e) => {
                                 const value = e.target.value;
 
