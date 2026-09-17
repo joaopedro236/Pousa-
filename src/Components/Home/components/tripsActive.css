@@ -145,8 +145,11 @@
     right: 15px;
 
     width: 30px;
+
     height: 30px;
+
     background-color: transparent;
+
     border: 1px solid var(--border-black);
 
     border-radius: 50%;
@@ -567,26 +570,6 @@
 
 }
 
-.buyTrip {
-
-    grid-column: 1 / -1;
-
-    grid-row: 4;
-
-    width: min(100%, 350px);
-
-    min-height: 48px;
-
-    margin: 0 auto;
-
-    border-radius: 10px;
-
-    font-size: .9rem;
-
-    font-weight: 600;
-
-}
-
 .bug-page {
 
     min-height: 100vh;
@@ -622,32 +605,70 @@
     max-width: 28%;
 
 }
+
+
 .buyTripsDiv {
+
     grid-column: 1 / -1;
+
     grid-row: 4;
+
     width: min(100%, 350px);
+
     margin: 0 auto;
+
 }
 
 .buyTripsDiv form {
+
     display: flex;
+
     align-items: center;
+
     gap: 10px;
+
     width: 100%;
+
 }
 
 .buyTripsDiv .buyTrip {
+
     flex: 1;
+
     width: auto;
+
     min-height: 48px;
+
     margin: 0;
+
+    border-radius: 10px;
+
+    font-size: .9rem;
+
+    font-weight: 600;
+
 }
 
 .buyTripsDiv #tripQuantity {
-    width: 80px;
-    flex: 0 0 80px;
+
+    display: block;
+
+    visibility: visible;
+
+    opacity: 1;
+
+    width: 70px;
+
+    min-width: 70px;
+
     height: 48px;
+
+    flex: 0 0 70px;
+
+    margin: 0;
+
 }
+
 @media (max-width: 900px) {
 
     .tripsActiveHeader {
@@ -898,11 +919,45 @@
 
     }
 
-    .buyTrip {
+    .buyTripsDiv {
 
         width: 100%;
 
+    }
+
+    .buyTripsDiv form {
+
+        width: 100%;
+
+    }
+
+    .buyTripsDiv .buyTrip {
+
+        flex: 1;
+
+        width: auto;
+
         min-height: 46px;
+
+    }
+
+    .buyTripsDiv #tripQuantity {
+
+        display: block;
+
+        visibility: visible;
+
+        opacity: 1;
+
+        width: 55px;
+
+        min-width: 55px;
+
+        height: 46px;
+
+        flex: 0 0 55px;
+
+        margin: 0;
 
     }
 
