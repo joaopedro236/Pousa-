@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import hiddenPhoto from '../../../assets/banner.jpeg'
 import hiddenUser from '../../../assets/user.png'
-export default function TripsActive({ itemsNavbar, stars, user, starTrip, getTripHistory ,selectedRestaurant, setSelectedRestaurant }) {
+export default function TripsActive({ itemsNavbar, stars, user, starTrip, getTripHistory, selectedRestaurant, setSelectedRestaurant }) {
     const [loading, setLoading] = useState(false)
     const [comments, setComments] = useState(null)
     const [notFound, setNotFound] = useState(false)
@@ -38,6 +38,7 @@ export default function TripsActive({ itemsNavbar, stars, user, starTrip, getTri
 
         fetchTrip()
     }, [tripId])
+    const [tripQuantity, setTripQuantity] = useState(1)
     const [showFullDescription, setShowFullDescription] = useState(false)
     const buy = async () => {
         setLoading(true)
@@ -51,7 +52,8 @@ export default function TripsActive({ itemsNavbar, stars, user, starTrip, getTri
                         'Content-Type': 'application/json'
                     },
                     body: JSON.stringify({
-                        id: selectedRestaurant?.id
+                        id: selectedRestaurant?.id,
+                        quantity:Number(tripQuantity);
                     })
                 }
 
@@ -290,12 +292,29 @@ export default function TripsActive({ itemsNavbar, stars, user, starTrip, getTri
                                 <input type="text" placeholder='Leave a comment' className='createCommentTrip form-control' value={message} minLength={2} maxLength={1600}
                                     onChange={(e) => setMessage(e.target.value)} />
                                 <input type="number" placeholder='note' className='form-control noteTrip' value={note} min={0} max={5}
-                                    onChange={(e) => setNote(e.target.value)} />
+                                    onChange={(e) => {
+                                        const value = e.target.value;
+
+                                        if (value === "" || (Number(value) >= 0 && Number(value) <= 5)) {
+                                            setNote(value);
+                                        }
+                                    }} />
                                 <input type="submit" className='btn btn-primary' disabled={message.trim().length < 2 || loading} value="Send" />
                             </form>
                         </div>
                     </div>
-                    <button className="btn btn-primary p-3 buyTrip" onClick={() => buy()} disabled={loading}>{loading ? 'loading' : 'Book a trip'}</button>
+                    <div className="buyTripsDiv">
+                        <form>
+                            <button className="btn btn-primary p-3 buyTrip" onClick={() => buy()} disabled={loading}>{loading ? 'loading' : 'Book a trip'}</button>
+                            <input type="number" name="tripQuantity" id="tripQuantity" placeholder='trip Quantity' value={tripQuantity} onChange={(e) => {
+                                const value = e.target.value;
+
+                                if (value === "" || (Number(value) >= 1 && Number(value) <= Number(selectedRestaurant?.numberOfTravelers))) {
+                                    setTripQuantity(value);
+                                }
+                            }} min={1} max={Number(selectedRestaurant?.numberOfTravelers)} />
+                        </form>
+                    </div>
                 </div>
             </section>
         </>

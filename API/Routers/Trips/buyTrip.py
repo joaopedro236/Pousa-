@@ -22,6 +22,7 @@ def buy_trip(tripId: validation, request: Request):
         tripPrice = cursor.fetchone()
         if not tripPrice:
             return {"Status": False, "Error": "Not exists trip"}
+        tripPriceMultiplied = tripPrice[0] * tripId.quantity
         cursorUser.execute(
             "select money from usersPousae where session_token = %s",
             (session_token_user,),
@@ -31,7 +32,7 @@ def buy_trip(tripId: validation, request: Request):
             return{'Status': False, 'Error': 'You cannot buy from your own restaurant.'}
         if not userMoney:
             return {"Status": False, "Error": "not exists user"}
-        if userMoney[0] < tripPrice[0]:
+        if userMoney[0] < tripPriceMultiplied:
             return {"Status": False, "Error": "The user does not have enough money."}
         cursorUser.execute(
             """update usersPousae    
@@ -42,7 +43,7 @@ def buy_trip(tripId: validation, request: Request):
                             purchasedTrips = array_append(purchasedTrips, %s)
                             where session_token = %s
                             """,
-            (tripPrice[0], tripPrice[0],tripId.id, session_token_user),
+            (tripPriceMultiplied, tripPriceMultiplied,tripId.id, session_token_user),
         )
         cursorUser.execute(
             """update usersPousae    
@@ -50,7 +51,7 @@ def buy_trip(tripId: validation, request: Request):
                             money= money + %s
                             where session_token = %s
                             """,
-            (tripPrice[0], tripPrice[1]),
+            (tripPriceMultiplied, tripPrice[1]),
         )
         connUser.commit()
         cursor.execute(

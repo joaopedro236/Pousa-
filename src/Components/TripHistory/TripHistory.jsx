@@ -1,4 +1,4 @@
-import './TripHistory.css'
+
 import { useState, useEffect } from 'react'
 import photoUser from '../../assets/user.png'
 
