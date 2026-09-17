@@ -53,7 +53,7 @@ export default function TripsActive({ itemsNavbar, stars, user, starTrip, getTri
                     },
                     body: JSON.stringify({
                         id: selectedRestaurant?.id,
-                        quantity:Number(tripQuantity);
+                        quantity:Number(tripQuantity)
                     })
                 }
 
