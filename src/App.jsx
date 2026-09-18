@@ -142,7 +142,7 @@ function App() {
     }
     return (
         <>
-            <VLibras forceOnload={true} />
+            <VLibras/>
             <RegisterUser
                 checkUser={checkUser}
                 user={user}
