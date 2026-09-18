@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react'
 import photoUser from '../../assets/user.png'
 import { useNavigate, useParams } from 'react-router-dom'
 
-export default function Home({ user, userData, selectedRestaurant, setSelectedRestaurant, itemsNavbar, setItemsNavbar, starTrip, stars }) {
+export default function     Home({ user, userData, selectedRestaurant, setSelectedRestaurant, itemsNavbar, setItemsNavbar, starTrip, stars }) {
     const [json, setJson] = useState({
 
         trips: []
@@ -12,16 +12,16 @@ export default function Home({ user, userData, selectedRestaurant, setSelectedRe
     const [search, setSearch] = useState('')
     const { tripId } = useParams()
     useEffect(() => {
-        if (!tripId || !json.trips.length) return
+    if (!tripId || !json.trips.length) return
 
-        const trip = json.trips.find(
-            trip => String(trip.id) === String(tripId)
-        )
+    const trip = json.trips.find(
+        trip => String(trip.id) === String(tripId)
+    )
 
-        if (trip) {
-            setSelectedRestaurant(trip)
-        }
-    }, [tripId, json.trips])
+    if (trip) {
+        setSelectedRestaurant(trip)
+    }
+}, [tripId, json.trips])
     const navigate = useNavigate()
 
     const fetchData = async () => {
@@ -118,36 +118,10 @@ export default function Home({ user, userData, selectedRestaurant, setSelectedRe
                 <div className="trips ">
 
                     {json?.trips
-                        ?.filter(trip => {
-                            const searchText = search.toLowerCase().trim()
-
-                            const parseDate = value => {
-                                if (!value) return null
-
-                                if (value.includes('/')) {
-                                    const [day, month, year] = value.split('/')
-                                    return new Date(year, month - 1, day)
-                                }
-
-                                return new Date(value)
-                            }
-
-                            const searchDate = parseDate(search)
-                            const start = parseDate(trip.startDate)
-                            const end = parseDate(trip.endDate)
-
-                            return (
-                                trip?.name?.toLowerCase().includes(searchText) ||
-                                trip?.description?.toLowerCase().includes(searchText) ||
-                                (
-                                    searchDate &&
-                                    start &&
-                                    end &&
-                                    searchDate >= start &&
-                                    searchDate <= end
-                                )
-                            )
-                        })
+                        ?.filter(trip =>
+                            trip?.name?.toLowerCase().includes(search?.toLowerCase()) ||
+                            trip?.description?.toLowerCase().includes(search?.toLowerCase())
+                        )
                         .map((trip, index) => (
                             <div className="trip" role='button' key={index} onClick={() => {
                                 sessionStorage.setItem('selectedTrip', JSON.stringify(trip))
