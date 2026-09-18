@@ -119,14 +119,20 @@ export default function Home({ user, userData, selectedRestaurant, setSelectedRe
 
                     {json?.trips
                         ?.filter(trip => {
-                            const date = new Date(search)
+                            const searchDate = new Date(search)
+
                             const start = new Date(trip.startDate)
                             const end = new Date(trip.endDate)
+
+                            const dateMatch =
+                                !isNaN(searchDate) &&
+                                searchDate >= start &&
+                                searchDate <= end
 
                             return (
                                 trip?.name?.toLowerCase().includes(search?.toLowerCase()) ||
                                 trip?.description?.toLowerCase().includes(search?.toLowerCase()) ||
-                                (search && date >= start && date <= end)
+                                dateMatch
                             )
                         })
                         .map((trip, index) => (
