@@ -163,6 +163,7 @@ function App() {
                 <Navbar
                     ItemsNavbar={setItemsNavbar}
                     user={user}
+                    userData= {userData}
                 />
 
                 <Routes>

@@ -2,13 +2,14 @@ import './Navbar.css'
 import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-export default function Navbar({ ItemsNavbar, user }) {
+export default function Navbar({ ItemsNavbar, user, userData }) {
     const itemsNavbar = [
         { name: 'Explore', href: '#', value: 'explore' },
         { name: 'Stars', href: '#', value: 'stars' },
         { name: 'User Dashboard', href: '#', value: 'User Dashboard' },
         { name: 'Create Trip', href: '#', value: 'create-trip' },
         { name: 'Trip History', href: '#', value: 'trip history' },
+        ...(userData?.tripsExists ? [{ name: 'Trip Dashbaord ', href: '#', value: 'trip dashboard' }] : [])
     ]
     const navigate = useNavigate()
 
@@ -22,7 +23,8 @@ export default function Navbar({ ItemsNavbar, user }) {
                 '2': 'stars',
                 '3': 'User Dashboard',
                 '4': 'create-trip',
-                '5': 'trip history'
+                '5': 'trip history',
+                ...(userData?.tripsExists && { '6': 'trip dashboard' })
             }
 
             const section = sections[event.key]
