@@ -3,6 +3,7 @@ import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 export default function Navbar({ ItemsNavbar, user, userData }) {
+    console.log(userData.tripsExists)
     const itemsNavbar = [
         { name: 'Explore', href: '#', value: 'explore' },
         { name: 'Stars', href: '#', value: 'stars' },
