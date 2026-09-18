@@ -4,9 +4,10 @@
     padding: 20px;
 }
 .tripsDashboard header h1{
-    font-size: 31px;    
+    font-size: 28px;    
 }
 .tripsDashboard header p{
-    font-size: 13.5px;
+    font-size: 14px;
+    max-width: 350px;
     color: var(--text-gray);
 }
