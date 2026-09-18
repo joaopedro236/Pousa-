@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react'
 import photoUser from '../../assets/user.png'
 import { useNavigate, useParams } from 'react-router-dom'
 
-export default function     Home({ user, userData, selectedRestaurant, setSelectedRestaurant, itemsNavbar, setItemsNavbar, starTrip, stars }) {
+export default function Home({ user, userData, selectedRestaurant, setSelectedRestaurant, itemsNavbar, setItemsNavbar, starTrip, stars }) {
     const [json, setJson] = useState({
 
         trips: []
@@ -12,16 +12,16 @@ export default function     Home({ user, userData, selectedRestaurant, setSelect
     const [search, setSearch] = useState('')
     const { tripId } = useParams()
     useEffect(() => {
-    if (!tripId || !json.trips.length) return
+        if (!tripId || !json.trips.length) return
 
-    const trip = json.trips.find(
-        trip => String(trip.id) === String(tripId)
-    )
+        const trip = json.trips.find(
+            trip => String(trip.id) === String(tripId)
+        )
 
-    if (trip) {
-        setSelectedRestaurant(trip)
-    }
-}, [tripId, json.trips])
+        if (trip) {
+            setSelectedRestaurant(trip)
+        }
+    }, [tripId, json.trips])
     const navigate = useNavigate()
 
     const fetchData = async () => {
@@ -118,10 +118,17 @@ export default function     Home({ user, userData, selectedRestaurant, setSelect
                 <div className="trips ">
 
                     {json?.trips
-                        ?.filter(trip =>
-                            trip?.name?.toLowerCase().includes(search?.toLowerCase()) ||
-                            trip?.description?.toLowerCase().includes(search?.toLowerCase())
-                        )
+                        ?.filter(trip => {
+                            const date = new Date(search)
+                            const start = new Date(trip.startDate)
+                            const end = new Date(trip.endDate)
+
+                            return (
+                                trip?.name?.toLowerCase().includes(search?.toLowerCase()) ||
+                                trip?.description?.toLowerCase().includes(search?.toLowerCase()) ||
+                                (search && date >= start && date <= end)
+                            )
+                        })
                         .map((trip, index) => (
                             <div className="trip" role='button' key={index} onClick={() => {
                                 sessionStorage.setItem('selectedTrip', JSON.stringify(trip))
