@@ -39,11 +39,11 @@ def buy_trip(tripId: validation, request: Request):
                         set 
                             money= money - %s,
                             moneyalreadyspent = moneyalreadyspent + %s,
-                            tripsTaken = tripsTaken + 1,
+                            tripsTaken = tripsTaken + %s,
                             purchasedTrips = array_append(purchasedTrips, %s)
                             where session_token = %s
                             """,
-            (tripPriceMultiplied, tripPriceMultiplied,tripId.id, session_token_user),
+            (tripPriceMultiplied, tripPriceMultiplied,tripId.quantity,tripId.id, session_token_user),
         )
         cursorUser.execute(
             """update usersPousae    
