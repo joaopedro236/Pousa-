@@ -3,7 +3,6 @@ import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 export default function Navbar({ ItemsNavbar, user, userData }) {
-    console.log(itemsNavbar)
     const itemsNavbar = [
         { name: 'Explore', href: '#', value: 'explore' },
         { name: 'Stars', href: '#', value: 'stars' },
@@ -14,6 +13,7 @@ export default function Navbar({ ItemsNavbar, user, userData }) {
         ? [{ name: 'Trip Dashboard', href: '#', value: 'trip dashboard' }]
         : [])
     ]
+    console.log(itemsNavbar)
     const navigate = useNavigate()
 
     useEffect(() => {
@@ -43,7 +43,7 @@ export default function Navbar({ ItemsNavbar, user, userData }) {
         return () => {
             window.removeEventListener('keydown', handleKeyDown)
         }
-
+        
     }, [ItemsNavbar, user, userData])
     return (
         <>
