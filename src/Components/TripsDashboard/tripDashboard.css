@@ -1,0 +1,12 @@
+.tripsDashboard {
+    flex-direction: column;
+    gap: 5px;
+    padding: 20px;
+}
+.tripsDashboard header h1{
+    font-size: 31px;    
+}
+.tripsDashboard header p{
+    font-size: 13.5px;
+    color: var(--text-gray);
+}

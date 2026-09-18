@@ -9,7 +9,7 @@ export default function Star({ itemsNavbar, setItemsNavbar, setSelectedRestauran
                 <header className='d-flex flex-column gap-1 p-2'>
                     <h1>Your Stars</h1>
                     <p>Here you can see the stars you left on your trips.</p>
-                </header>
+                 </header>
                 <div className="trips ">
                     {json?.length > 0 ? json.map((trip, index) => (
                         <div className="trip" role='button' key={index} onClick={() => {
