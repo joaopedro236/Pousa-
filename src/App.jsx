@@ -14,6 +14,7 @@ import Loading from './Components/loading/Loading'
 import Star from './Components/Stars/Stars'
 import Chatbot from './Components/Chatbot/Chatbot'
 import TripHistory from './Components/TripHistory/TripHistory'
+import TripsDashboard from './Components/TripsDashboard/TripsDashboard';
 import { Routes, Route, Navigate } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 
@@ -223,6 +224,9 @@ function App() {
                     setItemsNavbar={setItemsNavbar}
                     setSelectedRestaurant={setSelectedRestaurant}
                     itemsNavbar={itemsNavbar}
+                />
+                <TripsDashboard
+                itemsNavbar={itemsNavbar}
                 />
                 <Chatbot
                     user={user}

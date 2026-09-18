@@ -13,7 +13,6 @@ export default function Navbar({ ItemsNavbar, user, userData }) {
         ? [{ name: 'Trip Dashboard', href: '#', value: 'trip dashboard' }]
         : [])
     ]
-    console.log(itemsNavbar)
     const navigate = useNavigate()
 
     useEffect(() => {
