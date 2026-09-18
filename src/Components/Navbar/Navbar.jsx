@@ -10,7 +10,9 @@ export default function Navbar({ ItemsNavbar, user, userData }) {
         { name: 'User Dashboard', href: '#', value: 'User Dashboard' },
         { name: 'Create Trip', href: '#', value: 'create-trip' },
         { name: 'Trip History', href: '#', value: 'trip history' },
-        ...(userData?.tripsExists ? [{ name: 'Trip Dashbaord ', href: '#', value: 'trip dashboard' }] : [])
+        ...(userData?.tripsExists === true
+        ? [{ name: 'Trip Dashboard', href: '#', value: 'trip dashboard' }]
+        : [])
     ]
     const navigate = useNavigate()
 
