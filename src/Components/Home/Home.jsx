@@ -119,20 +119,33 @@ export default function Home({ user, userData, selectedRestaurant, setSelectedRe
 
                     {json?.trips
                         ?.filter(trip => {
-                            const searchDate = new Date(search)
+                            const searchText = search.toLowerCase().trim()
 
-                            const start = new Date(trip.startDate)
-                            const end = new Date(trip.endDate)
+                            const parseDate = value => {
+                                if (!value) return null
 
-                            const dateMatch =
-                                !isNaN(searchDate) &&
-                                searchDate >= start &&
-                                searchDate <= end
+                                if (value.includes('/')) {
+                                    const [day, month, year] = value.split('/')
+                                    return new Date(year, month - 1, day)
+                                }
+
+                                return new Date(value)
+                            }
+
+                            const searchDate = parseDate(search)
+                            const start = parseDate(trip.startDate)
+                            const end = parseDate(trip.endDate)
 
                             return (
-                                trip?.name?.toLowerCase().includes(search?.toLowerCase()) ||
-                                trip?.description?.toLowerCase().includes(search?.toLowerCase()) ||
-                                dateMatch
+                                trip?.name?.toLowerCase().includes(searchText) ||
+                                trip?.description?.toLowerCase().includes(searchText) ||
+                                (
+                                    searchDate &&
+                                    start &&
+                                    end &&
+                                    searchDate >= start &&
+                                    searchDate <= end
+                                )
                             )
                         })
                         .map((trip, index) => (
