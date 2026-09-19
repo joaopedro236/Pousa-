@@ -21,7 +21,7 @@ def metrics(request: Request):
             (session_token,),
         )
         trip = cursorTrip.fetchone()
-        if not trip:
+        if not trip:    
             return {"Status": False}
         cursor.execute(
             "select moneyobtained,tripsobtained,last_week,tripsobtainedhistoryS  from usersPousae where session_token = %s",

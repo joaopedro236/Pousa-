@@ -5,6 +5,10 @@ import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContai
 export default function TripsDashboard({ itemsNavbar }) {
     const [json, setJson] = useState(null)
     const weekDays = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+    const chartData = weekDays.map((day, index) => ({
+    day,
+    tripsobtainedhistoryS: json?.tripsobtainedhistoryS?.[index] ?? 0
+}))
     const requisition = async () => {
         try {
             const response = await fetch(`${import.meta.env.VITE_API_URL}/metrics`, {
@@ -41,9 +45,9 @@ export default function TripsDashboard({ itemsNavbar }) {
                     }
                 </div>
                 <div>
-                    <ResponsiveContainer width="100%">
+                    <ResponsiveContainer width="100%"  height={300}>
                         <LineChart style={{ cursor: 'pointer' }}
-                            data={json}
+                            data={chartData}
                             margin={{
                                 top: 10,
                                 right: 10,
