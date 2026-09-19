@@ -59,7 +59,7 @@ export default function TripsDashboard({ itemsNavbar }) {
                             <XAxis dataKey="day" niceTicks="snap125" style={{ fontSize: 11  }} interval={0} />
                             <YAxis width="40" niceTicks="snap125" style={{ fontSize:  11 }} dataKey="tripsobtainedhistoryS" />
                             <Tooltip />
-                            <Line type="monotone" dataKey="tripsobtainedhistoryS" stroke="var(--bs-primary)" strokeWidth={3} />
+                            <Line type="monotone" name='money' dataKey="tripsobtainedhistoryS" stroke="var(--bs-primary)" strokeWidth={3} />
                         </LineChart>
                     </ResponsiveContainer>
                 </div>
