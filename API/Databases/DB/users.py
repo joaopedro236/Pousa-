@@ -1,4 +1,5 @@
 from ..Conn.users import connect_database
+
 def database():
     conn=None
     cursor=None
@@ -18,7 +19,9 @@ def database():
         purchasedTrips int[],
         star int[] default null,
         moneyobtained numeric(10,2),
-        tripsobtained int  default 0""")
+        tripsobtained int  default 0,
+        tripsobtainedhistoryS numeric(10,2)[] default ARRAY[0,0,0,0,0,0,0],
+        last_week INT""")
         conn.commit()
     except Exception:
         if conn:

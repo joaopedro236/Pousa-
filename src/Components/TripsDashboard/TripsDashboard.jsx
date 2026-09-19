@@ -1,8 +1,10 @@
 import './tripDashboard.css'
 import cards from './cards'
 import { useState, useEffect } from 'react'
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 export default function TripsDashboard({ itemsNavbar }) {
     const [json, setJson] = useState(null)
+    const weekDays = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
     const requisition = async () => {
         try {
             const response = await fetch(`${import.meta.env.VITE_API_URL}/metrics`, {
@@ -18,9 +20,9 @@ export default function TripsDashboard({ itemsNavbar }) {
             console.error(error)
         }
     }
-    useEffect(()=>{
+    useEffect(() => {
         requisition()
-    },[])
+    }, [])
     return (
         <>
             <section className={`tripsDashboard ${itemsNavbar == 'trip dashboard' ? 'd-flex' : 'd-none'}`}>
@@ -30,13 +32,32 @@ export default function TripsDashboard({ itemsNavbar }) {
                 </header>
                 <div className="cardsTrips ">
                     {
-                        cards.map((cardsMap)=>(
+                        cards.map((cardsMap) => (
                             <div className="card" key={cardsMap.id}>
                                 <h2 className='fw-normal'>{cardsMap.title}</h2>
-                                <h1>{json?.[cardsMap?.jsonName] ?? 0 }</h1>
+                                <h1>{json?.[cardsMap?.jsonName] ?? 0}</h1>
                             </div>
                         ))
                     }
+                </div>
+                <div>
+                    <ResponsiveContainer width="100%">
+                        <LineChart style={{ cursor: 'pointer' }}
+                            data={json}
+                            margin={{
+                                top: 10,
+                                right: 10,
+                                left: -20,
+                                bottom: 0,
+                            }}
+                        >
+                            <CartesianGrid strokeDasharray="3 3" />
+                            <XAxis dataKey="day" niceTicks="snap125" style={{ fontSize: 11  }} interval={0} />
+                            <YAxis width="40" niceTicks="snap125" style={{ fontSize:  11 }} dataKey="tripsobtainedhistoryS" />
+                            <Tooltip />
+                            <Line type="monotone" dataKey="tripsobtainedhistoryS" stroke="var(--bs-primary)" strokeWidth={3} />
+                        </LineChart>
+                    </ResponsiveContainer>
                 </div>
             </section>
         </>

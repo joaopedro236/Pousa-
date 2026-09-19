@@ -2,6 +2,7 @@ from fastapi import APIRouter, Request
 from ...Databases.Conn.trips import connect_database_trip
 from ...Databases.Conn.users import connect_database
 from ...Validation.Trip.buyTrip import id as validation
+from datetime import datetime
 
 router = APIRouter()
 
@@ -15,6 +16,7 @@ def buy_trip(tripId: validation, request: Request):
     session_token_user = request.cookies.get("user_session_token")
     try:
         conn, cursor = connect_database_trip()
+        day_of_week = (datetime.now().weekday() + 1) % 7
         connUser, cursorUser = connect_database()
         cursor.execute(
             "select price, session_token from trips where id = %s", (tripId.id,)
@@ -29,7 +31,10 @@ def buy_trip(tripId: validation, request: Request):
         )
         userMoney = cursorUser.fetchone()
         if session_token_user == tripPrice[1]:
-            return{'Status': False, 'Error': 'You cannot buy from your own restaurant.'}
+            return {
+                "Status": False,
+                "Error": "You cannot buy from your own restaurant.",
+            }
         if not userMoney:
             return {"Status": False, "Error": "not exists user"}
         if userMoney[0] < tripPriceMultiplied:
@@ -43,7 +48,13 @@ def buy_trip(tripId: validation, request: Request):
                             purchasedTrips = array_append(purchasedTrips, %s)
                             where session_token = %s
                             """,
-            (tripPriceMultiplied, tripPriceMultiplied,tripId.quantity,tripId.id, session_token_user),
+            (
+                tripPriceMultiplied,
+                tripPriceMultiplied,
+                tripId.quantity,
+                tripId.id,
+                session_token_user,
+            ),
         )
         cursorUser.execute(
             """update usersPousae    
@@ -51,9 +62,11 @@ def buy_trip(tripId: validation, request: Request):
                             money= money + %s,
                             moneyobtained = moneyobtained + %s,
                             tripsobtained = tripsobtained + %s,
+                            tripsobtainedhistoryS[%s + 1] =
+            tripsobtainedhistoryS[%s + 1] + %s
                             where session_token = %s
                             """,
-            (tripPriceMultiplied, tripPriceMultiplied,tripId.quantity, tripPrice[1]),
+            (tripPriceMultiplied, tripPriceMultiplied, tripId.quantity,day_of_week, day_of_week,tripPriceMultiplied, tripPrice[1]),
         )
         connUser.commit()
         cursor.execute(
@@ -65,10 +78,10 @@ def buy_trip(tripId: validation, request: Request):
             (session_token_user, tripPrice[1]),
         )
         conn.commit()
-        
-        return{'Status': True}
-    except Exception :
-        return {"Status": False, "Error": 'An error occurred'}
+
+        return {"Status": True}
+    except Exception:
+        return {"Status": False, "Error": "An error occurred"}
     finally:
         if cursor:
             cursor.close()

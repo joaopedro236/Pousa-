@@ -21,7 +21,7 @@
 .cardsTrips .card{
     background-color: var(--white);
     width: 100%;
-    padding: 15px;
+    padding: 20px;
     max-width: 250px;
     border-radius: 10px;
     border: 1px solid var(--border-black);
