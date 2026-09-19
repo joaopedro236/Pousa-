@@ -10,7 +10,7 @@ def metrics(request: Request):
     conn = None
     connTrip = None
     cursor = None
-    session_token = request.cookies.get("users_session_token")
+    session_token = request.cookies.get("user_session_token")
     cursorTrip = None
     try:
         conn, cursor = connect_database()
