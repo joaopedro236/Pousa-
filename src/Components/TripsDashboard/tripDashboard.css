@@ -1,6 +1,7 @@
 .tripsDashboard {
     flex-direction: column;
     gap: 5px;
+    width: 100%;
     padding: 20px;
     padding-top: 35px;
 }
@@ -10,4 +11,19 @@
     max-width: 300px;
     margin-left: 8px;
     color: var(--text-gray);
+}
+.cardsTrips{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+.cardsTrips .card{
+    background-color: var(--white);
+    width: 100%;
+    max-width: 340px;
+    padding: 15px;
+    border-radius: 10px;
+    border: 1px solid var(--border-black);
+    display: flex;
+    flex-direction: column;
 }
