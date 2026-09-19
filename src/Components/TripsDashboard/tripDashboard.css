@@ -32,3 +32,9 @@
     font-size: 14px;
     color: var(--text-gray);
 }
+@media (min-width:900px) {
+    .cardsTrips {
+        display: flex;
+        align-items: center;
+    }
+}
