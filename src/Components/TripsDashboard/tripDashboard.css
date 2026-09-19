@@ -13,15 +13,16 @@
     color: var(--text-gray);
 }
 .cardsTrips{
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
+    display: grid;
+    grid-template-columns: repeat(2,1);
+    gap: 10px;
+    place-items: center;
 }
 .cardsTrips .card{
     background-color: var(--white);
     width: 100%;
-    max-width: 220px;
     padding: 15px;
+    max-width: 250px;
     border-radius: 10px;
     border: 1px solid var(--border-black);
     display: flex;
