@@ -20,7 +20,7 @@
 .cardsTrips .card{
     background-color: var(--white);
     width: 100%;
-    max-width: 290px;
+    max-width: 220px;
     padding: 15px;
     border-radius: 10px;
     border: 1px solid var(--border-black);
@@ -28,6 +28,6 @@
     flex-direction: column;
 }
 .cardsTrips .card h2{
-    font-size: 15px;
+    font-size: 14px;
     color: var(--text-gray);
 }
