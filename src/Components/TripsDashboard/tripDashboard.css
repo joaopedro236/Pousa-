@@ -2,6 +2,7 @@
     flex-direction: column;
     gap: 5px;
     padding: 20px;
+    padding-top: 35px;
 }
 
 .tripsDashboard header p {

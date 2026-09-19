@@ -48,10 +48,12 @@ def buy_trip(tripId: validation, request: Request):
         cursorUser.execute(
             """update usersPousae    
                         set 
-                            money= money + %s
+                            money= money + %s,
+                            moneyobtained = moneyobtained + %s,
+                            tripsobtained = tripsobtained + %s,
                             where session_token = %s
                             """,
-            (tripPriceMultiplied, tripPrice[1]),
+            (tripPriceMultiplied, tripPriceMultiplied,tripId.quantity, tripPrice[1]),
         )
         connUser.commit()
         cursor.execute(

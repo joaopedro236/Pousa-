@@ -7,6 +7,7 @@ export default function TripsDashboard({itemsNavbar}){
                 <h1>Trip tracking dashboard </h1>
                 <p>Track revenues, operating profits, and traveler feedback in real time.</p>
             </header>
+            <div className="cardsTrips"></div>
         </section>
         </>
     )

@@ -16,7 +16,9 @@ def database():
         moneyalreadyspent numeric(10,2) default 0.0,
         tripsTaken integer default 0,
         purchasedTrips int[],
-        star int[] default null""")
+        star int[] default null,
+        moneyobtained numeric(10,2),
+        tripsobtained int  default 0""")
         conn.commit()
     except Exception:
         if conn:
