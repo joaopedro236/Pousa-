@@ -12,6 +12,8 @@ export default function Chatbot({ selectedRestaurant, userData, user }) {
 
             if (end) {
                 setAnimate(true);
+            }else {
+                setAnimate(false)
             }
         };
 
