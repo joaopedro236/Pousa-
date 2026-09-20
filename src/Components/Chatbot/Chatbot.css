@@ -31,9 +31,6 @@
 .chatbotBtn.remove {
     display: none;
 }
-.chatbotBtn:hover {
-    transform: scale(1.08);
-}
 
 .chatbotBtn img {
     width: 100%;
