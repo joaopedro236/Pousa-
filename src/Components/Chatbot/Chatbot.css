@@ -22,10 +22,11 @@
 
     z-index: 55;
 
-    transition: transform 0.2s ease;
+    transition: transform 0.2s ease, opacity 0.2s ease;
 }
 .chatbotBtn.animation{
-    transform: translateY(-65px);
+    transform: translateY(-80px);
+    opacity: 0.8;
 }
 .chatbotBtn.remove {
     display: none;
