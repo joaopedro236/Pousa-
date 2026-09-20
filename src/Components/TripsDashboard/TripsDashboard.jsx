@@ -39,7 +39,14 @@ export default function TripsDashboard({ itemsNavbar }) {
                         cards.map((cardsMap) => (
                             <div className="card" key={cardsMap.id}>
                                 <h2 className='fw-normal'>{cardsMap.title}</h2>
-                                <h1>{json?.[cardsMap?.jsonName] ?? 0}</h1>
+                                <h1>{cardsMap.json === 'moneyObtained' || cardsMap.json === 'money'
+                                        ? new Intl.NumberFormat('en-us', {
+                                            style: 'currency',
+                                            currency: 'usd',
+                                            notation: 'compact',
+                                        }).format(json?.[cardsMap.json] || 0)
+                                        : json?.[cardsMap.json] || 0
+                                    }</h1>
                             </div>
                         ))
                     }
