@@ -32,6 +32,9 @@
     font-size: 14px;
     color: var(--text-gray);
 }
+.graphicTrips {
+    max-width: 350px;
+}
 @media (min-width:900px) {
     .cardsTrips {
         display: flex;

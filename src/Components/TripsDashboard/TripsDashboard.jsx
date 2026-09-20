@@ -51,7 +51,7 @@ export default function TripsDashboard({ itemsNavbar }) {
                         ))
                     }
                 </div>
-                <div>
+                <div className='graphicTrips '>
                     <ResponsiveContainer width="100%"  height={300}>
                         <LineChart style={{ cursor: 'pointer' }}
                             data={chartData}
