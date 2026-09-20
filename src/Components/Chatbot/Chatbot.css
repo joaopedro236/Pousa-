@@ -25,7 +25,7 @@
     transition: transform 0.2s ease;
 }
 .chatbotBtn.animation{
-    transform: translateY(-50px);
+    transform: translateY(-65px);
 }
 .chatbotBtn.remove {
     display: none;
