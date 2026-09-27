@@ -23,6 +23,7 @@ export default function Chatbot({ selectedRestaurant, userData, user }) {
     }, []);
 
     const [message, setMessage] = useState("");
+    const [quantityMessage, setQuantityMessage] = useState(0)
     const [chatbotActive, setChatBotActive] = useState(false)
     const [messages, setMessages] = useState([]);
     const [loading, setLoading] = useState(false);
@@ -56,7 +57,8 @@ export default function Chatbot({ selectedRestaurant, userData, user }) {
                     dateStart: selectedRestaurant?.startDate,
                     dateEnd: selectedRestaurant?.endDate,
                     petsTrip: selectedRestaurant?.petsAllowed,
-                    travelersTrip: selectedRestaurant?.numberOfTravelers
+                    travelersTrip: selectedRestaurant?.numberOfTravelers,
+                    quantityMessage:quantityMessage
                 })
 
             })
@@ -66,7 +68,7 @@ export default function Chatbot({ selectedRestaurant, userData, user }) {
                     ...prev,
                     { role: "assistant", content: data.Response }
                 ]);
-
+                setQuantityMessage(prev => prev +1)
             } else {
                 setMessages(prev => [
                     ...prev,

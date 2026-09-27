@@ -15,3 +15,4 @@ class validation(BaseModel):
     petsTrip: str | None = None
     travelersTrip: int | None = None
     ownerTrip: int | None = None
+    quantityMensage: int |None = None
