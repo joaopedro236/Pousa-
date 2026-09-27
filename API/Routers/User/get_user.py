@@ -34,7 +34,7 @@ def getUser(request: Request):
             "moneyalreadyspent": response[6],
             "tripsTaken": response[7],
             "money": response[8],
-            'tripsExists': False if not tripExists[0] else True
+            'tripsExists': tripExists is not None
         }
     except Exception :
         return {"Status": False, "Error": 'An error occurred'}
