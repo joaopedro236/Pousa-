@@ -84,7 +84,7 @@ window.addEventListener('error', event => {
         )
         || 
         event.message?.includes(
-            ''
+            "'NoneType' is not subscriptable"
         )
     ) {
         return
