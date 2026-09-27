@@ -82,6 +82,10 @@ window.addEventListener('error', event => {
         event.message?.includes(
             'ResizeObserver loop limit exceeded'
         )
+        || 
+        event.message?.includes(
+            ''
+        )
     ) {
         return
     }

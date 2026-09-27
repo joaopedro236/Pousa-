@@ -9,6 +9,7 @@
 }
 
 .userDashboard{
+    
     min-height: 100vh;
 }
 .userDashboard header h1 {
@@ -28,6 +29,7 @@
     flex-wrap: wrap;
     width: 100%;
     margin-top: auto;
+    margin-bottom: 20px;
     justify-content: center;
     max-width: 600px;
 }
