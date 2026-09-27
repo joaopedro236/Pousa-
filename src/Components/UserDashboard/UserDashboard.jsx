@@ -129,7 +129,7 @@ export default function User({ user, itemsNavbar , userData}) {
                 </div>
                 <div className="controlAccount">
                     <button className="LogOut btn btn-outline-dark" onClick={logOut}>Log out</button>
-                    <button className="deleteAccount LogOut btn btn-outline-danger" onClick={deleteAccount}></button>
+                    <button className="deleteAccount LogOut btn btn-outline-danger" onClick={deleteAccount}>Delete Account</button>
                 </div>
             </section>
         </>
