@@ -1,18 +1,23 @@
 import './userDashboard.css'
 import cards from './cardsUsers'
-import { useCookies } from 'react-cookie';
+
 import { useState, useEffect } from 'react'
 import photoUser from '../../assets/user.png'
 export default function User({ user, itemsNavbar , userData}) {
     const [activeFile, setActiveFile] = useState(false)
     const [photo, setPhoto] = useState(null)
-    const [cookies, setCookie, removeCookie] = useCookies(['user_session_token']);
 
-      const logOut = () => {
+      const logOut =async () => {
         try{
-
-        
-          removeCookie('user_session_token', { path: '/' });
+            const responseLO = await fetch(`${import.meta.env.VITE_API_URL}/logout`, {
+                method:"POST",
+                credentials:"include"
+            })
+            const dataLO= await responseLO.json()
+            if (dataLO?.Error){
+                console.error(dataLO?.Error)
+            }
+          
           alert("Refresh the page")
         }catch(error){
             console.error(error)
