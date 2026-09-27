@@ -113,14 +113,15 @@ class ErrorBoundary extends React.Component {
             hasError: false
         }
     }
-
     static getDerivedStateFromError() {
         return {
-            hasError: true
-        }
+                    hasError: true
+                        }
+                        }
     }
 
     componentDidCatch(error, info) {
+        if (error?.message?.includes("'NoneType' is not subscriptable")) return
         originalConsoleError('React Error:', error, info)
 
         showError(
