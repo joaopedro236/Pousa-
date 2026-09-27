@@ -1,13 +1,23 @@
 import './userDashboard.css'
 import cards from './cardsUsers'
+import { useCookies } from 'react-cookie';
 import { useState, useEffect } from 'react'
 import photoUser from '../../assets/user.png'
 export default function User({ user, itemsNavbar , userData}) {
     const [activeFile, setActiveFile] = useState(false)
     const [photo, setPhoto] = useState(null)
+    const [cookies, setCookie, removeCookie] = useCookies(['user_session_token']);
 
-   
+      const logOut = () => {
+        try{
 
+        
+          removeCookie('user_session_token', { path: '/' });
+          alert("Refresh the page")
+        }catch(error){
+            console.error(error)
+        }
+            };
 
     
     const handleFile = async (event) => {
@@ -97,6 +107,9 @@ export default function User({ user, itemsNavbar , userData}) {
                             <p>Click here to choose an image</p>
                         </div>
                     </label>
+                </div>
+                <div className="controlAccount">
+                    <button className="LogOut btn btn-outline-dark" onClick={logOut}>Log out</button>
                 </div>
             </section>
         </>
