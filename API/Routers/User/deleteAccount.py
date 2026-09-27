@@ -1,9 +1,9 @@
-from fastapi import APIRouter, Response
+from fastapi import APIRouter, Response, Request
 from ...Databases.Conn.users import connect_database
 from ...Databases.Conn.trips import connect_database_trip
 router = APIRouter()
 @router.post("/deleteAccount")
-def deleteAccount(request:Response):
+def deleteAccount(request: Request, response: Response):
     conn = None
     cursor= None
     connTrip = None
@@ -16,7 +16,7 @@ def deleteAccount(request:Response):
         conn.commit()
         cursorTrip.execute("delete from trips where session_token = %s", (session_token,))
         connTrip.commit()
-        request.delete_cookie(
+        response.delete_cookie(
             key="user_session_token"
             ,path="/",
             samesite="none",
