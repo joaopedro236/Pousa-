@@ -44,7 +44,7 @@ export default function TripsDashboard({ itemsNavbar }) {
                                             style: 'currency',
                                             currency: 'usd',
                                             notation: 'compact',
-                                        }).format(json?.[cardsMap.?json] || 0)
+                                        }).format(json?.[cardsMap?.json] || 0)
                                         : json?.[cardsMap?.json] || 0
                                     }</h1>
                             </div>
