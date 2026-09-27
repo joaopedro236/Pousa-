@@ -156,7 +156,10 @@ export default function TripsActive({ itemsNavbar, stars, user, starTrip, getTri
         }
     }
     useEffect(() => {
-        getComment()
+        if (selectedRestaurant){
+
+            getComment()
+        }
     }, [selectedRestaurant])
     const [showAllComments, setShowAllComments] = useState(false)
     const createComment = async () => {
