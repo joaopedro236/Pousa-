@@ -65,7 +65,7 @@ console.error = (...args) => {
                     return String(arg)
                 }
             }
-            if (String(args).includes("'NoneType' object is not subscriptable")) return
+        
             
             return String(arg)
         })
