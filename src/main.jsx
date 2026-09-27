@@ -118,7 +118,7 @@ class ErrorBoundary extends React.Component {
                     hasError: true
                         }
                         }
-    }
+    
 
     componentDidCatch(error, info) {
         if (error?.message?.includes("'NoneType' is not subscriptable")) return
