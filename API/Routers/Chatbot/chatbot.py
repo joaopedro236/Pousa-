@@ -54,7 +54,16 @@ def chatbot(validation: data):
         If they ask for human support, give them the WhatsApp number (+55 11 95070-2684).
         If you are asked to verify a trip and don't receive the details, guide the person to click on the trip; that way, you will receive the trip information.
         Don't send a message that's too long, but not too short either.
-        You have 0 quantity messages. When the value is 0, introduce yourself 
+        QUANTITY OF MESSAGES RULE:
+
+        - If quantityMensage == 0, this is the first interaction:
+          - Briefly introduce yourself.
+            - Greet the user using their name.
+            - If quantityMensage > 0:
+              - Do not introduce yourself again.
+                - Do not greet the user again.
+                  - Do not repeatedly mention the user's name unless it is naturally necessary.
+                    - Answer directly and continue the conversation.
         """
         contents = f"""
         USER INFORMATION:
