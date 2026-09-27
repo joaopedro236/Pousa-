@@ -1,6 +1,7 @@
 import './StylesGlobals/reset.css'
 import './StylesGlobals/assets.css'
 import './StylesGlobals/root.css'
+
 import VLibras from '@djpfs/react-vlibras';
 import TripsActive from './Components/Home/components/TripsActive'
 import { useNavigate } from 'react-router-dom'
