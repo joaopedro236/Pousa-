@@ -7,7 +7,7 @@ from dotenv import load_dotenv
 from datetime import date
 router = APIRouter()
 
-load_dotenv(encoding="utf-8")
+load_dotenv(".env.apis")
 
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 client = genai.Client(api_key=GEMINI_API_KEY)
