@@ -6,7 +6,21 @@ import photoUser from '../../assets/user.png'
 export default function User({ user, itemsNavbar , userData}) {
     const [activeFile, setActiveFile] = useState(false)
     const [photo, setPhoto] = useState(null)
-
+    const deleteAccount = async ()=> {
+        try{
+            const responseDA = await fetch(`${import.meta.env.VITE_API_URL}/deleteAccount`,{
+                method:'POST',
+                credentials:"include"
+         } )
+            const dataDA= await responseDA.json()
+            if(dataDA?.Error){
+                console.error(dataDA?.Error)
+            }
+            window.location.reload()
+        }catch(error){
+            console.error(error)
+        }
+    }
       const logOut =async () => {
         try{
             const responseLO = await fetch(`${import.meta.env.VITE_API_URL}/logout`, {
@@ -18,7 +32,7 @@ export default function User({ user, itemsNavbar , userData}) {
                 console.error(dataLO?.Error)
             }
           
-          alert("Refresh the page")
+          window.location.reload()
         }catch(error){
             console.error(error)
         }
@@ -115,6 +129,7 @@ export default function User({ user, itemsNavbar , userData}) {
                 </div>
                 <div className="controlAccount">
                     <button className="LogOut btn btn-outline-dark" onClick={logOut}>Log out</button>
+                    <button className="deleteAccount LogOut btn btn-outline-danger" onClick={deleteAccount}></button>
                 </div>
             </section>
         </>
