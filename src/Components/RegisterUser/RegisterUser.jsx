@@ -1,15 +1,18 @@
 import './RegisterUser.css'
 import inputs from './inputs'
+import Select from 'react-select';
+import countries from './countries';
 import { useState } from 'react'
-export default function RegisterUser({ user, setUser, setLogin ,login, checkUser}) {
+export default function RegisterUser({ user, setUser, setLogin, login, checkUser }) {
     const [loading, setLoading] = useState(false)
-
+    const [country, setCountry] = useState(null)
     const [error, setError] = useState(false)
     const [errorMessage, setErrorMessage] = useState('')
     const handleSubmit = async (e) => {
         e.preventDefault()
 
         const data = Object.fromEntries(new FormData(e.target))
+        data.country = country?.value
         try {
             setError(false)
             setErrorMessage('')
@@ -52,7 +55,7 @@ export default function RegisterUser({ user, setUser, setLogin ,login, checkUser
     }
     return (
         <>
-            <section className={`registerUser ${user || login? 'Active' : ''}`}>
+            <section className={`registerUser ${user || login ? 'Active' : ''}`}>
                 <form onSubmit={handleSubmit}>
                     <div className="userIcon">
                         <svg
@@ -94,6 +97,44 @@ export default function RegisterUser({ user, setUser, setLogin ,login, checkUser
                                 />
                             </div>
                         ))}
+                        <div className="mb-3">
+                            <label htmlFor="country">Select Country</label>
+                            <Select
+                                options={countries}
+                                value={country}
+                                onChange={setCountry}
+                                styles={{
+                                    control: (base) => ({
+                                        ...base,
+                                        cursor: "pointer",
+                                    }),
+                                    option: (base) => ({
+                                        ...base,
+                                        cursor: "pointer",
+                                    }),
+                                    multiValueRemove: (base) => ({
+                                        ...base,
+                                        cursor: "pointer",
+                                    }),
+                                    dropdownIndicator: (base) => ({
+                                        ...base,
+                                        cursor: "pointer",
+                                    }),
+                                    clearIndicator: (base) => ({
+                                        ...base,
+                                        cursor: "pointer",
+                                    }), menuList: (base) => ({
+                                        ...base,
+                                        maxHeight: '210px',
+                                        overflowY: 'auto',
+                                    }),
+                                }} menuPlacement="top"
+                                placeholder='Select Country (for TIN)'
+                                closeMenuOnSelect={false}
+                                required
+
+                            />
+                        </div>
 
 
                     </div>
@@ -112,7 +153,7 @@ export default function RegisterUser({ user, setUser, setLogin ,login, checkUser
                     )}
 
 
-                    <p className='mt-2'>Already have an account? <span onClick={()=> setLogin(true)} role='button' className='link-primary' >Login</span></p>
+                    <p className='mt-2'>Already have an account? <span onClick={() => setLogin(true)} role='button' className='link-primary' >Login</span></p>
                 </form>
             </section>
         </>

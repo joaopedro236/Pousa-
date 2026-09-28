@@ -4,3 +4,4 @@ class registerUser(BaseModel):
     email:EmailStr
     password:str
     cpf: int
+    country:str
