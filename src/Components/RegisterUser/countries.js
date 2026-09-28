@@ -1,4 +1,4 @@
-countries = {
+const countries = {
         "country": [
                 "AL", "AR", "AT", "AU", "BA", "BE", "BG", "BO", "BR", "BY",
                         "BZ", "CA", "CH", "CL", "CN", "CO", "CR", "CY", "CZ", "DE",
