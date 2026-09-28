@@ -100,38 +100,42 @@ export default function RegisterUser({ user, setUser, setLogin, login, checkUser
                         <div className="mb-3">
                             <label htmlFor="country">Select Country</label>
                             <Select
-                                options={countries}
-                                value={country}
-                                onChange={setCountry}
-                                styles={{
-                                    control: (base) => ({
-                                        ...base,
-                                        cursor: "pointer",
+                                options={countries.country.map(country => ({
+                                    value: country,
+                                    label: country
+                                }))}
+                            
+                            value={country}
+                            onChange={setCountry}
+                            styles={{
+                                control: (base) => ({
+                                ...base,
+                                cursor: "pointer",
                                     }),
                                     option: (base) => ({
-                                        ...base,
-                                        cursor: "pointer",
+                                ...base,
+                                cursor: "pointer",
                                     }),
                                     multiValueRemove: (base) => ({
-                                        ...base,
-                                        cursor: "pointer",
+                                ...base,
+                                cursor: "pointer",
                                     }),
                                     dropdownIndicator: (base) => ({
-                                        ...base,
-                                        cursor: "pointer",
+                                ...base,
+                                cursor: "pointer",
                                     }),
                                     clearIndicator: (base) => ({
-                                        ...base,
-                                        cursor: "pointer",
+                                ...base,
+                                cursor: "pointer",
                                     }), menuList: (base) => ({
-                                        ...base,
-                                        maxHeight: '210px',
-                                        overflowY: 'auto',
+                                ...base,
+                                maxHeight: '210px',
+                            overflowY: 'auto',
                                     }),
                                 }} menuPlacement="top"
-                                placeholder='Select Country (for TIN)'
-                                closeMenuOnSelect={false}
-                                required
+                            placeholder='Select Country (for TIN)'
+                            closeMenuOnSelect={false}
+                            required
 
                             />
                         </div>
