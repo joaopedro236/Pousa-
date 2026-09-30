@@ -81,7 +81,7 @@ export default function CreateTrip({ user, itemsNavbar, setItemsNavbar }) {
                 headers: {
                         "Content-Type": "application/json"
                         },
-                }
+                
                 body:JSON.stringify(dataFormHS)
             })
             const dataHS= await responseHS.json()
