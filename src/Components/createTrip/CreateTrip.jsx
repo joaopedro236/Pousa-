@@ -75,6 +75,8 @@ export default function CreateTrip({ user, itemsNavbar, setItemsNavbar }) {
         e.preventDefault()
         const form = e.currentTarget.closest('form')
         const dataFormHS = Object.fromEntries(new FormData(form))
+        if (dataFormHS.price === '') dataFormHS.price = 0
+        dataFormHS.price = Number(dataFormHS.price)
         try{
             const responseHS =await fetch(`${import.meta.env.VITE_API_URL}/suggestedDescription`, {
                 method:"POST",
