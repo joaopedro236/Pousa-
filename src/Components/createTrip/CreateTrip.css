@@ -6,3 +6,20 @@
 .createTrip.Active {
     display: flex;
 }   
+.textarea-wrapper {
+        position: relative;
+        }
+
+        .textarea-wrapper textarea {
+            padding-right: 45px;
+            }
+
+            .gemini-icon {
+                position: absolute;
+                    right: 12px;
+                        bottom: 12px;
+                        filter: invert(100);
+                            width: 24px;
+                                height: 24px;
+                                    object-fit: contain;
+                                    }

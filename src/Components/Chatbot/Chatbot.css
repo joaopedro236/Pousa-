@@ -242,22 +242,6 @@
 .chatbot form input[type="submit"]:disabled {
     cursor: not-allowed;
 }
-.textarea-wrapper {
-        position: relative;
-        }
-
-        .textarea-wrapper textarea {
-            padding-right: 45px;
-            }
-
-            .gemini-icon {
-                position: absolute;
-                    right: 12px;
-                        bottom: 12px;
-                            width: 24px;
-                                height: 24px;
-                                    object-fit: contain;
-                                    }
 
 @media (max-width: 500px) {
     .chatbotBtn {
