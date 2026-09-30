@@ -137,6 +137,7 @@ export default function CreateTrip({ user, itemsNavbar, setItemsNavbar }) {
                                         name={inputsMap.name}
                                         id={inputsMap.name}
                                         minLength={inputsMap.minLength}
+                                        value={description }
                                         maxLength={inputsMap.maxLength}
                                         className="form-control"
                                         onChange={handleChange}
