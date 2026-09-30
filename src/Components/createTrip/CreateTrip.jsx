@@ -70,7 +70,7 @@ export default function CreateTrip({ user, itemsNavbar, setItemsNavbar }) {
     const handleChange = (e) => {
             setDescription(e.target.value);
               };
-    }
+    
     const handleSuggested= async (e)=>{
         e.preventDefault()
         const dataFormHS = Object.fromEntries(new FormData(e.target ))
