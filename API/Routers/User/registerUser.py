@@ -44,7 +44,11 @@ def registerUser(data: registerUser, responseCookie: Response):
                                                     "countryCode": data.country
                                                         }
                                                         ).json()
-        
+        if "valid" not in result:
+                return {
+                        "Status": False,
+                                "Error": result.get("error", "IsValid API error")
+                                    }
         if not result["valid"]:
             return {"Status": False, "Error":"No TIN"}
         moderation = client.models.generate_content(
