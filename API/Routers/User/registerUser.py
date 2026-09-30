@@ -37,7 +37,7 @@ def registerUser(data: registerUser, responseCookie: Response):
             return {"Status": False, "Error": "email already exists."}
         session_token = str(uuid.uuid4())
         hashPassword = ph.hash(data.password)
-        result = ClientIsValidTin.tin(
+        result = ClientIsValidTin.vat(
             data.cpf,
             data.country
         
