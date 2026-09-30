@@ -12,7 +12,7 @@
 
 | Aspect | Status |
 |--------|--------|
-| **Overall Grade** | 7.5/10 ⭐ |
+| **Overall Grade** | 8.5/10 ⭐ |
 | **Frontend** | ✅ Fully Functional |
 | **Backend** | ✅ Fully Functional |
 | **Database** | ✅ Fully Operational |
