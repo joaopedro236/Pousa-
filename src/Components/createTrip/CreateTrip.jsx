@@ -1,6 +1,8 @@
 import '../../Components/RegisterUser/RegisterUser.css'
 import inputs from './inputs'
 import Select from 'react-select';
+import iconGemini from '../../assets/gemini.png'
+
 import itemsSelect from './selectTagsJSON'
 import './CreateTrip.css'
 import { useState, useEffect } from 'react'
@@ -8,6 +10,7 @@ export default function CreateTrip({ user, itemsNavbar, setItemsNavbar }) {
     const [loading, setLoading] = useState(false)
     const today = new Date().toISOString().split('T')[0]
     const [tags, setTags] = useState([])
+    const [description, setDescription]= useState("")
     const [error, setError] = useState(false)
     const [errorMessage, setErrorMessage] = useState('')
     const handleSubmit = async (e) => {
@@ -64,6 +67,27 @@ export default function CreateTrip({ user, itemsNavbar, setItemsNavbar }) {
             setTags(selected)
         }
     }
+    const handleChange = (e) => {
+            setDescription(e.target.value);
+              };
+    }
+    const handleSuggested= async (e)=>{
+        e.preventDefault()
+        const dataFormHS = Object.fromEntries(new FormData(e.target ))
+        try{
+            const responseHS =await fetch(`${import.meta.env.VITE_API_URL}/suggestedDescription`, {
+                method:"POST",
+                body:JSON.stringify(dataFormHS)
+            })
+            const dataHS= await responseHS.json()
+            if (dataHS?.Error){
+                console.error(dataHS?.Error)
+            }
+            setDescription(dataHS?.Response)
+        }catch(error){
+            console.error(error)
+        }
+    }
     return (
         <>
             <section className={`registerUser createTrip ${user && itemsNavbar == 'create-trip' ? 'Active' : ''}`}>
@@ -100,12 +124,15 @@ export default function CreateTrip({ user, itemsNavbar, setItemsNavbar }) {
                                 </label>
 
                                 {inputsMap.type === 'textarea' ? (
+                                    <>
+                                    <div className="textarea-wrapper">
                                     <textarea
                                         name={inputsMap.name}
                                         id={inputsMap.name}
                                         minLength={inputsMap.minLength}
                                         maxLength={inputsMap.maxLength}
                                         className="form-control"
+                                        onChange={handleChange}
                                         placeholder={inputsMap.placeholder}
                                         required
                                         onInput={(e) => {
@@ -125,6 +152,9 @@ export default function CreateTrip({ user, itemsNavbar, setItemsNavbar }) {
                                             }
                                         }}
                                     />
+                                    <img src={iconGemini} alt="gemini" className="gemini-icon" />
+                                    </div>
+                                    </>
                                 ) : (
                                     <input
                                         type={inputsMap.type}
@@ -222,5 +252,5 @@ export default function CreateTrip({ user, itemsNavbar, setItemsNavbar }) {
                 </form>
             </section >
         </>
-    )
+              )
 }
