@@ -38,10 +38,10 @@ def registerUser(data: registerUser, responseCookie: Response):
         session_token = str(uuid.uuid4())
         hashPassword = ph.hash(data.password)
         result = ClientIsValidTin.vat(
-            data.cpf,
-            data.country
+                data.cpf,
+                    {"countryCode": data.country}
+                    )
         
-        )
         isvalid= result["valid"]
         if not isvalid:
             return {"Status": False, "Error":"No TIN"}
