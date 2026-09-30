@@ -44,10 +44,10 @@ def registerUser(data: registerUser, responseCookie: Response):
                                                     "countryCode": data.country
                                                         }
                                                         ).json()
-        if "valid" not in result:
+        if not result.get("valid", False):
                 return {
                         "Status": False,
-                                "Error": result.get("error", "IsValid API error")
+                                "Error": result.get("message") or result.get("error") or "Invalid TIN"
                                     }
         if not result["valid"]:
             return {"Status": False, "Error":"No TIN"}
