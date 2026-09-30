@@ -4,7 +4,7 @@ import uuid
 from argon2 import PasswordHasher
 from ...Validation.User.registerUser import registerUser
 from google import genai
-import request 
+import requests
 router = APIRouter()
 ph = PasswordHasher()
 
