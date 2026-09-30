@@ -4,7 +4,7 @@ import uuid
 from argon2 import PasswordHasher
 from ...Validation.User.registerUser import registerUser
 from google import genai
-from isvalid_sdk import IsValidConfig, create_client
+import request 
 router = APIRouter()
 ph = PasswordHasher()
 
@@ -17,11 +17,7 @@ GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 IS_VALID_TIN = os.getenv("IS_VALID_TIN")
 client = genai.Client(api_key=GEMINI_API_KEY)
 
-ClientIsValidTin = create_client(
-        IsValidConfig(
-                api_key=IS_VALID_TIN
-                    )
-                    )
+
 
 @router.post("/registerUser")
 def registerUser(data: registerUser, responseCookie: Response):
@@ -37,13 +33,19 @@ def registerUser(data: registerUser, responseCookie: Response):
             return {"Status": False, "Error": "email already exists."}
         session_token = str(uuid.uuid4())
         hashPassword = ph.hash(data.password)
-        result = ClientIsValidTin.vat(
-                data.cpf,
-                    countryCode=data.country
-                    )
         
-        isvalid= result["valid"]
-        if not isvalid:
+        result = requests.get(
+                "https://api.isvalid.dev/v0/vat",
+                    headers={
+                            "Authorization": f"Bearer {IS_VALID_TIN}"
+                                },
+                                    params={
+                                            "value": data.cpf,
+                                                    "countryCode": data.country
+                                                        }
+                                                        ).json()
+        
+        if not result["valid"]:
             return {"Status": False, "Error":"No TIN"}
         moderation = client.models.generate_content(
             model="gemini-3.1-flash-lite",
