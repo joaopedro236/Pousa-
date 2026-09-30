@@ -12,7 +12,7 @@ def suggestedDescriptio(data: items):
     try:
         if not data.name: 
             return{"Status": False, "Error":"It must include a title (and preferably a brief description)."}
-        SYSTEM_PROMPT= """You are an artificial intelligence that will create or improve a description. If there is no description, you will create one (based on the title and any additional data provided by the user); if there is already a description, you will improve it. The content must not include violence or inappropriate material, and it must be related to travel."""
+        SYSTEM_PROMPT= """You are an artificial intelligence that will create or improve a description. If there is no description, you will create one (based on the title and any additional data provided by the user); if there is already a description, you will improve it. The content must not include violence or inappropriate material, and it must be related to travel.Be direct, don't send examples; here is your description."""
         contents = f"""
         TRIP INFORMATION
         title:{data.name}
