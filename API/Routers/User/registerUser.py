@@ -39,7 +39,7 @@ def registerUser(data: registerUser, responseCookie: Response):
         hashPassword = ph.hash(data.password)
         result = ClientIsValidTin.vat(
                 data.cpf,
-                    {"countryCode": data.country}
+                    countryCode=data.country
                     )
         
         isvalid= result["valid"]
