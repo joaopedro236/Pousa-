@@ -73,7 +73,8 @@ export default function CreateTrip({ user, itemsNavbar, setItemsNavbar }) {
     
     const handleSuggested= async (e)=>{
         e.preventDefault()
-        const dataFormHS = Object.fromEntries(new FormData(e.target ))
+        const form = e.currentTarget.closest('form')
+        const dataFormHS = Object.fromEntries(new FormData(form))
         try{
             const responseHS =await fetch(`${import.meta.env.VITE_API_URL}/suggestedDescription`, {
                 method:"POST",

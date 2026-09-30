@@ -18,7 +18,7 @@
                 position: absolute;
                     right: 12px;
                         bottom: 12px;z-index: 10;
-                        filter: invert(100%);
+                        
                             width: 24px;
                                 height: 24px;
                                     object-fit: contain;
