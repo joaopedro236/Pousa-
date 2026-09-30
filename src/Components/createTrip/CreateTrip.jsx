@@ -78,6 +78,10 @@ export default function CreateTrip({ user, itemsNavbar, setItemsNavbar }) {
         try{
             const responseHS =await fetch(`${import.meta.env.VITE_API_URL}/suggestedDescription`, {
                 method:"POST",
+                headers: {
+                        "Content-Type": "application/json"
+                        },
+                }
                 body:JSON.stringify(dataFormHS)
             })
             const dataHS= await responseHS.json()
