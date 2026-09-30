@@ -152,7 +152,7 @@ export default function CreateTrip({ user, itemsNavbar, setItemsNavbar }) {
                                             }
                                         }}
                                     />
-                                    <img src={iconGemini} alt="gemini" className="gemini-icon" />
+                                    <img src={iconGemini} alt="gemini" className="gemini-icon" onClick={handleSuggested}/>
                                     </div>
                                     </>
                                 ) : (
