@@ -13,8 +13,12 @@ function showError(message) {
     if (!container) {
         container = document.createElement('div')
         container.id = 'global-error-container'
-        container.className = 'position-fixed top-0 end-0 p-3'
-        container.style.zIndex = '999'
+        container.className = 'p-3'
+        container.style.position = 'fixed'
+        container.style.top = '0'
+        container.style.right = '0'
+        
+        container.style.zIndex = '990'
         container.style.width = '450px'
         container.style.maxWidth = 'calc(100vw - 30px)'
         container.style.display = 'flex'
