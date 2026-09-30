@@ -11,7 +11,7 @@ ph = PasswordHasher()
 import os
 from dotenv import load_dotenv
 
-load_dotenv(".env.apis")
+
 
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 IS_VALID_TIN = os.getenv("IS_VALID_TIN")
