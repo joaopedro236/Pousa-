@@ -1,85 +1,132 @@
-# PousaÊ
+# 🏨 PousaÊ
+
+> Plataforma moderna para descobrir, reservar e gerenciar experiências de viagem.
+
+**PousaÊ** é uma aplicação full‑stack criada com React (frontend) e FastAPI (backend), com PostgreSQL para persistência. A proposta é oferecer descoberta de viagens, gestão de perfil, compra segura de experiências e suporte com IA.
+
+
+---
 
 <div align="center">
 
-![PousaÊ](https://img.shields.io/badge/Pousa%C3%8A-Travel%20Platform-2E86AB?style=for-the-badge)
-![JavaScript](https://img.shields.io/badge/JavaScript-49.9%25-F7DF1E?style=flat-square&logo=javascript)
-![Python](https://img.shields.io/badge/Python-29.6%25-3776AB?style=flat-square&logo=python)
-![CSS](https://img.shields.io/badge/CSS-20.3%25-1572B6?style=flat-square&logo=css3)
-![React](https://img.shields.io/badge/React-19.2.8-61DAFB?style=flat-square&logo=react)
-![FastAPI](https://img.shields.io/badge/FastAPI-API-009688?style=flat-square&logo=fastapi)
-![PostgreSQL](https://img.shields.io/badge/PostgreSQL-Database-4169E1?style=flat-square&logo=postgresql)
+![Demo](https://img.shields.io/badge/Live-pousa.vercel.app-00b894?style=for-the-badge&logo=vercel)
+
+<p>
+  <img src="https://skillicons.dev/icons?i=python,fastapi,postgres,html,css,bootstrap,js,react,vite,git,github,vscode" alt="tech icons" />
+</p>
+
+<p>
+  ![JavaScript](https://img.shields.io/badge/JavaScript-49.9%25-F7DF1E?style=flat-square&logo=javascript)
+  ![Python](https://img.shields.io/badge/Python-29.6%25-3776AB?style=flat-square&logo=python)
+  ![CSS](https://img.shields.io/badge/CSS-20.3%25-1572B6?style=flat-square&logo=css3)
+  ![HTML](https://img.shields.io/badge/HTML-0.2%25-E34F26?style=flat-square&logo=html5)
+</p>
 
 </div>
 
-Plataforma moderna para descobrir, reservar e gerenciar experiências de viagem e hospedagens.
+---
 
-PousaÊ é uma aplicação full-stack desenvolvida com React no frontend e FastAPI no backend, com PostgreSQL como banco de dados principal. A plataforma permite que usuários explorem destinos, visualizem detalhes das viagens, comprem experiências, gerenciem favoritos, comentários, saldo e perfil pessoal.
+## 📊 Status do projeto
 
-## Demo em produção
+| Aspecto | Status |
+|---|---:|
+| **Nota geral** | 8.5 / 10 ⭐ |
+| **Frontend** | ✅ Funcional |
+| **Backend** | ✅ Operacional |
+| **Banco de dados** | ✅ PostgreSQL configurado |
+| **Deployment** | ✅ Vercel (frontend) |
 
-- Site: https://pousa.vercel.app
-- Repositório: https://github.com/joaopedro236/Pousa-
+---
 
-## Visão geral
+## 🖥️ Tecnologias (resumo)
 
-A aplicação foi pensada para oferecer uma experiência de compra e descoberta de hospedagens/experiências de viagem com foco em:
+- Frontend: React, Vite, JavaScript, HTML, CSS, Bootstrap
+- Backend: Python, FastAPI, Pydantic
+- Banco: PostgreSQL (psycopg2)
+- Autenticação: cookies HTTP‑only + tokens UUID
+- IA: Gemini (chatbot + moderação)
+- Upload de imagens: ImgBB
+- Deploy: Vercel
 
-- autenticação segura
-- gestão de usuários
-- compra e histórico de viagens
-- interação com IA para suporte e moderação
-- interface responsiva e moderna
 
-## Stack tecnológica
+---
 
-### Frontend
+## ✨ Funcionalidades principais
 
-- React
-- Vite
-- JavaScript
-- HTML
-- CSS
-- Bootstrap
-- React Router
-- React Day Picker
-- Recharts
-- React Cookie
+- Cadastro e login de usuários (validação de e‑mail, CPF, senha)
+- Sessões seguras com cookies HTTP‑only
+- Perfil do usuário com imagem, saldo e histórico
+- Listagem de viagens, busca e filtros
+- Visualização detalhada da viagem (datas, preço, limite de viajantes, política para pets)
+- Compra de viagens com verificação de saldo e proteção contra auto‑compra
+- Sistema de favoritos (star/bookmark)
+- Comentários e avaliações com moderação automática (Gemini)
+- Assistente virtual com IA
 
-### Backend
+---
 
-- Python
-- FastAPI
-- Pydantic
-- PostgreSQL
-- psycopg2
-- Argon2
-- python-dotenv
+## 🔐 Segurança & boas práticas
 
-### Serviços e integrações
+- Senhas armazenadas com Argon2 (hash seguro)
+- Cookies: HttpOnly, Secure (em produção), SameSite configurado
+- Rate limiting (IP) configurado no backend
+- CORS configurado e cabeçalhos expostos quando necessário
+- Moderação automática de comentários (detecção de discurso de ódio e conteúdo impróprio)
 
-- Gemini AI para chatbot e moderação
-- ImgBB para upload e hospedagem de imagens
-- Vercel para deploy
+---
 
-## Funcionalidades principais
+## 🔌 Endpoints principais (resumo)
 
-- Cadastro e login de usuários
-- Validação de dados de autenticação
-- Sessões com cookies HTTP-only
-- Perfil do usuário com saldo e histórico
-- Listagem de viagens com busca e filtros
-- Visualização detalhada da viagem
-- Compra de experiências com validação de saldo
-- Sistema de favoritos
-- Comentários e avaliações
-- Moderação automática de comentários com IA
-- Assistente virtual inteligente
-- Proteção contra compras próprias e inconsistências de saldo
+User:
+```
+POST   /registerUser    - Registrar usuário
+POST   /login           - Autenticar usuário
+GET    /checkUser       - Verificar sessão
+GET    /getUser         - Obter dados do usuário autenticado
+POST   /upload-image    - Enviar imagem de perfil
+```
 
-## Estrutura do projeto
+Trips & compra:
+```
+POST   /trips           - Criar nova viagem
+GET    /getTrips        - Listar viagens
+POST   /buyTrip         - Comprar viagem
+POST   /addStar         - Adicionar favorito
+POST   /removeStar      - Remover favorito
+GET    /getStar         - Listar favoritos
+```
 
-```bash
+Comentários/AI:
+```
+POST   /createComment   - Criar comentário (moderação automática)
+POST   /getComment      - Obter comentários
+POST   /chatbot         - Chat com assistente (IA)
+```
+
+---
+
+## 🏗️ Arquitetura (visão rápida)
+
+```
+Frontend (React + Vite)
+  - Components: Home, Trips, Dashboard
+  - Styling: Bootstrap + CSS
+         |
+         | REST API
+         v
+Backend (FastAPI + Python)
+  - Routers: User, Trips, Comments, Chatbot
+  - Middleware: CORS, Rate Limiting
+         |
+         v
+Database (PostgreSQL)
+```
+
+---
+
+## 📂 Estrutura do repositório
+
+```text
 Pousa-/
 ├── API/
 │   ├── Databases/
@@ -90,7 +137,7 @@ Pousa-/
 │   ├── requirements.txt
 │   └── .env.example
 ├── public/
-├── previews/
+├── previews/          # imagens e screenshots do projeto
 ├── src/
 │   ├── App.jsx
 │   ├── main.jsx
@@ -105,113 +152,113 @@ Pousa-/
 ├── pnpm-lock.yaml
 ├── vite.config.js
 ├── vercel.json
-├── README.md
 └── README.md
 ```
 
-## Pré-requisitos
+---
 
-Antes de iniciar, verifique se você possui instalado:
+## 🗄️ Esquema do banco (resumo)
 
-- Node.js 18+
-- pnpm
+Users (`usersPousae`):
+```
+id SERIAL PRIMARY KEY
+name VARCHAR(150) NOT NULL
+email VARCHAR(254) NOT NULL
+password VARCHAR(255) NOT NULL -- Argon2 hashed
+session_token UUID UNIQUE
+cpf VARCHAR(14)
+money NUMERIC(10,2) DEFAULT 1000.00
+image_url TEXT
+moneyalreadyspent NUMERIC(10,2) DEFAULT 0.0
+tripsTaken INTEGER DEFAULT 0
+star INT[]
+comments INT[]
+```
+
+Trips:
+```
+id SERIAL PRIMARY KEY
+name VARCHAR NOT NULL
+description TEXT NOT NULL
+startDate DATE NOT NULL
+endDate DATE NOT NULL
+numberOfTravelers INT NOT NULL
+petsAllowed BOOLEAN
+price NUMERIC(10,2) NOT NULL
+session_token UUID -- owner
+review FLOAT DEFAULT 0
+usersPurchased UUID[]
+comments TEXT[]
+usersComments UUID[]
+notes INT[]
+```
+
+---
+
+## 🚀 Como rodar localmente
+
+Pré‑requisitos:
+- Node.js 18+ e pnpm
 - Python 3.10+
 - PostgreSQL
-- Git
-- VS Code (recomendado)
 
-## Configuração local
+Passos rápidos:
 
-### 1) Clone o repositório
-
+1) Clone
 ```bash
 git clone https://github.com/joaopedro236/Pousa-.git
 cd Pousa-
 ```
 
-### 2) Instale as dependências do frontend
-
+2) Frontend
 ```bash
 pnpm install
-```
-
-### 3) Inicie o frontend
-
-```bash
 pnpm dev
+# app: http://localhost:5173
 ```
 
-A aplicação estará disponível em:
-
-```bash
-http://localhost:5173
-```
-
-### 4) Configure o backend
-
+3) Backend
 ```bash
 cd API
 python -m venv .venv
-```
-
-Para Windows:
-
-```bash
+# Windows
 .venv\Scripts\activate
-```
-
-Para macOS/Linux:
-
-```bash
+# macOS/Linux
 source .venv/bin/activate
-```
-
-Em seguida:
-
-```bash
 pip install -r requirements.txt
-```
-
-Inicie a API:
-
-```bash
 uvicorn main:app --reload
+# api: http://localhost:8000/docs
 ```
 
-A documentação Swagger estará disponível em:
+4) Banco
+- Use o `.env.example` como referência e crie suas bases no Postgres
 
-```bash
-http://localhost:8000/docs
-```
+---
 
-## Variáveis de ambiente
-
-Crie um arquivo `.env` na raiz do projeto com base no exemplo disponível em `.env.example`.
-
-Exemplo:
+## 🔧 Variáveis de ambiente (exemplo)
 
 ```env
 DB_HOST=localhost
 DB_PORT=5432
 DB_NAME=pousa_users
 DB_USER=postgres
-DB_PASSWORD=sua_senha
+DB_PASSWORD=your_password
 
 DB_HOST_TRIP=localhost
 DB_PORT_TRIP=5432
 DB_NAME_TRIP=pousa_trips
 DB_USER_TRIP=postgres
-DB_PASSWORD_TRIP=sua_senha
+DB_PASSWORD_TRIP=your_password
 
 VITE_API_URL=http://localhost:8000
 FRONTEND_URLS=http://localhost:5173,http://localhost:3000
-IMGBB_URL=sua_chave_imgbb
-GEMINI_API_KEY=sua_chave_gemini
+IMGBB_URL=your_imgbb_key
+GEMINI_API_KEY=your_gemini_key
 ```
 
-## Scripts disponíveis
+---
 
-No frontend, os scripts principais são:
+## 📦 Scripts (frontend)
 
 ```bash
 pnpm dev
@@ -220,69 +267,65 @@ pnpm preview
 pnpm lint
 ```
 
-## Fluxos principais
+---
 
-### Autenticação
+## 📈 Métricas & limites
 
-```text
-Usuário -> Cadastro/Login -> Valida��ão -> Hash de senha -> Banco de dados -> Token de sessão -> Cookie HTTP-only
-```
+- Rate limit: 30 req/s por IP
+- Session expiry: 7 dias
+- Upload max: 5 MB (JPG, PNG, WEBP)
 
-### Compra de viagem
+---
 
-```text
-Usuário seleciona viagem -> Verifica autenticação -> Valida saldo -> Atualiza banco -> Confirma compra
-```
+## 🛠️ Troubleshooting (comuns)
 
-### Comentários e moderação
+- Port 5173 em uso: `pnpm dev -- --port 3000`
+- Erro de módulo: `rm -rf node_modules pnpm-lock.yaml && pnpm install`
+- Erro de conexão DB: verificar `.env` e se o Postgres está rodando
+- Erros Gemini: conferir chave e formato de requisição
 
-```text
-Comentário -> Validação -> IA Gemini -> Aprovação/Rejeição -> Persistência -> Exibição para usuários
-```
+---
 
-## Segurança e boas práticas
+## 📋 Roadmap
 
-- cookies HTTP-only para autenticação
-- senhas com hash seguro via Argon2
-- proteção contra compra própria
-- validação de sessão do usuário
-- moderação automática de comentários
-- rate limiting no backend
-- CORS configurado para ambientes autorizados
+- Testes (Jest, Pytest)
+- CI/CD (GitHub Actions)
+- TypeScript no frontend
+- Docker + Docker Compose
+- Migrate para SQLAlchemy / ORM
+- Redis caching
+- Paginação nas APIs
 
-## Contribuição
+---
 
-Contribuições são bem-vindas.
+## 🤝 Contribuição
 
-1. Faça um fork do projeto
-2. Crie uma branch para sua funcionalidade
-3. Faça o commit das alterações
-4. Envie para o repositório
-5. Abra um Pull Request
+1. Fork
+2. Branch: `git checkout -b feature/x`
+3. Commit
+4. Push
+5. Pull Request
 
-## Licença
+---
 
-Este projeto está disponível sob a licença MIT.
+## 📄 Licença
 
-## Contato
+MIT
 
-- GitHub: https://github.com/joaopedro236
+---
+
+## 📞 Contato
+
+- Email: joaopedrooliveiradearaujo416@gmail.com
 - Issues: https://github.com/joaopedro236/Pousa-/issues
-- E-mail: joaopedrooliveiradearaujo416@gmail.com
+- Demo: https://pousa.vercel.app
 
-## Agradecimentos
+---
 
-- React
-- FastAPI
-- PostgreSQL
-- Bootstrap
-- Gemini AI
-- ImgBB
+## 👨‍💻 Autor
 
-## Status do projeto
+**João Pedro Oliveira** — https://github.com/joaopedro236
 
-O projeto está em desenvolvimento ativo e com deploy em produção na Vercel, com frontend funcional e backend em operação.
+---
 
-<p align="center">
-  <strong>Made with ❤️ by João Pedro Oliveira</strong>
-</p>
+<p align="center">Made with ❤️ using React, FastAPI and PostgreSQL</p>
