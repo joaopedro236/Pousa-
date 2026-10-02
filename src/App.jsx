@@ -210,6 +210,7 @@ function App({user, setUser}){
                 <CreateTrip
                     user={user}
                     itemsNavbar={itemsNavbar}
+                    setUser={setUser}
                     setItemsNavbar={setItemsNavbar}
                 />
                 <Star

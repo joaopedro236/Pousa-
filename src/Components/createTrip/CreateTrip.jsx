@@ -6,7 +6,7 @@ import iconGemini from '../../assets/gemini.png'
 import itemsSelect from './selectTagsJSON'
 import './CreateTrip.css'
 import { useState, useEffect } from 'react'
-export default function CreateTrip({ user, itemsNavbar, setItemsNavbar }) {
+export default function CreateTrip({ user, itemsNavbar, setItemsNavbar, setUser }) {
     const [loading, setLoading] = useState(false)
     const today = new Date().toISOString().split('T')[0]
     const [tags, setTags] = useState([])
