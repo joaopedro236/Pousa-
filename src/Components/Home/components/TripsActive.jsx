@@ -195,7 +195,7 @@ export default function TripsActive({ itemsNavbar, stars, user, starTrip, getTri
                         navigate('/', { replace: true })
 
                     }}>X</button>
-                    <img src={hiddenPhoto} alt="hiddenPhoto" />
+                    <img src={hiddenPhoto} alt="hiddenPhoto" loading='lazy'/>
                 </header>
                 <div className="tripsActiveContent  mt-2 px-3 position-relative">
                     <header className="d-flex flex-column position-relative align-items-center rounded p-4 justify-contnet-center">
@@ -227,6 +227,7 @@ export default function TripsActive({ itemsNavbar, stars, user, starTrip, getTri
                             <img
                                 src={selectedRestaurant?.ownerImage || hiddenUser}
                                 alt={selectedRestaurant?.ownerName}
+                                loading='lazy'
                                 onError={(e) => {
                                     e.currentTarget.onerror = null
                                     e.currentTarget.src = hiddenUser
@@ -266,6 +267,7 @@ export default function TripsActive({ itemsNavbar, stars, user, starTrip, getTri
                                     <img
                                         src={comment?.image_url || hiddenUser}
                                         alt={comment?.name}
+                                        loading='lazy'
                                         onError={(e) => {
                                             e.currentTarget.onerror = null
                                             e.currentTarget.src = hiddenUser

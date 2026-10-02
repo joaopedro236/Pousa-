@@ -109,7 +109,7 @@ export default function     Home({ user, userData, selectedRestaurant, setSelect
                             src={userData?.image_url || photoUser}
                             alt="photo user"
                             role="button"
-
+                            loading='lazy'
                             className="photo"
                             onClick={() => setItemsNavbar('User Dashboard')}
                         />
@@ -147,6 +147,7 @@ export default function     Home({ user, userData, selectedRestaurant, setSelect
                                     <img
                                         src={trip.ownerImage || photoUser}
                                         alt={trip.ownerName}
+                                        loading='lazy'
                                         onError={(e) => {
                                             e.currentTarget.onerror = null
                                             e.currentTarget.src = photoUser

@@ -37,6 +37,7 @@ export default function TripHistory({ user, itemsNavbar, setSelectedRestaurant, 
                                 <img
                                     src={trip.ownerImage || photoUser}
                                     alt={trip.ownerName}
+                                    loading='lazy'
                                     onError={(e) => {
                                         e.currentTarget.onerror = null
                                         e.currentTarget.src = photoUser

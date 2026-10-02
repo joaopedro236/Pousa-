@@ -88,7 +88,7 @@ export default function Chatbot({ selectedRestaurant, userData, user }) {
     return (
         <>
             <button className={`chatbotBtn bg-primary ${chatbotActive || !user ? 'remove' : ''} ${animate? 'animation' : ''}`} onClick={() => { setChatBotActive(true) }}>
-                <img src={iconGemini} alt="iconGemini" />
+                <img src={iconGemini} alt="iconGemini" loading='lazy'/>
             </button>
             <aside className={`chatbot ${chatbotActive ? 'active' : ''}`}>
                 <header>

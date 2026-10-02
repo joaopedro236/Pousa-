@@ -84,6 +84,7 @@ export default function User({ user, itemsNavbar , userData}) {
                             <img
                                 src={imageUrl}
                                 alt="photo user"
+                                loading='lazy'
                                 className="photo w-100"
                                 onError={(e) => {
                                     e.currentTarget.style.display = 'none';
@@ -98,7 +99,7 @@ export default function User({ user, itemsNavbar , userData}) {
                     {
                         cards.map((cardsMap) => (
                             <div key={cardsMap.id} className='d-flex  flex-column  ' >
-                                <img src={cardsMap?.image} alt={cardsMap.name} style={{ background: cardsMap.color, filter: 'invert(100)' }} />
+                                <img src={cardsMap?.image} loading='lazy' alt={cardsMap.name} style={{ background: cardsMap.color, filter: 'invert(100)' }} />
                                 <h1 className='mt-3'>
                                     {cardsMap.json === 'moneyalreadyspent' || cardsMap.json === 'money'
                                         ? new Intl.NumberFormat('en-us', {
