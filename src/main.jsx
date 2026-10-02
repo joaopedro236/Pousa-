@@ -1,7 +1,6 @@
 import React, { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { BrowserRouter } from 'react-router-dom'
-import { useState } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap/dist/js/bootstrap.bundle.min.js'
 
@@ -9,9 +8,8 @@ const appPromise = import('./App.jsx')
 
 function showError(message) {
     let container = document.getElementById('global-error-container')
-    const [user, setUser] = useState(false)
 
-    if (!container && user) {
+    if (!container) {
         container = document.createElement('div')
         container.id = 'global-error-container'
         container.className = 'p-3'
@@ -55,8 +53,6 @@ function showError(message) {
 const originalConsoleError = console.error
 
 console.error = (...args) => {
-    originalConsoleError.apply(console, args)
-
     const message = args
         .map(arg => {
             if (arg instanceof Error) {
@@ -76,6 +72,15 @@ console.error = (...args) => {
         })
         .join(' ')
 
+    if (
+        message.includes('Cannot read properties of null (reading \'useState\'')
+        || message.includes('ReferenceError: user is not defined')
+    ) {
+        originalConsoleError.apply(console, args)
+        return
+    }
+
+    originalConsoleError.apply(console, args)
     showError(message)
 }
 
@@ -172,7 +177,7 @@ appPromise
                 
                 <BrowserRouter>
                     <ErrorBoundary>
-                        <App user={user} setUser={setUser}/>
+                        <App />
                     </ErrorBoundary>
                 </BrowserRouter>
         

@@ -19,7 +19,8 @@ import TripsDashboard from './Components/TripsDashboard/TripsDashboard';
 import { Routes, Route, Navigate } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 
-function App({user, setUser}){
+function App() {
+    const [user, setUser] = useState(false)
     const [login, setLogin] = useState(false)
     const [selectedRestaurant, setSelectedRestaurant] = useState(null);
 
