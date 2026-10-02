@@ -1,7 +1,7 @@
 import React, { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { BrowserRouter } from 'react-router-dom'
-
+import { useState } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap/dist/js/bootstrap.bundle.min.js'
 
@@ -9,8 +9,9 @@ const appPromise = import('./App.jsx')
 
 function showError(message) {
     let container = document.getElementById('global-error-container')
+    const [user, setUser] = useState(false)
 
-    if (!container) {
+    if (!container && user) {
         container = document.createElement('div')
         container.id = 'global-error-container'
         container.className = 'p-3'
@@ -171,7 +172,7 @@ appPromise
                 
                 <BrowserRouter>
                     <ErrorBoundary>
-                        <App />
+                        <App user={user} setUser={setUser}/>
                     </ErrorBoundary>
                 </BrowserRouter>
         
