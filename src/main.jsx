@@ -75,6 +75,7 @@ console.error = (...args) => {
     if (
         message.includes('Cannot read properties of null (reading \'useState\'')
         || message.includes('ReferenceError: user is not defined')
+        || message.includes("'NoneType' object is not subscriptable")
     ) {
         originalConsoleError.apply(console, args)
         return
