@@ -8,3 +8,6 @@
 .footer span {
     color: var(--bs-primary);
 }
+.footer p{
+    font-size: 13.5px;
+}

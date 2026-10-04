@@ -21,7 +21,9 @@ main {
     width: 100%;
     display: none;
 }
-
+section{
+    min-width: 100vh;
+}
 main.Active {
     display: flex;
 }
