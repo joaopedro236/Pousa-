@@ -16,6 +16,7 @@ import Star from './Components/Stars/Stars'
 import Chatbot from './Components/Chatbot/Chatbot'
 import TripHistory from './Components/TripHistory/TripHistory'
 import TripsDashboard from './Components/TripsDashboard/TripsDashboard';
+import Footer from './Components/Footer/Footer';
 import { Routes, Route, Navigate } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 
@@ -234,6 +235,7 @@ function App() {
                     user={user}
                     selectedRestaurant={selectedRestaurant}
                     userData={userData} />
+                <Footer/>
             </main>
         </>
     )

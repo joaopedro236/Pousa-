@@ -119,6 +119,7 @@ export default function Chatbot({ selectedRestaurant, userData, user }) {
                     <input type="submit" className='btn btn-primary' disabled={message.trim().length < 2 || loading} value="Send" />
                 </form>
             </aside>
+            
         </>
     )
 }       
