@@ -14,12 +14,6 @@
   <img src="https://skillicons.dev/icons?i=python,fastapi,postgres,html,css,bootstrap,js,react,vite,git,github,vscode" alt="tech icons" />
 </p>
 
-<p>
-  ![JavaScript](https://img.shields.io/badge/JavaScript-50.1%25-F7DF1E?style=flat-square&logo=javascript)
-  ![Python](https://img.shields.io/badge/Python-29.4%25-3776AB?style=flat-square&logo=python)
-  ![CSS](https://img.shields.io/badge/CSS-20.3%25-1572B6?style=flat-square&logo=css3)
-  ![HTML](https://img.shields.io/badge/HTML-0.2%25-E34F26?style=flat-square&logo=html5)
-</p>
 
 </div>
 
