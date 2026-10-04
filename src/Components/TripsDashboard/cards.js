@@ -2,22 +2,22 @@ const cards = [
     {
         id:1,
         title:'Total profit',
-        jsonName:'moneyObtained'
+        json:'moneyObtained'
     },
     {
         id:2,
         title:"Trip numbers",
-        jsonName:'tripsObtained'
+        json:'tripsObtained'
     },
     {
         id:3,
         title:'Average rating',
-        jsonName:'Review'
+        json:'Review'
     },
     {
         id:4,
         title:'Comments received',
-        jsonName:"commentsCount"
+        json:"commentsCount"
     }
 ]
 export default cards
