@@ -1,9 +1,8 @@
 # 🏨 PousaÊ
 
-> Plataforma moderna para descobrir, reservar e gerenciar experiências de viagem.
+> A modern platform to discover, book, and manage travel experiences.
 
-**PousaÊ** é uma aplicação full‑stack criada com React (frontend) e FastAPI (backend), com PostgreSQL para persistência. A proposta é oferecer descoberta de viagens, gestão de perfil, compra segura de experiências e suporte com IA.
-
+**PousaÊ** is a full-stack application built with React (frontend) and FastAPI (backend), with PostgreSQL for persistence. The goal is to offer travel discovery, profile management, secure booking, favorites, reviews, and AI-powered chat support.
 
 ---
 
@@ -16,8 +15,8 @@
 </p>
 
 <p>
-  ![JavaScript](https://img.shields.io/badge/JavaScript-49.9%25-F7DF1E?style=flat-square&logo=javascript)
-  ![Python](https://img.shields.io/badge/Python-29.6%25-3776AB?style=flat-square&logo=python)
+  ![JavaScript](https://img.shields.io/badge/JavaScript-50.1%25-F7DF1E?style=flat-square&logo=javascript)
+  ![Python](https://img.shields.io/badge/Python-29.4%25-3776AB?style=flat-square&logo=python)
   ![CSS](https://img.shields.io/badge/CSS-20.3%25-1572B6?style=flat-square&logo=css3)
   ![HTML](https://img.shields.io/badge/HTML-0.2%25-E34F26?style=flat-square&logo=html5)
 </p>
@@ -26,86 +25,85 @@
 
 ---
 
-## 📊 Status do projeto
+## 📊 Project Status
 
-| Aspecto | Status |
+| Aspect | Status |
 |---|---:|
-| **Nota geral** | 8.5 / 10 ⭐ |
-| **Frontend** | ✅ Funcional |
-| **Backend** | ✅ Operacional |
-| **Banco de dados** | ✅ PostgreSQL configurado |
-| **Deployment** | ✅ Vercel (frontend) |
+| **Overall Rating** | 8.5 / 10 ⭐ |
+| **Frontend** | ✅ Functional |
+| **Backend** | ✅ Operational |
+| **Database** | ✅ PostgreSQL Configured |
+| **Deployment** | ✅ Vercel (Frontend) |
 
 ---
 
-## 🖥️ Tecnologias (resumo)
+## 🖥️ Technologies (Summary)
 
-- Frontend: React, Vite, JavaScript, HTML, CSS, Bootstrap
-- Backend: Python, FastAPI, Pydantic
-- Banco: PostgreSQL (psycopg2)
-- Autenticação: cookies HTTP‑only + tokens UUID
-- IA: Gemini (chatbot + moderação)
-- Upload de imagens: ImgBB
-- Deploy: Vercel
-
-
----
-
-## ✨ Funcionalidades principais
-
-- Cadastro e login de usuários (validação de e‑mail, CPF, senha)
-- Sessões seguras com cookies HTTP‑only
-- Perfil do usuário com imagem, saldo e histórico
-- Listagem de viagens, busca e filtros
-- Visualização detalhada da viagem (datas, preço, limite de viajantes, política para pets)
-- Compra de viagens com verificação de saldo e proteção contra auto‑compra
-- Sistema de favoritos (star/bookmark)
-- Comentários e avaliações com moderação automática (Gemini)
-- Assistente virtual com IA
+- **Frontend:** React, Vite, JavaScript, HTML, CSS, Bootstrap
+- **Backend:** Python, FastAPI, Pydantic
+- **Database:** PostgreSQL (psycopg2)
+- **Authentication:** HTTP-only cookies + UUID tokens
+- **AI:** Gemini (chatbot + moderation)
+- **Image Upload:** ImgBB
+- **Deploy:** Vercel
 
 ---
 
-## 🔐 Segurança & boas práticas
+## ✨ Main Features
 
-- Senhas armazenadas com Argon2 (hash seguro)
-- Cookies: HttpOnly, Secure (em produção), SameSite configurado
-- Rate limiting (IP) configurado no backend
-- CORS configurado e cabeçalhos expostos quando necessário
-- Moderação automática de comentários (detecção de discurso de ódio e conteúdo impróprio)
-
----
-
-## 🔌 Endpoints principais (resumo)
-
-User:
-```
-POST   /registerUser    - Registrar usuário
-POST   /login           - Autenticar usuário
-GET    /checkUser       - Verificar sessão
-GET    /getUser         - Obter dados do usuário autenticado
-POST   /upload-image    - Enviar imagem de perfil
-```
-
-Trips & compra:
-```
-POST   /trips           - Criar nova viagem
-GET    /getTrips        - Listar viagens
-POST   /buyTrip         - Comprar viagem
-POST   /addStar         - Adicionar favorito
-POST   /removeStar      - Remover favorito
-GET    /getStar         - Listar favoritos
-```
-
-Comentários/AI:
-```
-POST   /createComment   - Criar comentário (moderação automática)
-POST   /getComment      - Obter comentários
-POST   /chatbot         - Chat com assistente (IA)
-```
+- User registration and login (email validation, CPF, password)
+- Secure sessions with HTTP-only cookies
+- User profile with image, balance, and history
+- Trip listing, search, and filters
+- Detailed trip view (dates, price, traveler limit, pet policy)
+- Trip purchase with balance verification and self-purchase protection
+- Favorites system (star/bookmark)
+- Comments and ratings with automatic moderation (Gemini AI)
+- Virtual assistant with AI
 
 ---
 
-## 🏗️ Arquitetura (visão rápida)
+## 🔐 Security & Best Practices
+
+- Passwords stored with Argon2 (secure hashing)
+- Cookies: HttpOnly, Secure (in production), SameSite configured
+- Rate limiting (IP-based) configured in backend
+- CORS configured with exposed headers when necessary
+- Automatic comment moderation (hate speech and inappropriate content detection)
+
+---
+
+## 🔌 Main Endpoints (Summary)
+
+**User:**
+```
+POST   /registerUser    - Register user
+POST   /login           - Authenticate user
+GET    /checkUser       - Verify session
+GET    /getUser         - Get authenticated user data
+POST   /upload-image    - Upload profile image
+```
+
+**Trips & Purchase:**
+```
+POST   /trips           - Create new trip
+GET    /getTrips        - List trips
+POST   /buyTrip         - Buy trip
+POST   /addStar         - Add to favorites
+POST   /removeStar      - Remove from favorites
+GET    /getStar         - List favorites
+```
+
+**Comments & AI:**
+```
+POST   /createComment   - Create comment (automatic moderation)
+POST   /getComment      - Get comments
+POST   /chatbot         - Chat with AI assistant
+```
+
+---
+
+## 🏗️ Architecture (Quick Overview)
 
 ```
 Frontend (React + Vite)
@@ -124,7 +122,7 @@ Database (PostgreSQL)
 
 ---
 
-## 📂 Estrutura do repositório
+## 📂 Repository Structure
 
 ```text
 Pousa-/
@@ -137,7 +135,15 @@ Pousa-/
 │   ├── requirements.txt
 │   └── .env.example
 ├── public/
-├── previews/          # imagens e screenshots do projeto
+├── previews/          # Project images and screenshots
+│   ├── screenshot_08.png
+│   ├── screenshot_09.png
+│   ├── screenshot_11.png
+│   ├── screenshot_12.png
+│   ├── screenshot_14.png
+│   ├── screenshot_15.png
+│   ├── screenshot_16.png
+│   └── screenshot_17.png
 ├── src/
 │   ├── App.jsx
 │   ├── main.jsx
@@ -157,9 +163,42 @@ Pousa-/
 
 ---
 
-## 🗄️ Esquema do banco (resumo)
+## 📸 Project Screenshots
 
-Users (`usersPousae`):
+<details>
+  <summary>Click to see project images</summary>
+
+### Home & Trip Discovery
+![Screenshot 08](https://raw.githubusercontent.com/joaopedro236/Pousa-/main/previews/screenshot_08.png)
+
+### Trip Details
+![Screenshot 09](https://raw.githubusercontent.com/joaopedro236/Pousa-/main/previews/screenshot_09.png)
+
+### User Dashboard
+![Screenshot 11](https://raw.githubusercontent.com/joaopedro236/Pousa-/main/previews/screenshot_11.png)
+
+### Booking Interface
+![Screenshot 12](https://raw.githubusercontent.com/joaopedro236/Pousa-/main/previews/screenshot_12.png)
+
+### Favorites & Reviews
+![Screenshot 14](https://raw.githubusercontent.com/joaopedro236/Pousa-/main/previews/screenshot_14.png)
+
+### User Profile
+![Screenshot 15](https://raw.githubusercontent.com/joaopedro236/Pousa-/main/previews/screenshot_15.png)
+
+### Trip History
+![Screenshot 16](https://raw.githubusercontent.com/joaopedro236/Pousa-/main/previews/screenshot_16.png)
+
+### AI Chat Assistant
+![Screenshot 17](https://raw.githubusercontent.com/joaopedro236/Pousa-/main/previews/screenshot_17.png)
+
+</details>
+
+---
+
+## 🗄️ Database Schema (Summary)
+
+**Users (`usersPousae`):**
 ```
 id SERIAL PRIMARY KEY
 name VARCHAR(150) NOT NULL
@@ -175,7 +214,7 @@ star INT[]
 comments INT[]
 ```
 
-Trips:
+**Trips:**
 ```
 id SERIAL PRIMARY KEY
 name VARCHAR NOT NULL
@@ -195,29 +234,29 @@ notes INT[]
 
 ---
 
-## 🚀 Como rodar localmente
+## 🚀 How to Run Locally
 
-Pré‑requisitos:
-- Node.js 18+ e pnpm
+**Prerequisites:**
+- Node.js 18+ and pnpm
 - Python 3.10+
 - PostgreSQL
 
-Passos rápidos:
+**Quick Steps:**
 
-1) Clone
+1. **Clone**
 ```bash
 git clone https://github.com/joaopedro236/Pousa-.git
 cd Pousa-
 ```
 
-2) Frontend
+2. **Frontend**
 ```bash
 pnpm install
 pnpm dev
 # app: http://localhost:5173
 ```
 
-3) Backend
+3. **Backend**
 ```bash
 cd API
 python -m venv .venv
@@ -230,12 +269,12 @@ uvicorn main:app --reload
 # api: http://localhost:8000/docs
 ```
 
-4) Banco
-- Use o `.env.example` como referência e crie suas bases no Postgres
+4. **Database**
+- Use `.env.example` as reference and create your databases in PostgreSQL
 
 ---
 
-## 🔧 Variáveis de ambiente (exemplo)
+## 🔧 Environment Variables (Example)
 
 ```env
 DB_HOST=localhost
@@ -258,71 +297,71 @@ GEMINI_API_KEY=your_gemini_key
 
 ---
 
-## 📦 Scripts (frontend)
+## 📦 Frontend Scripts
 
 ```bash
-pnpm dev
-pnpm build
-pnpm preview
-pnpm lint
+pnpm dev       # Start development server
+pnpm build     # Build for production
+pnpm preview   # Preview production build
+pnpm lint      # Run linter
 ```
 
 ---
 
-## 📈 Métricas & limites
+## 📈 Metrics & Limits
 
-- Rate limit: 30 req/s por IP
-- Session expiry: 7 dias
-- Upload max: 5 MB (JPG, PNG, WEBP)
+- **Rate limit:** 30 req/s per IP
+- **Session expiry:** 7 days
+- **Upload max:** 5 MB (JPG, PNG, WEBP)
 
 ---
 
-## 🛠️ Troubleshooting (comuns)
+## 🛠️ Troubleshooting (Common Issues)
 
-- Port 5173 em uso: `pnpm dev -- --port 3000`
-- Erro de módulo: `rm -rf node_modules pnpm-lock.yaml && pnpm install`
-- Erro de conexão DB: verificar `.env` e se o Postgres está rodando
-- Erros Gemini: conferir chave e formato de requisição
+- **Port 5173 in use:** `pnpm dev -- --port 3000`
+- **Module error:** `rm -rf node_modules pnpm-lock.yaml && pnpm install`
+- **DB connection error:** Check `.env` and ensure PostgreSQL is running
+- **Gemini errors:** Verify API key and request format
 
 ---
 
 ## 📋 Roadmap
 
-- Testes (Jest, Pytest)
+- Tests (Jest, Pytest)
 - CI/CD (GitHub Actions)
-- TypeScript no frontend
+- TypeScript in frontend
 - Docker + Docker Compose
-- Migrate para SQLAlchemy / ORM
+- Migration to SQLAlchemy / ORM
 - Redis caching
-- Paginação nas APIs
+- API pagination
 
 ---
 
-## 🤝 Contribuição
+## 🤝 Contributing
 
-1. Fork
-2. Branch: `git checkout -b feature/x`
-3. Commit
-4. Push
-5. Pull Request
+1. Fork the repository
+2. Create a branch: `git checkout -b feature/x`
+3. Commit your changes
+4. Push to the branch
+5. Open a Pull Request
 
 ---
 
-## 📄 Licença
+## 📄 License
 
 MIT
 
 ---
 
-## 📞 Contato
+## 📞 Contact
 
-- Email: joaopedrooliveiradearaujo416@gmail.com
-- Issues: https://github.com/joaopedro236/Pousa-/issues
-- Demo: https://pousa.vercel.app
+- **Email:** joaopedrooliveiradearaujo416@gmail.com
+- **Issues:** https://github.com/joaopedro236/Pousa-/issues
+- **Live Demo:** https://pousa.vercel.app
 
 ---
 
-## 👨‍💻 Autor
+## 👨‍💻 Author
 
 **João Pedro Oliveira** — https://github.com/joaopedro236
 
