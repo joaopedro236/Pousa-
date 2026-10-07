@@ -39,13 +39,35 @@ def metrics(request: Request):
                 (current_week, session_token),
             )
             conn.commit()
+        cursorTrip.execute("select t.name, t.description, t.startDate, t.endDate,t.numberOfTravelers,t.petsAllowed,t.price,u.name, u.image_url,t.session_token, t.review, t.id from trips t left join userspousae u on t.session_token = u.session_token")
+        result= cursorTrip.fetchall()
+        trips = []
+        for t in result:
+            cursor.execute('select name, image_url from userspousae where session_token = %s', (session_token,))
+            resultUser = cursor.fetchone()
+            trips.append(
+                {
+                    "name": trip[0],
+                    "description": trip[1],
+                    "startDate": trip[2],
+                    "endDate": trip[3],
+                    "numberOfTravelers": trip[4],
+                    "petsAllowed": trip[5],
+                    "price": trip[6],
+                    "ownerName":resultUser[0] if resultUser else None,
+                    "ownerImage": resultUser[1] if resultUser else None,
+                    "review":trip[10],
+                    "id": trip [11]
+                }
+            )
         return {
             "Status": True,
             "moneyObtained": response[0],
             "tripsObtained": response[1],
             "Review": trip[1],
             "commentsCount": trip[2],
-            "tripsobtainedhistoryS": response[3]
+            "tripsobtainedhistoryS": response[3],
+            "trips": trips
         }
     except Exception:
         return {"Status": False, "Error": "An occured error"}
