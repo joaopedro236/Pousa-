@@ -69,8 +69,8 @@ def metrics(request: Request):
             "tripsobtainedhistoryS": response[3],
             "trips": trips
         }
-    except Exception:
-        return {"Status": False, "Error": "An occured error"}
+    except Exception as e:
+        return {"Status": False, "Error": str(e)}
     finally:
         if cursor:
             cursor.close()
