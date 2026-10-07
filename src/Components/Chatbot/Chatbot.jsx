@@ -45,11 +45,8 @@ export default function Chatbot({ selectedRestaurant, userData, user }) {
                 },
                 body: JSON.stringify({
                     message: message,
-
                     nameUser: userData?.name,
-                    emailUser: userData?.email,
-                    cpfUser: userData?.cpf,
-
+                    
                     nameTrip: selectedRestaurant?.name,
                     descriptionTrip: selectedRestaurant?.description,
                     reviewTrip: selectedRestaurant?.review,

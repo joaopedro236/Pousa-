@@ -4,8 +4,7 @@ from pydantic import BaseModel,EmailStr
 class validation(BaseModel):
     message: str
     nameUser:str
-    emailUser: EmailStr
-    cpfUser: str
+
     nameTrip: str | None = None
     descriptionTrip: str | None = None
     reviewTrip: float | None = None
