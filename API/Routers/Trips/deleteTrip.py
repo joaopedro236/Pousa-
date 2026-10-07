@@ -8,7 +8,7 @@ def deleteTrip(Data:data):
     cursor= None
     try:
         conn, cursor = connect_database_trip()
-        cursor.execute("delete from trips where id = %s", (Data.id))
+        cursor.execute("delete from trips where id = %s", (Data.id,))
         conn.commit()
         return{"Status":True}
     except Exception as e:
