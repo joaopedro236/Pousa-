@@ -11,7 +11,7 @@ export default function User({ user, itemsNavbar , userData}) {
             const responseDA = await fetch(`${import.meta.env.VITE_API_URL}/deleteAccount`,{
                 method:'DELETE',
                 headers: {
-                    'Content-Type': "aplication/json"
+                    'Content-Type': "application/json"
                 },
                 credentials:"include"
          } )
@@ -29,7 +29,7 @@ export default function User({ user, itemsNavbar , userData}) {
             const responseLO = await fetch(`${import.meta.env.VITE_API_URL}/logout`, {
                 method:"POST",
                 headers: {
-                    'Content-Type': "aplication/json"
+                    'Content-Type': "application/json"
                 },
                 credentials:"include"
             })

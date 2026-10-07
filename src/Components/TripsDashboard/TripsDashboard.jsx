@@ -55,7 +55,7 @@ export default function TripsDashboard({
       const responseDT = await fetch(`${import.meta.env.VITE_API_URL}/deleteTrip`, {
         method:"DELETE",
         headers:{
-          "Content-Type": "aplication/json"
+          "Content-Type": "application/json"
         },
         body:JSON.stringify({
           id:json?.trip[currentIndex]?.id
