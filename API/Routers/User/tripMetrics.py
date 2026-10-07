@@ -47,17 +47,17 @@ def metrics(request: Request):
             resultUser = cursor.fetchone()
             trips.append(
                 {
-                    "name": trip[0],
-                    "description": trip[1],
-                    "startDate": trip[2],
-                    "endDate": trip[3],
-                    "numberOfTravelers": trip[4],
-                    "petsAllowed": trip[5],
-                    "price": trip[6],
+                    "name": t[0],
+                    "description": t[1],
+                    "startDate": t[2],
+                    "endDate": t[3],
+                    "numberOfTravelers": t[4],
+                    "petsAllowed": t[5],
+                    "price": t[6],
                     "ownerName":resultUser[0] if resultUser else None,
                     "ownerImage": resultUser[1] if resultUser else None,
-                    "review":trip[10],
-                    "id": trip [11]
+                    "review":t[10],
+                    "id": t [11]
                 }
             )
         return {
