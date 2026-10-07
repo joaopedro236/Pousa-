@@ -50,6 +50,25 @@ export default function TripsDashboard({
   const previous = () => {
     setCurrentIndex((prev) => Math.max(prev - 1, 0));
   };
+  const deleteTrip =async () => {
+    try{
+      const responseDT = await fetch(`${import.meta.env.VITE_API_URL}/deleteTrip`, {
+        method:"DELETE",
+        headers:{
+          "Content-Type": "aplication/json"
+        },
+        body:JSON.stringify({
+          id:json?.trip[currentIndex]?.id
+        })
+      })
+      const dataDT = await responseDT.json()
+      if (dataDT?.Error){
+        console.error(dataDT?.Error)
+      }
+    }catch(error){
+      console.error(error)
+    }
+  }
   return (
     <>
       <section
@@ -167,6 +186,7 @@ export default function TripsDashboard({
           )}
           <div className="buttons">
           <button onClick={previous}>{'<'}</button>
+          <button onClick={deleteTrip}>X</button>
           <button onClick={next}>{">"}</button>
           </div>
         </div>

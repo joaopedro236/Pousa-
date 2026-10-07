@@ -20,6 +20,7 @@ from API.Routers.Trips.tripsHistory import router as tripsHistory
 from API.Routers.User.tripMetrics import router as tripMetrics
 from API.Routers.User.deleteAccount import router as deleteAccounts
 from API.Routers.Trips.suggestedDescription import router as suggestedDescription
+from API.Routers.Trips.deleteTrip import router as deleteTrip
 from fastapi.responses import JSONResponse
 import time
 from collections import defaultdict
@@ -82,6 +83,7 @@ app.include_router(tripMetrics)
 app.include_router(logout)
 app.include_router(deleteAccounts)
 app.include_router(suggestedDescription)
+app.include_router(deleteTrip)
 @app.on_event("startup")
 def startup():
     db_registerUser()

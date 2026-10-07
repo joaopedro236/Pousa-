@@ -35,6 +35,10 @@
 .graphicTrips {
     max-width: 550px;
 }
+.tripsDashboard .trips {
+  display: flex;
+  flex-direction: column;
+}
 .buttons {
       display: flex;
         justify-content: center;
@@ -53,11 +57,13 @@
                             cursor: pointer;
                               transition: 0.2s;
                               }
+@media (hover:hover) {
+  
 
                               .buttons button:hover {
                                 background: rgba(0, 0, 0, 0.75);
-                                }
-
+                              }   
+                            }  
 @media (min-width:900px) {
     .cardsTrips {
         display: flex;

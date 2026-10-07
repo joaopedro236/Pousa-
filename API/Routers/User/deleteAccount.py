@@ -2,7 +2,7 @@ from fastapi import APIRouter, Response, Request
 from ...Databases.Conn.users import connect_database
 from ...Databases.Conn.trips import connect_database_trip
 router = APIRouter()
-@router.post("/deleteAccount")
+@router.delete("/deleteAccount")
 def deleteAccount(request: Request, response: Response):
     conn = None
     cursor= None
@@ -33,4 +33,4 @@ def deleteAccount(request: Request, response: Response):
         if cursorTrip:
             cursorTrip.close()
         if connTrip:
-            connTrip.close()
+            connTrip.close() 
