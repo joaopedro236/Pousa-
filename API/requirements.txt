@@ -8,3 +8,4 @@ argon2-cffi==25.1.0
 requests==2.34.0
 google-genai==1.28.0
 email-validator
+python-multipart
