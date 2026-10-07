@@ -35,6 +35,29 @@
 .graphicTrips {
     max-width: 550px;
 }
+.buttons {
+      display: flex;
+        justify-content: center;
+          gap: 10px;
+            margin-top: 15px;
+            }
+
+            .buttons button {
+              width: 38px;
+                height: 38px;
+                  border: none;
+                    border-radius: 50%;
+                      background: rgba(0, 0, 0, 0.55);
+                        color: white;
+                          font-size: 20px;
+                            cursor: pointer;
+                              transition: 0.2s;
+                              }
+
+                              .buttons button:hover {
+                                background: rgba(0, 0, 0, 0.75);
+                                }
+
 @media (min-width:900px) {
     .cardsTrips {
         display: flex;

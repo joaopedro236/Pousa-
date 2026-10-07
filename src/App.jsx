@@ -230,6 +230,8 @@ function App() {
                 />
                 <TripsDashboard
                 itemsNavbar={itemsNavbar}
+                setItemsNavbar={setItemsNavbar}
+                setSelectedRestaurant={setSelectedRestaurant}
                 />
                 <Chatbot
                     user={user}

@@ -67,7 +67,7 @@ def metrics(request: Request):
             "Review": trip[1],
             "commentsCount": trip[2],
             "tripsobtainedhistoryS": response[3],
-            "trips": trips
+            "trip": trips
         }
     except Exception as e:
         return {"Status": False, "Error": str(e)}
