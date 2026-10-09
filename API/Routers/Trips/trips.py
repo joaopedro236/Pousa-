@@ -60,9 +60,10 @@ BLOCK
 
         if "BLOCK" in moderation.text.strip().upper():
             return {"Status": False, "Error": "Inappropriate content."}
-        cepResult = requests.get(
+        response = requests.get(
             "https://viacep.com.br/ws/{dataValidation.cep}/json/"
-        ).json()
+        )
+        cepResult = response.json()
         if cepResult.status_code != 200:
             return{"Status": False, "Error":"Invalid Cep "}
         cursor.execute(
