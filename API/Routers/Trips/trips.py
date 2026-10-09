@@ -66,7 +66,7 @@ BLOCK
         )
         
         if response.status_code != 200:
-            return{"Status": False, "Error":"Invalid  (status_code) "}
+            return{"Status": False, "Error":response.text}
         cepResult = response.json()
         cursor.execute(
             """insert into trips(
