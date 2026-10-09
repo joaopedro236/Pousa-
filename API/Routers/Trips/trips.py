@@ -82,15 +82,15 @@ BLOCK
                 dataValidation.price,
                 session_token,
                 dataValidation.cep,
-                cepResult.logradouro,
-                cepResult.complemento, 
-                cepResult.bairro,
-                cepResult.localidade,
-                cepResult.uf,
-                cepResult.regiao,
-                cepResult.igbe,
-                cepResult.ddd,
-                cepResult.siafi
+                cepResult["logradouro"],
+                cepResult["complemento"], 
+                cepResult["bairro"],
+                cepResult["localidade"],
+                cepResult["uf"],
+                cepResult["regiao"],
+                cepResult["ibge"],
+                cepResult["ddd"],
+                cepResult["siafi"]
 
 
             ),
