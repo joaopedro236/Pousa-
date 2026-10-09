@@ -60,4 +60,4 @@ const inputs = [
     }
 ]
 
-export default input
+export default inputs
