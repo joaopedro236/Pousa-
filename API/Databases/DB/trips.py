@@ -20,6 +20,17 @@ def database():
         review numeric(3,2) default 5,
         usersPurchased uuid[],
         cep int,
+        street text, 
+        complement text,
+        neighborhood text, 
+        city: text,
+        state: text,
+        state_code: text,
+        region: text,
+        ibge: int,
+
+        areacode: text,
+        siafi: int
         comments text[],
         note int[],
         usersComments uuid[])""")

@@ -6,6 +6,7 @@ from google import genai
 router = APIRouter()
 import os
 from dotenv import load_dotenv
+import request
 load_dotenv(".env.apis")
 
 GEMINI_API_KEY = os.getenv('GEMINI_API_KEY')
@@ -59,9 +60,14 @@ BLOCK
 
         if "BLOCK" in moderation.text.strip().upper():
             return {"Status": False, "Error": "Inappropriate content."}
+        cepResult = request.get(
+            "https://viacep.com.br/ws/{dataValidation.cep}/json/"
+        ).json()
+        if cepResult.status_code != 200:
+            return{"Status": False, "Error":"Invalid Cep "}
         cursor.execute(
             """insert into trips(
-        name, description, startDate, endDate, numberOfTravelers, petsAllowed,price, session_token, cep) values( %s,%s,%s, %s, %s, %s, %s, %s,%s)""",
+        name, description, startDate, endDate, numberOfTravelers, petsAllowed,price, session_token, cep, street, complement, neighborhood, city, state, state_code, region, ibge,areacode, siafi) values( %s,%s,%s,%s,%s,%s,%s,%s, %s, %s,%s,%s,%s, %s, %s, %s, %s, %s,%s)""",
             (
                 dataValidation.name,
                 dataValidation.description,
@@ -71,7 +77,18 @@ BLOCK
                 dataValidation.petsAllowed,
                 dataValidation.price,
                 session_token,
-                dataValidation.cep
+                dataValidation.cep,
+                cepResult.logradouro,
+                cepResult.complemento, 
+                cepResult.bairro,
+                cepResult.localidade,
+                cepResult.uf,
+                cepResult.regiao,
+                cepResult.igbe,
+                cepResult.ddd,
+                cepResult.siafi
+
+
             ),
         )
         conn.commit()
