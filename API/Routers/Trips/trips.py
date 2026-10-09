@@ -61,13 +61,14 @@ BLOCK
         if "BLOCK" in moderation.text.strip().upper():
             return {"Status": False, "Error": "Inappropriate content."}
         response = requests.get(
-            f"https://viacep.com.br/ws/{dataValidation.cep}/json/"
+            f"https://viacep.com.br/ws/{dataValidation.cep}/json/",
+            timeout=10
         )
         
         if response.status_code != 200:
             return{"Status": False, "Error":"Invalid Cep "}
         cepResult = response.json()
-        if "erro" in cepResult:
+        if cepResult.get("erro"):
                 return {"Status": False, "Error": "Invalid CEP"}
         cursor.execute(
             """insert into trips(
