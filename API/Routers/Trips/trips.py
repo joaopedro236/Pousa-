@@ -63,9 +63,12 @@ BLOCK
         response = requests.get(
             "https://viacep.com.br/ws/{dataValidation.cep}/json/"
         )
-        cepResult = response.json()
-        if cepResult.status_code != 200:
+        
+        if response.status_code != 200:
             return{"Status": False, "Error":"Invalid Cep "}
+        cepResult = response.json()
+        if "erro" in cepResult:
+                return {"Status": False, "Error": "Invalid CEP"}
         cursor.execute(
             """insert into trips(
         name, description, startDate, endDate, numberOfTravelers, petsAllowed,price, session_token, cep, street, complement, neighborhood, city, state, state_code, region, ibge,areacode, siafi) values( %s,%s,%s,%s,%s,%s,%s,%s, %s, %s,%s,%s,%s, %s, %s, %s, %s, %s,%s)""",
