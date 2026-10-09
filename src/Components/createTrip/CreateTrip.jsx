@@ -1,6 +1,5 @@
 import '../../Components/RegisterUser/RegisterUser.css'
 import inputs from './inputs'
-import Select from 'react-select';
 import iconGemini from '../../assets/gemini.png'
 
 import itemsSelect from './selectTagsJSON'
@@ -9,7 +8,7 @@ import { useState, useEffect } from 'react'
 export default function CreateTrip({ user, itemsNavbar, setItemsNavbar, setUser }) {
     const [loading, setLoading] = useState(false)
     const today = new Date().toISOString().split('T')[0]
-    const [tags, setTags] = useState([])
+    
     const [description, setDescription]= useState("")
     const [error, setError] = useState(false)
     const [errorMessage, setErrorMessage] = useState('')
@@ -17,7 +16,7 @@ export default function CreateTrip({ user, itemsNavbar, setItemsNavbar, setUser 
         e.preventDefault()
 
         const data = Object.fromEntries(new FormData(e.target))
-        data.tags = tags.map(tag => tag.value)
+        
         try {
             setError(false)
             setErrorMessage('')
@@ -62,11 +61,7 @@ export default function CreateTrip({ user, itemsNavbar, setItemsNavbar, setUser 
     }
     const MAX_TAGS = 5
 
-    const handleTagsChange = (selected) => {
-        if (selected.length <= MAX_TAGS) {
-            setTags(selected)
-        }
-    }
+
     const handleChange = (e) => {
             setDescription(e.target.value);
               };
@@ -197,48 +192,7 @@ export default function CreateTrip({ user, itemsNavbar, setItemsNavbar, setUser 
                                 <option value="no">No</option>
                             </select>
                         </div>
-                        <div className="mb-3">
-                            <label htmlFor="tags" className='text-sm'>Tags</label>
-                            <Select
-                                options={itemsSelect}
-                                isMulti
-                                value={tags}
-                                onChange={handleTagsChange}
-                                isOptionDisabled={(option) =>
-                                    tags.length >= MAX_TAGS && !tags.some(tag => tag.value === option.value)
-                                }
-                                styles={{
-                                    control: (base) => ({
-                                        ...base,
-                                        cursor: "pointer",
-                                    }),
-                                    option: (base) => ({
-                                        ...base,
-                                        cursor: "pointer",
-                                    }),
-                                    multiValueRemove: (base) => ({
-                                        ...base,
-                                        cursor: "pointer",
-                                    }),
-                                    dropdownIndicator: (base) => ({
-                                        ...base,
-                                        cursor: "pointer",
-                                    }),
-                                    clearIndicator: (base) => ({
-                                        ...base,
-                                        cursor: "pointer",
-                                    }), menuList: (base) => ({
-                                        ...base,
-                                        maxHeight: '210px',
-                                        overflowY: 'auto',
-                                    }),
-                                }} menuPlacement="top"
-                                placeholder='Select tags for your trip'
-                                closeMenuOnSelect={false}
-                                required
-
-                            />
-                        </div>
+                        
                     </div>
                     <button
                         type="submit"
@@ -253,7 +207,6 @@ export default function CreateTrip({ user, itemsNavbar, setItemsNavbar, setUser 
                             {errorMessage}!
                         </p>
                     )}
-
 
 
 

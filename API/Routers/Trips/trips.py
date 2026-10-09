@@ -61,7 +61,7 @@ BLOCK
             return {"Status": False, "Error": "Inappropriate content."}
         cursor.execute(
             """insert into trips(
-        name, description, startDate, endDate, numberOfTravelers, petsAllowed,price, session_token, tags) values(%s, %s,%s, %s, %s, %s, %s, %s,%s)""",
+        name, description, startDate, endDate, numberOfTravelers, petsAllowed,price, session_token, cep) values( %s,%s,%s, %s, %s, %s, %s, %s,%s)""",
             (
                 dataValidation.name,
                 dataValidation.description,
@@ -71,7 +71,7 @@ BLOCK
                 dataValidation.petsAllowed,
                 dataValidation.price,
                 session_token,
-                dataValidation.tags
+                dataValidation.cep
             ),
         )
         conn.commit()

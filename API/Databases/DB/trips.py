@@ -19,7 +19,7 @@ def database():
          session_token uuid,
         review numeric(3,2) default 5,
         usersPurchased uuid[],
-        tags text[],
+        cep int,
         comments text[],
         note int[],
         usersComments uuid[])""")

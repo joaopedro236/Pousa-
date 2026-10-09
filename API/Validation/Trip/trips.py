@@ -7,4 +7,4 @@ class Trips(BaseModel):
     numbertravelers:int
     petsAllowed: str
     price: float
-    tags: list
+    cep:int

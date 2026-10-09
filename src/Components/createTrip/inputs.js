@@ -19,7 +19,16 @@ const inputs = [
         placeholder: 'Your Description'
     },
     {
-        id: 3,
+        id:3,
+        type:"number",
+        name:"cep",
+        label:'Cep',
+        minLength:2,
+        maxLength:15,
+        placeholder:"Your Cep"
+    },
+    {
+        id: 4,
         type: 'number',
         name: 'price',
         label: 'Price',
@@ -28,20 +37,20 @@ const inputs = [
         placeholder: 'Price'
     },
     {
-        id: 4,
+        id: 5,
         type: 'date',
         name: 'startDate',
         label: 'Start Date'
 
     },
     {
-        id: 5,
+        id: 6,
         type: 'date',
         name: 'endDate',
         label: 'End Date'
     },
     {
-        id: 6,
+        id: 7,
         type: 'number',
         name: 'numbertravelers',
         label: 'Number of Travelers',
@@ -51,4 +60,4 @@ const inputs = [
     }
 ]
 
-export default inputs
+export default input
