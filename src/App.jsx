@@ -1,248 +1,246 @@
-import './StylesGlobals/reset.css'
-import './StylesGlobals/assets.css'
-import './StylesGlobals/root.css'
+import "./StylesGlobals/reset.css";
+import "./StylesGlobals/assets.css";
+import "./StylesGlobals/root.css";
 
-import VLibras from '@djpfs/react-vlibras';
-import TripsActive from './Components/Home/components/TripsActive'
-import { useNavigate } from 'react-router-dom'
-import RegisterUser from './Components/RegisterUser/RegisterUser'
-import UserDashboard from './Components/UserDashboard/UserDashboard'
-import Navbar from './Components/Navbar/Navbar'
-import CreateTrip from './Components/createTrip/CreateTrip'
-import Home from './Components/Home/Home'
-import Login from './Components/Login/Login'
-import Loading from './Components/loading/Loading'
-import Star from './Components/Stars/Stars'
-import Chatbot from './Components/Chatbot/Chatbot'
-import TripHistory from './Components/TripHistory/TripHistory'
-import TripsDashboard from './Components/TripsDashboard/TripsDashboard';
-import Footer from './Components/Footer/Footer';
-import { Routes, Route, Navigate } from 'react-router-dom'
-import { useState, useEffect } from 'react'
+import VLibras from "@djpfs/react-vlibras";
+import TripsActive from "./Components/Home/components/TripsActive";
+import { useNavigate } from "react-router-dom";
+import RegisterUser from "./Components/RegisterUser/RegisterUser";
+import UserDashboard from "./Components/UserDashboard/UserDashboard";
+import Navbar from "./Components/Navbar/Navbar";
+import CreateTrip from "./Components/createTrip/CreateTrip";
+import Home from "./Components/Home/Home";
+import Login from "./Components/Login/Login";
+import Loading from "./Components/loading/Loading";
+import Star from "./Components/Stars/Stars";
+import Chatbot from "./Components/Chatbot/Chatbot";
+import TripHistory from "./Components/TripHistory/TripHistory";
+import TripsDashboard from "./Components/TripsDashboard/TripsDashboard";
+import Footer from "./Components/Footer/Footer";
+import { Routes, Route, Navigate } from "react-router-dom";
+import { useState, useEffect } from "react";
 
 function App() {
-    const [user, setUser] = useState(false)
-    const [login, setLogin] = useState(false)
-    const [selectedRestaurant, setSelectedRestaurant] = useState(null);
+  const [user, setUser] = useState(false);
+  const [login, setLogin] = useState(false);
+  const [selectedRestaurant, setSelectedRestaurant] = useState(null);
 
-    const [itemsNavbar, setItemsNavbar] = useState('explore')
-    const [userData, setUserData] = useState(null)
-    const [starTrip, setStarTrip] = useState(null)
-    const [loading, setLoading] = useState(true)
+  const [itemsNavbar, setItemsNavbar] = useState("explore");
+  const [userData, setUserData] = useState(null);
+  const [starTrip, setStarTrip] = useState(null);
+  const [loading, setLoading] = useState(true);
 
+  const checkUser = async () => {
+    try {
+      const response = await fetch(
+        `${import.meta.env.VITE_API_URL}/checkUser`,
+        {
+          credentials: "include",
+        },
+      );
 
-    const checkUser = async () => {
-        try {
-            const response = await fetch(`${import.meta.env.VITE_API_URL}/checkUser`, {
-                credentials: 'include'
-            })
+      const data = await response.json();
 
-            const data = await response.json()
+      setUser(data.authenticated);
 
-            setUser(data.authenticated)
-
-            return data
-        } catch (error) {
-            console.error(error)
-            setUser(false)
-            return null
-        }
+      return data;
+    } catch (error) {
+      console.error(error);
+      setUser(false);
+      return null;
     }
+  };
 
-    const getUser = async () => {
-        try {
-            const response = await fetch(`${import.meta.env.VITE_API_URL}/getUser`, {
-                credentials: 'include'
-            })
+  const getUser = async () => {
+    try {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/getUser`, {
+        credentials: "include",
+      });
 
-            const data = await response.json()
+      const data = await response.json();
 
-            if (data?.image_url) {
-                await new Promise(resolve => {
-                    const img = new Image()
+      if (data?.image_url) {
+        await new Promise((resolve) => {
+          const img = new Image();
 
-                    img.onload = resolve
-                    img.onerror = resolve
+          img.onload = resolve;
+          img.onerror = resolve;
 
-                    img.src = data.image_url
-                })
-            }
+          img.src = data.image_url;
+        });
+      }
 
-            setUserData(data)
+      setUserData(data);
 
-            return data
-        } catch (error) {
-            console.error(error)
-            return null
-        }
+      return data;
+    } catch (error) {
+      console.error(error);
+      return null;
     }
+  };
 
-    const stars = async () => {
-        try {
-            const responseStar = await fetch(`${import.meta.env.VITE_API_URL}/getStar`, {
-                method: 'GET',
-                credentials: 'include'
-            })
+  const stars = async () => {
+    try {
+      const responseStar = await fetch(
+        `${import.meta.env.VITE_API_URL}/getStar`,
+        {
+          method: "GET",
+          credentials: "include",
+        },
+      );
 
-            const dataStar = await responseStar.json()
+      const dataStar = await responseStar.json();
 
-            if (dataStar?.Status) {
-                setStarTrip(dataStar.Trips || [])
-            } else {
-                setStarTrip([])
-            }
+      if (dataStar?.Status) {
+        setStarTrip(dataStar.Trips || []);
+      } else {
+        setStarTrip([]);
+      }
 
-            if (dataStar?.Error) {
-                console.error(dataStar.Error)
-            }
+      if (dataStar?.Error) {
+        console.error(dataStar.Error);
+      }
 
-            return dataStar
-        } catch (error) {
-            console.error(error)
-            setStarTrip([])
-            return null
-        }
+      return dataStar;
+    } catch (error) {
+      console.error(error);
+      setStarTrip([]);
+      return null;
     }
+  };
 
-    useEffect(() => {
-        const initializeApp = async () => {
-            await Promise.all([
-                checkUser(),
-                getUser(),
-                stars()
-            ])
+  useEffect(() => {
+    const initializeApp = async () => {
+      await Promise.all([checkUser(), getUser(), stars()]);
 
-            setLoading(false)
-        }
+      setLoading(false);
+    };
 
-        initializeApp()
-    }, [])
+    initializeApp();
+  }, []);
 
-    useEffect(() => {
-        document.body.classList.toggle('user-active', user)
-    }, [user])
+  useEffect(() => {
+    document.body.classList.toggle("user-active", user);
+  }, [user]);
 
-    const [tripHistory, setTripHistory] = useState(null)
-    const getTripHistory = async () => {
-        try {
-            const response = await fetch(`${import.meta.env.VITE_API_URL}/getTripsHistory`, {
-                credentials: 'include'
-            })
-            const data = await response.json()
-            if (data?.Error) {
-                console.error(data?.Error)
-            }
-            setTripHistory(data?.Trip)
-        } catch (error) {
-            console.error(error)
-        }
+  const [tripHistory, setTripHistory] = useState(null);
+  const getTripHistory = async () => {
+    try {
+      const response = await fetch(
+        `${import.meta.env.VITE_API_URL}/getTripsHistory`,
+        {
+          credentials: "include",
+        },
+      );
+      const data = await response.json();
+      if (data?.Error) {
+        console.error(data?.Error);
+      }
+      setTripHistory(data?.Trip);
+    } catch (error) {
+      console.error(error);
     }
-    useEffect(() => {
-        getTripHistory()
-    }, [])
-    if (loading) {
-        return <Loading />
-    }
-    return (
-        <>
-            <VLibras/>
-            <RegisterUser
-                checkUser={checkUser}
+  };
+  useEffect(() => {
+    getTripHistory();
+  }, []);
+  if (loading) {
+    return <Loading />;
+  }
+  return (
+    <>
+      <VLibras />
+      <RegisterUser
+        checkUser={checkUser}
+        user={user}
+        setUser={setUser}
+        login={login}
+        setLogin={setLogin}
+      />
+
+      <Login
+        user={user}
+        setUser={setUser}
+        checkUser={checkUser}
+        login={login}
+        setLogin={setLogin}
+      />
+
+      <main className={`d-flex flex-column ${user ? "Active" : ""}`}>
+        <Navbar ItemsNavbar={setItemsNavbar} user={user} userData={userData} />
+
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <Home
                 user={user}
-                setUser={setUser}
-                login={login}
-                setLogin={setLogin}
-            />
-
-            <Login
-                user={user}
-                setUser={setUser}
-                checkUser={checkUser}
-                login={login}
-                setLogin={setLogin}
-            />
-
-            <main className={`d-flex flex-column ${user ? 'Active' : ''}`}>
-                <Navbar
-                    ItemsNavbar={setItemsNavbar}
-                    user={user}
-                    userData= {userData}
-                />
-
-                <Routes>
-                    <Route
-                        path="/"
-                        element={
-                            <Home
-                                user={user}
-                                userData={userData}
-                                itemsNavbar={itemsNavbar}
-                                setItemsNavbar={setItemsNavbar}
-                                selectedRestaurant={selectedRestaurant}
-                                setSelectedRestaurant={setSelectedRestaurant}
-                                stars={stars}
-                                starTrip={starTrip}
-                            />
-                        }
-                    />
-                    <Route path="/trip/" element={<Navigate to="/" replace />} />
-                    <Route
-                        path="/trip/:tripId"
-                        element={
-                            <TripsActive
-                                stars={stars}
-                                user={user}
-                                getTripHistory={getTripHistory}
-                                starTrip={starTrip}
-                                selectedRestaurant={selectedRestaurant}
-                                setSelectedRestaurant={setSelectedRestaurant}
-                                itemsNavbar={itemsNavbar}
-                            />
-                        }
-                    />
-                </Routes>
-
-                <UserDashboard
-                    itemsNavbar={itemsNavbar}
-                    user={user}
-                    userData={userData}
-
-                />
-
-                <CreateTrip
-                    user={user}
-                    itemsNavbar={itemsNavbar}
-                    setUser={setUser}
-                    setItemsNavbar={setItemsNavbar}
-                />
-                <Star
-                    setSelectedRestaurant={setSelectedRestaurant}
-                    itemsNavbar={itemsNavbar}
-                    json={starTrip}
-                    setItemsNavbar={setItemsNavbar}
-                />
-                <TripHistory
-                    user={user}
-                    json={tripHistory}
-                    setItemsNavbar={setItemsNavbar}
-                    setSelectedRestaurant={setSelectedRestaurant}
-                    itemsNavbar={itemsNavbar}
-                />
-                <TripsDashboard
+                userData={userData}
                 itemsNavbar={itemsNavbar}
                 setItemsNavbar={setItemsNavbar}
+                selectedRestaurant={selectedRestaurant}
                 setSelectedRestaurant={setSelectedRestaurant}
-                />
-                <Chatbot
-                    user={user}
-                    selectedRestaurant={selectedRestaurant}
-                    userData={userData} />
-                <Footer/>
-            </main>
-        </>
-    )
+                stars={stars}
+                starTrip={starTrip}
+              />
+            }
+          />
+          <Route path="/trip/" element={<Navigate to="/" replace />} />
+          <Route
+            path="/trip/:tripId"
+            element={
+              <TripsActive
+                stars={stars}
+                user={user}
+                getTripHistory={getTripHistory}
+                starTrip={starTrip}
+                selectedRestaurant={selectedRestaurant}
+                setSelectedRestaurant={setSelectedRestaurant}
+                itemsNavbar={itemsNavbar}
+              />
+            }
+          />
+        </Routes>
 
+        <UserDashboard
+          itemsNavbar={itemsNavbar}
+          user={user}
+          userData={userData}
+        />
 
+        <CreateTrip
+          user={user}
+          itemsNavbar={itemsNavbar}
+          setUser={setUser}
+          setItemsNavbar={setItemsNavbar}
+        />
+        <Star
+          setSelectedRestaurant={setSelectedRestaurant}
+          itemsNavbar={itemsNavbar}
+          json={starTrip}
+          setItemsNavbar={setItemsNavbar}
+        />
+        <TripHistory
+          user={user}
+          json={tripHistory}
+          setItemsNavbar={setItemsNavbar}
+          setSelectedRestaurant={setSelectedRestaurant}
+          itemsNavbar={itemsNavbar}
+        />
+        <TripsDashboard
+          itemsNavbar={itemsNavbar}
+          setItemsNavbar={setItemsNavbar}
+          setSelectedRestaurant={setSelectedRestaurant}
+        />
+        <Chatbot
+          user={user}
+          selectedRestaurant={selectedRestaurant}
+          userData={userData}
+        />
+        <Footer />
+      </main>
+    </>
+  );
 }
 
-export default App
+export default App;

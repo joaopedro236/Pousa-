@@ -1,6 +1,6 @@
 import "./tripDashboard.css";
 import cards from "./cards";
-import photoUser from '../../assets/user.png'
+import photoUser from "../../assets/user.png";
 
 import { useState, useEffect } from "react";
 import {
@@ -50,25 +50,28 @@ export default function TripsDashboard({
   const previous = () => {
     setCurrentIndex((prev) => Math.max(prev - 1, 0));
   };
-  const deleteTrip =async () => {
-    try{
-      const responseDT = await fetch(`${import.meta.env.VITE_API_URL}/deleteTrip`, {
-        method:"DELETE",
-        headers:{
-          "Content-Type": "application/json"
+  const deleteTrip = async () => {
+    try {
+      const responseDT = await fetch(
+        `${import.meta.env.VITE_API_URL}/deleteTrip`,
+        {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            id: json?.trip[currentIndex]?.id,
+          }),
         },
-        body:JSON.stringify({
-          id:json?.trip[currentIndex]?.id
-        })
-      })
-      const dataDT = await responseDT.json()
-      if (dataDT?.Error){
-        console.error(dataDT?.Error)
+      );
+      const dataDT = await responseDT.json();
+      if (dataDT?.Error) {
+        console.error(dataDT?.Error);
       }
-    }catch(error){
-      console.error(error)
+    } catch (error) {
+      console.error(error);
     }
-  }
+  };
   return (
     <>
       <section
@@ -138,7 +141,7 @@ export default function TripsDashboard({
             <div
               className="trip"
               role="button"
-              
+
               onClick={() => {
                 setSelectedRestaurant(json.trip[currentIndex]);
                 setItemsNavbar("explore");
@@ -155,9 +158,12 @@ export default function TripsDashboard({
 
               <div className="trip-info">
                 <span>
-                  📅 {json.trip[currentIndex].startDate} - {json.trip[currentIndex].endDate}
+                  📅 {json.trip[currentIndex].startDate} -{" "}
+                  {json.trip[currentIndex].endDate}
                 </span>
-                <span>👥 {json.trip[currentIndex].numberOfTravelers} travelers</span>
+                <span>
+                  👥 {json.trip[currentIndex].numberOfTravelers} travelers
+                </span>
                 <span>
                   💰{" "}
                   {json.trip[currentIndex].price.toLocaleString("en-US", {
@@ -185,12 +191,12 @@ export default function TripsDashboard({
             </div>
           )}
           <div className="buttons">
-          <button onClick={previous}>{'<'}</button>
-          <button onClick={deleteTrip}>X</button>
-          <button onClick={next}>{">"}</button>
+            <button onClick={previous}>{"<"}</button>
+            <button onClick={deleteTrip}>X</button>
+            <button onClick={next}>{">"}</button>
           </div>
         </div>
       </section>
     </>
-  )
+  );
 }

@@ -4,7 +4,6 @@ export default function Loading() {
   return (
     <div className="loading-container position-fixed">
       <div className="loading-content">
-
         <h2 className="text-center">PousaÊ</h2>
         <p className="text-center">Loading...</p>
         <div className="loading-spinner"></div>

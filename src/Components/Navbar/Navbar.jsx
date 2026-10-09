@@ -1,92 +1,91 @@
-import './Navbar.css'
-import { useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
+import "./Navbar.css";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function Navbar({ ItemsNavbar, user, userData }) {
-    const itemsNavbar = [
-        { name: 'Explore', href: '#', value: 'explore' },
-        { name: 'Stars', href: '#', value: 'stars' },
-        { name: 'User Dashboard', href: '#', value: 'User Dashboard' },
-        { name: 'Create Trip', href: '#', value: 'create-trip' },
-        { name: 'Trip History', href: '#', value: 'trip history' },
-        ...(userData?.tripsExists === true
-        ? [{ name: 'Trip Dashboard', href: '#', value: 'trip dashboard' }]
-        : [])
-    ]
-    const navigate = useNavigate()
+  const itemsNavbar = [
+    { name: "Explore", href: "#", value: "explore" },
+    { name: "Stars", href: "#", value: "stars" },
+    { name: "User Dashboard", href: "#", value: "User Dashboard" },
+    { name: "Create Trip", href: "#", value: "create-trip" },
+    { name: "Trip History", href: "#", value: "trip history" },
+    ...(userData?.tripsExists === true
+      ? [{ name: "Trip Dashboard", href: "#", value: "trip dashboard" }]
+      : []),
+  ];
+  const navigate = useNavigate();
 
-    useEffect(() => {
-        const handleKeyDown = (event) => {
+  useEffect(() => {
+    const handleKeyDown = (event) => {
+      if (!user) return;
+      if (!event.ctrlKey) return;
+      const sections = {
+        1: "explore",
+        2: "stars",
+        3: "User Dashboard",
+        4: "create-trip",
+        5: "trip history",
+        ...(userData?.tripsExists && { 6: "trip dashboard" }),
+      };
 
-            if (!user) return
-            if (!event.ctrlKey) return
-            const sections = {
-                '1': 'explore',
-                '2': 'stars',
-                '3': 'User Dashboard',
-                '4': 'create-trip',
-                '5': 'trip history',
-                ...(userData?.tripsExists && { '6': 'trip dashboard' })
-            }
+      const section = sections[event.key];
 
-            const section = sections[event.key]
+      if (section) {
+        event.preventDefault();
+        ItemsNavbar(section);
+      }
+    };
 
-            if (section) {
-                event.preventDefault()
-                ItemsNavbar(section)
-            }
-        }
+    window.addEventListener("keydown", handleKeyDown);
 
-        window.addEventListener('keydown', handleKeyDown)
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [ItemsNavbar, user, userData]);
+  return (
+    <>
+      <nav
+        className={`navbar navbar-expand-lg bg-primary px-2 ${user ? "d-flex" : "d-none"}`}
+      >
+        <div className="container-fluid d-flex align-items-center  justify-content-between">
+          <h1 className="navbar-brand text-white m-0">PousaÊ</h1>
+          <button
+            className="navbar-toggler p-0 border-0 shadow-none"
+            type="button"
+            data-bs-toggle="collapse"
 
-        return () => {
-            window.removeEventListener('keydown', handleKeyDown)
-        }
-        
-    }, [ItemsNavbar, user, userData])
-    return (
-        <>
-            <nav className={`navbar navbar-expand-lg bg-primary px-2 ${user ? 'd-flex' : 'd-none'}`}>
-                <div className="container-fluid d-flex align-items-center  justify-content-between">
-                    <h1 className="navbar-brand text-white m-0">
-                        PousaÊ
-                    </h1>
-                    <button
-                        className="navbar-toggler p-0 border-0 shadow-none"
-                        type="button"
-                        data-bs-toggle="collapse"
-
-                        data-bs-target="#navbarSupportedContent"
-                    >
-                        <span className="navbar-toggler-icon"></span>
-                    </button>
-                    <div className="collapse navbar-collapse bg-primary p-3" id="navbarSupportedContent">
-                        <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-                            {itemsNavbar.map((item, index) => (
-                                <li className="nav-item" key={index}>
-                                    <a
-                                        href={item.href}
-                                        data-bs-toggle="collapse"
-                                        data-bs-target="#navbarSupportedContent"
-                                        onClick={(e) => {
-                                            e.preventDefault()
-                                            ItemsNavbar(item.value)
-                                            navigate('/', { replace: true })
-
-                                        }}
-                                        className={`nav-link text-white ${item.active ? 'active' : ''
-                                            } ${item.disabled ? 'disabled' : ''}`}
-                                    >
-                                        {item.name}
-                                    </a>
-                                </li>
-                            ))}
-
-                        </ul>
-
-                    </div>
-                </div>
-            </nav >
-        </>
-    )
+            data-bs-target="#navbarSupportedContent"
+          >
+            <span className="navbar-toggler-icon"></span>
+          </button>
+          <div
+            className="collapse navbar-collapse bg-primary p-3"
+            id="navbarSupportedContent"
+          >
+            <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+              {itemsNavbar.map((item, index) => (
+                <li className="nav-item" key={index}>
+                  <a
+                    href={item.href}
+                    data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      ItemsNavbar(item.value);
+                      navigate("/", { replace: true });
+                    }}
+                    className={`nav-link text-white ${
+                      item.active ? "active" : ""
+                    } ${item.disabled ? "disabled" : ""}`}
+                  >
+                    {item.name}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </>
+  );
 }

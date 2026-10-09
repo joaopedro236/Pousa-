@@ -86,6 +86,7 @@ BLOCK
                 cepResult["complemento"], 
                 cepResult["bairro"],
                 cepResult["localidade"],
+                cepResult["estado"],
                 cepResult["uf"],
                 cepResult["regiao"],
                 cepResult["ibge"],
