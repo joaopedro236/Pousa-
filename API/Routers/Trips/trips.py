@@ -6,7 +6,7 @@ from google import genai
 router = APIRouter()
 import os
 from dotenv import load_dotenv
-import request
+import requests
 load_dotenv(".env.apis")
 
 GEMINI_API_KEY = os.getenv('GEMINI_API_KEY')
@@ -60,7 +60,7 @@ BLOCK
 
         if "BLOCK" in moderation.text.strip().upper():
             return {"Status": False, "Error": "Inappropriate content."}
-        cepResult = request.get(
+        cepResult = requests.get(
             "https://viacep.com.br/ws/{dataValidation.cep}/json/"
         ).json()
         if cepResult.status_code != 200:
