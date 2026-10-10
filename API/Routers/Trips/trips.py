@@ -61,7 +61,7 @@ BLOCK
         if "BLOCK" in moderation.text.strip().upper():
             return {"Status": False, "Error": "Inappropriate content."}
         response = requests.get(
-            f"https://viacep.com.br/ws/{dataValidation.cep.strip()}/json/",
+            f"https://viacep.com.br/ws/{str(dataValidation.cep.strip())}/json/",
             timeout=10
         )
         
