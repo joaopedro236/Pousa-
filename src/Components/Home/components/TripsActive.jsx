@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import hiddenPhoto from "../../../assets/banner.jpeg";
 import hiddenUser from "../../../assets/user.png";
+import { selectDomainDefinition } from "recharts/types/state/selectors/axisSelectors";
 export default function TripsActive({
   itemsNavbar,
   stars,
@@ -295,6 +296,12 @@ export default function TripsActive({
                 </span>
                 <span>⭐ {selectedRestaurant?.review}</span>
                 <span>😺 Pets {selectedRestaurant?.petsAllowed}</span>
+              </div>
+            </div>
+            <div className="tagsLocalition tagsTrip d-flex flex-column gap-3 rounded p-4">
+              <h1 className="fw-normal text-center">Localition</h1>
+              <div className="d-flex flex-wrap gap-3 align-items-center justify-content-center">
+                <span>{"📍 Cep" + selectDomainDefinition?.cep}</span>
               </div>
             </div>
           </div>
