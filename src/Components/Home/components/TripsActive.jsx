@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import hiddenPhoto from "../../../assets/banner.jpeg";
 import hiddenUser from "../../../assets/user.png";
-import { selectDomainDefinition } from "recharts/types/state/selectors/axisSelectors";
+
 export default function TripsActive({
   itemsNavbar,
   stars,
