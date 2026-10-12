@@ -301,7 +301,11 @@ export default function TripsActive({
             <div className="tagsLocalition tagsTrip d-flex flex-column gap-3 rounded p-4">
               <h1 className="fw-normal text-center">Localition</h1>
               <div className="d-flex flex-wrap gap-3 align-items-center justify-content-center">
-                <span>{"📍 Cep" + selectDomainDefinition?.cep}</span>
+                <span>{"📍 CEP: " +
+                        (selectedRestaurant?.cep ||
+                                  selectedRestaurant?.address?.cep ||
+                                            "No cep")}
+                                                </span>
               </div>
             </div>
           </div>
