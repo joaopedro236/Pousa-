@@ -301,11 +301,21 @@ export default function TripsActive({
             <div className="tagsLocalition tagsTrip d-flex flex-column gap-3 rounded p-4">
               <h1 className="fw-normal text-center">Localition</h1>
               <div className="d-flex flex-wrap gap-3 align-items-center justify-content-center">
-                <span>{"📍 CEP: " +
-                        (selectedRestaurant?.cep ||
-                                  selectedRestaurant?.address?.cep ||
-                                            "No cep")}
+                <span>{"CEP: " +
+                        (selectedRestaurant?.cep || "No cep")}
                                                 </span>
+                <span>{"Street:" + (selectedRestaurant?.street || "No street")}</span>
+                <span>{"Complement: " + (selectedRestaurant?.complement || "No complement ")}</span>
+                <span>{"Neighborhood: " + (selectedRestaurant?.neighborhood || "No neighborhood")}</span>
+                <span>{"City: " + (selectedRestaurant?.city || "No city")}</span>
+                <span>{"State: " + (selectedRestaurant?.state || "No State")}</span>
+                <span>{"State Code: " + (selectedRestaurant?.state_code|| "No State Code")}</span>
+                <span>{"Region: " + (selectedRestaurant?.region|| "No region")}</span>
+                <span>{"Ibge: " + (selectedRestaurant?.ibge || "No ibge")}</span>
+                <span>{"Area code: " + (selectedRestaurant?.area_code|| "No Area Code")}</span>
+                <span>{"Siafi: " + (selectedRestaurant?.siafi || "No Siafi")}</span>
+
+
               </div>
             </div>
           </div>
