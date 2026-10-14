@@ -49,6 +49,7 @@ export default function TripsActive({
   }, [tripId]);
   const [tripQuantity, setTripQuantity] = useState(1);
   const [showFullDescription, setShowFullDescription] = useState(false);
+  const [showMoreLocation, setShowMoreLocation] = useState(false);
   const buy = async () => {
     setLoading(true);
     try {
@@ -200,6 +201,19 @@ export default function TripsActive({
       console.error(error);
     }
   };
+  const locationItems = [
+    { key: "cep", label: "CEP", value: selectedRestaurant?.cep || "No cep" },
+    { key: "street", label: "Street", value: selectedRestaurant?.street || "No street" },
+    { key: "complement", label: "Complement", value: selectedRestaurant?.complement || "No complement" },
+    { key: "neighborhood", label: "Neighborhood", value: selectedRestaurant?.neighborhood || "No neighborhood" },
+    { key: "city", label: "City", value: selectedRestaurant?.city || "No city" },
+    { key: "state", label: "State", value: selectedRestaurant?.state || "No State" },
+    { key: "state_code", label: "State Code", value: selectedRestaurant?.state_code || "No State Code" },
+    { key: "region", label: "Region", value: selectedRestaurant?.region || "No region" },
+    { key: "ibge", label: "Ibge", value: selectedRestaurant?.ibge || "No ibge" },
+    { key: "area_code", label: "Area code", value: selectedRestaurant?.area_code || "No Area Code" },
+    { key: "siafi", label: "Siafi", value: selectedRestaurant?.siafi || "No Siafi" },
+  ];
   return (
     <>
       <section
@@ -301,22 +315,21 @@ export default function TripsActive({
             <div className="tagsLocalition tagsTrip d-flex flex-column gap-3 rounded p-4">
               <h1 className="fw-normal text-center">Localition</h1>
               <div className="d-flex flex-wrap gap-3 align-items-center justify-content-center">
-                <span>{"CEP: " +
-                        (selectedRestaurant?.cep || "No cep")}
-                                                </span>
-                <span>{"Street:" + (selectedRestaurant?.street || "No street")}</span>
-                <span>{"Complement: " + (selectedRestaurant?.complement || "No complement ")}</span>
-                <span>{"Neighborhood: " + (selectedRestaurant?.neighborhood || "No neighborhood")}</span>
-                <span>{"City: " + (selectedRestaurant?.city || "No city")}</span>
-                <span>{"State: " + (selectedRestaurant?.state || "No State")}</span>
-                <span>{"State Code: " + (selectedRestaurant?.state_code|| "No State Code")}</span>
-                <span>{"Region: " + (selectedRestaurant?.region|| "No region")}</span>
-                <span>{"Ibge: " + (selectedRestaurant?.ibge || "No ibge")}</span>
-                <span>{"Area code: " + (selectedRestaurant?.area_code|| "No Area Code")}</span>
-                <span>{"Siafi: " + (selectedRestaurant?.siafi || "No Siafi")}</span>
-
-
+                {locationItems
+                  .slice(0, showMoreLocation ? locationItems.length : 6)
+                  .map((item) => (
+                    <span key={item.key}>{item.label + ": " + item.value}</span>
+                  ))}
               </div>
+              {locationItems.length > 6 && (
+                <button
+                  type="button"
+                  className="btn btn-link locationToggle"
+                  onClick={() => setShowMoreLocation(!showMoreLocation)}
+                >
+                  {showMoreLocation ? "See less" : "See more"}
+                </button>
+              )}
             </div>
           </div>
           <div className="descriptionTrip d-flex flex-column rounded gap-2 p-4">
