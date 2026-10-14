@@ -330,6 +330,52 @@
 
 }
 
+/* Location card layout and item organization */
+.tagsLocalition {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px 12px;
+  align-items: start;
+  max-height: 220px;
+  overflow: auto;
+  background: transparent;
+  padding: 12px;
+  box-sizing: border-box;
+  border-radius: 12px;
+}
+
+.tagsLocalition h1 {
+  grid-column: 1 / -1;
+  margin: 0 0 6px 0;
+  font-size: 1rem;
+}
+
+.tagsLocalition > div {
+  display: contents;
+}
+
+.tagsLocalition span {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  padding: 8px 10px;
+  background: #f8f9fb;
+  border-radius: 8px;
+  border: 1px solid rgba(0, 0, 0, 0.04);
+  font-size: 0.95rem;
+  color: #333;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@media (max-width: 600px) {
+  .tagsLocalition {
+    grid-template-columns: 1fr;
+    max-height: none;
+  }
+}
+
 .descriptionTrip {
 
     grid-column: 1;
