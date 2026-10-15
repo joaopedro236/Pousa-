@@ -1,8 +1,8 @@
 # 🏨 PousaÊ
 
-> A modern platform to discover, book, and manage travel experiences.
+> A modern platform to discover, book, and manage memorable travel experiences.
 
-**PousaÊ** is a full-stack application built with React (frontend) and FastAPI (backend), with PostgreSQL for persistence. The goal is to offer travel discovery, profile management, secure booking, favorites, reviews, and AI-powered chat support.
+PousaÊ is a full-stack application built with React on the frontend and FastAPI on the backend, using PostgreSQL for data persistence. The platform allows users to explore trips, manage their profile, purchase experiences, save favorite destinations, write reviews, and interact with an AI-powered assistant.
 
 ---
 
@@ -13,7 +13,6 @@
 <p>
   <img src="https://skillicons.dev/icons?i=python,fastapi,postgres,html,css,bootstrap,js,react,vite,git,github,vscode" alt="tech icons" />
 </p>
-
 
 </div>
 
@@ -26,91 +25,91 @@
 | **Overall Rating** | 8.5 / 10 ⭐ |
 | **Frontend** | ✅ Functional |
 | **Backend** | ✅ Operational |
-| **Database** | ✅ PostgreSQL Configured |
-| **Deployment** | ✅ Vercel (Frontend) |
+| **Database** | ✅ PostgreSQL configured |
+| **Deployment** | ✅ Vercel (frontend) |
 
 ---
 
-## 🖥️ Technologies (Summary)
+## 🧩 Tech Stack
 
 - **Frontend:** React, Vite, JavaScript, HTML, CSS, Bootstrap
 - **Backend:** Python, FastAPI, Pydantic
-- **Database:** PostgreSQL (psycopg2)
-- **Authentication:** HTTP-only cookies + UUID tokens
-- **AI:** Gemini (chatbot + moderation)
-- **Image Upload:** ImgBB
-- **Deploy:** Vercel
+- **Database:** PostgreSQL with `psycopg2`
+- **Authentication:** HTTP-only cookies + UUID session tokens
+- **AI integration:** Gemini for chatbot and content moderation
+- **Image hosting:** ImgBB
+- **Deployment:** Vercel
 
 ---
 
 ## ✨ Main Features
 
-- User registration and login (email validation, CPF, password)
-- Secure sessions with HTTP-only cookies
-- User profile with image, balance, and history
-- Trip listing, search, and filters
-- Detailed trip view (dates, price, traveler limit, pet policy)
-- Trip purchase with balance verification and self-purchase protection
-- Favorites system (star/bookmark)
-- Comments and ratings with automatic moderation (Gemini AI)
-- Virtual assistant with AI
+- User registration and login with email validation, CPF validation, and password handling
+- Secure session management using HTTP-only cookies
+- User profile with avatar, balance, and trip history
+- Trip listing, search, and filtering
+- Detailed trip pages with dates, pricing, traveler limits, and pet policy
+- Purchase flow with balance verification and self-purchase protection
+- Favorites system for saving preferred trips
+- Reviews and ratings with automatic moderation powered by Gemini
+- AI virtual assistant for user support and recommendations
 
 ---
 
-## 🔐 Security & Best Practices
+## 🔐 Security and Best Practices
 
-- Passwords stored with Argon2 (secure hashing)
-- Cookies: HttpOnly, Secure (in production), SameSite configured
-- Rate limiting (IP-based) configured in backend
-- CORS configured with exposed headers when necessary
-- Automatic comment moderation (hate speech and inappropriate content detection)
-
----
-
-## 🔌 Main Endpoints (Summary)
-
-**User:**
-```
-POST   /registerUser    - Register user
-POST   /login           - Authenticate user
-GET    /checkUser       - Verify session
-GET    /getUser         - Get authenticated user data
-POST   /upload-image    - Upload profile image
-```
-
-**Trips & Purchase:**
-```
-POST   /trips           - Create new trip
-GET    /getTrips        - List trips
-POST   /buyTrip         - Buy trip
-POST   /addStar         - Add to favorites
-POST   /removeStar      - Remove from favorites
-GET    /getStar         - List favorites
-```
-
-**Comments & AI:**
-```
-POST   /createComment   - Create comment (automatic moderation)
-POST   /getComment      - Get comments
-POST   /chatbot         - Chat with AI assistant
-```
+- Passwords are stored with Argon2 hashing
+- Cookies use `HttpOnly`, `Secure` in production, and `SameSite` settings
+- IP-based rate limiting is configured on the backend
+- CORS is configured with necessary exposed headers
+- Automatic moderation helps detect and filter inappropriate content
 
 ---
 
-## 🏗️ Architecture (Quick Overview)
+## 🔌 API Overview
 
+### Users
+```bash
+POST   /registerUser    - Register a new user
+POST   /login           - Authenticate a user
+GET    /checkUser       - Verify the current session
+GET    /getUser         - Get the authenticated user's data
+POST   /upload-image    - Upload a profile image
 ```
+
+### Trips and Purchases
+```bash
+POST   /trips           - Create a new trip
+GET    /getTrips        - List all trips
+POST   /buyTrip         - Purchase a trip
+POST   /addStar         - Add a trip to favorites
+POST   /removeStar      - Remove a trip from favorites
+GET    /getStar         - List favorite trips
+```
+
+### Reviews and AI
+```bash
+POST   /createComment   - Create a review comment (moderated)
+POST   /getComment      - Retrieve comments
+POST   /chatbot         - Chat with the AI assistant
+```
+
+---
+
+## 🏗️ Architecture
+
+```text
 Frontend (React + Vite)
   - Components: Home, Trips, Dashboard
-  - Styling: Bootstrap + CSS
-         |
-         | REST API
-         v
+  - Styling: Bootstrap + Custom CSS
+          |
+          | REST API
+          v
 Backend (FastAPI + Python)
-  - Routers: User, Trips, Comments, Chatbot
+  - Routers: Users, Trips, Comments, Chatbot
   - Middleware: CORS, Rate Limiting
-         |
-         v
+          |
+          v
 Database (PostgreSQL)
 ```
 
@@ -129,7 +128,7 @@ Pousa-/
 │   ├── requirements.txt
 │   └── .env.example
 ├── public/
-├── previews/          # Project images and screenshots
+├── previews/              # Project screenshots and visual assets
 │   ├── screenshot_08.png
 │   ├── screenshot_09.png
 │   ├── screenshot_11.png
@@ -157,43 +156,43 @@ Pousa-/
 
 ---
 
-## 📸 Project Screenshots
+## 📸 Screenshots
 
 <details>
-  <summary>Click to see project images</summary>
+  <summary>Click to view project images</summary>
 
-### Home & Trip Discovery
+### Home and trip discovery
 ![Screenshot 08](https://raw.githubusercontent.com/joaopedro236/Pousa-/main/previews/screenshot_08.png)
 
-### Trip Details
+### Trip details
 ![Screenshot 09](https://raw.githubusercontent.com/joaopedro236/Pousa-/main/previews/screenshot_09.png)
 
-### User Dashboard
+### User dashboard
 ![Screenshot 11](https://raw.githubusercontent.com/joaopedro236/Pousa-/main/previews/screenshot_11.png)
 
-### Booking Interface
+### Booking interface
 ![Screenshot 12](https://raw.githubusercontent.com/joaopedro236/Pousa-/main/previews/screenshot_12.png)
 
-### Favorites & Reviews
+### Favorites and reviews
 ![Screenshot 14](https://raw.githubusercontent.com/joaopedro236/Pousa-/main/previews/screenshot_14.png)
 
-### User Profile
+### User profile
 ![Screenshot 15](https://raw.githubusercontent.com/joaopedro236/Pousa-/main/previews/screenshot_15.png)
 
-### Trip History
+### Trip history
 ![Screenshot 16](https://raw.githubusercontent.com/joaopedro236/Pousa-/main/previews/screenshot_16.png)
 
-### AI Chat Assistant
+### AI chat assistant
 ![Screenshot 17](https://raw.githubusercontent.com/joaopedro236/Pousa-/main/previews/screenshot_17.png)
 
 </details>
 
 ---
 
-## 🗄️ Database Schema (Summary)
+## 🗄️ Database Summary
 
-**Users (`usersPousae`):**
-```
+### Users (`usersPousae`)
+```sql
 id SERIAL PRIMARY KEY
 name VARCHAR(150) NOT NULL
 email VARCHAR(254) NOT NULL
@@ -208,8 +207,8 @@ star INT[]
 comments INT[]
 ```
 
-**Trips:**
-```
+### Trips
+```sql
 id SERIAL PRIMARY KEY
 name VARCHAR NOT NULL
 description TEXT NOT NULL
@@ -228,29 +227,31 @@ notes INT[]
 
 ---
 
-## 🚀 How to Run Locally
+## 🚀 Run Locally
 
-**Prerequisites:**
-- Node.js 18+ and pnpm
+### Prerequisites
+
+- Node.js 18+
+- pnpm
 - Python 3.10+
 - PostgreSQL
 
-**Quick Steps:**
+### Quick Start
 
-1. **Clone**
+1. Clone the repository:
 ```bash
 git clone https://github.com/joaopedro236/Pousa-.git
 cd Pousa-
 ```
 
-2. **Frontend**
+2. Start the frontend:
 ```bash
 pnpm install
 pnpm dev
 # app: http://localhost:5173
 ```
 
-3. **Backend**
+3. Start the backend:
 ```bash
 cd API
 python -m venv .venv
@@ -260,15 +261,16 @@ python -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
 uvicorn main:app --reload
-# api: http://localhost:8000/docs
+# API docs: http://localhost:8000/docs
 ```
 
-4. **Database**
-- Use `.env.example` as reference and create your databases in PostgreSQL
+4. Configure the database:
+- Use `.env.example` as a reference
+- Create the required PostgreSQL databases
 
 ---
 
-## 🔧 Environment Variables (Example)
+## 🔧 Environment Variables
 
 ```env
 DB_HOST=localhost
@@ -294,37 +296,37 @@ GEMINI_API_KEY=your_gemini_key
 ## 📦 Frontend Scripts
 
 ```bash
-pnpm dev       # Start development server
+pnpm dev       # Start the development server
 pnpm build     # Build for production
-pnpm preview   # Preview production build
-pnpm lint      # Run linter
+pnpm preview   # Preview the production build
+pnpm lint      # Run the linter
 ```
 
 ---
 
-## 📈 Metrics & Limits
+## 📈 Project Notes
 
-- **Rate limit:** 30 req/s per IP
+- **Rate limit:** 30 requests/second per IP
 - **Session expiry:** 7 days
-- **Upload max:** 5 MB (JPG, PNG, WEBP)
+- **Upload limit:** 5 MB (JPG, PNG, WEBP)
 
 ---
 
-## 🛠️ Troubleshooting (Common Issues)
+## 🛠️ Troubleshooting
 
-- **Port 5173 in use:** `pnpm dev -- --port 3000`
-- **Module error:** `rm -rf node_modules pnpm-lock.yaml && pnpm install`
-- **DB connection error:** Check `.env` and ensure PostgreSQL is running
-- **Gemini errors:** Verify API key and request format
+- **Port 5173 already in use:** `pnpm dev -- --port 3000`
+- **Module errors:** `rm -rf node_modules pnpm-lock.yaml && pnpm install`
+- **Database connection issues:** Check your `.env` values and ensure PostgreSQL is running
+- **Gemini API errors:** Verify your API key and request format
 
 ---
 
 ## 📋 Roadmap
 
 - Tests (Jest, Pytest)
-- CI/CD (GitHub Actions)
-- TypeScript in frontend
-- Docker + Docker Compose
+- CI/CD with GitHub Actions
+- TypeScript migration for the frontend
+- Docker and Docker Compose support
 - Migration to SQLAlchemy / ORM
 - Redis caching
 - API pagination
@@ -334,10 +336,10 @@ pnpm lint      # Run linter
 ## 🤝 Contributing
 
 1. Fork the repository
-2. Create a branch: `git checkout -b feature/x`
+2. Create a feature branch: `git checkout -b feature/your-feature`
 3. Commit your changes
 4. Push to the branch
-5. Open a Pull Request
+5. Open a pull request
 
 ---
 
@@ -361,4 +363,4 @@ MIT
 
 ---
 
-<p align="center">Made with ❤️ using React, FastAPI and PostgreSQL</p>
+<p align="center">Made with ❤️ using React, FastAPI, and PostgreSQL</p>
