@@ -2,7 +2,7 @@
 
 > A modern platform to discover, book, and manage memorable travel experiences.
 
-PousaÊ is a full-stack application built with React on the frontend and FastAPI on the backend, using PostgreSQL for data persistence. The platform allows users to explore trips, manage their profile, purchase experiences, save favorite destinations, write reviews, and interact with an AI-powered assistant.
+PousaÊ is a full-stack application built with React on the frontend and FastAPI on the backend, using PostgreSQL for data persistence. The platform allows users to explore trips, manage their profiles, and handle bookings securely.
 
 ---
 
@@ -44,7 +44,7 @@ PousaÊ is a full-stack application built with React on the frontend and FastAPI
 
 ## ✨ Main Features
 
-- User registration and login with email validation, CPF validation, and password handling
+- User registration and login with email validation, CPF validation, and secure password handling
 - Secure session management using HTTP-only cookies
 - User profile with avatar, balance, and trip history
 - Trip listing, search, and filtering
@@ -59,7 +59,7 @@ PousaÊ is a full-stack application built with React on the frontend and FastAPI
 ## 🔐 Security and Best Practices
 
 - Passwords are stored with Argon2 hashing
-- Cookies use `HttpOnly`, `Secure` in production, and `SameSite` settings
+- Cookies use `HttpOnly` and `Secure` in production, with `SameSite` settings
 - IP-based rate limiting is configured on the backend
 - CORS is configured with necessary exposed headers
 - Automatic moderation helps detect and filter inappropriate content
@@ -318,28 +318,6 @@ pnpm lint      # Run the linter
 - **Module errors:** `rm -rf node_modules pnpm-lock.yaml && pnpm install`
 - **Database connection issues:** Check your `.env` values and ensure PostgreSQL is running
 - **Gemini API errors:** Verify your API key and request format
-
----
-
-## 📋 Roadmap
-
-- Tests (Jest, Pytest)
-- CI/CD with GitHub Actions
-- TypeScript migration for the frontend
-- Docker and Docker Compose support
-- Migration to SQLAlchemy / ORM
-- Redis caching
-- API pagination
-
----
-
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create a feature branch: `git checkout -b feature/your-feature`
-3. Commit your changes
-4. Push to the branch
-5. Open a pull request
 
 ---
 
