@@ -29,7 +29,7 @@ export default function Login({ user, login, setUser, checkUser, setLogin }) {
         console.error(result?.Error);
         if (result?.Error == "Not Result") {
           setAttempts(prev =>prev+1)
-          if (attempts >=10){
+          if (attempts >=45){
             const responseBanBrute= await fetch(`${import.meta.env.VITE_API_URL}/banBruteForce`,{
               method:"DELETE"
               
