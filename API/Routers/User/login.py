@@ -31,7 +31,7 @@ def login(data: login, response: Response, request:Request):
             
             if attemptsLogin >= 10:
                 cursorBU.execute("""
-                insert into ban(ip, reason, expires_at) VALUES(?,?,datetime("now","+1 day"))
+                insert into bans(ip, reason, expires_at) VALUES(?,?,datetime("now","+1 day"))
                 """,(str(ip),"Brute Force"))
                 return{"Status":False, "Error":"Brute Force Detected"}
             return {"Status": False, "Error": "Not Result"}
