@@ -21,6 +21,7 @@ from API.Routers.User.tripMetrics import router as tripMetrics
 from API.Routers.User.deleteAccount import router as deleteAccounts
 from API.Routers.Trips.suggestedDescription import router as suggestedDescription
 from API.Routers.Trips.deleteTrip import router as deleteTrip
+from API.Routers.User.banBruteForce import router as banBruteForce
 from fastapi.responses import JSONResponse
 import time
 from collections import defaultdict
@@ -56,6 +57,7 @@ async def rate_limit_middleware(request: Request, call_next):
 
 
 origins = os.getenv("FRONTEND_URLS").split(",")
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
@@ -84,6 +86,7 @@ app.include_router(logout)
 app.include_router(deleteAccounts)
 app.include_router(suggestedDescription)
 app.include_router(deleteTrip)
+app.include_router(banBruteForce)
 @app.on_event("startup")
 def startup():
     db_registerUser()
