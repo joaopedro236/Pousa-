@@ -3,7 +3,7 @@ import inputs from "./inputs";
 import { useState } from "react";
 export default function Login({ user, login, setUser, checkUser, setLogin }) {
   const [loading, setLoading] = useState(false);
-
+  const [attempts, setAttempts] = useState(0)
   const handleLogin = async (e) => {
     e.preventDefault();
     const data = Object.fromEntries(new FormData(e.target));
@@ -26,8 +26,18 @@ export default function Login({ user, login, setUser, checkUser, setLogin }) {
       }
       if (result?.Error) {
         console.error(result?.Error);
-        if (result?.Error == "Brute Force Detected ") {
-          window.location.reload()
+        if (result?.Error == "Not Result") {
+          setAttempts(prev => prev+1)
+          if (attempts =>10){
+            const responseBanBrute= await fetch(`${import.meta.env.VITE_API_URL}/banBruteForce`,{
+              method:"DELETE"
+              
+            })
+            const dataBanBrute = await responseBanBrute.json()
+            if (dataBanBrute?.Ban){
+              window.location.reload()
+            }
+          }
         }
       }
       
