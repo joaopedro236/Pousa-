@@ -24,10 +24,9 @@ def checkCookie(request: Request):
             return {"authenticated": True}
 
         return {"authenticated": False}
-    except KeyError:
-        return{'Error':'An error occurred while verifying the user.', "authenticated": False}
-    except Exception:
-                return{'Error':'An error occurred ', "authenticated": False}
+    
+    except Exception as e:
+                return{'Error': str(e), "authenticated": False}
     finally:
         if cursorBU:
             cursorBU.close()
