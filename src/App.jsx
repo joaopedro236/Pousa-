@@ -17,6 +17,7 @@ import Chatbot from "./Components/Chatbot/Chatbot";
 import TripHistory from "./Components/TripHistory/TripHistory";
 import TripsDashboard from "./Components/TripsDashboard/TripsDashboard";
 import Footer from "./Components/Footer/Footer";
+import Ban from "./Components/Ban/Ban"
 import { Routes, Route, Navigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 
@@ -150,6 +151,7 @@ function App() {
   return (
     <>
       <VLibras />
+      <Ban user={user}/>
       <RegisterUser
         checkUser={checkUser}
         user={user}

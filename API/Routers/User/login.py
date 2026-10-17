@@ -1,15 +1,20 @@
 from ...Validation.User.login import login
 from ...Databases.Conn.users import connect_database
-from fastapi import APIRouter,Response
-
+from fastapi import APIRouter,Response, Request 
+from ...Databases.Conn.banUser import connect_databaseBU
 router = APIRouter()
 
 
 @router.post("/login")
-def login(data: login, response: Response):
+def login(data: login, response: Response, request:Request):
     conn = None
     cursor = None
+    connBU= None
+    cursorBU= None
     try:
+        connBU, cursorBU = connect_databaseBU()
+        ip = request.client.host
+        attemptsLogin = 0
         conn, cursor = connect_database()
         cursor.execute(
             """
@@ -21,7 +26,16 @@ def login(data: login, response: Response):
         )
         result = cursor.fetchone()
         if not result:
+            attemptsLogin = attemptsLogin +1
+
+            
+            if attemptsLogin >= 10:
+                cursorBU.execute("""
+                insert into ban(ip, reason, expires_at) VALUES(?,?,datetime("now","+1 day"))
+                """,(str(ip),"Brute Force"))
+                return{"Status":False, "Error":"Brute Force Detected"}
             return {"Status": False, "Error": "Not Result"}
+
         response.set_cookie(
             key='user_session_token',
             value=result[2],
@@ -35,7 +49,11 @@ def login(data: login, response: Response):
     except Exception:
         return {"Status": False, "Error": "An Error Occured"}
     finally:
-        if conn:
-            conn.close()
         if cursor:
             cursor.close()
+        if conn:
+            conn.close()
+        if cursorBU:
+            cursorBU.close()
+        if connBU:
+            connBU.close()

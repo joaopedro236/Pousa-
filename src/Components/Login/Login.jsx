@@ -26,7 +26,11 @@ export default function Login({ user, login, setUser, checkUser, setLogin }) {
       }
       if (result?.Error) {
         console.error(result?.Error);
+        if (result?.Error == "Brute Force Detected ") {
+          window.location.reload()
+        }
       }
+      
     } catch (error) {
       console.error(error);
     } finally {
