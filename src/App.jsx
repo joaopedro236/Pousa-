@@ -23,6 +23,7 @@ import { useState, useEffect } from "react";
 
 function App() {
   const [user, setUser] = useState(false);
+  const [banInfo, setBanInfo] = useState(null);
   const [login, setLogin] = useState(false);
   const [selectedRestaurant, setSelectedRestaurant] = useState(null);
 
@@ -43,11 +44,13 @@ function App() {
       const data = await response.json();
 
       setUser(data.authenticated);
+      setBanInfo(data.Error === "Ban Detected" ? data : null);
 
       return data;
     } catch (error) {
       console.error(error);
       setUser(false);
+      setBanInfo(null);
       return null;
     }
   };
@@ -151,7 +154,7 @@ function App() {
   return (
     <>
       <VLibras />
-      <Ban user={user}/>
+      <Ban user={banInfo}/>
       <RegisterUser
         checkUser={checkUser}
         user={user}
