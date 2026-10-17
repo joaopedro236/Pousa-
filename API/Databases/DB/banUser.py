@@ -12,6 +12,7 @@ def databaseBU():
         
     expires_at DATETIME DEFAULT CURRENT_TIMESTAMP)""")
         conn.commit()
+        
     except Exception as e:
         return{"Status": False, "Error": "Error Database"}
     finally:
@@ -19,3 +20,4 @@ def databaseBU():
             cursor.close()
         if conn:
             conn.close()
+            
