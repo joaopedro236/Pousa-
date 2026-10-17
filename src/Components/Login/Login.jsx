@@ -20,6 +20,7 @@ export default function Login({ user, login, setUser, checkUser, setLogin }) {
       });
       const result = await response.json();
       if (result?.Status) {
+        setAttempts(0)
         setUser(true);
         await checkUser();
         window.location.reload();
@@ -27,8 +28,8 @@ export default function Login({ user, login, setUser, checkUser, setLogin }) {
       if (result?.Error) {
         console.error(result?.Error);
         if (result?.Error == "Not Result") {
-          setAttempts(prev => prev+1)
-          if (attempts =>10){
+          setAttempts(prev =>prev+1)
+          if (attempts >=10){
             const responseBanBrute= await fetch(`${import.meta.env.VITE_API_URL}/banBruteForce`,{
               method:"DELETE"
               
