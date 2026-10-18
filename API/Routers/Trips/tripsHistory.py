@@ -25,7 +25,8 @@ def tripsHistory(request: Request):
             (tripId,),
         )
         trips = cursorTrip.fetchall()
-        session_tokenCT = [row[8] for row in trips]
+        # session_token is the 7th column in the select above (index 6)
+        session_tokenCT = [row[6] for row in trips]
         cursor.execute(
             "select session_token, name, image_url from usersPousae where session_token::text = ANY(%s)",
             (session_tokenCT,),
@@ -40,10 +41,10 @@ def tripsHistory(request: Request):
                 "price": row[4],
                 "review": row[5],
                 "ownerName": next(
-                    owner[1] for owner in owners if str(owner[0]) == row[8]
+                    owner[1] for owner in owners if str(owner[0]) == row[6]
                 ),
                 "ownerImage": next(
-                    owner[2] for owner in owners if str(owner[0]) == row[8]
+                    owner[2] for owner in owners if str(owner[0]) == row[6]
                 ),
             }
             for row in trips
