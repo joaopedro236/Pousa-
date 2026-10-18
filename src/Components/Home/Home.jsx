@@ -14,14 +14,15 @@ export default function Home({
   starTrip,
   stars,
 }) {
-  const [json, setJson] = useState({
-    trips: [],
-  });
+  const [json, setJson] = useState({ trips: [] });
   const [search, setSearch] = useState("");
   const [showDateFilter, setShowDateFilter] = useState(false);
   const [fromDate, setFromDate] = useState("");
   const [toDate, setToDate] = useState("");
+  const [petFilter, setPetFilter] = useState("any");
+  const [appliedPetFilter, setAppliedPetFilter] = useState("any");
   const { tripId } = useParams();
+
   useEffect(() => {
     if (!tripId || !json.trips.length) return;
 
@@ -31,12 +32,12 @@ export default function Home({
       setSelectedRestaurant(trip);
     }
   }, [tripId, json.trips]);
+
   const navigate = useNavigate();
 
   const fetchData = async () => {
     try {
       const tripsResponse = await fetch(`${import.meta.env.VITE_API_URL}/getTrips`);
-
       const tripsData = await tripsResponse.json();
 
       setJson({
@@ -57,11 +58,9 @@ export default function Home({
 
   useEffect(() => {
     if (itemsNavbar !== "explore") return;
-
     fetchData();
   }, [itemsNavbar]);
 
-  // minimal combined filter: search + optional date range (startDate)
   const filteredTrips = (json?.trips || []).filter((trip) => {
     const q = search?.toLowerCase();
     if (q) {
@@ -77,6 +76,16 @@ export default function Home({
     if (toDate && trip?.startDate) {
       if (new Date(trip.startDate) > new Date(toDate)) return false;
     }
+
+    if (appliedPetFilter && appliedPetFilter !== "any") {
+      const petAllowed = String(trip?.petsAllowed || "").toLowerCase();
+      const isPet =
+        petAllowed === "true" || petAllowed === "yes" || petAllowed === "sim";
+
+      if (appliedPetFilter === "yes" && !isPet) return false;
+      if (appliedPetFilter === "no" && isPet) return false;
+    }
+
     return true;
   });
 
@@ -119,72 +128,69 @@ export default function Home({
               <button
                 type="button"
                 className="filter-btn"
-                aria-label="Toggle date filter"
+                title="Toggle date filter"
                 onClick={() => setShowDateFilter((s) => !s)}
               >
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <rect x="3" y="5" width="18" height="16" rx="2" stroke="currentColor" strokeWidth="1.5"/>
-                  <path d="M16 3V7M8 3V7" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
-                </svg>
+                📅
               </button>
-
             </div>
 
             {showDateFilter && (
               <div className="date-filter">
-                <div className="date-filter-card">
-                  <div className="date-field">
-                    <label className="date-label">Start date</label>
-                    <input
-                      type="date"
-                      value={fromDate}
-                      onChange={(e) => setFromDate(e.target.value)}
-                      className="date-input"
-                      placeholder="YYYY-MM-DD"
-                      aria-label="Start date"
-                    />
-                  </div>
+                <input
+                  type="date"
+                  value={fromDate}
+                  onChange={(e) => setFromDate(e.target.value)}
+                  className="date-input"
+                />
+                <input
+                  type="date"
+                  value={toDate}
+                  onChange={(e) => setToDate(e.target.value)}
+                  className="date-input"
+                />
 
-                  <div className="date-field">
-                    <label className="date-label">End date</label>
-                    <input
-                      type="date"
-                      value={toDate}
-                      onChange={(e) => setToDate(e.target.value)}
-                      className="date-input"
-                      placeholder="YYYY-MM-DD"
-                      aria-label="End date"
-                    />
-                  </div>
+                <select
+                  className="date-input"
+                  value={petFilter}
+                  onChange={(e) => setPetFilter(e.target.value)}
+                >
+                  <option value="any">Any</option>
+                  <option value="yes">Yes</option>
+                  <option value="no">No</option>
+                </select>
 
-                  <div className="date-actions">
-                    <button
-                      type="button"
-                      className="apply-filter"
-                      onClick={() => setShowDateFilter(false)}
-                    >
-                      Apply
-                    </button>
-                    <button
-                      type="button"
-                      className="clear-filter"
-                      onClick={() => {
-                        setFromDate("");
-                        setToDate("");
-                      }}
-                    >
-                      Reset
-                    </button>
-                  </div>
-                </div>
+                <button
+                  type="button"
+                  className="apply-filter"
+                  onClick={() => setAppliedPetFilter(petFilter)}
+                >
+                  Apply
+                </button>
+
+                <button
+                  type="button"
+                  className="clear-filter"
+                  onClick={() => {
+                    setFromDate("");
+                    setToDate("");
+                    setPetFilter("any");
+                    setAppliedPetFilter("any");
+                  }}
+                >
+                  ✖
+                </button>
               </div>
             )}
           </form>
         </header>
+
         <div className="d-flex flex-column p-4">
-          <div className="userInfo d-flex  justify-content-between gap-2 align-items-start">
-            <div className="d-flex flex-column ">
-              <p className="fw-bold mb-0">Hello, {userData?.name?.split(" ").slice(0, 2).join(" ")}👋</p>
+          <div className="userInfo d-flex justify-content-between gap-2 align-items-start">
+            <div className="d-flex flex-column">
+              <p className="fw-bold mb-0">
+                Hello, {userData?.name?.split(" ").slice(0, 2).join(" ")}👋
+              </p>
               <h1 className="mb-0">Trips For Sale</h1>
               <p className="small">Browse trips and buy them.</p>
             </div>
@@ -198,7 +204,8 @@ export default function Home({
             />
           </div>
         </div>
-        <div className="trips ">
+
+        <div className="trips">
           {filteredTrips.map((trip, index) => (
             <div
               className="trip"
@@ -221,8 +228,7 @@ export default function Home({
                 </span>
                 <span>👥 {trip.numberOfTravelers} travelers</span>
                 <span>
-                  💰 {" "}
-                  {trip.price.toLocaleString("en-US", {
+                  💰 {trip.price.toLocaleString("en-US", {
                     style: "currency",
                     currency: "USD",
                   })}
@@ -248,6 +254,7 @@ export default function Home({
           ))}
         </div>
       </section>
+
       <TripsActive
         selectedRestaurant={selectedRestaurant}
         stars={stars}
@@ -259,3 +266,4 @@ export default function Home({
     </>
   );
 }
+
