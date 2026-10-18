@@ -1,8 +1,8 @@
 import "../../Components/RegisterUser/RegisterUser.css";
 import inputs from "./inputs";
 import iconGemini from "../../assets/gemini.png";
-import { DayPicker } from "@daypicker/react";
-import "@daypicker/react/style.css";
+import { DayPicker } from "react-day-picker";
+import "react-day-picker/style.css";
 import itemsSelect from "./selectTagsJSON";
 import "./CreateTrip.css";
 import { useState, useEffect } from "react";
