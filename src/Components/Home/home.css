@@ -97,6 +97,7 @@
     background: transparent;
     font-size: 14px;
     color: #1f2937;
+    min-width: 120px;
 }
 
 .date-input:focus {
@@ -123,6 +124,7 @@
     border-radius: 8px;
     cursor: pointer;
     font-weight: 600;
+    margin-left: 6px;
 }
 
 .userInfo div {

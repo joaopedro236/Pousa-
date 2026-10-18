@@ -21,6 +21,12 @@ export default function Home({
   const [toDate, setToDate] = useState("");
   const [petFilter, setPetFilter] = useState("any");
   const [appliedPetFilter, setAppliedPetFilter] = useState("any");
+  const [maxPrice, setMaxPrice] = useState("");
+  const [appliedMaxPrice, setAppliedMaxPrice] = useState("");
+  const [minRating, setMinRating] = useState("");
+  const [appliedMinRating, setAppliedMinRating] = useState("");
+  const [minTravelers, setMinTravelers] = useState("");
+  const [appliedMinTravelers, setAppliedMinTravelers] = useState("");
   const { tripId } = useParams();
 
   useEffect(() => {
@@ -84,6 +90,18 @@ export default function Home({
 
       if (appliedPetFilter === "yes" && !isPet) return false;
       if (appliedPetFilter === "no" && isPet) return false;
+    }
+
+    if (appliedMaxPrice) {
+      if (Number(trip.price) > Number(appliedMaxPrice)) return false;
+    }
+
+    if (appliedMinRating) {
+      if (Number(trip.review) < Number(appliedMinRating)) return false;
+    }
+
+    if (appliedMinTravelers) {
+      if (Number(trip.numberOfTravelers) < Number(appliedMinTravelers)) return false;
     }
 
     return true;
@@ -155,15 +173,51 @@ export default function Home({
                   value={petFilter}
                   onChange={(e) => setPetFilter(e.target.value)}
                 >
-                  <option value="any">Any</option>
-                  <option value="yes">Yes</option>
-                  <option value="no">No</option>
+                  <option value="any">Pets: Any</option>
+                  <option value="yes">Pets: Yes</option>
+                  <option value="no">Pets: No</option>
                 </select>
+
+                <input
+                  type="number"
+                  min="0"
+                  placeholder="Max price"
+                  className="date-input"
+                  value={maxPrice}
+                  onChange={(e) => setMaxPrice(e.target.value)}
+                />
+
+                <select
+                  className="date-input"
+                  value={minRating}
+                  onChange={(e) => setMinRating(e.target.value)}
+                >
+                  <option value="">Rating</option>
+                  <option value="1">1+</option>
+                  <option value="2">2+</option>
+                  <option value="3">3+</option>
+                  <option value="4">4+</option>
+                  <option value="5">5</option>
+                </select>
+
+                <input
+                  type="number"
+                  min="1"
+                  placeholder="Min travelers"
+                  className="date-input"
+                  value={minTravelers}
+                  onChange={(e) => setMinTravelers(e.target.value)}
+                />
 
                 <button
                   type="button"
                   className="apply-filter"
-                  onClick={() => setAppliedPetFilter(petFilter)}
+                  onClick={() => {
+                    setAppliedPetFilter(petFilter);
+                    setAppliedMaxPrice(maxPrice);
+                    setAppliedMinRating(minRating);
+                    setAppliedMinTravelers(minTravelers);
+                  }}
                 >
                   Apply
                 </button>
@@ -176,6 +230,12 @@ export default function Home({
                     setToDate("");
                     setPetFilter("any");
                     setAppliedPetFilter("any");
+                    setMaxPrice("");
+                    setAppliedMaxPrice("");
+                    setMinRating("");
+                    setAppliedMinRating("");
+                    setMinTravelers("");
+                    setAppliedMinTravelers("");
                   }}
                 >
                   ✖
@@ -188,9 +248,7 @@ export default function Home({
         <div className="d-flex flex-column p-4">
           <div className="userInfo d-flex justify-content-between gap-2 align-items-start">
             <div className="d-flex flex-column">
-              <p className="fw-bold mb-0">
-                Hello, {userData?.name?.split(" ").slice(0, 2).join(" ")}👋
-              </p>
+              <p className="fw-bold mb-0">Hello, {userData?.name?.split(" ").slice(0, 2).join(" ")}👋</p>
               <h1 className="mb-0">Trips For Sale</h1>
               <p className="small">Browse trips and buy them.</p>
             </div>
@@ -223,16 +281,9 @@ export default function Home({
               </div>
 
               <div className="trip-info">
-                <span>
-                  📅 {trip.startDate} - {trip.endDate}
-                </span>
+                <span>📅 {trip.startDate} - {trip.endDate}</span>
                 <span>👥 {trip.numberOfTravelers} travelers</span>
-                <span>
-                  💰 {trip.price.toLocaleString("en-US", {
-                    style: "currency",
-                    currency: "USD",
-                  })}
-                </span>
+                <span>💰 {trip.price.toLocaleString("en-US", { style: "currency", currency: "USD" })}</span>
                 <span>⭐ {trip?.review}</span>
                 <span>😺 Pets {trip?.petsAllowed}</span>
               </div>
@@ -266,4 +317,3 @@ export default function Home({
     </>
   );
 }
-
