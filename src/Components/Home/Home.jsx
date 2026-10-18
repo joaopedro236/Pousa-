@@ -119,37 +119,64 @@ export default function Home({
               <button
                 type="button"
                 className="filter-btn"
-                title="Toggle date filter"
+                aria-label="Toggle date filter"
                 onClick={() => setShowDateFilter((s) => !s)}
               >
-                📅
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <rect x="3" y="5" width="18" height="16" rx="2" stroke="currentColor" strokeWidth="1.5"/>
+                  <path d="M16 3V7M8 3V7" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+                </svg>
               </button>
+
             </div>
 
             {showDateFilter && (
               <div className="date-filter">
-                <input
-                  type="date"
-                  value={fromDate}
-                  onChange={(e) => setFromDate(e.target.value)}
-                  className="date-input"
-                />
-                <input
-                  type="date"
-                  value={toDate}
-                  onChange={(e) => setToDate(e.target.value)}
-                  className="date-input"
-                />
-                <button
-                  type="button"
-                  className="clear-filter"
-                  onClick={() => {
-                    setFromDate("");
-                    setToDate("");
-                  }}
-                >
-                  Clear
-                </button>
+                <div className="date-filter-card">
+                  <div className="date-field">
+                    <label className="date-label">Start date</label>
+                    <input
+                      type="date"
+                      value={fromDate}
+                      onChange={(e) => setFromDate(e.target.value)}
+                      className="date-input"
+                      placeholder="YYYY-MM-DD"
+                      aria-label="Start date"
+                    />
+                  </div>
+
+                  <div className="date-field">
+                    <label className="date-label">End date</label>
+                    <input
+                      type="date"
+                      value={toDate}
+                      onChange={(e) => setToDate(e.target.value)}
+                      className="date-input"
+                      placeholder="YYYY-MM-DD"
+                      aria-label="End date"
+                    />
+                  </div>
+
+                  <div className="date-actions">
+                    <button
+                      type="button"
+                      className="apply-filter"
+                      onClick={() => setShowDateFilter(false)}
+                    >
+                      Apply
+                    </button>
+                    <button
+                      type="button"
+                      className="clear-filter"
+                      onClick={() => {
+                        setFromDate("");
+                        setToDate("");
+                      }}
+                    >
+                      Reset
+                    </button>
+                  </div>
+                </div>
               </div>
             )}
           </form>
