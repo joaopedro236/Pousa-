@@ -6,6 +6,27 @@
 .createTrip.Active {
     display: flex;
 }   
+.registerUserFormDiv.remove{
+    display: none;
+}
+.day-available {
+      background-color: #22c55e !important;
+        color: white !important;
+          border-radius: 8px;
+          }
+
+          .day-unavailable {
+            background-color: #ef4444 !important;
+              color: white !important;
+                border-radius: 8px;
+                }
+
+                .calendar-tools {
+                  display: flex;
+                    gap: 10px;
+                      margin-bottom: 16px;
+                      }
+
 .textarea-wrapper {
         position: relative;
         }

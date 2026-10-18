@@ -2,8 +2,7 @@ from pydantic import BaseModel
 class Trips(BaseModel):
     name: str
     description:str
-    startDate: str
-    endDate:str
+    selected:dict
     numbertravelers:int
     petsAllowed: str
     price: float

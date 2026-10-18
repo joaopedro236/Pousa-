@@ -1,7 +1,7 @@
 from ...Databases.Conn.trips import connect_database_trip
 from ...Validation.Trip.trips import Trips
 from fastapi import APIRouter, Request
-from datetime import date, datetime
+import json
 from google import genai
 router = APIRouter()
 import os
@@ -21,16 +21,7 @@ def trips(dataValidation: Trips, request: Request):
         start_date = datetime.strptime(dataValidation.startDate, "%Y-%m-%d").date()
         end_date = datetime.strptime(dataValidation.endDate, "%Y-%m-%d").date()
 
-        if start_date < date.today():
-            return {"Status": False, "Error": "The date cannot be in the past."}
-        elif end_date < date.today():
-            return {"Status": False, "Error": "The end date cannot be in the past."}
-
-        elif end_date < start_date:
-            return {
-                "Status": False,
-                "Error": "The end date cannot be before the start date.",
-            }
+        
         if not session_token:
             return {"Status": False, "Error": "Not session token"}
         moderation = client.models.generate_content(
@@ -70,12 +61,11 @@ BLOCK
         cepResult = response.json()
         cursor.execute(
             """insert into trips(
-        name, description, startDate, endDate, numberOfTravelers, petsAllowed,price, session_token, cep, street, complement, neighborhood, city, state, state_code, region, ibge,areacode, siafi) values( %s,%s,%s,%s,%s,%s,%s,%s, %s, %s,%s,%s,%s, %s, %s, %s, %s, %s,%s)""",
+        name, description,numberOfTravelers, petsAllowed,price, session_token, cep, street, complement, neighborhood, city, state, state_code, region, ibge,areacode, siafi, selected) values( %s,%s,%s,%s,%s,%s,%s, %s, %s,%s,%s,%s, %s, %s, %s, %s, %s,%s)""",
             (
                 dataValidation.name,
                 dataValidation.description,
-                start_date,
-                end_date,
+                
                 dataValidation.numbertravelers,
                 dataValidation.petsAllowed,
                 dataValidation.price,
@@ -90,7 +80,9 @@ BLOCK
                 cepResult["regiao"],
                 cepResult["ibge"],
                 cepResult["ddd"],
-                cepResult["siafi"]
+                cepResult["siafi"],
+                dataValidation.selected
+
 
 
             ),

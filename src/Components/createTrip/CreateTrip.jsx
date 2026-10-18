@@ -1,31 +1,53 @@
 import "../../Components/RegisterUser/RegisterUser.css";
 import inputs from "./inputs";
 import iconGemini from "../../assets/gemini.png";
-
+import { DayPicker } from "@daypicker/react";
+import "@daypicker/react/style.css";
 import itemsSelect from "./selectTagsJSON";
 import "./CreateTrip.css";
 import { useState, useEffect } from "react";
+import StateManagedSelect from "react-select";
 export default function CreateTrip({
   user,
   itemsNavbar,
   setItemsNavbar,
   setUser,
 }) {
+  const [selected, setSelected] = useState({})
+  const [paintMode, setPaintMode] = useState("unavailable");
   const [loading, setLoading] = useState(false);
   const today = new Date().toISOString().split("T")[0];
-
+  const [stage, setStage]= useState(0)
   const [description, setDescription] = useState("");
   const [error, setError] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+  const handleDayClick = (day) => {
+      const dateKey = [
+          day.getFullYear(),
+              String(day.getMonth() + 1).padStart(2, "0"),
+                  String(day.getDate()).padStart(2, "0"),
+                    ].join("-");
+
+                      setSelected((prev) => ({
+                          ...prev,
+                              [dateKey]: paintMode,
+                                }));
+                                };
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     const data = Object.fromEntries(new FormData(e.target));
-
+    data.selected = selected
     try {
       setError(false);
       setErrorMessage("");
       setLoading(true);
+      setStage(prev => prev +1)
+      if(stage >2){
+        setStage(0)
+      }
+      if (stage === 2){
       const response = await fetch(`${import.meta.env.VITE_API_URL}/trips`, {
         method: "POST",
         credentials: "include",
@@ -52,7 +74,7 @@ export default function CreateTrip({
       if (result?.Status) {
         setItemsNavbar("explore");
         window.location.reload();
-      }
+      }}
     } catch (error) {
       setError(true);
       setErrorMessage(error instanceof Error ? error.message : String(error));
@@ -99,7 +121,7 @@ export default function CreateTrip({
       <section
         className={`registerUser createTrip ${user && itemsNavbar == "create-trip" ? "Active" : ""}`}
       >
-        <form onSubmit={handleSubmit}>
+        <form >
           <div className="userIcon">
             <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
               <defs>
@@ -125,7 +147,7 @@ export default function CreateTrip({
             <h1>Create Trip</h1>
             <p>Plan your next adventure! Fill in the details below.</p>
           </header>
-          <div className="registerUserFormDiv">
+          <div className={`registerUserFormDiv ${stage == 0? "": "remove"}`}>
             {inputs.map((inputsMap) => (
               <div className="mb-3" key={inputsMap.id}>
                 <label htmlFor={inputsMap.name} className="form-label">
@@ -211,6 +233,54 @@ export default function CreateTrip({
                 <option value="no">No</option>
               </select>
             </div>
+          </div>
+          <div className={`date ${stage == 1?"d-flex":"d-none"}`}>
+            <div className="calendar-tools">
+                <button
+                      type="button"
+                            className="btn btn-danger"
+                                  onClick={() => setPaintMode("unavailable")}
+                                      >
+                                            Red — Unavailable
+                                                </button>
+
+                                                    <button
+                                                          type="button"
+                                                                className="btn btn-success"
+                                                                      onClick={() => setPaintMode("available")}
+                                                                          >
+                                                                                Green — Available
+                                                                                    </button>
+                                                                                      </div>
+
+                                                                                        <DayPicker
+                                                                                            animate
+                                                                                                onDayClick={handleDayClick}
+                                                                                                    modifiers={{
+                                                                                                          available: (day) => {
+                                                                                                                  const key = [
+                                                                                                                            day.getFullYear(),
+                                                                                                                                      String(day.getMonth() + 1).padStart(2, "0"),
+                                                                                                                                                String(day.getDate()).padStart(2, "0"),
+                                                                                                                                                        ].join("-");
+
+                                                                                                                                                                return availability[key] === "available";
+                                                                                                                                                                      },
+                                                                                                                                                                            unavailable: (day) => {
+                                                                                                                                                                                    const key = [
+                                                                                                                                                                                              day.getFullYear(),
+                                                                                                                                                                                                        String(day.getMonth() + 1).padStart(2, "0"),
+                                                                                                                                                                                                                  String(day.getDate()).padStart(2, "0"),
+                                                                                                                                                                                                                          ].join("-");
+
+                                                                                                                                                                                                                                  return availability[key] === "unavailable";
+                                                                                                                                                                                                                                        },
+                                                                                                                                                                                                                                            }}
+                                                                                                                                                                                                                                                modifiersClassNames={{
+                                                                                                                                                                                                                                                      available: "day-available",
+                                                                                                                                                                                                                                                            unavailable: "day-unavailable",
+                                                                                                                                                                                                                                                                }}
+                                                                                                                                                                                                                                                                  />
           </div>
           <button type="submit" className="btn btn-primary" disabled={loading}>
             {loading ? "Creating..." : "Submit"}

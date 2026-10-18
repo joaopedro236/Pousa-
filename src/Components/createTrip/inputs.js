@@ -36,21 +36,9 @@ const inputs = [
         maxLength: 200,
         placeholder: 'Price'
     },
+
     {
         id: 5,
-        type: 'date',
-        name: 'startDate',
-        label: 'Start Date'
-
-    },
-    {
-        id: 6,
-        type: 'date',
-        name: 'endDate',
-        label: 'End Date'
-    },
-    {
-        id: 7,
         type: 'number',
         name: 'numbertravelers',
         label: 'Number of Travelers',
