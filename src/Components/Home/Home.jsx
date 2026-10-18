@@ -4,6 +4,20 @@ import { useState, useEffect } from "react";
 import photoUser from "../../assets/user.png";
 import { useNavigate, useParams } from "react-router-dom";
 
+const normalizeDateValue = (value) => {
+  if (!value) return null;
+  const date = new Date(`${value}T00:00:00`);
+  return Number.isNaN(date.getTime()) ? null : date;
+};
+
+const parseBooleanValue = (value) => {
+  if (typeof value === "boolean") return value;
+  if (typeof value === "number") return value === 1;
+
+  const text = String(value ?? "").trim().toLowerCase();
+  return ["true", "1", "yes", "sim", "y"].includes(text);
+};
+
 export default function Home({
   user,
   userData,
@@ -76,32 +90,33 @@ export default function Home({
       if (!matches) return false;
     }
 
-    if (fromDate && trip?.startDate) {
-      if (new Date(trip.startDate) < new Date(fromDate)) return false;
+    const tripStartDate = normalizeDateValue(trip?.startDate);
+
+    if (fromDate) {
+      const from = normalizeDateValue(fromDate);
+      if (!tripStartDate || !from || tripStartDate < from) return false;
     }
-    if (toDate && trip?.startDate) {
-      if (new Date(trip.startDate) > new Date(toDate)) return false;
+
+    if (toDate) {
+      const to = normalizeDateValue(toDate);
+      if (!tripStartDate || !to || tripStartDate > to) return false;
     }
 
     if (appliedPetFilter && appliedPetFilter !== "any") {
-      const petAllowed = String(trip?.petsAllowed || "").toLowerCase();
-      const isPet =
-        petAllowed === "true" || petAllowed === "yes" || petAllowed === "sim";
-
-      if (appliedPetFilter === "yes" && !isPet) return false;
-      if (appliedPetFilter === "no" && isPet) return false;
+      const expectedPet = appliedPetFilter === "yes";
+      if (parseBooleanValue(trip?.petsAllowed) !== expectedPet) return false;
     }
 
     if (appliedMaxPrice) {
-      if (Number(trip.price) > Number(appliedMaxPrice)) return false;
+      if (Number(trip.price || 0) > Number(appliedMaxPrice)) return false;
     }
 
     if (appliedMinRating) {
-      if (Number(trip.review) < Number(appliedMinRating)) return false;
+      if (Number(trip.review || 0) < Number(appliedMinRating)) return false;
     }
 
     if (appliedMinTravelers) {
-      if (Number(trip.numberOfTravelers) < Number(appliedMinTravelers)) return false;
+      if (Number(trip.numberOfTravelers || 0) < Number(appliedMinTravelers)) return false;
     }
 
     return true;
