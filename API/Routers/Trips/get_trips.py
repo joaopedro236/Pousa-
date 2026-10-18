@@ -28,7 +28,7 @@ def get_trips():
         for trip in result:
             cursorUser.execute(
                 "select name, image_url from usersPousae where session_token = %s",
-                (trip[9],),
+                (trip[7],),
             )
             resultUser = cursorUser.fetchone()
 
