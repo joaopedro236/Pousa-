@@ -3,7 +3,8 @@ import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import hiddenPhoto from "../../../assets/banner.jpeg";
 import hiddenUser from "../../../assets/user.png";
-
+import { DayPicker } from "react-day-picker";
+import "react-day-picker/style.css";
 export default function TripsActive({
   itemsNavbar,
   stars,
@@ -203,24 +204,74 @@ export default function TripsActive({
   };
   const locationItems = [
     { key: "cep", label: "CEP", value: selectedRestaurant?.cep || "No cep" },
-    { key: "street", label: "Street", value: selectedRestaurant?.street || "No street" },
-    { key: "complement", label: "Complement", value: selectedRestaurant?.complement || "No complement" },
-    { key: "neighborhood", label: "Neighborhood", value: selectedRestaurant?.neighborhood || "No neighborhood" },
-    { key: "city", label: "City", value: selectedRestaurant?.city || "No city" },
-    { key: "state", label: "State", value: selectedRestaurant?.state || "No State" },
-    { key: "state_code", label: "State Code", value: selectedRestaurant?.state_code || "No State Code" },
-    { key: "region", label: "Region", value: selectedRestaurant?.region || "No region" },
-    { key: "ibge", label: "Ibge", value: selectedRestaurant?.ibge || "No ibge" },
-    { key: "area_code", label: "Area code", value: selectedRestaurant?.area_code || "No Area Code" },
-    { key: "siafi", label: "Siafi", value: selectedRestaurant?.siafi || "No Siafi" },
+    {
+      key: "street",
+      label: "Street",
+      value: selectedRestaurant?.street || "No street",
+    },
+    {
+      key: "complement",
+      label: "Complement",
+      value: selectedRestaurant?.complement || "No complement",
+    },
+    {
+      key: "neighborhood",
+      label: "Neighborhood",
+      value: selectedRestaurant?.neighborhood || "No neighborhood",
+    },
+    {
+      key: "city",
+      label: "City",
+      value: selectedRestaurant?.city || "No city",
+    },
+    {
+      key: "state",
+      label: "State",
+      value: selectedRestaurant?.state || "No State",
+    },
+    {
+      key: "state_code",
+      label: "State Code",
+      value: selectedRestaurant?.state_code || "No State Code",
+    },
+    {
+      key: "region",
+      label: "Region",
+      value: selectedRestaurant?.region || "No region",
+    },
+    {
+      key: "ibge",
+      label: "Ibge",
+      value: selectedRestaurant?.ibge || "No ibge",
+    },
+    {
+      key: "area_code",
+      label: "Area code",
+      value: selectedRestaurant?.area_code || "No Area Code",
+    },
+    {
+      key: "siafi",
+      label: "Siafi",
+      value: selectedRestaurant?.siafi || "No Siafi",
+    },
   ];
   const [showDatePicker, setShowDatePicker] = useState(false);
   const [selectedDate, setSelectedDate] = useState("");
+  const availableDates = selectedRestaurant?.selected ?? {};
 
-  const availableDates = selectedRestaurant?.selected
   const availableDateList = Object.entries(availableDates)
-                  .filter(([date, status]) => status === "available")
-                    .map(([date]) => date);
+    .filter(([, status]) => status === "available")
+    .map(([date]) => date);
+
+  const isDateAvailable = (day) => {
+    const dateKey = [
+      day.getFullYear(),
+      String(day.getMonth() + 1).padStart(2, "0"),
+      String(day.getDate()).padStart(2, "0"),
+    ].join("-");
+
+    return availableDates[dateKey] === "available";
+  };
   return (
     <>
       <section
@@ -301,7 +352,6 @@ export default function TripsActive({
             <div className="tagsTrip d-flex flex-column gap-3 rounded p-4 ">
               <h1 className="fw-normal text-center">Tags</h1>
               <div className="d-flex flex-wrap gap-3 align-items-center justify-content-center">
-        
                 <span>
                   👥 {selectedRestaurant?.numberOfTravelers} travelers
                 </span>
@@ -421,102 +471,116 @@ export default function TripsActive({
               </form>
             </div>
           </div>
-        
-        <div className="buyTripsDiv mt-1">
-          <form
+
+          <div className="buyTripsDiv mt-1">
+            <form
               onSubmit={(e) => {
-                    e.preventDefault();
-                          setShowDatePicker(true);
-                              }}
-                                >
-                                    <button
-                                          type="submit"
-                                                className="btn btn-primary p-3 buyTrip"
-                                                      disabled={loading}
-                                                          >
-                                                                Book a trip
-                                                                    </button>
+                e.preventDefault();
+                setShowDatePicker(true);
+              }}
+            >
+              <button
+                type="submit"
+                className="btn btn-primary p-3 buyTrip"
+                disabled={loading}
+              >
+                Book a trip
+              </button>
 
-                                                                        <input
-                                                                              type="number"
-                                                                                    name="tripQuantity"
-                                                                                          id="tripQuantity"
-                                                                                                className="form-control"
-                                                                                                      placeholder="Trip Quantity"
-                                                                                                            value={tripQuantity}
-                                                                                                                  onChange={(e) => {
-                                                                                                                          const value = e.target.value;
+              <input
+                type="number"
+                name="tripQuantity"
+                id="tripQuantity"
+                className="form-control"
+                placeholder="Trip Quantity"
+                value={tripQuantity}
+                onChange={(e) => {
+                  const value = e.target.value;
 
-                                                                                                                                  if (
-                                                                                                                                            value === "" ||
-                                                                                                                                                      (Number(value) >= 1 &&
-                                                                                                                                                                  Number(value) <=
-                                                                                                                                                                                Number(selectedRestaurant?.numberOfTravelers))
-                                                                                                                                                                                        ) {
-                                                                                                                                                                                                  setTripQuantity(value);
-                                                                                                                                                                                                          }
-                                                                                                                                                                                                                }}
-                                                                                                                                                                                                                      min={1}
-                                                                                                                                                                                                                            max={Number(selectedRestaurant?.numberOfTravelers)}
-                                                                                                                                                                                                                                />
-                                                                                                                                                                                                                                  </form>
+                  if (
+                    value === "" ||
+                    (Number(value) >= 1 &&
+                      Number(value) <=
+                        Number(selectedRestaurant?.numberOfTravelers))
+                  ) {
+                    setTripQuantity(value);
+                  }
+                }}
+                min={1}
+                max={Number(selectedRestaurant?.numberOfTravelers)}
+              />
+            </form>
 
-                                                                                                                                                                                                                                    {showDatePicker && (
-                                                                                                                                                                                                                                        <div className="datePickerOverlay">
-                                                                                                                                                                                                                                              <div className="datePickerCard">
-                                                                                                                                                                                                                                                      <button
-                                                                                                                                                                                                                                                                type="button"
-                                                                                                                                                                                                                                                                          className="closeDatePicker"
-                                                                                                                                                                                                                                                                                    onClick={() => setShowDatePicker(false)}
-                                                                                                                                                                                                                                                                                            >
-                                                                                                                                                                                                                                                                                                      ✕
-                                                                                                                                                                                                                                                                                                              </button>
+            {showDatePicker && (
+              <div className="datePickerOverlay">
+                <div className="datePickerCard">
+                  <button
+                    type="button"
+                    className="closeDatePicker"
+                    onClick={() => setShowDatePicker(false)}
+                  >
+                    ✕
+                  </button>
 
-                                                                                                                                                                                                                                                                                                                      <h2>Select your trip date</h2>
-                                                                                                                                                                                                                                                                                                                              <p>Choose one of the available dates.</p>
+                  <h2>Select your trip date</h2>
+                  <p>Choose one of the available dates.</p>
 
-                                                                                                                                                                                                                                                                                                                                      <input
-                                                                                                                                                                                                                                                                                                                                                type="date"
-                                                                                                                                                                                                                                                                                                                                                          className="form-control"
-                                                                                                                                                                                                                                                                                                                                                                    value={selectedDate}
-                                                                                                                                                                                                                                                                                                                                                                              min={availableDateList[0]}
-                                                                                                                                                                                                                                                                                                                                                                                        onChange={(e) => {
-                                                                                                                                                                                                                                                                                                                                                                                                    const date = e.target.value;
+                  <DayPicker
+                    mode="single"
+                    selected={
+                      selectedDate
+                        ? new Date(`${selectedDate}T12:00:00`)
+                        : undefined
+                    }
+                    onSelect={(day) => {
+                      if (!day) {
+                        setSelectedDate("");
+                        return;
+                      }
 
-                                                                                                                                                                                                                                                                                                                                                                                                                if (availableDates[date] === "available") {
-                                                                                                                                                                                                                                                                                                                                                                                                                              setSelectedDate(date);
-                                                                                                                                                                                                                                                                                                                                                                                                                                          } else {
-                                                                                                                                                                                                                                                                                                                                                                                                                                                        setSelectedDate("");
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                    }
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                              }}
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      />
+                      const dateKey = [
+                        day.getFullYear(),
+                        String(day.getMonth() + 1).padStart(2, "0"),
+                        String(day.getDate()).padStart(2, "0"),
+                      ].join("-");
 
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              {selectedDate ? (
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <p className="selectedDateMessage">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    Selected date: {selectedDate}
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              </p>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      ) : (
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <p className="dateHint">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            Available: {availableDateList.join(", ")}
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      </p>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              )}
+                      if (availableDates[dateKey] === "available") {
+                        setSelectedDate(dateKey);
+                      }
+                    }}
+                    disabled={(day) => !isDateAvailable(day)}
+                    modifiers={{
+                      available: isDateAvailable,
+                    }}
+                    modifiersClassNames={{
+                      available: "day-available",
+                    }}
+                  />
+                  {selectedDate ? (
+                    <p className="selectedDateMessage">
+                      Selected date: {selectedDate}
+                    </p>
+                  ) : (
+                    <p className="dateHint">
+                      Available: {availableDateList.join(", ")}
+                    </p>
+                  )}
 
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      <button
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                type="button"
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          className="btn btn-primary w-100 mt-3"
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    disabled={!selectedDate || loading}
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              onClick={() => {
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          setShowDatePicker(false);
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      buy();
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                }}
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        >
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  {loading ? "Loading..." : "Confirm and book"}
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          </button>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                </div>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    </div>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      )}
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      </div>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
+                  <button
+                    type="button"
+                    className="btn btn-primary w-100 mt-3"
+                    disabled={!selectedDate || loading}
+                    onClick={() => {
+                      setShowDatePicker(false);
+                      buy();
+                    }}
+                  >
+                    {loading ? "Loading..." : "Confirm and book"}
+                  </button>
+                </div>
+              </div>
+            )}
+          </div>
         </div>
       </section>
     </>

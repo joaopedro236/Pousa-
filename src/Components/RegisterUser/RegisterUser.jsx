@@ -61,7 +61,9 @@ export default function RegisterUser({
   };
   return (
     <>
-      <section className={`registerUser ${user || login ||user?.Error =="Ban Detected" ? "Active" : ""}`}>
+      <section
+        className={`registerUser ${user || login || user?.Error == "Ban Detected" ? "Active" : ""}`}
+      >
         <form onSubmit={handleSubmit}>
           <div className="userIcon">
             <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">

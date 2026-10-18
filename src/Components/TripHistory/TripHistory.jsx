@@ -39,7 +39,6 @@ export default function TripHistory({
                 </div>
 
                 <div className="trip-info">
-              
                   <span>👥 {trip?.numberOfTravelers} travelers</span>
                   <span>
                     💰{" "}

@@ -38,7 +38,6 @@ export default function Star({
                 </div>
 
                 <div className="trip-info">
-                
                   <span>👥 {trip.numberOfTravelers} travelers</span>
                   <span>
                     💰{" "}

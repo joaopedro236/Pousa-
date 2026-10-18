@@ -14,7 +14,9 @@ const parseBooleanValue = (value) => {
   if (typeof value === "boolean") return value;
   if (typeof value === "number") return value === 1;
 
-  const text = String(value ?? "").trim().toLowerCase();
+  const text = String(value ?? "")
+    .trim()
+    .toLowerCase();
   return ["true", "1", "yes", "sim", "y"].includes(text);
 };
 
@@ -57,7 +59,9 @@ export default function Home({
 
   const fetchData = async () => {
     try {
-      const tripsResponse = await fetch(`${import.meta.env.VITE_API_URL}/getTrips`);
+      const tripsResponse = await fetch(
+        `${import.meta.env.VITE_API_URL}/getTrips`,
+      );
       const tripsData = await tripsResponse.json();
 
       setJson({
@@ -92,8 +96,6 @@ export default function Home({
 
     const tripStartDate = normalizeDateValue(trip?.startDate);
 
-    
-
     if (appliedPetFilter && appliedPetFilter !== "any") {
       const expectedPet = appliedPetFilter === "yes";
       if (parseBooleanValue(trip?.petsAllowed) !== expectedPet) return false;
@@ -108,7 +110,8 @@ export default function Home({
     }
 
     if (appliedMinTravelers) {
-      if (Number(trip.numberOfTravelers || 0) < Number(appliedMinTravelers)) return false;
+      if (Number(trip.numberOfTravelers || 0) < Number(appliedMinTravelers))
+        return false;
     }
 
     return true;
@@ -124,7 +127,11 @@ export default function Home({
         } flex-column gap-2`}
       >
         <header className="px-3 m-auto mt-3 d-flex flex-column align-items-center justify-content-center">
-          <form className="search-form" onSubmit={(e) => e.preventDefault()} role="search">
+          <form
+            className="search-form"
+            onSubmit={(e) => e.preventDefault()}
+            role="search"
+          >
             <div className="search-box">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -162,8 +169,6 @@ export default function Home({
 
             {showDateFilter && (
               <div className="date-filter">
-
-
                 <div className="filter-field">
                   <label className="filter-label">Pets</label>
                   <select
@@ -258,7 +263,9 @@ export default function Home({
         <div className="d-flex flex-column p-4">
           <div className="userInfo d-flex justify-content-between gap-2 align-items-start">
             <div className="d-flex flex-column">
-              <p className="fw-bold mb-0">Hello, {userData?.name?.split(" ").slice(0, 2).join(" ")}👋</p>
+              <p className="fw-bold mb-0">
+                Hello, {userData?.name?.split(" ").slice(0, 2).join(" ")}👋
+              </p>
               <h1 className="mb-0">Trips For Sale</h1>
               <p className="small">Browse trips and buy them.</p>
             </div>
@@ -291,9 +298,14 @@ export default function Home({
               </div>
 
               <div className="trip-info">
-            
                 <span>👥 {trip.numberOfTravelers} travelers</span>
-                <span>💰 {trip.price.toLocaleString("en-US", { style: "currency", currency: "USD" })}</span>
+                <span>
+                  💰{" "}
+                  {trip.price.toLocaleString("en-US", {
+                    style: "currency",
+                    currency: "USD",
+                  })}
+                </span>
                 <span>⭐ {trip?.review}</span>
                 <span>😺 Pets {trip?.petsAllowed}</span>
               </div>

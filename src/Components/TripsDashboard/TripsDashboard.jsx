@@ -157,7 +157,6 @@ export default function TripsDashboard({
               </div>
 
               <div className="trip-info">
-                
                 <span>
                   👥 {json.trip[currentIndex].numberOfTravelers} travelers
                 </span>

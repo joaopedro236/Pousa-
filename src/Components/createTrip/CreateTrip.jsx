@@ -13,68 +13,69 @@ export default function CreateTrip({
   setItemsNavbar,
   setUser,
 }) {
-  const [selected, setSelected] = useState({})
+  const [selected, setSelected] = useState({});
   const [paintMode, setPaintMode] = useState("unavailable");
   const [loading, setLoading] = useState(false);
   const today = new Date().toISOString().split("T")[0];
-  const [stage, setStage]= useState(0)
+  const [stage, setStage] = useState(0);
   const [description, setDescription] = useState("");
   const [error, setError] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const handleDayClick = (day) => {
-      const dateKey = [
-          day.getFullYear(),
-              String(day.getMonth() + 1).padStart(2, "0"),
-                  String(day.getDate()).padStart(2, "0"),
-                    ].join("-");
+    const dateKey = [
+      day.getFullYear(),
+      String(day.getMonth() + 1).padStart(2, "0"),
+      String(day.getDate()).padStart(2, "0"),
+    ].join("-");
 
-                        setSelected((prev) => ({
-                            ...prev,
-                                [dateKey]: paintMode,
-                                  }));
-                                  };
-  
+    setSelected((prev) => ({
+      ...prev,
+      [dateKey]: paintMode,
+    }));
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     const data = Object.fromEntries(new FormData(e.target));
-    data.selected = selected
+    data.selected = selected;
     try {
       setError(false);
       setErrorMessage("");
       setLoading(true);
-      setStage(prev => prev +1)
-      if(stage >2){
-        setStage(0)
+      setStage((prev) => prev + 1);
+      if (stage > 2) {
+        setStage(0);
       }
-      if (stage === 2){
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/trips`, {
-        method: "POST",
-        credentials: "include",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      });
-      const result = await response.json();
-      if (result?.authenticated) {
-        setUser(true);
-      }
-      if (result?.Error) {
-        setError(true);
-        console.error(result?.Error);
-        setErrorMessage(
-          typeof result.Error === "string"
-            ? result.Error
-            : JSON.stringify(result.Error),
-        );
+      if (stage === 2) {
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/trips`, {
+          method: "POST",
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        });
+        const result = await response.json();
+        if (result?.authenticated) {
+          setUser(true);
+        }
+        if (result?.Error) {
+          setError(true);
+          console.error(result?.Error);
+          setErrorMessage(
+            typeof result.Error === "string"
+              ? result.Error
+              : JSON.stringify(result.Error),
+          );
 
-        return;
+          return;
+        }
+        if (result?.Status) {
+          setItemsNavbar("explore");
+          window.location.reload();
+        }
       }
-      if (result?.Status) {
-        setItemsNavbar("explore");
-        window.location.reload();
-      }}
     } catch (error) {
       setError(true);
       setErrorMessage(error instanceof Error ? error.message : String(error));
@@ -147,7 +148,7 @@ export default function CreateTrip({
             <h1>Create Trip</h1>
             <p>Plan your next adventure! Fill in the details below.</p>
           </header>
-          <div className={`registerUserFormDiv ${stage == 0? "": "remove"}`}>
+          <div className={`registerUserFormDiv ${stage == 0 ? "" : "remove"}`}>
             {inputs.map((inputsMap) => (
               <div className="mb-3" key={inputsMap.id}>
                 <label htmlFor={inputsMap.name} className="form-label">
@@ -234,53 +235,53 @@ export default function CreateTrip({
               </select>
             </div>
           </div>
-          <div className={`date ${stage == 1?"d-flex":"d-none"}`}>
+          <div className={`date ${stage == 1 ? "d-flex" : "d-none"}`}>
             <div className="calendar-tools">
-                <button
-                      type="button"
-                            className="btn btn-danger"
-                                  onClick={() => setPaintMode("unavailable")}
-                                      >
-                                            Red — Unavailable
-                                                </button>
+              <button
+                type="button"
+                className="btn btn-danger"
+                onClick={() => setPaintMode("unavailable")}
+              >
+                Red — Unavailable
+              </button>
 
-                                                    <button
-                                                          type="button"
-                                                                className="btn btn-success"
-                                                                      onClick={() => setPaintMode("available")}
-                                                                          >
-                                                                                Green — Available
-                                                                                    </button>
-                                                                                      </div>
+              <button
+                type="button"
+                className="btn btn-success"
+                onClick={() => setPaintMode("available")}
+              >
+                Green — Available
+              </button>
+            </div>
 
-                                                                                        <DayPicker
-                                                                                            animate
-                                                                                                onDayClick={handleDayClick}
-                                                                                                    modifiers={{
-                                                                                                          available: (day) => {
-                                                                                                                  const key = [
-                                                                                                                            day.getFullYear(),
-                                                                                                                                      String(day.getMonth() + 1).padStart(2, "0"),
-                                                                                                                                                String(day.getDate()).padStart(2, "0"),
-                                                                                                                                                        ].join("-");
+            <DayPicker
+              animate
+              onDayClick={handleDayClick}
+              modifiers={{
+                available: (day) => {
+                  const key = [
+                    day.getFullYear(),
+                    String(day.getMonth() + 1).padStart(2, "0"),
+                    String(day.getDate()).padStart(2, "0"),
+                  ].join("-");
 
-                                                                                                                                                                return selected[key] === "available";
-                                                                                                                                                                      },
-                                                                                                                                                                            unavailable: (day) => {
-                                                                                                                                                                                    const key = [
-                                                                                                                                                                                              day.getFullYear(),
-                                                                                                                                                                                                        String(day.getMonth() + 1).padStart(2, "0"),
-                                                                                                                                                                                                                  String(day.getDate()).padStart(2, "0"),
-                                                                                                                                                                                                                          ].join("-");
+                  return selected[key] === "available";
+                },
+                unavailable: (day) => {
+                  const key = [
+                    day.getFullYear(),
+                    String(day.getMonth() + 1).padStart(2, "0"),
+                    String(day.getDate()).padStart(2, "0"),
+                  ].join("-");
 
-                                                                                                                                                                                                                                  return selected[key] === "unavailable";
-                                                                                                                                                                                                                                        },
-                                                                                                                                                                                                                                            }}
-                                                                                                                                                                                                                                                modifiersClassNames={{
-                                                                                                                                                                                                                                                      available: "day-available",
-                                                                                                                                                                                                                                                            unavailable: "day-unavailable",
-                                                                                                                                                                                                                                                                }}
-                                                                                                                                                                                                                                                                  />
+                  return selected[key] === "unavailable";
+                },
+              }}
+              modifiersClassNames={{
+                available: "day-available",
+                unavailable: "day-unavailable",
+              }}
+            />
           </div>
           <button type="submit" className="btn btn-primary" disabled={loading}>
             {loading ? "Creating..." : "Submit"}
