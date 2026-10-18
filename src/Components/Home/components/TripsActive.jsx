@@ -256,7 +256,7 @@ export default function TripsActive({
     },
   ];
   const [showDatePicker, setShowDatePicker] = useState(false);
-  const [selectedDate, setSelectedDate] = useState("");
+  const [selectedDate, setSelectedDate] = useState([]);
   const availableDates = selectedRestaurant?.selected ?? {};
 
   const availableDateList = Object.entries(availableDates)
@@ -272,6 +272,13 @@ export default function TripsActive({
 
     return availableDates[dateKey] === "available";
   };
+  const selectedDateList = selectedDate.map((day) =>
+    [
+      day.getFullYear(),
+      String(day.getMonth() + 1).padStart(2, "0"),
+      String(day.getDate()).padStart(2, "0"),
+    ].join("-"),
+  );
   return (
     <>
       <section
@@ -527,27 +534,10 @@ export default function TripsActive({
 
                   <DayPicker
                     mode="multiple"
-                    required
-                    selected={
-                      selectedDate
-                        ? new Date(`${selectedDate}T12:00:00`)
-                        : undefined
-                    }
-                    onSelect={(day) => {
-                      if (!day) {
-                        setSelectedDate("");
-                        return;
-                      }
-
-                      const dateKey = [
-                        day.getFullYear(),
-                        String(day.getMonth() + 1).padStart(2, "0"),
-                        String(day.getDate()).padStart(2, "0"),
-                      ].join("-");
-
-                      if (availableDates[dateKey] === "available") {
-                        setSelectedDate(dateKey);
-                      }
+                    selected={selectedDate}
+                    onSelect={(days) => {
+                      const validDays = (days || []).filter(isDateAvailable);
+                      setSelectedDate(validDays);
                     }}
                     disabled={(day) => !isDateAvailable(day)}
                     modifiers={{
@@ -557,14 +547,11 @@ export default function TripsActive({
                       available: "day-available",
                     }}
                   />
-                  {selectedDate ? (
-                    <p className="selectedDateMessage">
-                      Selected date: {selectedDate}
-                    </p>
+
+                  {selectedDateList.length > 0 ? (
+                    <p>Datas selecionadas: {selectedDateList.join(", ")}</p>
                   ) : (
-                    <p className="dateHint">
-                      Available: {availableDateList.join(", ")}
-                    </p>
+                    <p>Selecione as datas disponíveis.</p>
                   )}
 
                   <button
