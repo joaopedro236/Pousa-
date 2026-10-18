@@ -527,6 +527,7 @@ export default function TripsActive({
 
                   <DayPicker
                     mode="multiple"
+                    required
                     selected={
                       selectedDate
                         ? new Date(`${selectedDate}T12:00:00`)

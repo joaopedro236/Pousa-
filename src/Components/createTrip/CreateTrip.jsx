@@ -256,6 +256,8 @@ export default function CreateTrip({
 
             <DayPicker
               animate
+              
+              required
               onDayClick={handleDayClick}
               modifiers={{
                 available: (day) => {

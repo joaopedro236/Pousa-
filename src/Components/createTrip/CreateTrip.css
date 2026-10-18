@@ -37,6 +37,10 @@
             }
 .date{
     display: flex;
+    gap: 10px;
+    justify-content: center;
+    align-items:center;
+    margin-top: 5px;
     flex-direction: column;
 }
             .gemini-icon {
