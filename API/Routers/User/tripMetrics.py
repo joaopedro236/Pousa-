@@ -43,8 +43,6 @@ def metrics(request: Request):
             SELECT
                     t.name,
                             t.description,
-                                    t.startDate,
-                                            t.endDate,
                                                     t.numberOfTravelers,
                                                             t.petsAllowed,
                                                                     t.price,
@@ -68,15 +66,14 @@ def metrics(request: Request):
                 {
                     "name": t[0],
                     "description": t[1],
-                    "startDate": t[2],
-                    "endDate": t[3],
-                    "numberOfTravelers": t[4],
-                    "petsAllowed": t[5],
-                    "price": t[6],
+                    
+                    "numberOfTravelers": t[2],
+                    "petsAllowed": t[3],
+                    "price": t[4],
                     "ownerName":resultUser[0] if resultUser else None,
                     "ownerImage": resultUser[1] if resultUser else None,
-                    "review":t[10],
-                    "id": t [11]
+                    "review":t[8],
+                    "id": t [9]
                 }
             )
         return {

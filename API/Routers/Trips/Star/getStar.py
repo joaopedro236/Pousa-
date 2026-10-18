@@ -45,7 +45,7 @@ def getStar(request: Request):
         for row in trips:
             cursor.execute(
                 "select name, image_url from usersPousae where session_token = %s",
-                (row[10],),
+                (row[8],),
             )
             owner = cursor.fetchone()
             result.append(
