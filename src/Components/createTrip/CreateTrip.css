@@ -35,7 +35,10 @@
         .textarea-wrapper textarea {
             padding-right: 45px;
             }
-
+.date{
+    display: flex;
+    flex-direction: column;
+}
             .gemini-icon {
                 position: absolute;
                     right: 17px;
