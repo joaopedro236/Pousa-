@@ -8,23 +8,6 @@ export default function TripHistory({
   setItemsNavbar,
   json,
 }) {
-  const [fromDate, setFromDate] = useState("");
-  const [toDate, setToDate] = useState("");
-
-  const filtered = (json || []).filter((trip) => {
-    if (!trip?.startDate) return true;
-    const tripStart = new Date(trip.startDate);
-    if (fromDate) {
-      const from = new Date(fromDate);
-      if (tripStart < from) return false;
-    }
-    if (toDate) {
-      const to = new Date(toDate);
-      if (tripStart > to) return false;
-    }
-    return true;
-  });
-
   return (
     <>
       <section
@@ -33,27 +16,10 @@ export default function TripHistory({
         <header className="d-flex flex-column gap-1 p-2">
           <h1>Purchased Trips</h1>
           <p>Here is the history of the trips you have purchased.</p>
-
-          <div className="d-flex gap-1 align-items-center">
-            <label>
-              From: <input type="date" value={fromDate} onChange={(e) => setFromDate(e.target.value)} />
-            </label>
-            <label>
-              To: <input type="date" value={toDate} onChange={(e) => setToDate(e.target.value)} />
-            </label>
-            <button
-              onClick={() => {
-                setFromDate("");
-                setToDate("");
-              }}
-            >
-              Clear
-            </button>
-          </div>
         </header>
         <div className="trips">
-          {filtered?.length > 0 ? (
-            filtered.map((trip, index) => (
+          {json?.length > 0 ? (
+            json.map((trip, index) => (
               <div
                 className="trip"
                 role="button"
@@ -78,7 +44,7 @@ export default function TripHistory({
                   </span>
                   <span>👥 {trip?.numberOfTravelers} travelers</span>
                   <span>
-                    💰 {" "}
+                    💰{" "}
                     {trip?.price.toLocaleString("en-US", {
                       style: "currency",
                       currency: "USD",
