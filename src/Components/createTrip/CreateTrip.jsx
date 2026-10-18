@@ -28,11 +28,11 @@ export default function CreateTrip({
                   String(day.getDate()).padStart(2, "0"),
                     ].join("-");
 
-                      setSelected((prev) => ({
-                          ...prev,
-                              [dateKey]: paintMode,
-                                }));
-                                };
+                        setSelected((prev) => ({
+                            ...prev,
+                                [dateKey]: paintMode,
+                                  }));
+                                  };
   
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -121,7 +121,7 @@ export default function CreateTrip({
       <section
         className={`registerUser createTrip ${user && itemsNavbar == "create-trip" ? "Active" : ""}`}
       >
-        <form >
+        <form onSubmit={handleSubmit}>
           <div className="userIcon">
             <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
               <defs>
