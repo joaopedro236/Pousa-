@@ -264,7 +264,7 @@ export default function CreateTrip({
                                                                                                                                                 String(day.getDate()).padStart(2, "0"),
                                                                                                                                                         ].join("-");
 
-                                                                                                                                                                return availability[key] === "available";
+                                                                                                                                                                return selected[key] === "available";
                                                                                                                                                                       },
                                                                                                                                                                             unavailable: (day) => {
                                                                                                                                                                                     const key = [
