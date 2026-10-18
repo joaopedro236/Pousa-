@@ -537,7 +537,9 @@ export default function TripsActive({
                     selected={selectedDate}
                     onSelect={(days) => {
                       const validDays = (days || []).filter(isDateAvailable);
-                      setSelectedDate(validDays);
+                      if(validDays.length <= tripQuantity){
+
+                      setSelectedDate(validDays);}
                     }}
                     disabled={(day) => !isDateAvailable(day)}
                     modifiers={{
@@ -549,9 +551,9 @@ export default function TripsActive({
                   />
 
                   {selectedDateList.length > 0 ? (
-                    <p>Datas selecionadas: {selectedDateList.join(", ")}</p>
+                    <p>"Selected dates": {selectedDateList.join(", ")}</p>
                   ) : (
-                    <p>Selecione as datas disponíveis.</p>
+                    <p>Select the available dates. </p>
                   )}
 
                   <button
