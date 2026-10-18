@@ -39,8 +39,27 @@ def metrics(request: Request):
                 (current_week, session_token),
             )
             conn.commit()
-        cursorTrip.execute("select t.name, t.description, t.startDate, t.endDate,t.numberOfTravelers,t.petsAllowed,t.price,u.name, u.image_url,t.session_token, t.review, t.id from trips t left join userspousae u on t.session_token = u.session_token")
-        result= cursorTrip.fetchall()
+        cursorTrip.execute("""
+            SELECT
+                    t.name,
+                            t.description,
+                                    t.startDate,
+                                            t.endDate,
+                                                    t.numberOfTravelers,
+                                                            t.petsAllowed,
+                                                                    t.price,
+                                                                            u.name,
+                                                                                    u.image_url,
+                                                                                            t.session_token,
+                                                                                                    t.review,
+                                                                                                            t.id
+                                                                                                                FROM trips t
+                                                                                                                    LEFT JOIN userspousae u
+                                                                                                                            ON t.session_token = u.session_token
+                                                                                                                                WHERE t.session_token = %s
+                                                                                                                                """, (session_token,))
+
+        result = cursorTrip.fetchall()
         trips = []
         for t in result:
             cursor.execute('select name, image_url from userspousae where session_token = %s', (session_token,))
