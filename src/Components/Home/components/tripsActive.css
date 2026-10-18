@@ -38,6 +38,60 @@
 
 }
 
+.datePickerOverlay {
+  position: fixed;
+    inset: 0;
+      background: rgba(0, 0, 0, 0.65);
+        display: flex;
+          align-items: center;
+            justify-content: center;
+              padding: 20px;
+                z-index: 9999;
+                }
+
+                .datePickerCard {
+                  position: relative;
+                    width: 100%;
+                      max-width: 420px;
+                        background: white;
+                          color: #222;
+                            border-radius: 16px;
+                              padding: 28px;
+                                box-shadow: 0 10px 40px rgba(0, 0, 0, 0.25);
+                                }
+
+                                .datePickerCard h2 {
+                                  font-size: 1.5rem;
+                                    margin-bottom: 8px;
+                                    }
+
+                                    .datePickerCard p {
+                                      font-size: 0.9rem;
+                                        color: #666;
+                                        }
+
+                                        .closeDatePicker {
+                                          position: absolute;
+                                            top: 12px;
+                                              right: 12px;
+                                                border: none;
+                                                  background: transparent;
+                                                    font-size: 1.2rem;
+                                                      cursor: pointer;
+                                                      }
+
+                                                      .selectedDateMessage {
+                                                        margin-top: 12px;
+                                                          font-weight: 600;
+                                                            color: #198754 !important;
+                                                              overflow-wrap: anywhere;
+                                                              }
+
+                                                              .dateHint {
+                                                                margin-top: 12px;
+                                                                  overflow-wrap: anywhere;
+                                                                  }
+                                                                  
 .tripsActiveHeader button {
 
     top: 18px;
