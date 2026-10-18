@@ -294,10 +294,7 @@ export default function TripsActive({
             <div className="tagsTrip d-flex flex-column gap-3 rounded p-4 ">
               <h1 className="fw-normal text-center">Tags</h1>
               <div className="d-flex flex-wrap gap-3 align-items-center justify-content-center">
-                <span>
-                  📅 {selectedRestaurant?.startDate} -{" "}
-                  {selectedRestaurant?.endDate}
-                </span>
+        
                 <span>
                   👥 {selectedRestaurant?.numberOfTravelers} travelers
                 </span>

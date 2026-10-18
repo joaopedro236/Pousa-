@@ -38,9 +38,7 @@ export default function Star({
                 </div>
 
                 <div className="trip-info">
-                  <span>
-                    📅 {trip.startDate} - {trip.endDate}
-                  </span>
+                
                   <span>👥 {trip.numberOfTravelers} travelers</span>
                   <span>
                     💰{" "}

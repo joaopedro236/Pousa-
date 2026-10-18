@@ -21,7 +21,7 @@ def tripsHistory(request: Request):
         )
         tripId = cursor.fetchone()[0]
         cursorTrip.execute(
-            "select name, description,startdate, enddate,numberoftravelers, petsallowed, price , review,session_token from trips where id = ANY(%s)",
+            "select name, description,numberoftravelers, petsallowed, price , review,session_token from trips where id = ANY(%s)",
             (tripId,),
         )
         trips = cursorTrip.fetchall()
@@ -35,12 +35,10 @@ def tripsHistory(request: Request):
             {
                 "name": row[0],
                 "description": row[1],
-                "startDate": row[2],
-                "endDate": row[3],
-                "numberOfTravelers": row[4],
-                "petsAllowed": row[5],
-                "price": row[6],
-                "review": row[7],
+                "numberOfTravelers": row[2],
+                "petsAllowed": row[3],
+                "price": row[4],
+                "review": row[5],
                 "ownerName": next(
                     owner[1] for owner in owners if str(owner[0]) == row[8]
                 ),

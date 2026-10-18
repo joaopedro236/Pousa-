@@ -29,7 +29,7 @@ def getStar(request: Request):
 
         cursorTrip.execute(
             """
-            SELECT id, name, description, startDate, endDate,
+            SELECT id, name, description, 
                 numberOfTravelers, petsAllowed, price,
                 review, usersPurchased, session_token
             FROM trips
@@ -53,13 +53,11 @@ def getStar(request: Request):
                     "id": row[0],
                     "name": row[1],
                     "description": row[2],
-                    "startDate": row[3],
-                    "endDate": row[4],
-                    "numberOfTravelers": row[5],
-                    "petsAllowed": row[6],
-                    "price": row[7],
-                    "review": row[8],
-                    "usersPurchased": row[9],
+                    "numberOfTravelers": row[3],
+                    "petsAllowed": row[4],
+                    "price": row[5],
+                    "review": row[6],
+                    "usersPurchased": row[7],
                     "ownerName": owner[0] if owner else None,
                     "ownerImage": owner[1] if owner else None,
                 }

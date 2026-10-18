@@ -74,8 +74,7 @@ def chatbot(validation: data):
         Description: {validation.descriptionTrip or "Not provided"}
         Review: {validation.reviewTrip if validation.reviewTrip is not None else "Not provided"}
         Price: {validation.priceTrip if validation.priceTrip is not None else "Not provided"}
-        Start date: {validation.dateStart or "Not provided"}
-        End date: {validation.dateEnd or "Not provided"}
+        
         Pets: {validation.petsTrip or "Not provided"}
         Travelers: {validation.travelersTrip if validation.travelersTrip is not None else "Not provided"}
         Trip owner: {validation.ownerTrip if validation.ownerTrip is not None else "Not provided"}

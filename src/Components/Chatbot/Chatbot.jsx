@@ -48,8 +48,7 @@ export default function Chatbot({ selectedRestaurant, userData, user }) {
           descriptionTrip: selectedRestaurant?.description,
           reviewTrip: selectedRestaurant?.review,
           priceTrip: selectedRestaurant?.price,
-          dateStart: selectedRestaurant?.startDate,
-          dateEnd: selectedRestaurant?.endDate,
+    
           petsTrip: selectedRestaurant?.petsAllowed,
           travelersTrip: selectedRestaurant?.numberOfTravelers,
           quantityMessage: quantityMessage,

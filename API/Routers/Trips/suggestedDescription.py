@@ -17,8 +17,7 @@ def suggestedDescriptio(data: items):
         TRIP INFORMATION
         title:{data.name}
         description: {data.description}
-        startDate: {data.StartDate}
-        endDate:{data.EndDate}
+        
         petsAllowed: {data.petsAllowed}
         numberTravelers: {data.numberTravelers}
         price: {data.price}"""

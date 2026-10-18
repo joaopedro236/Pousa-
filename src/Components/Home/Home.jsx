@@ -92,15 +92,7 @@ export default function Home({
 
     const tripStartDate = normalizeDateValue(trip?.startDate);
 
-    if (fromDate) {
-      const from = normalizeDateValue(fromDate);
-      if (!tripStartDate || !from || tripStartDate < from) return false;
-    }
-
-    if (toDate) {
-      const to = normalizeDateValue(toDate);
-      if (!tripStartDate || !to || tripStartDate > to) return false;
-    }
+    
 
     if (appliedPetFilter && appliedPetFilter !== "any") {
       const expectedPet = appliedPetFilter === "yes";
@@ -170,25 +162,7 @@ export default function Home({
 
             {showDateFilter && (
               <div className="date-filter">
-                <div className="filter-field">
-                  <label className="filter-label">From</label>
-                  <input
-                    type="date"
-                    value={fromDate}
-                    onChange={(e) => setFromDate(e.target.value)}
-                    className="date-input"
-                  />
-                </div>
 
-                <div className="filter-field">
-                  <label className="filter-label">To</label>
-                  <input
-                    type="date"
-                    value={toDate}
-                    onChange={(e) => setToDate(e.target.value)}
-                    className="date-input"
-                  />
-                </div>
 
                 <div className="filter-field">
                   <label className="filter-label">Pets</label>
@@ -317,7 +291,7 @@ export default function Home({
               </div>
 
               <div className="trip-info">
-                <span>📅 {trip.startDate} - {trip.endDate}</span>
+            
                 <span>👥 {trip.numberOfTravelers} travelers</span>
                 <span>💰 {trip.price.toLocaleString("en-US", { style: "currency", currency: "USD" })}</span>
                 <span>⭐ {trip?.review}</span>

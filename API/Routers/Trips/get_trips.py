@@ -15,7 +15,7 @@ def get_trips():
         conn, cursor = connect_database_trip()
         connUser, cursorUser = connect_database()
         cursor.execute("""
-    SELECT t.name, t.description, t.startDate, t.endDate,
+    SELECT t.name, t.description,
            t.numberOfTravelers, t.petsAllowed, t.price,
            u.name, u.image_url, t.session_token, t.review, 
            t.id, t.cep, t.street, t.complement,t.neighborhood, t.city, t.state, t.state_code, t.region, t.ibge, t.areacode, t.siafi
@@ -36,26 +36,24 @@ def get_trips():
                 {
                     "name": trip[0],
                     "description": trip[1],
-                    "startDate": trip[2],
-                    "endDate": trip[3],
-                    "numberOfTravelers": trip[4],
-                    "petsAllowed": trip[5],
-                    "price": trip[6],
+                    "numberOfTravelers": trip[2],
+                    "petsAllowed": trip[3],
+                    "price": trip[4],
                     "ownerName": resultUser[0] if resultUser else None,
                     "ownerImage": resultUser[1] if resultUser else None,
-                    "review": trip[10],
-                    'id': trip[11],
-                    "cep": trip[12],
-                    "street": trip[13] if trip else None,
-                    "complement": trip[14] if trip else None,
-                    "neighborhood": trip[15] if trip else None,
-                    "city": trip[16] if trip else None,
-                    "state":trip[17] if trip else None,
-                    "state_code": trip[18] if trip else None,
-                    "region": trip[19] if trip else None,
-                    "ibge": trip[20] if trip else None,
-                    "areacode": trip[21] if trip else None,
-                    "siafi": trip[22] if trip else None
+                    "review": trip[8],
+                    'id': trip[9],
+                    "cep": trip[10],
+                    "street": trip[11] if trip else None,
+                    "complement": trip[12] if trip else None,
+                    "neighborhood": trip[13] if trip else None,
+                    "city": trip[14] if trip else None,
+                    "state":trip[15] if trip else None,
+                    "state_code": trip[16] if trip else None,
+                    "region": trip[17] if trip else None,
+                    "ibge": trip[18] if trip else None,
+                    "areacode": trip[19] if trip else None,
+                    "siafi": trip[20] if trip else None
                 }
             )
 
