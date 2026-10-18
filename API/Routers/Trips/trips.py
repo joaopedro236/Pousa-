@@ -18,8 +18,6 @@ def trips(dataValidation: Trips, request: Request):
     session_token = request.cookies.get("user_session_token")
     try:
         conn, cursor = connect_database_trip()
-        start_date = datetime.strptime(dataValidation.startDate, "%Y-%m-%d").date()
-        end_date = datetime.strptime(dataValidation.endDate, "%Y-%m-%d").date()
 
         
         if not session_token:
