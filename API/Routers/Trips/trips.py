@@ -2,6 +2,8 @@ from ...Databases.Conn.trips import connect_database_trip
 from ...Validation.Trip.trips import Trips
 from fastapi import APIRouter, Request
 import json
+from psycopg2.extras import Json
+
 from google import genai
 router = APIRouter()
 import os
@@ -79,7 +81,7 @@ BLOCK
                 cepResult["ibge"],
                 cepResult["ddd"],
                 cepResult["siafi"],
-                dataValidation.selected
+                Json(dataValidation.selected)
 
 
 
