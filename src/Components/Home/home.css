@@ -79,7 +79,7 @@
     display: flex;
     gap: 10px;
     margin-top: 12px;
-    align-items: center;
+    align-items: flex-end;
     width: 100%;
     background: #ffffff;
     border: 1px solid #e5e7eb;
@@ -87,6 +87,21 @@
     border-radius: 12px;
     box-shadow: 0 4px 12px rgba(0,0,0,0.04);
     flex-wrap: wrap;
+}
+
+.filter-field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    min-width: 110px;
+}
+
+.filter-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: #6b7280;
 }
 
 .date-input {
@@ -106,8 +121,14 @@
     box-shadow: 0 0 0 4px rgba(13,110,253,0.06);
 }
 
-.clear-filter {
+.filter-actions {
+    display: flex;
+    align-items: flex-end;
+    gap: 8px;
     margin-left: auto;
+}
+
+.clear-filter {
     background: transparent;
     border: none;
     color: #0d6efd;
@@ -124,7 +145,6 @@
     border-radius: 8px;
     cursor: pointer;
     font-weight: 600;
-    margin-left: 6px;
 }
 
 .userInfo div {

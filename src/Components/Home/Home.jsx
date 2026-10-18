@@ -155,91 +155,112 @@ export default function Home({
 
             {showDateFilter && (
               <div className="date-filter">
-                <input
-                  type="date"
-                  value={fromDate}
-                  onChange={(e) => setFromDate(e.target.value)}
-                  className="date-input"
-                />
-                <input
-                  type="date"
-                  value={toDate}
-                  onChange={(e) => setToDate(e.target.value)}
-                  className="date-input"
-                />
+                <div className="filter-field">
+                  <label className="filter-label">From</label>
+                  <input
+                    type="date"
+                    value={fromDate}
+                    onChange={(e) => setFromDate(e.target.value)}
+                    className="date-input"
+                  />
+                </div>
 
-                <select
-                  className="date-input"
-                  value={petFilter}
-                  onChange={(e) => setPetFilter(e.target.value)}
-                >
-                  <option value="any">Pets: Any</option>
-                  <option value="yes">Pets: Yes</option>
-                  <option value="no">Pets: No</option>
-                </select>
+                <div className="filter-field">
+                  <label className="filter-label">To</label>
+                  <input
+                    type="date"
+                    value={toDate}
+                    onChange={(e) => setToDate(e.target.value)}
+                    className="date-input"
+                  />
+                </div>
 
-                <input
-                  type="number"
-                  min="0"
-                  placeholder="Max price"
-                  className="date-input"
-                  value={maxPrice}
-                  onChange={(e) => setMaxPrice(e.target.value)}
-                />
+                <div className="filter-field">
+                  <label className="filter-label">Pets</label>
+                  <select
+                    className="date-input"
+                    value={petFilter}
+                    onChange={(e) => setPetFilter(e.target.value)}
+                  >
+                    <option value="any">Any</option>
+                    <option value="yes">Yes</option>
+                    <option value="no">No</option>
+                  </select>
+                </div>
 
-                <select
-                  className="date-input"
-                  value={minRating}
-                  onChange={(e) => setMinRating(e.target.value)}
-                >
-                  <option value="">Rating</option>
-                  <option value="1">1+</option>
-                  <option value="2">2+</option>
-                  <option value="3">3+</option>
-                  <option value="4">4+</option>
-                  <option value="5">5</option>
-                </select>
+                <div className="filter-field">
+                  <label className="filter-label">Max price</label>
+                  <input
+                    type="number"
+                    min="0"
+                    placeholder="0"
+                    className="date-input"
+                    value={maxPrice}
+                    onChange={(e) => setMaxPrice(e.target.value)}
+                  />
+                </div>
 
-                <input
-                  type="number"
-                  min="1"
-                  placeholder="Min travelers"
-                  className="date-input"
-                  value={minTravelers}
-                  onChange={(e) => setMinTravelers(e.target.value)}
-                />
+                <div className="filter-field">
+                  <label className="filter-label">Rating</label>
+                  <select
+                    className="date-input"
+                    value={minRating}
+                    onChange={(e) => setMinRating(e.target.value)}
+                  >
+                    <option value="">Any</option>
+                    <option value="1">1+</option>
+                    <option value="2">2+</option>
+                    <option value="3">3+</option>
+                    <option value="4">4+</option>
+                    <option value="5">5</option>
+                  </select>
+                </div>
 
-                <button
-                  type="button"
-                  className="apply-filter"
-                  onClick={() => {
-                    setAppliedPetFilter(petFilter);
-                    setAppliedMaxPrice(maxPrice);
-                    setAppliedMinRating(minRating);
-                    setAppliedMinTravelers(minTravelers);
-                  }}
-                >
-                  Apply
-                </button>
+                <div className="filter-field">
+                  <label className="filter-label">Travelers</label>
+                  <input
+                    type="number"
+                    min="1"
+                    placeholder="1"
+                    className="date-input"
+                    value={minTravelers}
+                    onChange={(e) => setMinTravelers(e.target.value)}
+                  />
+                </div>
 
-                <button
-                  type="button"
-                  className="clear-filter"
-                  onClick={() => {
-                    setFromDate("");
-                    setToDate("");
-                    setPetFilter("any");
-                    setAppliedPetFilter("any");
-                    setMaxPrice("");
-                    setAppliedMaxPrice("");
-                    setMinRating("");
-                    setAppliedMinRating("");
-                    setMinTravelers("");
-                    setAppliedMinTravelers("");
-                  }}
-                >
-                  ✖
-                </button>
+                <div className="filter-actions">
+                  <button
+                    type="button"
+                    className="apply-filter"
+                    onClick={() => {
+                      setAppliedPetFilter(petFilter);
+                      setAppliedMaxPrice(maxPrice);
+                      setAppliedMinRating(minRating);
+                      setAppliedMinTravelers(minTravelers);
+                    }}
+                  >
+                    Apply
+                  </button>
+
+                  <button
+                    type="button"
+                    className="clear-filter"
+                    onClick={() => {
+                      setFromDate("");
+                      setToDate("");
+                      setPetFilter("any");
+                      setAppliedPetFilter("any");
+                      setMaxPrice("");
+                      setAppliedMaxPrice("");
+                      setMinRating("");
+                      setAppliedMinRating("");
+                      setMinTravelers("");
+                      setAppliedMinTravelers("");
+                    }}
+                  >
+                    ✖
+                  </button>
+                </div>
               </div>
             )}
           </form>
