@@ -68,6 +68,60 @@
     outline: none;
     box-shadow: none;
 }
+
+.filter-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    border-radius: 10px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+.date-filter {
+    display: flex;
+    gap: 10px;
+    margin-top: 12px;
+    align-items: center;
+    width: 100%;
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    padding: 8px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+    flex-wrap: wrap;
+}
+
+.date-input {
+    height: 40px;
+    padding: 8px 12px;
+    border-radius: 8px;
+    border: 1px solid #e5e7eb;
+    background: transparent;
+    font-size: 14px;
+    color: #1f2937;
+}
+
+.date-input:focus {
+    outline: none;
+    border-color: #0d6efd;
+    box-shadow: 0 0 0 4px rgba(13,110,253,0.06);
+}
+
+.clear-filter {
+    margin-left: auto;
+    background: transparent;
+    border: none;
+    color: #0d6efd;
+    cursor: pointer;
+    padding: 6px 10px;
+    font-weight: 600;
+}
+
 .userInfo div {
     gap: 2px;
 }
