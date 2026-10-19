@@ -216,7 +216,7 @@ export default function CreateTrip({
             ))}
             <div className="mb-3">
               <label htmlFor="uploadImage">Place printable image</label>
-              <input type="file"  accept="image/jpeg,image/png,image/webp" name="uploadImage" className="form-control" id="file" />
+              <input type="file"  accept="image/jpeg,image/png,image/webp" name="file" className="form-control" id="file" />
             </div>
             <div className="mb-3">
               <label htmlFor="petsAllowed" className="form-label">
