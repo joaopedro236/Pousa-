@@ -39,7 +39,7 @@ export default function CreateTrip({
 
     const data = new FormData(e.target);
     data.set("selected", JSON.stringify(selected));
-    const file = e.target.uploadImage.files[0];
+    const file = e.target.file.files[0];
     try {
       setError(false);
       setErrorMessage("");
