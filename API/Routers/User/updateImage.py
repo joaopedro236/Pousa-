@@ -12,12 +12,9 @@ MAX_SIZE = 5 * 1024 * 1024
 
 
 @router.post("/upload-image")
-async def upload_image(
-    request: Request,
-    file: UploadFile = File(...)
-):
+async def upload_image(request: Request, file: UploadFile = File(...)):
     conn = None
-    session_token = request.cookies.get("user_session_token") 
+    session_token = request.cookies.get("user_session_token")
 
     cursor = None
     allowed_extensions = {"image/jpeg", "image/png", "image/webp"}
@@ -51,8 +48,8 @@ async def upload_image(
         )
         conn.commit()
         return {"status": True, "url": data["data"]["url"]}
-    except Exception :
-        return {"Status": False,'Error': 'An error occurred'}
+    except Exception:
+        return {"Status": False, "Error": "An error occurred"}
     finally:
         if cursor:
             cursor.close()

@@ -87,6 +87,8 @@ app.include_router(deleteAccounts)
 app.include_router(suggestedDescription)
 app.include_router(deleteTrip)
 app.include_router(banBruteForce)
+
+
 @app.on_event("startup")
 def startup():
     db_registerUser()

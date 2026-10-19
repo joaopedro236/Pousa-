@@ -83,29 +83,22 @@ def chatbot(validation: data):
         {validation.message}
         """
         try:
-                response = client.models.generate_content(
-                    model="gemini-3.1-flash-lite",
-                    contents=contents,
-                    config={"system_instruction": SYSTEM_PROMPT},
-                )
+            response = client.models.generate_content(
+                model="gemini-3.1-flash-lite",
+                contents=contents,
+                config={"system_instruction": SYSTEM_PROMPT},
+            )
         except Exception as error:
             if "503" in str(error):
                 response = client.models.generate_content(
                     model="gemini-3.1-flash-lite",
                     contents=contents,
-                    config={
-                        "system_instruction": SYSTEM_PROMPT
-                    },
+                    config={"system_instruction": SYSTEM_PROMPT},
                 )
             else:
                 raise
 
-   
+        return {"Status": True, "Response": response.text}
+    except Exception as e:
 
-        return {
-            "Status": True,
-            "Response": response.text
-        }
-    except Exception as e :
-        
         return {"Status": False, "Error": str(e)}

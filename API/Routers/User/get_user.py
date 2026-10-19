@@ -1,6 +1,7 @@
 from fastapi import APIRouter, Request
 from ...Databases.Conn.users import connect_database
 from ...Databases.Conn.trips import connect_database_trip
+
 router = APIRouter()
 
 
@@ -23,8 +24,10 @@ def getUser(request: Request):
         response = cursor.fetchone()
         if not response:
             return {"Status": False, "Error": "The user does not exist."}
-        cursorTrip.execute('select id from trips where session_token = %s', (session_token,))
-        tripExists= cursorTrip.fetchone()
+        cursorTrip.execute(
+            "select id from trips where session_token = %s", (session_token,)
+        )
+        tripExists = cursorTrip.fetchone()
         return {
             "Status": True,
             "name": response[0],
@@ -34,10 +37,10 @@ def getUser(request: Request):
             "moneyalreadyspent": response[6],
             "tripsTaken": response[7],
             "money": response[8],
-            'tripsExists': tripExists is not None
+            "tripsExists": tripExists is not None,
         }
-    except Exception :
-        return {"Status": False, "Error": 'An error occurred'}
+    except Exception:
+        return {"Status": False, "Error": "An error occurred"}
 
     finally:
         if cursor:

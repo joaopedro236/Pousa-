@@ -42,25 +42,25 @@ def get_trips():
                     "ownerName": resultUser[0] if resultUser else None,
                     "ownerImage": resultUser[1] if resultUser else None,
                     "review": trip[8],
-                    'id': trip[9],
+                    "id": trip[9],
                     "cep": trip[10],
                     "street": trip[11] if trip else None,
                     "complement": trip[12] if trip else None,
                     "neighborhood": trip[13] if trip else None,
                     "city": trip[14] if trip else None,
-                    "state":trip[15] if trip else None,
+                    "state": trip[15] if trip else None,
                     "state_code": trip[16] if trip else None,
                     "region": trip[17] if trip else None,
                     "ibge": trip[18] if trip else None,
                     "areacode": trip[19] if trip else None,
                     "siafi": trip[20] if trip else None,
-                    "selected": trip[21]
+                    "selected": trip[21],
                 }
             )
 
         return {"Status": True, "trips": trips}
-    except Exception as e :
-        return {"Status": False, "Error": 'An error occurred'}
+    except Exception as e:
+        return {"Status": False, "Error": "An error occurred"}
     finally:
         if cursor:
             cursor.close()

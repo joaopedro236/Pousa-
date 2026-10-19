@@ -5,14 +5,18 @@ import json
 from psycopg2.extras import Json
 
 from google import genai
+
 router = APIRouter()
 import os
 from dotenv import load_dotenv
 import requests
+
 load_dotenv(".env.apis")
 
-GEMINI_API_KEY = os.getenv('GEMINI_API_KEY')
+GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 client = genai.Client(api_key=GEMINI_API_KEY)
+
+
 @router.post("/trips")
 def trips(dataValidation: Trips, request: Request):
     conn = None
@@ -21,12 +25,11 @@ def trips(dataValidation: Trips, request: Request):
     try:
         conn, cursor = connect_database_trip()
 
-        
         if not session_token:
             return {"Status": False, "Error": "Not session token"}
         moderation = client.models.generate_content(
-        model="gemini-3.1-flash-lite",
-        contents=f"""
+            model="gemini-3.1-flash-lite",
+            contents=f"""
 Analyze this travel trip content.
 
 Name: {dataValidation.name}
@@ -46,18 +49,18 @@ Respond with ONLY:
 SAFE
 or
 BLOCK
-"""
-    )
+""",
+        )
 
         if "BLOCK" in moderation.text.strip().upper():
             return {"Status": False, "Error": "Inappropriate content."}
         response = requests.get(
             f"https://viacep.com.br/ws/{str(dataValidation.cep.strip())}/json/",
-            timeout=10
+            timeout=10,
         )
-        
+
         if response.status_code != 200:
-            return{"Status": False, "Error":response.text}
+            return {"Status": False, "Error": response.text}
         cepResult = response.json()
         cursor.execute(
             """insert into trips(
@@ -65,14 +68,13 @@ BLOCK
             (
                 dataValidation.name,
                 dataValidation.description,
-                
                 dataValidation.numbertravelers,
                 dataValidation.petsAllowed,
                 dataValidation.price,
                 session_token,
                 dataValidation.cep,
                 cepResult["logradouro"],
-                cepResult["complemento"], 
+                cepResult["complemento"],
                 cepResult["bairro"],
                 cepResult["localidade"],
                 cepResult["estado"],
@@ -81,15 +83,12 @@ BLOCK
                 cepResult["ibge"],
                 cepResult["ddd"],
                 cepResult["siafi"],
-                Json(dataValidation.selected)
-
-
-
+                Json(dataValidation.selected),
             ),
         )
         conn.commit()
 
-        return{'Status': True}
+        return {"Status": True}
     except Exception as e:
         return {"Status": False, "Error": str(e)}
 

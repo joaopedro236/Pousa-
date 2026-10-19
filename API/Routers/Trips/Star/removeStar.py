@@ -3,6 +3,7 @@ from ....Databases.Conn.trips import connect_database_trip
 from ....Databases.Conn.users import connect_database
 from ....Validation.Trip.star import buy_trip as data
 from .base import model
+
 router = APIRouter()
 
 
@@ -14,13 +15,11 @@ def removeStar(Data: data, request: Request):
         FROM trips
         WHERE id = %s
         """,
-
         """
         UPDATE usersPousae
         SET star = array_remove(star, %s)
         WHERE session_token = %s
         """,
-
         Data,
-        request
+        request,
     )

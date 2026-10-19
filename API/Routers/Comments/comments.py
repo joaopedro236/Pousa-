@@ -5,6 +5,7 @@ from google import genai
 import os
 from dotenv import load_dotenv
 from datetime import date
+
 router = APIRouter()
 
 load_dotenv(".env.apis")
@@ -20,16 +21,25 @@ def createComment(Data: data, request: Request):
     session_token = request.cookies.get("user_session_token")
     try:
         conn, cursor = connect_database_trip()
-        cursor.execute('select userscomments from trips where id = %s AND %s = ANY(usersComments)', (Data.tripId, session_token))
+        cursor.execute(
+            "select userscomments from trips where id = %s AND %s = ANY(usersComments)",
+            (Data.tripId, session_token),
+        )
         response = cursor.fetchone()
         if response:
-            return {'Status': False, 'Error': "Unfortunately, you've already commented!"}
-        cursor.execute('select endDate from trips where id = %s', (Data.tripId,))
+            return {
+                "Status": False,
+                "Error": "Unfortunately, you've already commented!",
+            }
+        cursor.execute("select endDate from trips where id = %s", (Data.tripId,))
         endDate = cursor.fetchone()
         if not endDate:
-            return{'Status': False, 'Error': 'The end date was not found.'}
+            return {"Status": False, "Error": "The end date was not found."}
         if date.today() < date.fromisoformat(endDate[0]):
-            return{'Status': False, 'Error':"The trip isn't over yet—you can comment once it's finished!"}
+            return {
+                "Status": False,
+                "Error": "The trip isn't over yet—you can comment once it's finished!",
+            }
         moderation = client.models.generate_content(
             model="gemini-3.1-flash-lite",
             contents=f"""
@@ -76,12 +86,13 @@ def createComment(Data: data, request: Request):
         )
         if "BLOCK" in moderation.text.strip().upper():
             return {"Status": False, "Error": "That comment was offensive."}
-        cursor.execute('select review from trips where id  = %s', (Data.tripId,))
+        cursor.execute("select review from trips where id  = %s", (Data.tripId,))
         review = cursor.fetchone()[0]
         if review is None:
             return {"Status": False, "Error": "Trip review not found."}
         new_review = (review * 10 + Data.note) / 11
-        cursor.execute("""
+        cursor.execute(
+            """
             UPDATE trips
             SET
                 comments = array_append(comments, %s),
@@ -89,15 +100,11 @@ def createComment(Data: data, request: Request):
                 review = %s,
                 usersComments = array_append(usersComments, %s)
             WHERE id = %s
-        """, (
-            Data.comment,
-            Data.note,
-            new_review,
-            session_token,
-            Data.tripId
-        ))
+        """,
+            (Data.comment, Data.note, new_review, session_token, Data.tripId),
+        )
         conn.commit()
-        return {'Status': True}
+        return {"Status": True}
     except Exception as e:
         return {"Status": False, "Error": str(e)}
     finally:

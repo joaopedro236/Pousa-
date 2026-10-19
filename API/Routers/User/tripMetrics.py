@@ -2,6 +2,7 @@ from ...Databases.Conn.trips import connect_database_trip
 from ...Databases.Conn.users import connect_database
 from fastapi import APIRouter, Request
 from datetime import date
+
 router = APIRouter()
 
 
@@ -21,7 +22,7 @@ def metrics(request: Request):
             (session_token,),
         )
         trip = cursorTrip.fetchone()
-        if not trip:    
+        if not trip:
             return {"Status": False}
         cursor.execute(
             "select moneyobtained,tripsobtained,last_week,tripsobtainedhistoryS  from usersPousae where session_token = %s",
@@ -39,7 +40,8 @@ def metrics(request: Request):
                 (current_week, session_token),
             )
             conn.commit()
-        cursorTrip.execute("""
+        cursorTrip.execute(
+            """
             SELECT
                     t.name,
                             t.description,
@@ -55,25 +57,29 @@ def metrics(request: Request):
                                                                                                                     LEFT JOIN userspousae u
                                                                                                                             ON t.session_token = u.session_token
                                                                                                                                 WHERE t.session_token = %s
-                                                                                                                                """, (session_token,))
+                                                                                                                                """,
+            (session_token,),
+        )
 
         result = cursorTrip.fetchall()
         trips = []
         for t in result:
-            cursor.execute('select name, image_url from userspousae where session_token = %s', (session_token,))
+            cursor.execute(
+                "select name, image_url from userspousae where session_token = %s",
+                (session_token,),
+            )
             resultUser = cursor.fetchone()
             trips.append(
                 {
                     "name": t[0],
                     "description": t[1],
-                    
                     "numberOfTravelers": t[2],
                     "petsAllowed": t[3],
                     "price": t[4],
-                    "ownerName":resultUser[0] if resultUser else None,
+                    "ownerName": resultUser[0] if resultUser else None,
                     "ownerImage": resultUser[1] if resultUser else None,
-                    "review":t[8],
-                    "id": t [9]
+                    "review": t[8],
+                    "id": t[9],
                 }
             )
         return {
@@ -83,7 +89,7 @@ def metrics(request: Request):
             "Review": trip[1],
             "commentsCount": trip[2],
             "tripsobtainedhistoryS": response[3],
-            "trip": trips
+            "trip": trips,
         }
     except Exception as e:
         return {"Status": False, "Error": str(e)}

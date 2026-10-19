@@ -3,7 +3,8 @@ from ....Databases.Conn.trips import connect_database_trip
 from ....Databases.Conn.users import connect_database
 from ....Validation.Trip.star import buy_trip as data
 
-def model(sql, sqlU,Data: data, request: Request):
+
+def model(sql, sqlU, Data: data, request: Request):
     conn = None
     cursor = None
     cursorTrip = None

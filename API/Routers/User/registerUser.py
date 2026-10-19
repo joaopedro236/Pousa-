@@ -5,18 +5,16 @@ from argon2 import PasswordHasher
 from ...Validation.User.registerUser import registerUser
 from google import genai
 import requests
+
 router = APIRouter()
 ph = PasswordHasher()
 
 import os
 from dotenv import load_dotenv
 
-
-
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 IS_VALID_TIN = os.getenv("IS_VALID_TIN")
 client = genai.Client(api_key=GEMINI_API_KEY)
-
 
 
 @router.post("/registerUser")
@@ -33,24 +31,19 @@ def registerUser(data: registerUser, responseCookie: Response):
             return {"Status": False, "Error": "email already exists."}
         session_token = str(uuid.uuid4())
         hashPassword = ph.hash(data.password)
-        
+
         result = requests.get(
-                "https://api.isvalid.dev/v0/vat",
-                    headers={
-                            "Authorization": f"Bearer {IS_VALID_TIN}"
-                                },
-                                    params={
-                                            "value": data.cpf,
-                                                    "countryCode": data.country
-                                                        }
-                                                        ).json()
+            "https://api.isvalid.dev/v0/vat",
+            headers={"Authorization": f"Bearer {IS_VALID_TIN}"},
+            params={"value": data.cpf, "countryCode": data.country},
+        ).json()
         if not result.get("valid", False):
-                return {
-                        "Status": False,
-                                "Error": result.get("message") or result.get("error") or "Invalid TIN"
-                                    }
+            return {
+                "Status": False,
+                "Error": result.get("message") or result.get("error") or "Invalid TIN",
+            }
         if not result["valid"]:
-            return {"Status": False, "Error":"No TIN"}
+            return {"Status": False, "Error": "No TIN"}
         moderation = client.models.generate_content(
             model="gemini-3.1-flash-lite",
             contents=f"""

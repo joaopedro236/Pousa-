@@ -64,7 +64,6 @@ def getStar(request: Request):
             )
 
         trips = result
-        
 
         return {"Status": True, "Trips": trips}
     except Exception as e:

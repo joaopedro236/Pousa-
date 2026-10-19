@@ -66,7 +66,15 @@ def buy_trip(tripId: validation, request: Request):
             tripsobtainedhistoryS[%s + 1] + %s
                             where session_token = %s
                             """,
-            (tripPriceMultiplied, tripPriceMultiplied, tripId.quantity,day_of_week, day_of_week,tripPriceMultiplied, tripPrice[1]),
+            (
+                tripPriceMultiplied,
+                tripPriceMultiplied,
+                tripId.quantity,
+                day_of_week,
+                day_of_week,
+                tripPriceMultiplied,
+                tripPrice[1],
+            ),
         )
         connUser.commit()
         cursor.execute(
