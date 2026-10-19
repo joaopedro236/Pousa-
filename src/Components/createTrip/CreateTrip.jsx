@@ -37,7 +37,8 @@ export default function CreateTrip({
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const data = Object.fromEntries(new FormData(e.target));
+    const data = new FormData(e.target);
+    data.set("selected", JSON.stringify(selected));
     const file = e.target.uploadImage.files[0];
 
     data.uploadImage = file;
@@ -54,10 +55,8 @@ export default function CreateTrip({
         const response = await fetch(`${import.meta.env.VITE_API_URL}/trips`, {
           method: "POST",
           credentials: "include",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(data),
+        
+          body: data,
         });
         const result = await response.json();
         if (result?.authenticated) {

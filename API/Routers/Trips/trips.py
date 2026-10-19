@@ -74,11 +74,12 @@ BLOCK
             "https://api.imgbb.com/1/upload",
             params={"key": IMGBB_URL},
             files={"image": (file.filename, content, file.content_type)},
-
+            timeout=10
         )
-        save_img_data = save_image.json()
+        
         if not save_image.ok:
-            return{"Status": False, "Error": response.status_code}
+            return{"Status": False, "Error": save_image.status_code}
+        save_image_data= save_image.json()
         cursor.execute(
             """insert into trips(
         name, description,numberOfTravelers, petsAllowed,price, session_token, cep, street, complement, neighborhood, city, state, state_code, region, ibge,areacode, siafi, selected, img_main_url) values( %s,%s,%s,%s,%s,%s,%s,%s, %s, %s,%s,%s,%s, %s, %s, %s, %s, %s,%s)""",
