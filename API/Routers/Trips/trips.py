@@ -19,7 +19,7 @@ client = genai.Client(api_key=GEMINI_API_KEY)
 MAX_SIZE = 5 * 1024 * 1024
 
 @router.post("/trips")
-def trips(dataValidation: Trips, request: Request, file:UploadFile= File(...)):
+async def trips(dataValidation: Trips, request: Request, file:UploadFile= File(...)):
     conn = None
     cursor = None
     session_token = request.cookies.get("user_session_token")
@@ -70,7 +70,7 @@ BLOCK
         if response.status_code != 200:
             return {"Status": False, "Error": response.text}
         cepResult = response.json()
-        save_image =response.post(
+        save_image =requests.post(
             "https://api.imgbb.com/1/upload",
             params={"key": IMGBB_URL},
             files={"image": (file.filename, content, file.content_type)},
