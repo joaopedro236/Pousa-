@@ -1,6 +1,6 @@
 from ...Databases.Conn.trips import connect_database_trip
 from ...Validation.Trip.trips import Trips
-from fastapi import APIRouter, Request
+from fastapi import APIRouter, Request,UploadFile, File
 import json
 from psycopg2.extras import Json
 
@@ -12,16 +12,24 @@ from dotenv import load_dotenv
 import requests
 
 load_dotenv(".env.apis")
-
+load_dotenv(".env")
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
+IMGBB_URL = os.getenv("IMGBB_URL")
 client = genai.Client(api_key=GEMINI_API_KEY)
-
+MAX_SIZE = 5 * 1024 * 1024
 
 @router.post("/trips")
-def trips(dataValidation: Trips, request: Request):
+def trips(dataValidation: Trips, request: Request, file:UploadFile= File(...)):
     conn = None
     cursor = None
     session_token = request.cookies.get("user_session_token")
+    allowed_extensions= {"image/jpeg", "image/png", "image/webp"}
+    if file.content_type not in allowed_extensions:
+        return {"Error": "Only JPG, PNG, or WEBP are allowed", "Status": False}
+    content = await file.read()
+    if len(content)> MAX_SIZE:
+        return {"Error": "The image must be no larger than 5 MB.", "Status": False}
+    temp_path =None
     try:
         conn, cursor = connect_database_trip()
 
@@ -62,9 +70,18 @@ BLOCK
         if response.status_code != 200:
             return {"Status": False, "Error": response.text}
         cepResult = response.json()
+        save_image =response.post(
+            "https://api.imgbb.com/1/upload",
+            params={"key": IMGBB_URL},
+            files={"image": (file.filename, content, file.content_type)},
+
+        )
+        save_img_data = save_image.json()
+        if not save_image.ok:
+            return{"Status": False, "Error": response.status_code}
         cursor.execute(
             """insert into trips(
-        name, description,numberOfTravelers, petsAllowed,price, session_token, cep, street, complement, neighborhood, city, state, state_code, region, ibge,areacode, siafi, selected) values( %s,%s,%s,%s,%s,%s,%s, %s, %s,%s,%s,%s, %s, %s, %s, %s, %s,%s)""",
+        name, description,numberOfTravelers, petsAllowed,price, session_token, cep, street, complement, neighborhood, city, state, state_code, region, ibge,areacode, siafi, selected, img_main_url) values( %s,%s,%s,%s,%s,%s,%s,%s, %s, %s,%s,%s,%s, %s, %s, %s, %s, %s,%s)""",
             (
                 dataValidation.name,
                 dataValidation.description,
@@ -84,6 +101,7 @@ BLOCK
                 cepResult["ddd"],
                 cepResult["siafi"],
                 Json(dataValidation.selected),
+                save_img_data["data"]["url"]
             ),
         )
         conn.commit()

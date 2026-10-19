@@ -1,7 +1,7 @@
 import "./Chatbot.css";
 import { useState, useEffect } from "react";
 import iconGemini from "../../assets/gemini.png";
-export default function Chatbot({ selectedRestaurant, userData, user }) {
+export default function Chatbot({ selectedTrip, userData, user }) {
   const [animate, setAnimate] = useState(false);
 
   useEffect(() => {
@@ -44,13 +44,13 @@ export default function Chatbot({ selectedRestaurant, userData, user }) {
           message: message,
           nameUser: userData?.name,
 
-          nameTrip: selectedRestaurant?.name,
-          descriptionTrip: selectedRestaurant?.description,
-          reviewTrip: selectedRestaurant?.review,
-          priceTrip: selectedRestaurant?.price,
+          nameTrip: selectedTrip?.name,
+          descriptionTrip: selectedTrip?.description,
+          reviewTrip: selectedTrip?.review,
+          priceTrip: selectedTrip?.price,
 
-          petsTrip: selectedRestaurant?.petsAllowed,
-          travelersTrip: selectedRestaurant?.numberOfTravelers,
+          petsTrip: selectedTrip?.petsAllowed,
+          travelersTrip: selectedTrip?.numberOfTravelers,
           quantityMessage: quantityMessage,
         }),
       });

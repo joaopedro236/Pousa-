@@ -37,7 +37,7 @@ async def upload_image(request: Request, file: UploadFile = File(...)):
         data = response.json()
 
         if not response.ok:
-            return {"status": False, "Error": response.status_code}
+            return {"Status": False, "Error": response.status_code}
         cursor.execute(
             """
     UPDATE usersPousae

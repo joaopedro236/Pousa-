@@ -27,7 +27,7 @@ def database():
         state_code: text,
         region: text,
         ibge: int,
-
+        img_main_url TEXT,
         areacode: text,
         siafi: int
         comments text[],

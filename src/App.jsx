@@ -25,7 +25,7 @@ function App() {
   const [user, setUser] = useState(false);
   const [banInfo, setBanInfo] = useState(null);
   const [login, setLogin] = useState(false);
-  const [selectedRestaurant, setSelectedRestaurant] = useState(null);
+  const [selectedTrip, setSelectedRestaurant] = useState(null);
 
   const [itemsNavbar, setItemsNavbar] = useState("explore");
   const [userData, setUserData] = useState(null);
@@ -183,7 +183,7 @@ function App() {
                 userData={userData}
                 itemsNavbar={itemsNavbar}
                 setItemsNavbar={setItemsNavbar}
-                selectedRestaurant={selectedRestaurant}
+                selectedTrip={selectedTrip}
                 setSelectedRestaurant={setSelectedRestaurant}
                 stars={stars}
                 starTrip={starTrip}
@@ -199,7 +199,7 @@ function App() {
                 user={user}
                 getTripHistory={getTripHistory}
                 starTrip={starTrip}
-                selectedRestaurant={selectedRestaurant}
+                selectedTrip={selectedTrip}
                 setSelectedRestaurant={setSelectedRestaurant}
                 itemsNavbar={itemsNavbar}
               />
@@ -239,7 +239,7 @@ function App() {
         />
         <Chatbot
           user={user}
-          selectedRestaurant={selectedRestaurant}
+          selectedTrip={selectedTrip}
           userData={userData}
         />
         <Footer />

@@ -11,7 +11,7 @@ export default function TripsActive({
   user,
   starTrip,
   getTripHistory,
-  selectedRestaurant,
+  selectedTrip,
   setSelectedRestaurant,
 }) {
   const [loading, setLoading] = useState(false);
@@ -22,7 +22,7 @@ export default function TripsActive({
   const { tripId } = useParams();
   const navigate = useNavigate();
   useEffect(() => {
-    if (selectedRestaurant || !tripId) return;
+    if (selectedTrip || !tripId) return;
 
     const fetchTrip = async () => {
       try {
@@ -61,7 +61,7 @@ export default function TripsActive({
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          id: selectedRestaurant?.id,
+          id: selectedTrip?.id,
           quantity: Number(tripQuantity),
         }),
       });
@@ -82,11 +82,11 @@ export default function TripsActive({
   const [starActive, setStarActive] = useState(false);
   useEffect(() => {
     const isFavorite = Array.isArray(starTrip)
-      ? starTrip.some((star) => star?.id === selectedRestaurant?.id)
+      ? starTrip.some((star) => star?.id === selectedTrip?.id)
       : false;
 
     setStarActive(isFavorite);
-  }, [starTrip, selectedRestaurant?.id]);
+  }, [starTrip, selectedTrip?.id]);
   const addStar = async () => {
     try {
       const responseAS = await fetch(
@@ -98,7 +98,7 @@ export default function TripsActive({
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            id: selectedRestaurant?.id,
+            id: selectedTrip?.id,
           }),
         },
       );
@@ -123,7 +123,7 @@ export default function TripsActive({
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            id: selectedRestaurant?.id,
+            id: selectedTrip?.id,
           }),
         },
       );
@@ -156,7 +156,7 @@ export default function TripsActive({
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            id: selectedRestaurant?.id,
+            id: selectedTrip?.id,
           }),
         },
       );
@@ -171,10 +171,10 @@ export default function TripsActive({
     }
   };
   useEffect(() => {
-    if (selectedRestaurant) {
+    if (selectedTrip) {
       getComment();
     }
-  }, [selectedRestaurant]);
+  }, [selectedTrip]);
   const [showAllComments, setShowAllComments] = useState(false);
   const createComment = async () => {
     try {
@@ -187,7 +187,7 @@ export default function TripsActive({
           },
           credentials: "include",
           body: JSON.stringify({
-            tripId: selectedRestaurant?.id,
+            tripId: selectedTrip?.id,
             comment: message,
             note: Number(note),
           }),
@@ -203,61 +203,61 @@ export default function TripsActive({
     }
   };
   const locationItems = [
-    { key: "cep", label: "CEP", value: selectedRestaurant?.cep || "No cep" },
+    { key: "cep", label: "CEP", value: selectedTrip?.cep || "No cep" },
     {
       key: "street",
       label: "Street",
-      value: selectedRestaurant?.street || "No street",
+      value: selectedTrip?.street || "No street",
     },
     {
       key: "complement",
       label: "Complement",
-      value: selectedRestaurant?.complement || "No complement",
+      value: selectedTrip?.complement || "No complement",
     },
     {
       key: "neighborhood",
       label: "Neighborhood",
-      value: selectedRestaurant?.neighborhood || "No neighborhood",
+      value: selectedTrip?.neighborhood || "No neighborhood",
     },
     {
       key: "city",
       label: "City",
-      value: selectedRestaurant?.city || "No city",
+      value: selectedTrip?.city || "No city",
     },
     {
       key: "state",
       label: "State",
-      value: selectedRestaurant?.state || "No State",
+      value: selectedTrip?.state || "No State",
     },
     {
       key: "state_code",
       label: "State Code",
-      value: selectedRestaurant?.state_code || "No State Code",
+      value: selectedTrip?.state_code || "No State Code",
     },
     {
       key: "region",
       label: "Region",
-      value: selectedRestaurant?.region || "No region",
+      value: selectedTrip?.region || "No region",
     },
     {
       key: "ibge",
       label: "Ibge",
-      value: selectedRestaurant?.ibge || "No ibge",
+      value: selectedTrip?.ibge || "No ibge",
     },
     {
       key: "area_code",
       label: "Area code",
-      value: selectedRestaurant?.area_code || "No Area Code",
+      value: selectedTrip?.area_code || "No Area Code",
     },
     {
       key: "siafi",
       label: "Siafi",
-      value: selectedRestaurant?.siafi || "No Siafi",
+      value: selectedTrip?.siafi || "No Siafi",
     },
   ];
   const [showDatePicker, setShowDatePicker] = useState(false);
   const [selectedDate, setSelectedDate] = useState([]);
-  const availableDates = selectedRestaurant?.selected ?? {};
+  const availableDates = selectedTrip?.selected ?? {};
 
   const availableDateList = Object.entries(availableDates)
     .filter(([, status]) => status === "available")
@@ -283,7 +283,7 @@ export default function TripsActive({
     <>
       <section
         className={`tripsActive position-relative ${
-          itemsNavbar == "explore" && user && selectedRestaurant != null
+          itemsNavbar == "explore" && user && selectedTrip != null
             ? "show-home"
             : "hide-home"
         } w-100 flex-column gap-3`}
@@ -298,7 +298,7 @@ export default function TripsActive({
           >
             X
           </button>
-          <img src={hiddenPhoto} alt="hiddenPhoto" loading="lazy" />
+          <img src={ selectedTrip?.img_main_url||hiddenPhoto} alt="hiddenPhoto" loading="lazy" />
         </header>
         <div className="tripsActiveContent  mt-2 px-3 position-relative">
           <header className="d-flex flex-column position-relative align-items-center rounded p-4 justify-contnet-center">
@@ -310,29 +310,29 @@ export default function TripsActive({
             </button>
 
             <h1 className="fw-normal text-center">
-              {selectedRestaurant?.name}
+              {selectedTrip?.name}
             </h1>
             <p className="text-center">
-              {selectedRestaurant?.description?.split(" ").length > 5
-                ? selectedRestaurant?.description
+              {selectedTrip?.description?.split(" ").length > 5
+                ? selectedTrip?.description
                     ?.split(" ")
                     .slice(0, 12)
                     .join(" ") + "..."
-                : selectedRestaurant?.description}
+                : selectedTrip?.description}
             </p>
             <p>
-              {selectedRestaurant?.price?.toLocaleString("en-US", {
+              {selectedTrip?.price?.toLocaleString("en-US", {
                 style: "currency",
                 currency: "USD",
               })}
             </p>
             <div className="stars d-flex flex-column align-items-center justify-content-center text-center ">
-              <h1 className="mb-0 fw-normal">{selectedRestaurant?.review}</h1>
+              <h1 className="mb-0 fw-normal">{selectedTrip?.review}</h1>
               <div>
                 {[1, 2, 3, 4, 5].map((star) => (
                   <span
                     key={star}
-                    className={`${star <= selectedRestaurant?.review ? "star filled" : "star"}`}
+                    className={`${star <= selectedTrip?.review ? "star filled" : "star"}`}
                   >
                     ★
                   </span>
@@ -343,8 +343,8 @@ export default function TripsActive({
           <div className="tripRight">
             <div className="ownerTrip  d-flex flex-wrap gap-3  rounded p-3">
               <img
-                src={selectedRestaurant?.ownerImage || hiddenUser}
-                alt={selectedRestaurant?.ownerName}
+                src={selectedTrip?.ownerImage || hiddenUser}
+                alt={selectedTrip?.ownerName}
                 loading="lazy"
                 onError={(e) => {
                   e.currentTarget.onerror = null;
@@ -353,24 +353,24 @@ export default function TripsActive({
               />
               <div className="mt-2">
                 <p className="mb-0">owner</p>
-                <h1 className="mb-0">{selectedRestaurant?.ownerName}</h1>
+                <h1 className="mb-0">{selectedTrip?.ownerName}</h1>
               </div>
             </div>
             <div className="tagsTrip d-flex flex-column gap-3 rounded p-4 ">
               <h1 className="fw-normal text-center">Tags</h1>
               <div className="d-flex flex-wrap gap-3 align-items-center justify-content-center">
                 <span>
-                  👥 {selectedRestaurant?.numberOfTravelers} travelers
+                  👥 {selectedTrip?.numberOfTravelers} travelers
                 </span>
                 <span>
                   💰{" "}
-                  {selectedRestaurant?.price?.toLocaleString("en-US", {
+                  {selectedTrip?.price?.toLocaleString("en-US", {
                     style: "currency",
                     currency: "USD",
                   })}
                 </span>
-                <span>⭐ {selectedRestaurant?.review}</span>
-                <span>😺 Pets {selectedRestaurant?.petsAllowed}</span>
+                <span>⭐ {selectedTrip?.review}</span>
+                <span>😺 Pets {selectedTrip?.petsAllowed}</span>
               </div>
             </div>
             <div className="tagsLocalition tagsTrip d-flex flex-column gap-3 rounded p-4">
@@ -396,7 +396,7 @@ export default function TripsActive({
           <div className="descriptionTrip d-flex flex-column rounded gap-2 p-4">
             <h2>Description</h2>
 
-            <p>{selectedRestaurant?.description}</p>
+            <p>{selectedTrip?.description}</p>
           </div>
           <div className="commentsTrip d-flex flex-column rounded gap-3 p-4">
             <header>
@@ -508,13 +508,13 @@ export default function TripsActive({
                     value === "" ||
                     (Number(value) >= 1 &&
                       Number(value) <=
-                        Number(selectedRestaurant?.numberOfTravelers))
+                        Number(selectedTrip?.numberOfTravelers))
                   ) {
                     setTripQuantity(value);
                   }
                 }}
                 min={1}
-                max={Number(selectedRestaurant?.numberOfTravelers)}
+                max={Number(selectedTrip?.numberOfTravelers)}
               />
             </form>
 

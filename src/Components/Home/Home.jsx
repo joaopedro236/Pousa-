@@ -23,7 +23,7 @@ const parseBooleanValue = (value) => {
 export default function Home({
   user,
   userData,
-  selectedRestaurant,
+  selectedTrip,
   setSelectedRestaurant,
   itemsNavbar,
   setItemsNavbar,
@@ -121,7 +121,7 @@ export default function Home({
     <>
       <section
         className={`home ${
-          user && itemsNavbar == "explore" && selectedRestaurant == null
+          user && itemsNavbar == "explore" && selectedTrip == null
             ? "show-home"
             : "hide-home"
         } flex-column gap-2`}
@@ -330,7 +330,7 @@ export default function Home({
       </section>
 
       <TripsActive
-        selectedRestaurant={selectedRestaurant}
+        selectedTrip={selectedTrip}
         stars={stars}
         starTrip={starTrip}
         user={user}
