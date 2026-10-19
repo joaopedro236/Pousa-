@@ -290,6 +290,7 @@ export default function Home({
                 sessionStorage.setItem("selectedTrip", JSON.stringify(trip));
                 setSelectedRestaurant(trip);
                 navigate(`/trip/${trip.id}`);
+                window.location.reload()
               }}
             >
               <div>
