@@ -6,7 +6,7 @@ router = APIRouter()
 
 
 @router.get("/getTrips")
-def get_trips():
+async def get_trips():
     conn = None
     cursor = None
     connUser = None
