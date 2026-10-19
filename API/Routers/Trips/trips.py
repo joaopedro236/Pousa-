@@ -1,6 +1,6 @@
 from ...Databases.Conn.trips import connect_database_trip
 from ...Validation.Trip.trips import Trips
-from fastapi import APIRouter, Request, UploadFile, File
+from fastapi import APIRouter, Request, UploadFile, File, Form
 import json
 from psycopg2.extras import Json
 
@@ -20,7 +20,17 @@ MAX_SIZE = 5 * 1024 * 1024
 
 
 @router.post("/trips")
-async def trips(dataValidation: Trips, request: Request, file: UploadFile = File(...)):
+async def trips(
+    request: Request,
+    name: str = Form(...),
+    description: str = Form(...),
+    selected: str = Form(...),
+    numbertravelers: int = Form(...),
+    petsAllowed: str = Form(...),
+    price: float = Form(...),
+    cep: str = Form(...),
+    file: UploadFile = File(...),
+):
     conn = None
     cursor = None
     session_token = request.cookies.get("user_session_token")
@@ -39,13 +49,15 @@ async def trips(dataValidation: Trips, request: Request, file: UploadFile = File
         if not session_token:
             return {"Status": False, "Error": "Not session token"}
 
+        selected_data = json.loads(selected) if isinstance(selected, str) else selected
+
         moderation = client.models.generate_content(
             model="gemini-3.1-flash-lite",
             contents=f"""
 Analyze this travel trip content.
 
-Name: {dataValidation.name}
-Description: {dataValidation.description}
+Name: {name}
+Description: {description}
 
 Block only if the content contains:
 - Hate speech
@@ -68,7 +80,7 @@ BLOCK
             return {"Status": False, "Error": "Inappropriate content."}
 
         response = requests.get(
-            f"https://viacep.com.br/ws/{str(dataValidation.cep.strip())}/json/",
+            f"https://viacep.com.br/ws/{str(cep.strip())}/json/",
             timeout=10,
         )
 
@@ -116,13 +128,13 @@ BLOCK
             )
             """,
             (
-                dataValidation.name,
-                dataValidation.description,
-                dataValidation.numbertravelers,
-                dataValidation.petsAllowed,
-                dataValidation.price,
+                name,
+                description,
+                numbertravelers,
+                petsAllowed,
+                price,
                 session_token,
-                dataValidation.cep,
+                cep,
                 cepResult.get("logradouro"),
                 cepResult.get("complemento"),
                 cepResult.get("bairro"),
@@ -133,7 +145,7 @@ BLOCK
                 cepResult.get("ibge"),
                 cepResult.get("ddd"),
                 cepResult.get("siafi"),
-                Json(dataValidation.selected),
+                Json(selected_data),
                 save_image_data["data"]["url"],
             ),
         )
