@@ -40,9 +40,6 @@ export default function CreateTrip({
     const data = new FormData(e.target);
     data.set("selected", JSON.stringify(selected));
     const file = e.target.uploadImage.files[0];
-
-    data.uploadImage = file;
-    data.selected = selected;
     try {
       setError(false);
       setErrorMessage("");
@@ -219,7 +216,7 @@ export default function CreateTrip({
             ))}
             <div className="mb-3">
               <label htmlFor="uploadImage">Place printable image</label>
-              <input type="file"  accept="image/jpeg,image/png,image/webp" name="uploadImage" className="form-control" id="uploadImage" />
+              <input type="file"  accept="image/jpeg,image/png,image/webp" name="uploadImage" className="form-control" id="file" />
             </div>
             <div className="mb-3">
               <label htmlFor="petsAllowed" className="form-label">
