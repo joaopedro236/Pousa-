@@ -3,7 +3,7 @@ import TripsActive from "./components/TripsActive";
 import { useState, useEffect } from "react";
 import photoUser from "../../assets/user.png";
 import { useNavigate, useParams } from "react-router-dom";
-import hiddenPhoto from "../../../assets/banner.jpeg";
+import hiddenPhoto from "../../assets/banner.jpeg";
 
 const normalizeDateValue = (value) => {
   if (!value) return null;
