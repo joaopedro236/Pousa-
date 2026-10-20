@@ -295,7 +295,7 @@ export default function Home({
               }}
             >
               <img src={trip?.img_main_url || hiddenPhoto} alt="photo trip" className="tripImage"/>
-              <div>
+              <div className="mt-2">
                 <h2>{trip.name}</h2>
                 <p>{trip.description}</p>
               </div>

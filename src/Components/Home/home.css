@@ -26,9 +26,10 @@
     transition: all 0.25s ease;
 }
 .tripImage{
-    height:350px;
+    height:320px;
     border-radius: 18px;
     width: 100%;
+    object-fit: cover;
 }
 .search-box:hover {
     border-color: #cfd5dc;
