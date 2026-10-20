@@ -25,7 +25,11 @@
     box-shadow: 0 4px 18px rgba(0, 0, 0, 0.06);
     transition: all 0.25s ease;
 }
-
+.tripImage{
+    height:350px;
+    border-radius: 18px;
+    width: 100%;
+}
 .search-box:hover {
     border-color: #cfd5dc;
     box-shadow: 0 6px 22px rgba(0, 0, 0, 0.09);

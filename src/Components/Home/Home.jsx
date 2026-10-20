@@ -3,6 +3,7 @@ import TripsActive from "./components/TripsActive";
 import { useState, useEffect } from "react";
 import photoUser from "../../assets/user.png";
 import { useNavigate, useParams } from "react-router-dom";
+import hiddenPhoto from "../../../assets/banner.jpeg";
 
 const normalizeDateValue = (value) => {
   if (!value) return null;
@@ -293,6 +294,7 @@ export default function Home({
                 window.location.reload()
               }}
             >
+              <img src={trip?.img_main_url || hiddenPhoto} alt="photo trip" className="tripImage"/>
               <div>
                 <h2>{trip.name}</h2>
                 <p>{trip.description}</p>
