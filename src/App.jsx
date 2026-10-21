@@ -120,9 +120,9 @@ function App() {
   useEffect(() => {
     getTripHistory();
   }, []);
-  //if (loading) {
+  if (loading) {
     //return <Loading />;
-  //}
+  }
   return (
     <>
       <VLibras />
