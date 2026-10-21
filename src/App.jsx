@@ -87,7 +87,7 @@ function App() {
 
   useEffect(() => {
     const initializeApp = async () => {
-      await Promise.all([checkUser(), getUser(), stars()]);
+      await Promise.all([checkUser(), getUser()]);
 
       setLoading(false);
     };
