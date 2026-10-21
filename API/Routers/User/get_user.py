@@ -39,7 +39,7 @@ def getUser(request: Request):
         
         for idTripStar in trips:
             cursor.execute(
-                "select name, image_u from usersPousae where session_token =%s",
+                "select name, image_url from usersPousae where session_token =%s",
                 (idTripStar[8],)
             )
             ownerOfTheTrip= cursor.fetchone()
