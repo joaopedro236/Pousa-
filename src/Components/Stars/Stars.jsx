@@ -7,6 +7,7 @@ export default function Star({
   setSelectedRestaurant,
   json,
 }) {
+  console.log(json)
   return (
     <>
       <section
