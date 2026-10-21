@@ -28,8 +28,7 @@ export default function Home({
   setSelectedRestaurant,
   itemsNavbar,
   setItemsNavbar,
-  starTrip,
-  stars,
+  starTrip
 }) {
   const [json, setJson] = useState({ trips: [] });
   const [search, setSearch] = useState("");
@@ -333,7 +332,7 @@ export default function Home({
 
       <TripsActive
         selectedTrip={selectedTrip}
-        stars={stars}
+        
         starTrip={starTrip}
         user={user}
         itemsNavbar={itemsNavbar}

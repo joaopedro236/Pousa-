@@ -18,16 +18,46 @@ def getUser(request: Request):
         conn, cursor = connect_database()
         connTrip, cursorTrip = connect_database_trip()
         cursor.execute(
-            """select name, email, password, cpf, session_token,image_url,moneyalreadyspent ,  tripstaken,money from usersPousae  where session_token = %s""",
-            (session_token,),
+            """select name, email, password, cpf, session_token,image_url,moneyalreadyspent ,  tripstaken,money, star from usersPousae  where session_token = %s""",
+            (session_token,)
         )
         response = cursor.fetchone()
+        starUser =response[9]
         if not response:
             return {"Status": False, "Error": "The user does not exist."}
+        cursorTrip.execute("select id from trips where session_token =%s",(session_token,))
+        idTripStar = cursorTrip.fetchone()
+        tripsExists= False if not idTripStar[0] else True
         cursorTrip.execute(
-            "select id from trips where session_token = %s", (session_token,)
+            "select id, name, description, numberOfTravelers, petsAllowed, price, review, usersPurchased, session_token from trips where id= %s", (response,)
         )
-        tripExists = cursorTrip.fetchone()
+        trips = cursorTrip.fetchall()
+        
+        if not trips:
+            trips =[]
+        trip=[] 
+        
+        for idTripStar in trips:
+            cursor.execute(
+                "select name, image_u from usersPousae where session_token =%s",
+                (idTripStar[8],)
+            )
+            ownerOfTheTrip= cursor.fetchone()
+            trip.append(
+                {
+                    "id": idTripStar[0],
+                    "name":idTripStar[1],
+                    "description": idTripStar[2],
+                    "numberOfTravelers":idTripStar[3],
+                    "petsAllowed": idTripStar[4],
+                    "price":idTripStar[5],
+                    "review": idTripStar[6],
+                    "usersPurchased": idTripStar[7],
+                    "ownerName": ownerOfTheTrip[0] if ownerOfTheTrip else None,
+                    "ownerImage": ownerOfTheTrip[1] if ownerOfTheTrip else None
+                }
+            )
+            trips = trip
         return {
             "Status": True,
             "name": response[0],
@@ -37,7 +67,8 @@ def getUser(request: Request):
             "moneyalreadyspent": response[6],
             "tripsTaken": response[7],
             "money": response[8],
-            "tripsExists": tripExists is not None,
+            "tripsExists": tripExists,
+            "favoriteTrips":trips
         }
     except Exception:
         return {"Status": False, "Error": "An error occurred"}

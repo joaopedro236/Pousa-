@@ -75,7 +75,7 @@ function App() {
       }
 
       setUserData(data);
-
+      setStarTrip(userData?.favoriteTrips)
       return data;
     } catch (error) {
       console.error(error);
@@ -83,35 +83,7 @@ function App() {
     }
   };
 
-  const stars = async () => {
-    try {
-      const responseStar = await fetch(
-        `${import.meta.env.VITE_API_URL}/getStar`,
-        {
-          method: "GET",
-          credentials: "include",
-        },
-      );
-
-      const dataStar = await responseStar.json();
-
-      if (dataStar?.Status) {
-        setStarTrip(dataStar.Trips || []);
-      } else {
-        setStarTrip([]);
-      }
-
-      if (dataStar?.Error) {
-        console.error(dataStar.Error);
-      }
-
-      return dataStar;
-    } catch (error) {
-      console.error(error);
-      setStarTrip([]);
-      return null;
-    }
-  };
+  
 
   useEffect(() => {
     const initializeApp = async () => {
@@ -185,7 +157,7 @@ function App() {
                 setItemsNavbar={setItemsNavbar}
                 selectedTrip={selectedTrip}
                 setSelectedRestaurant={setSelectedRestaurant}
-                stars={stars}
+                
                 starTrip={starTrip}
               />
             }
@@ -195,7 +167,7 @@ function App() {
             path="/trip/:tripId"
             element={
               <TripsActive
-                stars={stars}
+              
                 user={user}
                 getTripHistory={getTripHistory}
                 starTrip={starTrip}

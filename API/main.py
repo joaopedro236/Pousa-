@@ -12,7 +12,7 @@ from API.Routers.User.login import router as login
 from API.Routers.Trips.buyTrip import router as buyTrip
 from API.Routers.Trips.Star.addStar import router as addStar
 from API.Routers.Trips.Star.removeStar import router as removeStar
-from API.Routers.Trips.Star.getStar import router as getStar
+
 from API.Routers.Chatbot.chatbot import router as chatbot
 from API.Routers.Comments.comments import router as createComments
 from API.Routers.Comments.getComments import router as getComments
@@ -76,7 +76,6 @@ app.include_router(login)
 app.include_router(buyTrip)
 app.include_router(addStar)
 app.include_router(removeStar)
-app.include_router(getStar)
 app.include_router(chatbot)
 app.include_router(createComments)
 app.include_router(getComments)

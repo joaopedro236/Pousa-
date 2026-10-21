@@ -7,7 +7,7 @@ import { DayPicker } from "react-day-picker";
 import "react-day-picker/style.css";
 export default function TripsActive({
   itemsNavbar,
-  stars,
+  
   user,
   starTrip,
   getTripHistory,
@@ -107,7 +107,7 @@ export default function TripsActive({
         console.error(dataAS?.Error);
       }
       setStarActive(true);
-      await stars();
+      
     } catch (error) {
       console.error(error);
     }
@@ -132,7 +132,7 @@ export default function TripsActive({
         console.error(dataRS?.Error);
       }
       setStarActive(false);
-      await stars();
+      
     } catch (error) {
       console.error(error);
     }
