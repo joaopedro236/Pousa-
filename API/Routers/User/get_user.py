@@ -70,8 +70,8 @@ def getUser(request: Request):
             "tripsExists": tripExists,
             "favoriteTrips":trips
         }
-    except Exception:
-        return {"Status": False, "Error": "An error occurred"}
+    except Exception as e:
+        return {"Status": False, "Error": str(e)}
 
     finally:
         if cursor:
