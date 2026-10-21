@@ -27,7 +27,7 @@ def getUser(request: Request):
             return {"Status": False, "Error": "The user does not exist."}
         cursorTrip.execute("select id from trips where session_token =%s",(session_token,))
         idTripStar = cursorTrip.fetchone()
-        tripsExists= False if not idTripStar[0] else True
+        tripExists= False if not idTripStar[0] else True
         cursorTrip.execute(
             "select id, name, description, numberOfTravelers, petsAllowed, price, review, usersPurchased, session_token from trips where id= %s", (starUser,)
         )
