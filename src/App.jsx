@@ -29,7 +29,7 @@ function App() {
 
   const [itemsNavbar, setItemsNavbar] = useState("explore");
   const [userData, setUserData] = useState(null);
-  const [starTrip, setStarTrip] = useState(null);
+  const [starTrip, setStarTrip] = useState([]);
   const [loading, setLoading] = useState(true);
 
   const checkUser = async () => {
@@ -75,7 +75,7 @@ function App() {
       }
 
       setUserData(data);
-      setStarTrip(userData?.favoriteTrips)
+      setStarTrip(userData?.favoriteTrips ||[])
       return data;
     } catch (error) {
       console.error(error);
