@@ -29,7 +29,7 @@ def getUser(request: Request):
         idTripStar = cursorTrip.fetchone()
         tripExists= False if not idTripStar[0] else True
         cursorTrip.execute(
-            "select id, name, description, numberOfTravelers, petsAllowed, price, review, usersPurchased, session_token from trips where id= %s", (starUser,)
+            "select id, name, description, numberOfTravelers, petsAllowed, price, review, usersPurchased, session_token from trips where id= ANY(%s)", (starUser,)
         )
         trips = cursorTrip.fetchall()
         
