@@ -75,7 +75,7 @@ function App() {
       }
 
       setUserData(data);
-      setStarTrip(userData?.favoriteTrips ||[])
+      setStarTrip(data?.favoriteTrips ||[])
       return data;
     } catch (error) {
       console.error(error);
