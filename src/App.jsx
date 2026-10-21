@@ -121,7 +121,7 @@ function App() {
     getTripHistory();
   }, []);
   if (loading) {
-    //return <Loading />;
+    <return <Loading />;
   }
   return (
     <>
