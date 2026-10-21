@@ -1,0 +1,295 @@
+[33m1150ce9[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m Use userInfo.favoriteTrips safely in Stars component
+[33mbf86889[m Replace starTrip usage with favoriteTrips prop to avoid undefined variable errors
+[33m0658e75[m fix: update app.jsz
+[33me6196db[m fix: Optimizing the backend
+[33m50c5501[m styles: update home.jsx
+[33m5971830[m styles: update home.css
+[33m3c4220f[m feat: Add travel photo to homepage
+[33mfb00d8d[m feat: Add travel photo to homepage
+[33mf2ed82e[m fix: update trips.py
+[33m30b06b4[m fix: update createtrip.jsx
+[33m38bb281[m fix: update createtrip.jsx
+[33m8252ec9[m fix: update createtrip.jsx
+[33m1027401[m Fix trip creation route for multipart form submissions and selected field parsing
+[33m52fc0bb[m Fix trip creation route: correct SQL INSERT, typo, and upload handling
+[33mc469187[m fix: update create trip
+[33m40f4102[m fix: update trip.py
+[33m821a3ca[m fix: update trips.py
+[33m50e4fb6[m feat: put photo on trip
+[33m85c8d61[m feat: add tests
+[33mb90df2c[m fix: update home.jsx
+[33m3fe1cc2[m fix: update tripActive.jsx
+[33m5b8eca8[m fix: update tripsActive.jsx
+[33mc41d58d[m fix: update datapicker
+[33me0cf560[m fix: update createTrip.jsx
+[33m2206527[m fix: update tripActive.jsx
+[33m36967fd[m fix: update tripsActive
+[33m50e9c32[m fix: update trips.py
+[33m656e2e1[m fix: update trips.py
+[33m5bd30ce[m fix: update gettrips.py
+[33m5daf6d6[m Fix(CreateTrip): attach handleSubmit to form and use selected in DayPicker modifiers (minimal changes)
+[33mf67eff6[m Fix: use correct column index for session_token in tripsHistory (row[6] instead of row[8]) to prevent tuple index out of range
+[33mee080d0[m fix: update api
+[33mc0b9547[m fix: update createtrip.jsx
+[33mf21db33[m fix: update createTrip.jsx
+[33mbf9627d[m fix: remove startDate and endDate
+[33m10fcd87[m fix: correct day picker imports
+[33m86da637[m fix: update create trip
+[33mf6c710e[m fix: update create trip
+[33m084d117[m Tighten filter logic to exact comparisons and retain labeled filters
+[33m2864217[m Add small labels to Explore filter fields
+[33m4fbe65d[m Add more explore filters: price, rating, travelers, pet
+[33m192a162[m Add explore pet filter and apply button
+[33m8391cc5[m Add styles for explore date filter and filter button
+[33m3805f4f[m Refine date filter UI: labels, placeholders and actions
+[33md1b9b29[m Move minimal date range filter to Home with toggle button
+[33mc8e2e15[m Remove date filter from TripHistory (moved to Home)
+[33m53982b7[m Add minimal date range filter to TripHistory
+[33m2aebc18[m fix: update tripmetrics.py
+[33m2a07038[m fix: update registerUser.jsx
+[33ma25ee91[m fix: update login.jsx
+[33m23709eb[m fix: update ban
+[33m38e0889[m Minimal: preserve boolean user state and add banInfo to show ban screen
+[33m6ce501c[m fix: update registerUser.jsx
+[33m8d4b01b[m feat: update Login.jsx
+[33m0b8213b[m feat: update Login.jsx
+[33m2637d76[m feat: add router ban brute force
+[33mab30879[m fix(ban): ensure bans table exists on connect
+[33m69a5c42[m fix(ban): use repo DB path
+[33m80ab81c[m fix(login): insert into correct "bans" table to match schema
+[33mc628d97[m fix: update banUser.py
+[33m320e49b[m fix: update ban
+[33m98e384a[m fix: update checkUser.py
+[33m2c2773d[m feat: add protection for brute force
+[33m366746b[m chore: clean README — remove roadmap and contributing sections, polish content
+[33m4449551[m Improve README wording and documentation in English
+[33m63ae2f3[m Revert tripsActive.css and set background and border for tagsLocalition (minimal change)
+[33mcacaca3[m Set tagsLocalition card background to match tags card
+[33m81c28ce[m Make location card match tags style and add see more toggle
+[33ma1dc44c[m Update location card layout in tripsActive CSS
+[33m00febd6[m feat: update tripActive.jsx
+[33m59a9376[m fix: update tripsActive.jsx
+[33m5ea5e8b[m feat: add cep in getTrips.py
+[33m5b5b7a6[m feat: add cep in getTrips.py
+[33m2e7cd77[m Fix CEP validation type to string for ViaCEP compatibility
+[33mecadca8[m fix: update trips.py
+[33mf3daf75[m fix: update trips.py
+[33m0074716[m fix: update trips.py
+[33me4c8498[m fix: update trips.py
+[33m981c8e9[m fix: update trips.py
+[33ma440618[m fix: update trips.py and formate src
+[33m9462363[m fix: update trips.py
+[33mfcdb4a9[m fix: update trips.py
+[33mfe6766d[m fix: update trips.py
+[33m7b5db75[m fix: update trips.py
+[33m517e8d1[m fix: update trips.py
+[33m49536a8[m feat: add cep verification
+[33ma20129c[m fix: update inputs in create trip
+[33m6146f5d[m feat: add cep in create trip
+[33m66e5d77[m fix: update chatbot
+[33m1bdf65e[m fix: update chatbot
+[33mc42bc19[m fix: update deleteTrip.py
+[33md82ba6c[m fix: correct application json content type
+[33mbe3ce0b[m feat: add deleteTrip
+[33m2eeca52[m feat: add cards (tripsDashboard)
+[33m22a1af1[m fix: update tripMetrics.py
+[33mdce78d5[m fix: update tripMetrics.py
+[33m801dd47[m fix: update requirements.txt
+[33md46e9ba[m fix: update requirements.txt
+[33m5bc6a39[m feat: update tripsMetrics.py
+[33m90649fc[m Reduce API requirements.txt to the minimal runtime dependencies actually used by the backend
+[33mdb8f0e7[m Remove language badges from README
+[33m53cb75d[m docs: Translate README to English and fix image references
+[33md2b8d3b[m styles: update footer.css
+[33m10437ec[m styles: update footer.css
+[33m49acfc9[m styles: update footer.css
+[33m5d8963f[m styles: update assets.css
+[33m8dbf764[m styles: update assets.css and footer.css
+[33md84b821[m feat: add Footer
+[33m7e50cd0[m fix: update cardsJson (tripDashboard)
+[33m5d2cb82[m Filter out 'NoneType' is not subscriptable error from showing alerts
+[33m96ab536[m Fix React hooks error and filter console alerts when user not registered
+[33m218eab1[m fix: update app.jsx
+[33m6852a9a[m fix: update main.jsx
+[33m73ab2da[m feat: add loading lazy for images
+[33m0e090f6[m Restaura ícones das stacks, notas e detalhe do README conforme solicitado pelo autor.
+[33ma66251a[m Atualiza o README com uma versão mais premium e profissional do PousaÊ.
+[33m39b7677[m Atualiza o README do projeto PousaÊ para refletir a estrutura atual e as tecnologias do repositório.
+[33m844b7a1[m fix: update registerUser.jsx
+[33m5635c1b[m fix: update main.jsx
+[33mefa9977[m styles: update main.jsx and registerUser.css
+[33me3bfae1[m fix: update registerUser.py
+[33m814bd28[m fix: update registerUser.jsx
+[33m51ca5fb[m update README
+[33m3d2035b[m fix: update registerUser.py
+[33m5cc7149[m fix: update registerUser.py
+[33mcbd0e6a[m fix: update registerUser.py
+[33mafb6fb0[m fix: update registerUser.py
+[33m04e0c34[m fix: update registerUser.py
+[33m5dce3b0[m fix: update registerUser.jsx
+[33m1c2c9bf[m fix: update suggestedDescription.py
+[33mb14267a[m fix: update createTrip.jsx
+[33mc24067f[m fix: update createTrip.jsx
+[33ma2d136c[m fix: update createTrip.jsx
+[33mcd35f81[m fix: update createTrip.jsx
+[33ma892ea8[m fix: update main
+[33m55213ba[m stylez: update createTrip.css
+[33m13fe9e6[m fix: update createTrip
+[33m95f0606[m styles: updatw createTrip.css
+[33mb4a84aa[m fix: update createTrip.jsx
+[33mdd7e447[m styles: update chatbot.css and createTrip.css
+[33m104b41f[m fix: update createTrip.jsx
+[33m2bd0f1d[m fix: update requirements.txt
+[33m3062717[m feat: add suggested description
+[33m802a140[m fix: uodate registerUser.py
+[33m78c278c[m fix: update countries.js
+[33me4a55a2[m fix: update registerUser.jsx
+[33m25e4d8c[m fix: add verification TIN
+[33mbe91707[m styles: update usersDashboard.css
+[33m7545d53[m fix: update deleteAccount.py
+[33mb15cd48[m fix: update UserDashboard
+[33me3f8109[m feat: add delete Account
+[33m6789817[m fix: update main
+[33mb14ab6d[m fix: update chatbot
+[33m03499e9[m fix: update chatbot
+[33m3377ebc[m fix: update TripsActive.jsx
+[33m9305ecc[m fix: update main.jsx
+[33m1500684[m fix: update main
+[33maa1fd26[m fix: update main
+[33m2e6232c[m g
+[33mde729f1[m fix:Update logout
+[33m81a59a6[m styles: update userDashboard.css
+[33m1276775[m styles: update userDashboard.css
+[33mdac6848[m fix: add CookiesProvider
+[33ma7d9511[m fix: add react-cookie dependency
+[33mfee06df[m feat: add button log out
+[33md33c74f[m fix: handle users without trips
+[33mabae3aa[m fix: update chatbot
+[33m8135a33[m fix: correct TripsDashboard syntax
+[33mcae581c[m fix: Fixing the Gemini API (I lost the original .env file)
+[33maa3931b[m fix: update main
+[33m0f75a4a[m fix: update TripsDashboard.jsx
+[33me1d477e[m fix: update TripsDashboard.jsx
+[33m46879cf[m styles: update tripDashboard.css
+[33m293ad04[m styles: update Chatbot.css
+[33m9faaa88[m styles: update Chatbot.css
+[33m4202a7f[m styles: update Chatbot.css
+[33m406beb0[m fix: update Chatbot.jsx
+[33ma05159c[m feat: add animation (chatbot)
+[33mff77f27[m feat: update TripsDashboard.jsx
+[33m5bf1608[m styles: update tripDashboard.css
+[33m4ef5499[m fix: I fixed a few bugs
+[33m0e22d0c[m fix: update TripsDashboard.jsx
+[33m56b4562[m fix: update TripsDashboard.jsx
+[33m92e2e61[m feat: add graphic
+[33mc03b94c[m styles: update tripDashboard.css
+[33m14b9fce[m styles: update tripDashboard.css
+[33m6e2651b[m styles: update tripDashboard.css
+[33m945874b[m styles: update tripDashboard.css
+[33m7ededaf[m fix: update tripMetrics.py
+[33mafb97c8[m fix: update TripsDashboard.jsx
+[33m9e3c651[m fix: update TripsDashboard.jsx
+[33m4df0c05[m feat: add cards (TripsDashboard)
+[33mcb1e522[m feat: add tripMetrics.py
+[33m288e60d[m styles: update tripDashboard.css
+[33m734cb02[m styles: update tripDashboard.css
+[33m6c24ea3[m feat: add header tripsDashboard
+[33mc34a7c5[m feat: add tripsDashboard
+[33m5a6e5c4[m fix: update Navbar.jsx
+[33m5370294[m fix: update Navbar.jsx
+[33m7ed47bd[m fix: update Navbar.jsx
+[33m89c7907[m fix: update Navbar.jsx
+[33m2ee4860[m fix: add console.log
+[33mc587595[m feat: add new section navbar
+[33m8197823[m feat: update get_user.py
+[33mb05d314[m fix: update Home.jsx
+[33mfaaa357[m fix: update Home.jsx
+[33mc844493[m fix: update Home.jsx
+[33m25bdf57[m fix: update Home.jsx
+[33mcef7bdc[m fix: update app.jsx
+[33maadb1bb[m feat: add vlibras
+[33mc0ddce9[m fix: update buyTrip.pyy
+[33m76d7404[m styles: update tripsActive.jsx
+[33m7729031[m styles: update tripsActive.jsx
+[33m1fe9eb0[m styles: update tripsActive.css
+[33m8d2bfe1[m styles: update tripsActive.css
+[33m19f21a7[m feat: I added the purchase quantity to trips.
+[33m7f6c46b[m fix: update chatbot
+[33m5dec997[m fix: update tripsHistory.py
+[33m181a6b9[m fix: update tripsHistory.py
+[33mefbd702[m feat: add owner from trip history
+[33mf112aed[m fix: update app.jsx
+[33mf5e2ec6[m fix: update TripHistory.js
+[33mb823156[m fix: update tripsHistory.py
+[33mf18cf12[m fix: update tripsHistory.py
+[33mecc65fc[m fix: update tripsHistory.py
+[33mcc5c68d[m fix: update tripsHistory.py
+[33ma8d8b95[m fix: update tripsHistory.py
+[33mbea9573[m fix: update app.jsx
+[33me82901e[m feat: update app.jsx, TripHistory.jsx and tripsActive.jsx
+[33m0361b4b[m feat: update TripHistory
+[33m05063a6[m feat: add TripHistory
+[33m124b8da2[m docs: comprehensive README update with project grading, detailed architecture, troubleshooting, and roadmap
+[33m0d4e500[m style: update usersDashboard.css
+[33meb2b762[m styles: update userDashboard.css and home.css
+[33m88b94e8[m styles: add object-fit-cover
+[33mf873456[m fix: update except
+[33m1a2661a[m fix: I fixed the comment logic.
+[33mb90f162[m feat: Improving the logic
+[33m0a5a422[m fix: update gemini version
+[33m5cbfded[m fix: add test
+[33mf87e88c[m fix: removed reload
+[33m2f17aeb[m feat: add reload
+[33mbc82b65[m fix: update samesite
+[33mdc2cbca[m fix: removed reload
+[33mc3a7d2e[m feat: add reload
+[33mae645e7[m fix: update cookies
+[33me57f858[m fix: update cookies
+[33m5b7fb4d[m fix: resolved bugs
+[33m63a1dff[m fix: restore Chatbot.css
+[33m62d2cd7[m fix: I fixed the bug where the chatbot appeared too early. Styles: update RegisterUser.css
+[33m4960012[m Styles:Correct min-height value in RegisterUser styles
+[33m38f8718[m Delete src/Chatbot directory
+[33m11ed439[m Update Chatbot import path from src/Chatbot to src/Components/Chatbot
+[33mce4d186[m Move Chatbot component to Components folder - CSS file
+[33me085ae1[m Move Chatbot component to Components folder - update import path for assets
+[33ma112ec4[m style: update tripsActive.css
+[33m64d0e5f[m fix: add vercel json
+[33mc225970[m style: update star.css
+[33mb8b39a8[m style: update star.css
+[33mef59df0[m style: update star.css
+[33mc006702[m Change samesite from lax to none
+[33ma5b0ec9[m Fix: Add expose_headers for Set-Cookie CORS
+[33m3cdc169[m fix: samesite update
+[33m3889d3a[m fix: I fixed the cookies.
+[33m27c80c4[m fix:  sql
+[33mfed7140[m fix: api connection
+[33mdbdaca5[m fix: removed vercel.json
+[33mc844240[m fix: vercel react routes
+[33m8884ee8[m fix: add sslmode
+[33maccc7b0[m test
+[33mbe382a4[m fix: backend requirements
+[33m7c2fa99[m fix: backend requirements
+[33m588d245[m fix: backend requirements
+[33ma5344f0[m fix: backend requirements
+[33m0b38d32[m feat: add backend requirements
+[33m3f5cf4f[m feat: Changing a few things before deployment
+[33m32cd2fb[m feat: add comments
+[33m65c48b2[m feat: I added Gemini, updated the README, added stars, added new routes and components, added a chatbot, etc.
+[33md6df136[m feat: add previews
+[33m7366dd9[m docs: update README
+[33m9a66574[m docs: Update README
+[33m9f005ae[m fix: corrected loading
+[33m8fa768f[m feat:I added tripActive, the purchase of them, new routes, new components, etc.
+[33md0cf057[m feat: add login
+[33md43b32b[m feat: add component Home e new router
+[33m7ba07d6[m feat: add router and component
+[33m1a19654[m fix: Now the menu switches the sections.
+[33mc5e14b3[m feat: New cards
+[33m4686790[m feat: I added error handling for the user and improved the code.
+[33mc003e3e[m feat: add router and add update image and component user
+[33ma066b62[m add component Navbar
+[33ma2b0e3f[m fix: I fixed the checkUser bug.
+[33m0445a7d[m feat: add new Router (checkUser)
+[33mf9b0b43[m feat: add Styles Global, Add Components, add API and tests
+[33med9e6a0[m starting project

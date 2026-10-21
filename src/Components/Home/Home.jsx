@@ -295,7 +295,7 @@ export default function Home({
               }}
             >
               <img src={trip?.img_main_url || hiddenPhoto} alt="photo trip" className="tripImage"/>
-              <div className="mt-4 d-flex gap-2">
+              <div className="mt-4 d-flex flex-column gap-2">
                 <h2>{trip.name}</h2>
                 <p>{trip.description}</p>
               </div>
