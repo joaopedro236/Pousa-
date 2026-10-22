@@ -15,6 +15,14 @@ const inputs = [
         minLenght:3,
         maxLenght:14,
         placeholder:'Example: 12345678901234 '
-    },
+    },{
+        id:3, 
+        type:"password",
+        name:"password",
+        minLenght:5,
+        maxLenght:100,
+        placeholder:"Your password",
+        label:"Password"
+    }
 ]
 export default inputs

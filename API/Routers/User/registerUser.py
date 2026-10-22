@@ -5,7 +5,6 @@ from argon2 import PasswordHasher
 from ...Validation.User.registerUser import registerUser
 from google import genai
 import requests
-
 router = APIRouter()
 ph = PasswordHasher()
 
