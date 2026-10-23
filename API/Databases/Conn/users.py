@@ -17,7 +17,7 @@ pool = ThreadedConnectionPool(
 
 
 def connect_database():
-    conn = poll.getconn()
+    conn = pool.getconn()
     try:
 
         cursor = conn.cursor()
