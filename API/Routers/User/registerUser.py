@@ -5,6 +5,8 @@ from argon2 import PasswordHasher
 from ...Validation.User.registerUser import registerUser
 from google import genai
 import requests
+from ...Databases.Conn.release_database import release_database
+
 router = APIRouter()
 ph = PasswordHasher()
 
@@ -90,7 +92,4 @@ BLOCK
     except Exception as e:
         return {"Status": False, "Error": str(e)}
     finally:
-        if cursor:
-            cursor.close()
-        if conn:
-            conn.close()
+        release_database(conn, cursor)

@@ -3,6 +3,7 @@ from ...Validation.Trip.trips import Trips
 from fastapi import APIRouter, Request, UploadFile, File, Form
 import json
 from psycopg2.extras import Json
+from ...Databases.Conn.release_database import release_database
 
 from google import genai
 
@@ -157,7 +158,4 @@ BLOCK
         return {"Status": False, "Error": str(e)}
 
     finally:
-        if cursor:
-            cursor.close()
-        if conn:
-            conn.close()
+        release_database(conn, cursor)

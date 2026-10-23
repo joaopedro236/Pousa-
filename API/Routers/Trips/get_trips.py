@@ -1,6 +1,7 @@
 from fastapi import APIRouter
 from ...Databases.Conn.users import connect_database
 from ...Databases.Conn.trips import connect_database_trip
+from ...Databases.Conn.release_database import release_database
 
 router = APIRouter()
 
@@ -55,7 +56,7 @@ def get_trips():
                     "areacode": trip[19] if trip else None,
                     "siafi": trip[20] if trip else None,
                     "selected": trip[21],
-                    "img_main_url": trip[22]
+                    "img_main_url": trip[22],
                 }
             )
 
@@ -63,11 +64,5 @@ def get_trips():
     except Exception as e:
         return {"Status": False, "Error": "An error occurred"}
     finally:
-        if cursor:
-            cursor.close()
-        if conn:
-            conn.close()
-        if cursorUser:
-            cursorUser.close()
-        if connUser:
-            connUser.close()
+        release_database(conn, cursor)
+        release_database(connUser, cursorUser)

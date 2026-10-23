@@ -3,6 +3,7 @@ from ...Databases.Conn.trips import connect_database_trip
 from ...Databases.Conn.users import connect_database
 from ...Validation.Trip.buyTrip import id as validation
 from datetime import datetime
+from ...Databases.Conn.release_database import release_database
 
 router = APIRouter()
 
@@ -91,11 +92,5 @@ def buy_trip(tripId: validation, request: Request):
     except Exception:
         return {"Status": False, "Error": "An error occurred"}
     finally:
-        if cursor:
-            cursor.close()
-        if conn:
-            conn.close()
-        if cursorUser:
-            cursorUser.close()
-        if connUser:
-            connUser.close()
+        release_database(conn, cursor)
+        release_database(connUser, cursorUser)

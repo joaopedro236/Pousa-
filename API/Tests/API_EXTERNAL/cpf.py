@@ -2,6 +2,7 @@ import requests
 import pprint
 import os
 from dotenv import load_dotenv
+
 load_dotenv()
 IS_VALID_TIN = os.getenv("IS_VALID_TIN")
 
@@ -20,4 +21,6 @@ def cpf():
             print("Error")
     except Exception as e:
         print(str(e))
+
+
 cpf()

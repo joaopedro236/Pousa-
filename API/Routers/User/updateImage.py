@@ -3,6 +3,7 @@ import os
 from dotenv import load_dotenv
 from ...Databases.Conn.users import connect_database
 from fastapi import APIRouter, UploadFile, File, Request
+from ...Databases.Conn.release_database import release_database
 
 load_dotenv(encoding="utf-8")
 API_KEY = os.getenv("IMGBB_URL")
@@ -51,7 +52,4 @@ async def upload_image(request: Request, file: UploadFile = File(...)):
     except Exception:
         return {"Status": False, "Error": "An error occurred"}
     finally:
-        if cursor:
-            cursor.close()
-        if conn:
-            conn.close()
+        release_database(conn, cursor)

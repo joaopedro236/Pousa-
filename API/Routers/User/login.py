@@ -3,8 +3,12 @@ from ...Databases.Conn.users import connect_database
 from fastapi import APIRouter, Response
 from argon2 import PasswordHasher
 from argon2.exceptions import VerifyMismatchError, VerificationError
+from ...Databases.Conn.release_database import release_database
+
 router = APIRouter()
-ph=PasswordHasher()
+ph = PasswordHasher()
+
+
 @router.post("/login")
 def login(data: login, response: Response):
     conn = None
@@ -42,7 +46,4 @@ def login(data: login, response: Response):
     except Exception:
         return {"Status": False, "Error": "An Error Occured"}
     finally:
-        if cursor:
-            cursor.close()
-        if conn:
-            conn.close()
+        release_database(conn, cursor)

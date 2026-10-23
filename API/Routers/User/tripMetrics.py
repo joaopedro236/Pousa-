@@ -2,6 +2,7 @@ from ...Databases.Conn.trips import connect_database_trip
 from ...Databases.Conn.users import connect_database
 from fastapi import APIRouter, Request
 from datetime import date
+from ...Databases.Conn.release_database import release_database
 
 router = APIRouter()
 
@@ -94,11 +95,5 @@ def metrics(request: Request):
     except Exception as e:
         return {"Status": False, "Error": str(e)}
     finally:
-        if cursor:
-            cursor.close()
-        if conn:
-            conn.close()
-        if cursorTrip:
-            cursorTrip.close()
-        if connTrip:
-            connTrip.close()
+        release_database(conn, cursor)
+        release_database(connTrip, cursorTrip)

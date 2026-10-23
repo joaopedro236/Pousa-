@@ -2,6 +2,7 @@ from fastapi import Request
 from ....Databases.Conn.trips import connect_database_trip
 from ....Databases.Conn.users import connect_database
 from ....Validation.Trip.star import buy_trip as data
+from ...Databases.Conn.release_database import release_database
 
 
 def model(sql, sqlU, Data: data, request: Request):
@@ -23,11 +24,5 @@ def model(sql, sqlU, Data: data, request: Request):
     except Exception:
         return {"Status": False, "Error": "An Error occurred"}
     finally:
-        if cursor:
-            cursor.close()
-        if conn:
-            conn.close()
-        if cursorTrip:
-            cursorTrip.close()
-        if connTrip:
-            connTrip.close()
+        release_database(conn, cursor)
+        release_database(connTrip, cursorTrip)

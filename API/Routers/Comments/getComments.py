@@ -2,6 +2,7 @@ from fastapi import APIRouter
 from ...Databases.Conn.trips import connect_database_trip
 from ...Databases.Conn.users import connect_database
 from ...Validation.Comments.get_comments import getComments
+from ...Databases.Conn.release_database import release_database
 
 router = APIRouter()
 
@@ -61,11 +62,5 @@ def getComment(data: getComments):
     except Exception as e:
         return {"Status": False, "Error": str(e)}
     finally:
-        if cursor:
-            cursor.close()
-        if conn:
-            conn.close()
-        if cursorUser:
-            cursorUser.close()
-        if connUser:
-            connUser.close()
+        release_database(conn, cursor)
+        release_database(connUser, cursorUser)

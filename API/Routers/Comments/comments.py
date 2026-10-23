@@ -2,6 +2,7 @@ from fastapi import APIRouter, Request
 from ...Validation.Comments.comments import comment as data
 from ...Databases.Conn.trips import connect_database_trip
 from google import genai
+from ...Databases.Conn.release_database import release_database
 import os
 from dotenv import load_dotenv
 from datetime import date
@@ -108,7 +109,4 @@ def createComment(Data: data, request: Request):
     except Exception as e:
         return {"Status": False, "Error": str(e)}
     finally:
-        if cursor:
-            cursor.close()
-        if conn:
-            conn.close()
+        release_database(conn, cursor)
