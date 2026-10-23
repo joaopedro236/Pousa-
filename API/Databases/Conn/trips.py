@@ -7,7 +7,7 @@ load_dotenv(encoding="utf-8")
 
 pool = ThreadedConnectionPool(
     minconn=1,
-    maxconn=10,
+    maxconn=5,
     host=os.getenv("DB_HOST_TRIP"),
     port=os.getenv("DB_PORT_TRIP"),
     dbname=os.getenv("DB_NAME_TRIP"),
