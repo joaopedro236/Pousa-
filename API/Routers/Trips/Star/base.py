@@ -2,7 +2,7 @@ from fastapi import Request
 from ....Databases.Conn.trips import connect_database_trip
 from ....Databases.Conn.users import connect_database
 from ....Validation.Trip.star import buy_trip as data
-from ...Databases.Conn.release_database import release_database
+from API.Databases.Conn.release_database import release_database
 
 
 def model(sql, sqlU, Data: data, request: Request):
