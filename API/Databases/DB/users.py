@@ -22,7 +22,7 @@ def database():
         moneyobtained numeric(10,2)  DEFAULT 0, 
         tripsobtained int  default 0,
         tripsobtainedhistoryS numeric(10,2)[] default ARRAY[0,0,0,0,0,0,0],
-        last_week INT""")
+        last_week INT)""")
         conn.commit()
     except Exception:
         if conn:

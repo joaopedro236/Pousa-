@@ -54,6 +54,7 @@ function App() {
       return null;
     }
   };
+  const [tripHistory, setTripHistory] = useState(null);
 
   const getUser = async () => {
     try {
@@ -76,6 +77,7 @@ function App() {
 
       setUserData(data);
       setStarTrip(data?.favoriteTrips ||[])
+      setTripHistory(data?.tripsAlreadyPurchased)
       return data;
     } catch (error) {
       console.error(error);
@@ -99,27 +101,7 @@ function App() {
     document.body.classList.toggle("user-active", user);
   }, [user]);
 
-  const [tripHistory, setTripHistory] = useState(null);
-  const getTripHistory = async () => {
-    try {
-      const response = await fetch(
-        `${import.meta.env.VITE_API_URL}/getTripsHistory`,
-        {
-          credentials: "include",
-        },
-      );
-      const data = await response.json();
-      if (data?.Error) {
-        console.error(data?.Error);
-      }
-      setTripHistory(data?.Trip);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-  useEffect(() => {
-    getTripHistory();
-  }, []);
+  
   if (loading) {
     return <Loading />;
   }

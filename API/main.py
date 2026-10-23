@@ -16,7 +16,6 @@ from API.Routers.Trips.Star.removeStar import router as removeStar
 from API.Routers.Chatbot.chatbot import router as chatbot
 from API.Routers.Comments.comments import router as createComments
 from API.Routers.Comments.getComments import router as getComments
-from API.Routers.Trips.tripsHistory import router as tripsHistory
 from API.Routers.User.tripMetrics import router as tripMetrics
 from API.Routers.User.deleteAccount import router as deleteAccounts
 from API.Routers.Trips.suggestedDescription import router as suggestedDescription
@@ -79,7 +78,6 @@ app.include_router(removeStar)
 app.include_router(chatbot)
 app.include_router(createComments)
 app.include_router(getComments)
-app.include_router(tripsHistory)
 app.include_router(tripMetrics)
 app.include_router(logout)
 app.include_router(deleteAccounts)
