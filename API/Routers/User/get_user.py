@@ -18,7 +18,7 @@ def getUser(request: Request):
         conn, cursor = connect_database()
         connTrip, cursorTrip = connect_database_trip()
         cursor.execute(
-            """select name, email, password, cpf, session_token,image_url,moneyalreadyspent ,  tripstaken,money, star, purchasedTripx from usersPousae  where session_token = %s""",
+            """select name, email, password, cpf, session_token,image_url,moneyalreadyspent ,  tripstaken,money, star, purchasedTrips from usersPousae  where session_token = %s""",
             (session_token,)
         )
         response = cursor.fetchone()
