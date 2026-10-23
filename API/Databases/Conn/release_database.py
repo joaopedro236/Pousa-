@@ -3,13 +3,8 @@ import psycopg2
 
 def release_database(conn, cursor):
     try:
-        if cursor:
+        if cursor and not cursor.closed:
             cursor.close()
-
-            if conn:
-                if not conn.closed:
-                    pool.putconn(conn)
-    except Exception:
-        if conn:
-            pool.putconn(conn, close=True)
-            raise
+    finally:
+        if conn and not conn.closed:
+            conn.close()
