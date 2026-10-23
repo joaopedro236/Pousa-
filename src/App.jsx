@@ -151,7 +151,6 @@ function App() {
               <TripsActive
               
                 user={user}
-                getTripHistory={getTripHistory}
                 starTrip={starTrip}
                 selectedTrip={selectedTrip}
                 setSelectedRestaurant={setSelectedRestaurant}

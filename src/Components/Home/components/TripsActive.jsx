@@ -7,10 +7,8 @@ import { DayPicker } from "react-day-picker";
 import "react-day-picker/style.css";
 export default function TripsActive({
   itemsNavbar,
-  
   user,
   starTrip,
-  getTripHistory,
   selectedTrip,
   setSelectedRestaurant,
 }) {
@@ -68,7 +66,7 @@ export default function TripsActive({
       const data = await response.json();
       if (data?.Status) {
         alert("trip purchased");
-        getTripHistory();
+    
       }
       if (data?.Error) {
         console.error(data?.Error);
