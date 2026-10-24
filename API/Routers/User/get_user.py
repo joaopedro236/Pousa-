@@ -1,5 +1,5 @@
 from fastapi import APIRouter, Request, Response
-from ...Databases.Conn.users import connect_database,poolUser
+from ...Databases.Conn.users import connect_database, poolUser
 from ...Databases.Conn.trips import connect_database_trip, poolTrips
 from ...Databases.Conn.release_database import release_database
 
@@ -113,5 +113,5 @@ def getUser(request: Request):
         return {"Status": False, "Error": str(e)}
 
     finally:
-        release_database(conn, cursor,poolUser)
-        release_database(connTrip, cursorTrip,poolTrips)
+        release_database(conn, cursor, poolUser)
+        release_database(connTrip, cursorTrip, poolTrips)

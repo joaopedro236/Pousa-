@@ -92,4 +92,4 @@ BLOCK
     except Exception as e:
         return {"Status": False, "Error": str(e)}
     finally:
-        release_database(conn, cursor,poolUser)
+        release_database(conn, cursor, poolUser)

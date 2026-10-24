@@ -158,4 +158,4 @@ BLOCK
         return {"Status": False, "Error": str(e)}
 
     finally:
-        release_database(conn, cursor,poolTrips)
+        release_database(conn, cursor, poolTrips)

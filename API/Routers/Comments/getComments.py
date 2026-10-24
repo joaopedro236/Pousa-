@@ -1,6 +1,6 @@
 from fastapi import APIRouter
-from ...Databases.Conn.trips import connect_database_trip,poolTrips
-from ...Databases.Conn.users import connect_database,poolUser
+from ...Databases.Conn.trips import connect_database_trip, poolTrips
+from ...Databases.Conn.users import connect_database, poolUser
 from ...Validation.Comments.get_comments import getComments
 from ...Databases.Conn.release_database import release_database
 
@@ -62,5 +62,5 @@ def getComment(data: getComments):
     except Exception as e:
         return {"Status": False, "Error": str(e)}
     finally:
-        release_database(conn, cursor,poolTrips)
-        release_database(connUser, cursorUser,poolUser)
+        release_database(conn, cursor, poolTrips)
+        release_database(connUser, cursorUser, poolUser)

@@ -1,6 +1,6 @@
 from fastapi import Request
 from ....Databases.Conn.trips import connect_database_trip, poolTrips
-from ....Databases.Conn.users import connect_database,poolUser
+from ....Databases.Conn.users import connect_database, poolUser
 from ....Validation.Trip.star import buy_trip as data
 from API.Databases.Conn.release_database import release_database
 
@@ -24,5 +24,5 @@ def model(sql, sqlU, Data: data, request: Request):
     except Exception:
         return {"Status": False, "Error": "An Error occurred"}
     finally:
-        release_database(conn, cursor,poolUser)
-        release_database(connTrip, cursorTrip,poolTrips)
+        release_database(conn, cursor, poolUser)
+        release_database(connTrip, cursorTrip, poolTrips)
