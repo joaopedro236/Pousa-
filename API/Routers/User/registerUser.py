@@ -98,4 +98,5 @@ BLOCK
             return {"Status": False, "Error": str(e)}
 
     finally:
-        release_database(conn, cursor, poolUser)
+        if conn is not None and not conn.closed:
+            release_database(conn, cursor, poolUser)
