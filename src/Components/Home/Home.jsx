@@ -293,6 +293,7 @@ export default function Home({
                 window.location.reload()
               }}
             >
+              <h3 className="stateTrip">𖡡 {trip?.state}</h3>
               <img src={trip?.img_main_url || hiddenPhoto} alt="photo trip" className="tripImage"/>
               <div className="mt-4 d-flex flex-column gap-2">
                 <h2>{trip.name}</h2>
@@ -308,6 +309,9 @@ export default function Home({
                     currency: "USD",
                   })}
                 </span>
+                <span>📍 {trip?.cep}</span>
+                <span>🚦 {trip?.neighborhood}</span>
+                <span>🧭 {trip?.city}</span>
                 <span>⭐ {trip?.review}</span>
                 <span>😺 Pets {trip?.petsAllowed}</span>
               </div>

@@ -183,6 +183,7 @@
     background: var(--white);
     border: 1px solid #e8e8e8;
     border-radius: 18px;
+    position: relative;
     padding: 20px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
     transition: 0.2s ease;
@@ -221,7 +222,16 @@
     font-size: 13px;
     color: var(--text-gray);
 }
-
+.stateTrip{
+    background: var(--shadow-button);
+    padding: 8px 12px;
+    border-radius: 10px;
+    font-size: 15px;
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    color: white;
+}
 .trip-owner {
     display: flex;
     align-items: center;
