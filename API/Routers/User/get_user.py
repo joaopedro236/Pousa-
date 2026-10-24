@@ -23,8 +23,10 @@ def getUser(request: Request):
             (session_token,),
         )
         response = cursor.fetchone()
-        starUser = response[9]
-        purchasedTrips = response[10]
+        if response is None:
+            return{"Status": False, "Error": "User not found"}
+        starUser = response[9] or []
+        purchasedTrips = response[10] or []
         if not response:
             return Response(status_code=204)
         cursorTrip.execute(
