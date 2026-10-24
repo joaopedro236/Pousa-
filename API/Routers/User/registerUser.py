@@ -91,7 +91,11 @@ BLOCK
             path="/",
         )
         return {"Status": True}
+
     except Exception as e:
-        return {"Status": False, "Error": str(e)}
+        if conn is not None and not conn.closed:
+            conn.rollback()
+            return {"Status": False, "Error": str(e)}
+
     finally:
         release_database(conn, cursor, poolUser)

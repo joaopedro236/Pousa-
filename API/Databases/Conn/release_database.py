@@ -6,9 +6,5 @@ def release_database(conn, cursor, pool):
         if cursor and not cursor.closed:
             cursor.close()
     finally:
-        try:
-            if conn and not conn.closed:
-                conn.rollback()
-        finally:
-            if conn and not conn.closed:
-                pool.putconn(conn)
+        if conn and not conn.closed:
+            pool.putconn(conn)
