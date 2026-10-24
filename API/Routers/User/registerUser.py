@@ -20,6 +20,8 @@ client = genai.Client(api_key=GEMINI_API_KEY)
 
 @router.post("/registerUser")
 def registerUser(data: registerUser, responseCookie: Response):
+    conn = None
+    cursor = None
     try:
         conn, cursor = connect_database()
         cursor.execute(
