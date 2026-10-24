@@ -5,7 +5,7 @@ from psycopg2.pool import ThreadedConnectionPool
 
 load_dotenv(encoding="utf-8")
 
-Trips = ThreadedConnectionPool(
+poolTrips = ThreadedConnectionPool(
     minconn=1,
     maxconn=2,
     host=os.getenv("DB_HOST_TRIP"),
