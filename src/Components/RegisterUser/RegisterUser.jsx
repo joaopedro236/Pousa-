@@ -38,6 +38,7 @@ export default function RegisterUser({
       if (result?.Status) {
         setUser(true);
         await checkUser();
+        window.location.reload()
         
       }
       if (result?.Error) {

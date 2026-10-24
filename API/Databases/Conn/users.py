@@ -6,7 +6,7 @@ from psycopg2.pool import ThreadedConnectionPool
 load_dotenv(encoding="utf-8")
 poolUser = ThreadedConnectionPool(
     minconn=1,
-    maxconn=5,
+    maxconn=7,
     host=os.getenv("DB_HOST"),
     port=os.getenv("DB_PORT"),
     dbname=os.getenv("DB_NAME"),
