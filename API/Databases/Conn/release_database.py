@@ -1,12 +1,12 @@
 import psycopg2
 
 
-def release_database(conn, cursor):
-    try:
-        cursor.close()
-    finally:
+def release_database(conn, cursor, pool):
         try:
-            if not conn.closed:
-                conn.rollback()
+                cursor.close()
         finally:
-            pool.putconn(conn)
+                            try:
+                                if not conn.closed:
+                                                        conn.rollback()
+                            finally:
+                                                                            pool.putconn(conn)
