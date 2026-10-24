@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Request
+from fastapi import APIRouter, Request, Response
 from ...Databases.Conn.users import connect_database,poolUser
 from ...Databases.Conn.trips import connect_database_trip, poolTrips
 from ...Databases.Conn.release_database import release_database
@@ -26,7 +26,7 @@ def getUser(request: Request):
         starUser = response[9]
         purchasedTrips = response[10]
         if not response:
-            return {"Status": False, "Error": "The user does not exist."}
+            return Response(status_code=204)
         cursorTrip.execute(
             "select name,description, numberOfTravelers, petsAllowed,price, review, session_token from trips where id = ANY(%s)",
             (purchasedTrips,),
