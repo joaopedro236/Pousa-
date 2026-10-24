@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Request
 from ...Validation.Comments.comments import comment as data
-from ...Databases.Conn.trips import connect_database_trip
+from ...Databases.Conn.trips import connect_database_trip,poolTrips
 from google import genai
 from ...Databases.Conn.release_database import release_database
 import os
@@ -109,4 +109,4 @@ def createComment(Data: data, request: Request):
     except Exception as e:
         return {"Status": False, "Error": str(e)}
     finally:
-        release_database(conn, cursor)
+        release_database(conn, cursor, poolTrips)

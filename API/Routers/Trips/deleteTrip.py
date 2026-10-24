@@ -1,6 +1,6 @@
 from ...Validation.Trip.deleteTrip import data
 from fastapi import APIRouter
-from ...Databases.Conn.trips import connect_database_trip
+from ...Databases.Conn.trips import connect_database_trip,poolTrips
 from ...Databases.Conn.release_database import release_database
 
 router = APIRouter()
@@ -18,4 +18,4 @@ def deleteTrip(Data: data):
     except Exception as e:
         return {"Status": False, "Error": str(e)}
     finally:
-        release_database(conn, cursor)
+        release_database(conn, cursor, poolTrips)

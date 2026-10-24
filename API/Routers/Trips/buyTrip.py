@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Request
-from ...Databases.Conn.trips import connect_database_trip
-from ...Databases.Conn.users import connect_database
+from ...Databases.Conn.trips import connect_database_trip, poolTrips
+from ...Databases.Conn.users import connect_database,poolUser
 from ...Validation.Trip.buyTrip import id as validation
 from datetime import datetime
 from ...Databases.Conn.release_database import release_database
@@ -92,5 +92,5 @@ def buy_trip(tripId: validation, request: Request):
     except Exception:
         return {"Status": False, "Error": "An error occurred"}
     finally:
-        release_database(conn, cursor)
-        release_database(connUser, cursorUser)
+        release_database(conn, cursor,poolTrips)
+        release_database(connUser, cursorUser,poolUser)

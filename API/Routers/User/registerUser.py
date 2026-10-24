@@ -1,4 +1,4 @@
-from ...Databases.Conn.users import connect_database
+from ...Databases.Conn.users import connect_database, poolUser
 from fastapi import APIRouter, Response
 import uuid
 from argon2 import PasswordHasher
@@ -92,4 +92,4 @@ BLOCK
     except Exception as e:
         return {"Status": False, "Error": str(e)}
     finally:
-        release_database(conn, cursor)
+        release_database(conn, cursor,poolUser)

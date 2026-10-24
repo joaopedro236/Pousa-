@@ -1,7 +1,7 @@
 import requests
 import os
 from dotenv import load_dotenv
-from ...Databases.Conn.users import connect_database
+from ...Databases.Conn.users import connect_database,poolUser
 from fastapi import APIRouter, UploadFile, File, Request
 from ...Databases.Conn.release_database import release_database
 
@@ -52,4 +52,4 @@ async def upload_image(request: Request, file: UploadFile = File(...)):
     except Exception:
         return {"Status": False, "Error": "An error occurred"}
     finally:
-        release_database(conn, cursor)
+        release_database(conn, cursor,poolUser)

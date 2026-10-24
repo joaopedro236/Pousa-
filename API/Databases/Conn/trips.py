@@ -5,7 +5,7 @@ from psycopg2.pool import ThreadedConnectionPool
 
 load_dotenv(encoding="utf-8")
 
-pool = ThreadedConnectionPool(
+Trips = ThreadedConnectionPool(
     minconn=1,
     maxconn=2,
     host=os.getenv("DB_HOST_TRIP"),
@@ -19,7 +19,7 @@ pool = ThreadedConnectionPool(
 
 def connect_database_trip():
 
-    conn = pool.getconn()
+    conn = poolTrips.getconn()
     try:
         cursor = conn.cursor()
         return conn, cursor

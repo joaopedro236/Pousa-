@@ -1,4 +1,4 @@
-from ...Databases.Conn.trips import connect_database_trip
+from ...Databases.Conn.trips import connect_database_trip, poolTrips
 from ...Validation.Trip.trips import Trips
 from fastapi import APIRouter, Request, UploadFile, File, Form
 import json
@@ -158,4 +158,4 @@ BLOCK
         return {"Status": False, "Error": str(e)}
 
     finally:
-        release_database(conn, cursor)
+        release_database(conn, cursor,poolTrips)

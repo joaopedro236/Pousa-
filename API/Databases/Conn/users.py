@@ -4,7 +4,7 @@ from dotenv import load_dotenv
 from psycopg2.pool import ThreadedConnectionPool
 
 load_dotenv(encoding="utf-8")
-pool = ThreadedConnectionPool(
+poolUser = ThreadedConnectionPool(
     minconn=1,
     maxconn=2,
     host=os.getenv("DB_HOST"),
@@ -17,7 +17,7 @@ pool = ThreadedConnectionPool(
 
 
 def connect_database():
-    conn = pool.getconn()
+    conn = poolUser.getconn()
     try:
 
         cursor = conn.cursor()

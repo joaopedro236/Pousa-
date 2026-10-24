@@ -1,5 +1,5 @@
 from ...Validation.User.login import login
-from ...Databases.Conn.users import connect_database
+from ...Databases.Conn.users import connect_database,poolUser
 from fastapi import APIRouter, Response
 from argon2 import PasswordHasher
 from argon2.exceptions import VerifyMismatchError, VerificationError
@@ -46,4 +46,4 @@ def login(data: login, response: Response):
     except Exception:
         return {"Status": False, "Error": "An Error Occured"}
     finally:
-        release_database(conn, cursor)
+        release_database(conn, cursor, poolUser)
