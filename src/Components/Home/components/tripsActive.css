@@ -441,19 +441,7 @@
     max-height: none;
   }
 }
-.googleMaps {
-      grid-column: 1;
-        grid-row: 3;
-        }
 
-        .commentsTrip {
-          grid-row: 4;
-          }
-
-          .buyTripsDiv {
-            grid-row: 5;
-            
-}
 .descriptionTrip {
 
     grid-column: 1;
@@ -792,6 +780,13 @@
     margin: 0;
 
 }
+.buyTripsDiv {
+      grid-row: 5;
+      }
+
+      .commentsTrip {
+        grid-row: 4;
+        }
 
 @media (max-width: 900px) {
 
