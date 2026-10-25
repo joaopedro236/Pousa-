@@ -2,8 +2,8 @@ import requests
 from google import genai
 import os
 from dotenv import load_dotenv
-from ...Databases.Conn.release_database import release_database
-from ...Databases.Conn.users import connect_database, poolUser
+from ..Databases.Conn.release_database import release_database
+from ..Databases.Conn.users import connect_database, poolUser
 GEMINI_API_KEY= os.getenv("GEMINI_API_KEY")
 IS_VALID_TIN = os.getenv("IS_VALID_TIN")
 client = genai.Client(api_key=GEMINI_API_KEY)
