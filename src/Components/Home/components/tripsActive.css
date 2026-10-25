@@ -363,7 +363,8 @@
     width: 100%;
 
 }
-.googleMaps{
+.googleMaps{grid-column: 1;
+      grid-row: 3;
     align-items: center;
     justify-content: center;
     width: 100%;
