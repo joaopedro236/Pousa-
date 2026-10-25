@@ -16,7 +16,9 @@ def registerUser(data: registerUser, responseCookie: Response):
         conn, cursor = connect_database()
         session_token = str(uuid.uuid4())
         hashPassword = ph.hash(data.password)
-        registerUserVerification(data.email, data.cpf, data.country, data.name)
+        verification =registerUserVerification(data.email, data.cpf, data.country, data.name)
+        if not verification["Status"]:
+            return verification
         cursor.execute(
             """
             INSERT INTO usersPousae(
