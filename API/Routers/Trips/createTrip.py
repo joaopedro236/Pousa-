@@ -57,7 +57,8 @@ async def trips(
         urlGoogleMaps = "https://www.google.com/maps/?" + urlencode(
             {"q": Address, "output": "embed"}
         )
-
+    
+        content = await file.read()
         save_image = requests.post(
             "https://api.imgbb.com/1/upload",
             params={"key": IMGBB_URL},
