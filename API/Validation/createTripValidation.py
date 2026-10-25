@@ -48,6 +48,6 @@ async def createTripValidation(file, name, cep, description):
         if response.status_code != 200:
             return {"Status": False, "Error": response.text}
         cepVerificationResult = response.json()
-        return {"cepVerificationResult": cepVerificationResult}
+        return {"Status": True,"cepVerificationResult": cepVerificationResult}
     except Exception as e:
         return {"Status": False, "Error": str(e)}
