@@ -24,7 +24,7 @@ def getUser(request: Request):
         )
         response = cursor.fetchone()
         if response is None:
-            return{"Status": False, "Error": "User not found"}
+            return {"Status": False, "Error": "User not found"}
         starUser = response[9] or []
         purchasedTrips = response[10] or []
         if not response:

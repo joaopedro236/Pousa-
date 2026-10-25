@@ -57,7 +57,7 @@ def get_trips():
                     "siafi": trip[20] if trip else None,
                     "selected": trip[21],
                     "img_main_url": trip[22],
-                    "url_google_maps": trip[23] if trip else None
+                    "url_google_maps": trip[23] if trip else None,
                 }
             )
 

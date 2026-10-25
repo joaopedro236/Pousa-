@@ -6,8 +6,11 @@ from ...Schemas.User.registerUser import registerUser
 import requests
 from ...Databases.Conn.release_database import release_database
 from ...Validation.userCreationValidation import registerUserVerification
+
 router = APIRouter()
 ph = PasswordHasher()
+
+
 @router.post("/registerUser")
 def registerUser(data: registerUser, responseCookie: Response):
     conn = None
@@ -16,7 +19,9 @@ def registerUser(data: registerUser, responseCookie: Response):
         conn, cursor = connect_database()
         session_token = str(uuid.uuid4())
         hashPassword = ph.hash(data.password)
-        verification =registerUserVerification(data.email, data.cpf, data.country, data.name)
+        verification = registerUserVerification(
+            data.email, data.cpf, data.country, data.name
+        )
         if not verification["Status"]:
             return verification
         cursor.execute(
