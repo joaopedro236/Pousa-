@@ -3,77 +3,20 @@ from fastapi import APIRouter, Response
 import uuid
 from argon2 import PasswordHasher
 from ...Schemas.User.registerUser import registerUser
-from google import genai
 import requests
 from ...Databases.Conn.release_database import release_database
-
+from ...Validation.userCreationValidation import registerUserVerification
 router = APIRouter()
 ph = PasswordHasher()
-
-import os
-from dotenv import load_dotenv
-
-GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
-IS_VALID_TIN = os.getenv("IS_VALID_TIN")
-client = genai.Client(api_key=GEMINI_API_KEY)
-
-
 @router.post("/registerUser")
 def registerUser(data: registerUser, responseCookie: Response):
     conn = None
     cursor = None
     try:
         conn, cursor = connect_database()
-        cursor.execute(
-            """select name, email from usersPousae
-        WHERE email = %s""",
-            (data.email,),
-        )
-        response = cursor.fetchone()
-        if response:
-            return {"Status": False, "Error": "email already exists."}
         session_token = str(uuid.uuid4())
         hashPassword = ph.hash(data.password)
-
-        result = requests.get(
-            "https://api.isvalid.dev/v0/vat",
-            headers={"Authorization": f"Bearer {IS_VALID_TIN}"},
-            params={"value": data.cpf, "countryCode": data.country},
-        ).json()
-        if not result.get("valid", False):
-            return {
-                "Status": False,
-                "Error": result.get("message") or result.get("error") or "Invalid TIN",
-            }
-        if not result["valid"]:
-            return {"Status": False, "Error": "No TIN"}
-        moderation = client.models.generate_content(
-            model="gemini-3.1-flash-lite",
-            contents=f"""
-Analyze this travel trip content.
-
-Name: {data.name}
-
-
-Block only if the content contains:
-- Hate speech
-- Harassment or targeted insults
-- Sexually explicit content
-- Violent or graphic content
-- Discrimination
-- Clearly offensive or inappropriate content
-
-Normal travel-related content is SAFE.
-
-Respond with ONLY:
-SAFE
-or
-BLOCK
-""",
-        )
-
-        if "BLOCK" in moderation.text.strip().upper():
-            return {"Status": False, "Error": "Inappropriate content."}
+        registerUserVerification(data.email, data.cpf, data.country, data.name)
         cursor.execute(
             """
             INSERT INTO usersPousae(
