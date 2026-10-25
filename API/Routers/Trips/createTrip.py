@@ -42,11 +42,11 @@ async def trips(
         if not tripValidation["Status"]:
             return tripValidation
 
-            cepResult = tripValidation["cepVerificationResult"]
+            
 
         selected_data = json.loads(selected) if isinstance(selected, str) else selected
 
-        cepResult = response.json()
+        cepResult = tripValidation["cepVerificationResult"]
         Address = (
             f"{cepResult.get('logradouro', '')}, "
             f"{cepResult.get('bairro', '')}, "
