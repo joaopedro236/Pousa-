@@ -396,7 +396,7 @@ export default function TripsActive({
 
             <p>{selectedTrip?.description}</p>
           </div>
-          <div className="googleMaps d-flex flex-column rounded gap-2 p-4">
+          <div className="googleMaps d-flex flex-column rounded gap-2 p-2">
             <h1>Google Maps</h1>
             <iframe src={selectedTrip?.url_google_maps} className="googleMapsImage" height={400} frameborder="0"></iframe>
           </div>
