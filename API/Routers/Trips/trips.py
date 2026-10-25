@@ -91,7 +91,7 @@ BLOCK
         cepResult = response.json()
         urlGoogleMaps = "https://www.google.com/maps/search/?"+ urlencode({
             "api": "1",
-            "query":f"{cepResult["logradouro"]}, {cepResult["bairro"]},"f"{cepResult[localidade]}- {cepResult["uf"]},Brasil"
+            "query":f"{cepResult["logradouro"]}, {cepResult["bairro"]},"f"{cepResult["localidade"]}- {cepResult["uf"]},Brasil"
         })
 
         save_image = requests.post(
