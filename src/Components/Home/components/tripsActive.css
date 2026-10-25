@@ -363,8 +363,7 @@
     width: 100%;
 
 }
-.googleMaps{grid-column: 1;
-      grid-row: 3;
+.googleMaps{
     align-items: center;
     justify-content: center;
     width: 100%;
@@ -397,8 +396,6 @@
     text-align: center;
 
 }
-
-/* Location card layout restored with minimal visual change: add background and border only */
 .tagsLocalition {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -444,7 +441,19 @@
     max-height: none;
   }
 }
+.googleMaps {
+      grid-column: 1;
+        grid-row: 3;
+        }
 
+        .commentsTrip {
+          grid-row: 4;
+          }
+
+          .buyTripsDiv {
+            grid-row: 5;
+            
+}
 .descriptionTrip {
 
     grid-column: 1;
