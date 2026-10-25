@@ -2,7 +2,7 @@ from fastapi import FastAPI, Request
 from API.Databases.DB.trips import database as db_trips
 from API.Databases.DB.users import database as db_registerUser
 from API.Routers.User.registerUser import router as registerUser
-from API.Validation.User.checkUser import router as checkUser
+from API.Schemas.User.checkUser import router as checkUser
 from API.Routers.User.get_user import router as getUser
 from API.Routers.User.updateImage import router as updateImage
 from API.Routers.Trips.trips import router as trips
