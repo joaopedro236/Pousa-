@@ -1,5 +1,5 @@
 from ...Databases.Conn.trips import connect_database_trip, poolTrips
-from ...Schemas.Trip.createTrip import createTrip
+from ...Schemas.Trip.createTrip import Trips
 from fastapi import APIRouter, Request, UploadFile, File, Form
 import json
 from psycopg2.extras import Json
