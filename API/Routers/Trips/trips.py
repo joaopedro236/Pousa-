@@ -4,7 +4,7 @@ from fastapi import APIRouter, Request, UploadFile, File, Form
 import json
 from psycopg2.extras import Json
 from ...Databases.Conn.release_database import release_database
-
+from urllib.parse import urlencode
 from google import genai
 
 router = APIRouter()
@@ -89,6 +89,10 @@ BLOCK
             return {"Status": False, "Error": response.text}
 
         cepResult = response.json()
+        urlGoogleMaps = "https://www.google.com/maps/search/?"+ urlencode({
+            "api": "1",
+            "query":f"{cepResult["logradouro"]}, {cepResult["bairro"]},"f"{cepResult[localidade]}- {cepResult["uf"]},Brasil"
+        })
 
         save_image = requests.post(
             "https://api.imgbb.com/1/upload",
@@ -123,9 +127,10 @@ BLOCK
                 areacode,
                 siafi,
                 selected,
-                img_main_url
+                img_main_url,
+                url_google_maps
             ) VALUES (
-                %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s
+                %s,%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s
             )
             """,
             (
@@ -148,6 +153,7 @@ BLOCK
                 cepResult.get("siafi"),
                 Json(selected_data),
                 save_image_data["data"]["url"],
+                str(urlGoogleMaps)
             ),
         )
         conn.commit()

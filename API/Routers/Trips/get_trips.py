@@ -19,7 +19,7 @@ def get_trips():
     SELECT t.name, t.description,
            t.numberOfTravelers, t.petsAllowed, t.price,
            u.name, u.image_url, t.session_token, t.review, 
-           t.id, t.cep, t.street, t.complement,t.neighborhood, t.city, t.state, t.state_code, t.region, t.ibge, t.areacode, t.siafi, t.selected,t.img_main_url
+           t.id, t.cep, t.street, t.complement,t.neighborhood, t.city, t.state, t.state_code, t.region, t.ibge, t.areacode, t.siafi, t.selected,t.img_main_url, t.url_google_maps
     FROM trips t
     LEFT JOIN usersPousae u
     ON t.session_token = u.session_token
@@ -57,6 +57,7 @@ def get_trips():
                     "siafi": trip[20] if trip else None,
                     "selected": trip[21],
                     "img_main_url": trip[22],
+                    "url_google_maps": trip[23] if trip else None
                 }
             )
 

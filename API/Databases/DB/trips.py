@@ -32,7 +32,8 @@ def database():
         siafi int,
         comments text[],
         note int[],
-        usersComments uuid[])""")
+        usersComments uuid[],
+        url_google_maps TEXT)""")
         conn.commit()
     except Exception:
         return {"Status": False, "Error": "Error Create Database"}

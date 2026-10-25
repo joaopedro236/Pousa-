@@ -363,7 +363,10 @@
     width: 100%;
 
 }
-
+.googleMaps{
+    align-items: center;
+    justify-content: center;
+}
 .tagsTrip span {
 
     display: inline-flex;
