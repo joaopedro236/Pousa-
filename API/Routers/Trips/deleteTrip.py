@@ -1,4 +1,4 @@
-from ...Validation.Trip.deleteTrip import data
+from ...Schemas.Trip.deleteTrip import data
 from fastapi import APIRouter
 from ...Databases.Conn.trips import connect_database_trip, poolTrips
 from ...Databases.Conn.release_database import release_database

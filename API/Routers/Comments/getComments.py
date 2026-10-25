@@ -1,7 +1,7 @@
 from fastapi import APIRouter
 from ...Databases.Conn.trips import connect_database_trip, poolTrips
 from ...Databases.Conn.users import connect_database, poolUser
-from ...Validation.Comments.get_comments import getComments
+from ...Schemas.Comments.get_comments import getComments
 from ...Databases.Conn.release_database import release_database
 
 router = APIRouter()

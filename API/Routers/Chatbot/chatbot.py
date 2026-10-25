@@ -1,5 +1,5 @@
 from fastapi import APIRouter
-from ...Validation.Chatbot.chatbot import validation as data
+from ...Schemas.Chatbot.chatbot import validation as data
 from google import genai
 
 router = APIRouter()

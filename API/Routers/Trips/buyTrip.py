@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Request
 from ...Databases.Conn.trips import connect_database_trip, poolTrips
 from ...Databases.Conn.users import connect_database, poolUser
-from ...Validation.Trip.buyTrip import id as validation
+from ...Schemas.Trip.buyTrip import id as validation
 from datetime import datetime
 from ...Databases.Conn.release_database import release_database
 

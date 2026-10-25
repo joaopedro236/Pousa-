@@ -1,4 +1,4 @@
-from ...Validation.User.login import login
+from ...Schemas.User.login import login
 from ...Databases.Conn.users import connect_database, poolUser
 from fastapi import APIRouter, Response
 from argon2 import PasswordHasher

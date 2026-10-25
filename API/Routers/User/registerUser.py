@@ -2,7 +2,7 @@ from ...Databases.Conn.users import connect_database, poolUser
 from fastapi import APIRouter, Response
 import uuid
 from argon2 import PasswordHasher
-from ...Validation.User.registerUser import registerUser
+from ...Schemas.User.registerUser import registerUser
 from google import genai
 import requests
 from ...Databases.Conn.release_database import release_database

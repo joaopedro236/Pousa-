@@ -1,5 +1,5 @@
 from fastapi import APIRouter
-from ...Validation.Trip.suggestedDescription import items
+from ...Schemas.Trip.suggestedDescription import items
 from google import genai
 import os
 from dotenv import load_dotenv
