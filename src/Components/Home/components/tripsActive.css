@@ -366,6 +366,12 @@
 .googleMaps{
     align-items: center;
     justify-content: center;
+    width: 100%;
+}
+.googleMapsImage{
+    width:100%;
+    border-radius: 10px;
+    max-width: 600px;
 }
 .tagsTrip span {
 
