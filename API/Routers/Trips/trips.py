@@ -96,9 +96,9 @@ BLOCK
                             f"{cepResult.get('uf', '')}, Brasil"
                     )
         
-        urlGoogleMaps = "https://www.google.com/maps/search/?"+ urlencode({
-            "api": "1",
-            "query":Address
+        urlGoogleMaps = "https://www.google.com/maps/?"+ urlencode({
+            "q":Address,
+            "output":"embed"
         })
 
         save_image = requests.post(
