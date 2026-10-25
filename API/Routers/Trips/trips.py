@@ -89,9 +89,16 @@ BLOCK
             return {"Status": False, "Error": response.text}
 
         cepResult = response.json()
+        Address  = (
+                f"{cepResult.get('logradouro', '')}, "
+                    f"{cepResult.get('bairro', '')}, "
+                        f"{cepResult.get('localidade', '')} - "
+                            f"{cepResult.get('uf', '')}, Brasil"
+                    )
+        
         urlGoogleMaps = "https://www.google.com/maps/search/?"+ urlencode({
             "api": "1",
-            "query":f"{cepResult["logradouro"]}, {cepResult["bairro"]},"f"{cepResult["localidade"]}- {cepResult["uf"]},Brasil"
+            "query":Address
         })
 
         save_image = requests.post(
