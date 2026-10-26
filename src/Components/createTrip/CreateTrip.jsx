@@ -262,7 +262,7 @@ export default function CreateTrip({
               minDate={new Date()}
               required
               dayClassName={(date) =>
-                  date < new Date().setHours(0, 0, 0, 0)
+                  date < new Date(new Date().setHours(0, 0, 0, 0))
                       ? "d-none"
                           : ""
                           

@@ -538,7 +538,7 @@ export default function TripsActive({
                     mode="multiple"
                     minDate={new Date()}
                     dayClassName={(date) =>
-                        date < new Date().setHours(0, 0, 0, 0)
+                        date < new Date(new Date().setHours(0, 0, 0, 0))
                             ? "d-none"
                                 : ""
                     }
