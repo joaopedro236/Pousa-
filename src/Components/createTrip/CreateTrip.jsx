@@ -259,7 +259,7 @@ export default function CreateTrip({
 
             <DayPicker
               animate
-
+              minDate={new Date()}
               required
               onDayClick={handleDayClick}
               modifiers={{
