@@ -68,3 +68,6 @@ html {
 html {
     scroll-behavior: smooth;
 }
+.react-datepicker__day--disabled {
+      visibility: hidden !important;
+      }
