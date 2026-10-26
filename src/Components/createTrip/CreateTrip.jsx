@@ -261,14 +261,12 @@ export default function CreateTrip({
               animate
               minDate={new Date()}
               required
-              renderDayContents={(day, date)=> {
-                const today = new Date()
-                today.setHours(0,0,0,0)
-                if (date < today){
-                  return null
-                }
-                return day
-              }}
+              dayClassName={(date) =>
+                  date < new Date().setHours(0, 0, 0, 0)
+                      ? "d-none"
+                          : ""
+                          
+              }
               onDayClick={handleDayClick}
               modifiers={{
                 available: (day) => {
