@@ -40,11 +40,19 @@ export default async function sendMessage(e, setMessage, setMessages, setLoading
     }
     if (data?.Error){
         console.error(error)
-        setMessages("Unableto connect to the chatbot.")
+        setMessages((prev) => [...prev, {
+              role: "assistant",
+                content: "Unable to connect to the chatbot."
+                }]);
+        }])
     }
     }catch(error){
         console.error(error)
-        setMessages("Unable to connect to the chatbot.")
+        setMessages((prev) => [...prev, {
+              role: "assistant",
+                content: "Unable to connect to the chatbot."
+                }]);
+        }])
     }finally{
         setLoading(false)
     }
