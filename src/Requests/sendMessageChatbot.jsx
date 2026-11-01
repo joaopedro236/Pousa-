@@ -30,7 +30,7 @@ export default async function sendMessage(e, setMessage, setMessages, setLoading
         ])
         setQuantityMessage((prev) => prev +1)
     }else{
-        setMessage((prev) => [
+        setMessages((prev) => [
             ...prev,
             {
                 role: "assistant",
