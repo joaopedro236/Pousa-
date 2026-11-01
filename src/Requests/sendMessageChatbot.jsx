@@ -26,7 +26,7 @@ export default async function sendMessage(e, setMessage, setMessages, setLoading
     if(data.Status){
         setMessages((prev) =>[
             ...prev,
-            {role: "assistant", content:data.response},
+            {role: "assistant", content:data.Response},
         ])
         setQuantityMessage((prev) => prev +1)
     }else{
@@ -39,7 +39,7 @@ export default async function sendMessage(e, setMessage, setMessages, setLoading
         ])
     }
     if (data?.Error){
-        console.error(error)
+        console.error(data?.Error)
         setMessages((prev) => [...prev, {
               role: "assistant",
                 content: "Unable to connect to the chatbot."
