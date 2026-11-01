@@ -15,6 +15,7 @@ const {
   Navbar,
   RegisterUser,
   Login,
+  Loading,
   Home,
   UserDashboard,
   Ban,
@@ -42,14 +43,22 @@ function App() {
 
 
   useEffect(() => {
-    const initializeApp = async () => {
-      await Promise.all([checkUser(setUser, setBanInfo), getUser(setUserData, setStarTrip, setTripHistory)]);
+      const initializeApp = async () => {
+          try {
+                await Promise.all([
+                        checkUser(setUser, setBanInfo),
+                                getUser(setUserData, setStarTrip, setTripHistory)
+                                      ]);
+                                          } catch (error) {
+                                                console.error("Error initializing application:", error);
+                                                    } finally {
+                                                          setLoading(false);
+                                                              }
+                                                                };
 
-      setLoading(false);
-    };
-
-    initializeApp();
-  }, []);
+                                                                  initializeApp();
+                                                                  }, []);
+  
 
   useEffect(() => {
     document.body.classList.toggle("user-active", user);
