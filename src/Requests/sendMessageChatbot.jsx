@@ -1,5 +1,5 @@
 
-export default async function sendMessage(e, setMessage, setMessages, setLoading, message, userData, selectedTrip, quantityMessage, setQuantityMessage){
+export default async function sendMessage(e, setMessage, setMessages, setLoading, message, userData, selectedTrip, quantityMessage, setQuantityMessage, messages){
     e.preventDefault()
     try{
         setMessages([...messages, { role: "user", content: message }])

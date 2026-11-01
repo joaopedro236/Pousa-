@@ -63,7 +63,7 @@ export default function Chatbot({ selectedTrip, userData, user }) {
             </div>
           )}
         </div>
-        <form onSubmit={(e) => (sendMessage(e, setMessage, setMessages, setLoading, message, userData, selectedTrip, quantityMessage, setQuantityMessage))}>
+        <form onSubmit={(e) => (sendMessage(e, setMessage, setMessages, setLoading, message, userData, selectedTrip, quantityMessage, setQuantityMessage, messages))}>
           <input
             type="text"
             placeholder="Type a question"
