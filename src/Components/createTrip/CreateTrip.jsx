@@ -204,7 +204,7 @@ export default function CreateTrip({
               animate
               disabled={{ before: new Date() }}
               required
-              
+              startMonth={new Date(new Date().getFullYear(), new Date().getMonth())}
               onDayClick={handleDayClick}
               modifiers={{
                 available: (day) => {

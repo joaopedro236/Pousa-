@@ -402,6 +402,7 @@ export default function TripsActive({
                   <DayPicker
                     mode="multiple"
                     hidden={{ before: new Date() }}
+                    startMonth={new Date(new Date().getFullYear(), new Date().getMonth())}
                     selected={selectedDate}
                     onSelect={(days) => {
                       const validDays = (days || []).filter(isDateAvailable);
