@@ -401,13 +401,7 @@ export default function TripsActive({
 
                   <DayPicker
                     mode="multiple"
-                    minDate={new Date()}
-                    dayClassName={(date) =>
-                        date < new Date(new Date().setHours(0, 0, 0, 0))
-                            ? "d-none"
-                                : ""
-                    }
-                    
+                    disabled={{ before: new Date() }}
                     selected={selectedDate}
                     onSelect={(days) => {
                       const validDays = (days || []).filter(isDateAvailable);

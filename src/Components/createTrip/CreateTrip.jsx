@@ -202,14 +202,9 @@ export default function CreateTrip({
 
             <DayPicker
               animate
-              minDate={new Date()}
+              disabled={{ before: new Date() }}
               required
-              dayClassName={(date) =>
-                  date < new Date(new Date().setHours(0, 0, 0, 0))
-                      ? "d-none"
-                          : ""
-                          
-              }
+              
               onDayClick={handleDayClick}
               modifiers={{
                 available: (day) => {
