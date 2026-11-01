@@ -70,7 +70,7 @@ function App() {
   }
   return (
     <>
-    <Suspense fallback={<loading/>}>
+    <Suspense fallback={<Loading/>}>
       <VLibras />
       <Ban user={banInfo} />
       <RegisterUser
