@@ -12,6 +12,7 @@
   "dependencies": {
     "@djpfs/react-vlibras": "^2.0.2",
     "bootstrap": "^5.3.8",
+    "js-cookie": "^3.0.8",
     "react": "^19.2.8",
     "react-cookie": "^8.1.2",
     "react-day-picker": "^10.0.1",
