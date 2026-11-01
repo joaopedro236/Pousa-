@@ -19,7 +19,8 @@ def get_trips():
     SELECT t.name, t.description,
            t.numberOfTravelers, t.petsAllowed, t.price,
            u.name, u.image_url, t.session_token, t.review, 
-           t.id, t.cep, t.street, t.complement,t.neighborhood, t.city, t.state, t.state_code, t.region, t.ibge, t.areacode, t.siafi, t.selected,t.img_main_url, t.url_google_maps
+           
+           t.id, t.cep, t.street, t.complement,t.neighborhood, t.city, t.state, t.state_code, t.region, t.ibge, t.areacode, t.siafi, t.selected,t.img_main_url, t.url_google_maps, t.comments, t.usersComments, t.note
     FROM trips t
     LEFT JOIN usersPousae u
     ON t.session_token = u.session_token
@@ -32,7 +33,15 @@ def get_trips():
                 (trip[7],),
             )
             resultUser = cursorUser.fetchone()
+            cursorUser.execute(
+                "select name, image_url from usersPousae where session_token = ANY(%s)",
+                (trip[25],),
+            )
+            
+            usersOwnTheirComments = cursorUser.fetchall()
 
+        
+            
             trips.append(
                 {
                     "name": trip[0],
@@ -58,6 +67,16 @@ def get_trips():
                     "selected": trip[21],
                     "img_main_url": trip[22],
                     "url_google_maps": trip[23] if trip else None,
+                    
+                    "comments": [
+                            {
+                                    "name": user[0],
+                                            "image_url": user[1],
+                                                    "comment": trip[24]
+                                                        }
+                                                            for user in usersOwnTheirComments
+                                                            ]
+                    
                 }
             )
 

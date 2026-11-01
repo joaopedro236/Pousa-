@@ -1,47 +1,18 @@
 import "./userDashboard.css";
+import updateImage from "../../Requests/uploadImage";
 import cards from "./cardsUsers";
-
+import deleteAccount from "../../Requests/deleteAccount";
 import { useState, useEffect } from "react";
 import photoUser from "../../assets/user.png";
+import Cookies from "js-cookie"
 export default function User({ user, itemsNavbar, userData }) {
   const [activeFile, setActiveFile] = useState(false);
   const [photo, setPhoto] = useState(null);
-  const deleteAccount = async () => {
-    try {
-      const responseDA = await fetch(
-        `${import.meta.env.VITE_API_URL}/deleteAccount`,
-        {
-          method: "DELETE",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          credentials: "include",
-        },
-      );
-      const dataDA = await responseDA.json();
-      if (dataDA?.Error) {
-        console.error(dataDA?.Error);
-      }
-      window.location.reload();
-    } catch (error) {
-      console.error(error);
-    }
-  };
-  const logOut = async () => {
-    try {
-      const responseLO = await fetch(`${import.meta.env.VITE_API_URL}/logout`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        credentials: "include",
-      });
-      const dataLO = await responseLO.json();
-      if (dataLO?.Error) {
-        console.error(dataLO?.Error);
-      }
 
-      window.location.reload();
+  const logOut = () => {
+    try {
+      Cookies.remove("user_session_token")
+      window.location.reload()
     } catch (error) {
       console.error(error);
     }
@@ -54,31 +25,8 @@ export default function User({ user, itemsNavbar, userData }) {
 
     const formData = new FormData();
     formData.append("file", file);
-
-    try {
-      const response = await fetch(
-        `${import.meta.env.VITE_API_URL}/upload-image`,
-        {
-          method: "POST",
-          credentials: "include",
-          body: formData,
-        },
-      );
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        console.error(data?.detail || "Error sending image");
-      }
-      if (data?.url) {
-        setPhoto(data.url);
-      }
-      setActiveFile(false);
-    } catch (error) {
-      console.error(error);
-      alert("Error sending image");
-    }
-  };
+    updateImage(formData, setPhoto, setActiveFile)
+  }
   const imageUrl = photo || userData?.image_url || photoUser;
   return (
     <>

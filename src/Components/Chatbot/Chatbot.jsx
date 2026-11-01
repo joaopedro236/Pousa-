@@ -1,6 +1,7 @@
 import "./Chatbot.css";
 import { useState, useEffect } from "react";
 import iconGemini from "../../assets/gemini.png";
+import sendMessage from "../../Requests/sendMessageChatbot";
 export default function Chatbot({ selectedTrip, userData, user }) {
   const [animate, setAnimate] = useState(false);
 
@@ -27,59 +28,7 @@ export default function Chatbot({ selectedTrip, userData, user }) {
   const [chatbotActive, setChatBotActive] = useState(false);
   const [messages, setMessages] = useState([]);
   const [loading, setLoading] = useState(false);
-  const apiURL = import.meta.env.VITE_API_URL;
-  async function sendMessage(e) {
-    e.preventDefault();
-    try {
-      setMessages((prev) => [...prev, { role: "user", content: message }]);
-      setMessage("");
-      setLoading(true);
-      const response = await fetch(`${apiURL}/chatbot`, {
-        method: "POST",
 
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          message: message,
-          nameUser: userData?.name,
-
-          nameTrip: selectedTrip?.name,
-          descriptionTrip: selectedTrip?.description,
-          reviewTrip: selectedTrip?.review,
-          priceTrip: selectedTrip?.price,
-
-          petsTrip: selectedTrip?.petsAllowed,
-          travelersTrip: selectedTrip?.numberOfTravelers,
-          quantityMessage: quantityMessage,
-        }),
-      });
-      const data = await response.json();
-      if (data.Status) {
-        setMessages((prev) => [
-          ...prev,
-          { role: "assistant", content: data.Response },
-        ]);
-        setQuantityMessage((prev) => prev + 1);
-      } else {
-        setMessages((prev) => [
-          ...prev,
-          {
-            role: "assistant",
-            content: "An error occurred while processing your message.",
-          },
-        ]);
-      }
-      if (data?.Error) {
-        console.error(data?.Error);
-      }
-    } catch (error) {
-      console.error(error);
-      setMessages("Unable to connect to the chatbot.");
-    } finally {
-      setLoading(false);
-    }
-  }
   return (
     <>
       <button
@@ -114,7 +63,7 @@ export default function Chatbot({ selectedTrip, userData, user }) {
             </div>
           )}
         </div>
-        <form onSubmit={sendMessage}>
+        <form onSubmit={(e) => (sendMessage(e, setMessage, setMessages, setLoading, message, userData, selectedTrip, quantityMessage, setQuantityMessage))}>
           <input
             type="text"
             placeholder="Type a question"

@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import photoUser from "../../assets/user.png";
 import { useNavigate, useParams } from "react-router-dom";
 import hiddenPhoto from "../../assets/banner.jpeg";
-
+import getTrips from "../../Requests/getTrips";
 const normalizeDateValue = (value) => {
   if (!value) return null;
   const date = new Date(`${value}T00:00:00`);
@@ -25,7 +25,7 @@ export default function Home({
   user,
   userData,
   selectedTrip,
-  setSelectedRestaurant,
+  setSelectedTrip,
   itemsNavbar,
   setItemsNavbar,
   starTrip
@@ -51,40 +51,21 @@ export default function Home({
     const trip = json.trips.find((trip) => String(trip.id) === String(tripId));
 
     if (trip) {
-      setSelectedRestaurant(trip);
+      setSelectedTrip(trip);
     }
   }, [tripId, json.trips]);
 
   const navigate = useNavigate();
 
-  const fetchData = async () => {
-    try {
-      const tripsResponse = await fetch(
-        `${import.meta.env.VITE_API_URL}/getTrips`,
-      );
-      const tripsData = await tripsResponse.json();
-
-      setJson({
-        trips: tripsData?.trips || [],
-      });
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
+  
   useEffect(() => {
-    fetchData();
-
-    const interval = setInterval(fetchData, 300000);
+    getTrips(setJson)
+    const interval = setInterval(getTrips, 300000);
 
     return () => clearInterval(interval);
   }, []);
 
-  useEffect(() => {
-    if (itemsNavbar !== "explore") return;
-    fetchData();
-  }, [itemsNavbar]);
-
+  
   const filteredTrips = (json?.trips || []).filter((trip) => {
     const q = search?.toLowerCase();
     if (q) {
@@ -288,7 +269,7 @@ export default function Home({
               key={index}
               onClick={() => {
                 sessionStorage.setItem("selectedTrip", JSON.stringify(trip));
-                setSelectedRestaurant(trip);
+                setSelectedTrip(trip);
                 navigate(`/trip/${trip.id}`);
                 window.location.reload()
               }}
@@ -336,11 +317,11 @@ export default function Home({
 
       <TripsActive
         selectedTrip={selectedTrip}
-        
+        getTrips = {getTrips}
         starTrip={starTrip}
         user={user}
         itemsNavbar={itemsNavbar}
-        setSelectedRestaurant={setSelectedRestaurant}
+        setSelectedTrip={setSelectedTrip}
       />
     </>
   );

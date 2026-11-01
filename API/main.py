@@ -7,7 +7,6 @@ from API.Routers.User.get_user import router as getUser
 from API.Routers.User.updateImage import router as updateImage
 from API.Routers.Trips.createTrip import router as trips
 from API.Routers.Trips.get_trips import router as get_trips
-from API.Routers.User.logout import router as logout
 from API.Routers.User.login import router as login
 from API.Routers.Trips.buyTrip import router as buyTrip
 from API.Routers.Trips.Star.addStar import router as addStar
@@ -79,7 +78,6 @@ app.include_router(chatbot)
 app.include_router(createComments)
 app.include_router(getComments)
 app.include_router(tripMetrics)
-app.include_router(logout)
 app.include_router(deleteAccounts)
 app.include_router(suggestedDescription)
 app.include_router(deleteTrip)

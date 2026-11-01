@@ -1,7 +1,8 @@
 import "./tripDashboard.css";
+import deleteTrip from "../../Requests/deleteTrip";
 import cards from "./cards";
 import photoUser from "../../assets/user.png";
-
+import metricsTrips from "../../Requests/metricsTrips";
 import { useState, useEffect } from "react";
 import {
   LineChart,
@@ -15,7 +16,7 @@ import {
 export default function TripsDashboard({
   itemsNavbar,
   setItemsNavbar,
-  setSelectedRestaurant,
+  setSelectedTrip,
 }) {
   const [json, setJson] = useState(null);
   const weekDays = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
@@ -23,23 +24,9 @@ export default function TripsDashboard({
     day,
     tripsobtainedhistoryS: json?.tripsobtainedhistoryS?.[index] ?? 0,
   }));
-  const requisition = async () => {
-    try {
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/metrics`, {
-        method: "GET",
-        credentials: "include",
-      });
-      const data = await response.json();
-      if (data?.Error) {
-        console.error(data?.Error);
-      }
-      setJson(data);
-    } catch (error) {
-      console.error(error);
-    }
-  };
+  
   useEffect(() => {
-    requisition();
+    metricsTrips(setJson);
   }, []);
   const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -49,29 +36,7 @@ export default function TripsDashboard({
 
   const previous = () => {
     setCurrentIndex((prev) => Math.max(prev - 1, 0));
-  };
-  const deleteTrip = async () => {
-    try {
-      const responseDT = await fetch(
-        `${import.meta.env.VITE_API_URL}/deleteTrip`,
-        {
-          method: "DELETE",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            id: json?.trip[currentIndex]?.id,
-          }),
-        },
-      );
-      const dataDT = await responseDT.json();
-      if (dataDT?.Error) {
-        console.error(dataDT?.Error);
-      }
-    } catch (error) {
-      console.error(error);
-    }
-  };
+  }
   return (
     <>
       <section
@@ -143,7 +108,7 @@ export default function TripsDashboard({
               role="button"
 
               onClick={() => {
-                setSelectedRestaurant(json.trip[currentIndex]);
+                setSelectedTrip(json.trip[currentIndex]);
                 setItemsNavbar("explore");
               }}
             >
@@ -188,7 +153,7 @@ export default function TripsDashboard({
           )}
           <div className="buttons">
             <button onClick={previous}>{"<"}</button>
-            <button onClick={deleteTrip}>X</button>
+            <button onClick={() => {deleteTrip(json,currentIndex)}}>X</button>
             <button onClick={next}>{">"}</button>
           </div>
         </div>

@@ -4,7 +4,7 @@ import photoUser from "../../assets/user.png";
 export default function TripHistory({
   user,
   itemsNavbar,
-  setSelectedRestaurant,
+  setSelectedTrip,
   setItemsNavbar,
   json,
 }) {
@@ -25,7 +25,7 @@ export default function TripHistory({
                 role="button"
                 key={index}
                 onClick={() => {
-                  setSelectedRestaurant(trip);
+                  setSelectedTrip(trip);
                   setItemsNavbar("explore");
                 }}
               >

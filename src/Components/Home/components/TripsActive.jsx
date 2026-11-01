@@ -5,15 +5,21 @@ import hiddenPhoto from "../../../assets/banner.jpeg";
 import hiddenUser from "../../../assets/user.png";
 import { DayPicker } from "react-day-picker";
 import "react-day-picker/style.css";
+import removeStar from "../../../Requests/removeStar"
+import addStar from "../../../Requests/addStar"
+import createComment from "../../../Requests/createComment"
+import buyTrip from "../../../Requests/buyTrip"
+import tripsActiveRequisition from "../../../Requests/tripsActive"
 export default function TripsActive({
   itemsNavbar,
   user,
   starTrip,
   selectedTrip,
-  setSelectedRestaurant,
+  getTrips,
+  setSelectedTrip,
 }) {
   const [loading, setLoading] = useState(false);
-  const [comments, setComments] = useState(null);
+  const [comments, setComments] = useState([]);
   const [notFound, setNotFound] = useState(false);
   const [message, setMessage] = useState("");
   const [note, setNote] = useState(5);
@@ -22,61 +28,16 @@ export default function TripsActive({
   useEffect(() => {
     if (selectedTrip || !tripId) return;
 
-    const fetchTrip = async () => {
-      try {
-        const response = await fetch(
-          `${import.meta.env.VITE_API_URL}/getTrips`,
-        );
 
-        const data = await response.json();
-
-        const trip = data.trips?.find(
-          (trip) => String(trip.id) === String(tripId),
-        );
-
-        if (trip) {
-          setSelectedRestaurant(trip);
-        } else {
-          setNotFound(true);
-        }
-      } catch (error) {
-        console.error(error);
-      }
-    };
-
-    fetchTrip();
-  }, [tripId]);
+    tripsActiveRequisition(setSelectedTrip, setNotFound)
+  }, [tripId])
+  useEffect(() => {
+      setComments(selectedTrip?.comments || []);
+      }, [selectedTrip])
   const [tripQuantity, setTripQuantity] = useState(1);
   const [showFullDescription, setShowFullDescription] = useState(false);
   const [showMoreLocation, setShowMoreLocation] = useState(false);
-  const buy = async () => {
-    setLoading(true);
-    try {
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/buyTrip`, {
-        method: "POST",
-        credentials: "include",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          id: selectedTrip?.id,
-          quantity: Number(tripQuantity),
-        }),
-      });
-      const data = await response.json();
-      if (data?.Status) {
-        alert("trip purchased");
-    
-      }
-      if (data?.Error) {
-        console.error(data?.Error);
-      }
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setLoading(false);
-    }
-  };
+  
   const [starActive, setStarActive] = useState(false);
   useEffect(() => {
     const isFavorite = Array.isArray(starTrip)
@@ -85,56 +46,8 @@ export default function TripsActive({
 
     setStarActive(isFavorite);
   }, [starTrip, selectedTrip?.id]);
-  const addStar = async () => {
-    try {
-      const responseAS = await fetch(
-        `${import.meta.env.VITE_API_URL}/addStar`,
-        {
-          method: "POST",
-          credentials: "include",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            id: selectedTrip?.id,
-          }),
-        },
-      );
-      const dataAS = await responseAS.json();
-      if (dataAS?.Error) {
-        console.error(dataAS?.Error);
-      }
-      setStarActive(true);
-      
-    } catch (error) {
-      console.error(error);
-    }
-  };
-  const removeStar = async () => {
-    try {
-      const responseRS = await fetch(
-        `${import.meta.env.VITE_API_URL}/removeStar`,
-        {
-          method: "POST",
-          credentials: "include",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            id: selectedTrip?.id,
-          }),
-        },
-      );
-      const dataRS = await responseRS.json();
-      if (dataRS?.Error) {
-        console.error(dataRS?.Error);
-      }
-      setStarActive(false);
-      
-    } catch (error) {
-      console.error(error);
-    }
-  };
+
+
   if (notFound) {
     return (
       <div className="bug-page">
@@ -143,63 +56,9 @@ export default function TripsActive({
       </div>
     );
   }
-  const getComment = async () => {
-    try {
-      const responseGC = await fetch(
-        `${import.meta.env.VITE_API_URL}/getComment`,
-        {
-          method: "POST",
-          credentials: "include",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            id: selectedTrip?.id,
-          }),
-        },
-      );
-      const dataGC = await responseGC.json();
-      if (dataGC?.Error) {
-        console.error(dataGC?.Error);
-      }
 
-      setComments(dataGC?.Comments || []);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-  useEffect(() => {
-    if (selectedTrip) {
-      getComment();
-    }
-  }, [selectedTrip]);
   const [showAllComments, setShowAllComments] = useState(false);
-  const createComment = async () => {
-    try {
-      const responseCC = await fetch(
-        `${import.meta.env.VITE_API_URL}/createComment`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          credentials: "include",
-          body: JSON.stringify({
-            tripId: selectedTrip?.id,
-            comment: message,
-            note: Number(note),
-          }),
-        },
-      );
-      const dataCC = await responseCC.json();
-      if (dataCC?.Error) {
-        console.error(dataCC?.Error);
-      }
-      if (dataCC?.Status) getComment();
-    } catch (error) {
-      console.error(error);
-    }
-  };
+  
   const locationItems = [
     { key: "cep", label: "CEP", value: selectedTrip?.cep || "No cep" },
     {
@@ -290,7 +149,7 @@ export default function TripsActive({
           <button
             className="position-absolute "
             onClick={() => {
-              setSelectedRestaurant(null);
+              setSelectedTrip(null);
               navigate("/", { replace: true });
             }}
           >
@@ -302,7 +161,14 @@ export default function TripsActive({
           <header className="d-flex flex-column position-relative align-items-center rounded p-4 justify-contnet-center">
             <button
               className={` starTrip position-absolute d-flex align-items-center justify-content-center ${starActive ? "text-primary" : ""}`}
-              onClick={starActive ? removeStar : addStar}
+              onClick={() => {
+                  if (starActive) {
+                      removeStar(selectedTrip, setStarActive);
+                        } else {
+                            addStar(selectedTrip, setStarActive);
+                              }
+                              }}
+              
             >
               ★
             </button>
@@ -433,7 +299,7 @@ export default function TripsActive({
                   type="button"
                   onClick={() => setShowAllComments(!showAllComments)}
                   className="btn btn-link seeMoreTrip"
-                >
+                > 
                   {showAllComments ? "See less" : "See more"}
                 </button>
               )}
@@ -441,7 +307,7 @@ export default function TripsActive({
                 className="d-flex gap-1 mt-3"
                 onSubmit={(e) => {
                   e.preventDefault();
-                  createComment();
+                  createComment(selectedTrip, message, note);
                 }}
               >
                 <input
@@ -571,7 +437,7 @@ export default function TripsActive({
                     disabled={!selectedDate || loading}
                     onClick={() => {
                       setShowDatePicker(false);
-                      buy();
+                      buyTrip(selectedTrip, tripQuantity, setLoading);
                     }}
                   >
                     {loading ? "Loading..." : "Confirm and book"}

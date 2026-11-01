@@ -5,8 +5,11 @@ import { DayPicker } from "react-day-picker";
 import "react-day-picker/style.css";
 import itemsSelect from "./selectTagsJSON";
 import "./CreateTrip.css";
+
+import handleSubmitVerification from "../../Requests/createTrip";
 import { useState, useEffect } from "react";
 import StateManagedSelect from "react-select";
+import suggestedDescription from "../../Requests/handleSuggested";
 export default function CreateTrip({
   user,
   itemsNavbar,
@@ -40,48 +43,7 @@ export default function CreateTrip({
     const data = new FormData(e.target);
     data.set("selected", JSON.stringify(selected));
     const file = e.target.file.files[0];
-    try {
-      setError(false);
-      setErrorMessage("");
-      setLoading(true);
-      setStage((prev) => prev + 1);
-      if (stage > 2) {
-        setStage(0);
-      }
-      if (stage === 2) {
-        const response = await fetch(`${import.meta.env.VITE_API_URL}/trips`, {
-          method: "POST",
-          credentials: "include",
-        
-          body: data,
-        });
-        const result = await response.json();
-        if (result?.authenticated) {
-          setUser(true);
-        }
-        if (result?.Error) {
-          setError(true);
-          console.error(result?.Error);
-          setErrorMessage(
-            typeof result.Error === "string"
-              ? result.Error
-              : JSON.stringify(result.Error),
-          );
-
-          return;
-        }
-        if (result?.Status) {
-          setItemsNavbar("explore");
-          window.location.reload();
-        }
-      }
-    } catch (error) {
-      setError(true);
-      setErrorMessage(error instanceof Error ? error.message : String(error));
-      console.error(error);
-    } finally {
-      setLoading(false);
-    }
+    handleSubmitVerification(setError, setErrorMessage, setLoading, setStage, stage, data, setUser, setItemsNavbar)
   };
   const MAX_TAGS = 5;
 
@@ -95,26 +57,7 @@ export default function CreateTrip({
     const dataFormHS = Object.fromEntries(new FormData(form));
     if (dataFormHS.price === "") dataFormHS.price = 0;
     dataFormHS.price = Number(dataFormHS.price);
-    try {
-      const responseHS = await fetch(
-        `${import.meta.env.VITE_API_URL}/suggestedDescription`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-
-          body: JSON.stringify(dataFormHS),
-        },
-      );
-      const dataHS = await responseHS.json();
-      if (dataHS?.Error) {
-        console.error(dataHS?.Error);
-      }
-      setDescription(dataHS?.Response);
-    } catch (error) {
-      console.error(error);
-    }
+    suggestedDescription(dataFormHS, setDescription)
   };
   return (
     <>

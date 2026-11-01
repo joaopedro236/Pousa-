@@ -2,6 +2,7 @@ import "./RegisterUser.css";
 import inputs from "./inputs";
 import Select from "react-select";
 import countries from "./countries";
+import registerUserRequisition from "../../Requests/registerUser";
 import { useState } from "react";
 export default function RegisterUser({
   user,
@@ -19,46 +20,7 @@ export default function RegisterUser({
 
     const data = Object.fromEntries(new FormData(e.target));
     data.country = country?.value;
-    try {
-      setError(false);
-      setErrorMessage("");
-      setLoading(true);
-      const response = await fetch(
-        `${import.meta.env.VITE_API_URL}/registerUser`,
-        {
-          method: "POST",
-          credentials: "include",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(data),
-        },
-      );
-      const result = await response.json();
-      if (result?.Status) {
-        setUser(true);
-        await checkUser();
-        window.location.reload()
-        
-      }
-      if (result?.Error) {
-        setError(true);
-        console.error(result?.Error);
-        setErrorMessage(
-          typeof result.Error === "string"
-            ? result.Error
-            : JSON.stringify(result.Error),
-        );
-
-        return;
-      }
-    } catch (error) {
-      setError(true);
-      setErrorMessage(error instanceof Error ? error.message : String(error));
-      console.error(error);
-    } finally {
-      setLoading(false);
-    }
+    registerUserRequisition(setError, setErrorMessage, setLoading, data, setUser)
   };
   return (
     <>

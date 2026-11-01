@@ -1,53 +1,14 @@
 import "./login.css";
 import inputs from "./inputs";
 import { useState } from "react";
+import loginRequisition from  "../../Requests/login"
 export default function Login({ user, login, setUser, checkUser, setLogin }) {
   const [loading, setLoading] = useState(false);
   const [attempts, setAttempts] = useState(0);
   const handleLogin = async (e) => {
     e.preventDefault();
     const data = Object.fromEntries(new FormData(e.target));
-
-    try {
-      setLoading(true);
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/login`, {
-        method: "POST",
-        credentials: "include",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      });
-      const result = await response.json();
-      if (result?.Status) {
-        setAttempts(0);
-        setUser(true);
-        await checkUser();
-        window.location.reload();
-      }
-      if (result?.Error) {
-        console.error(result?.Error);
-        if (result?.Error == "Not Result") {
-          setAttempts((prev) => prev + 1);
-          if (attempts >= 45) {
-            const responseBanBrute = await fetch(
-              `${import.meta.env.VITE_API_URL}/banBruteForce`,
-              {
-                method: "DELETE",
-              },
-            );
-            const dataBanBrute = await responseBanBrute.json();
-            if (dataBanBrute?.Ban) {
-              window.location.reload();
-            }
-          }
-        }
-      }
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setLoading(false);
-    }
+    loginRequisition(setLoading,setAttempts, setUser, data)
   };
   return (
     <>

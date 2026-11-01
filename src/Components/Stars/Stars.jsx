@@ -4,10 +4,9 @@ import photoUser from "../../assets/user.png";
 export default function Star({
   itemsNavbar,
   setItemsNavbar,
-  setSelectedRestaurant,
+  setSelectedTrip,
   json,
 }) {
-  console.log(json)
   return (
     <>
       <section
@@ -25,7 +24,7 @@ export default function Star({
                 role="button"
                 key={index}
                 onClick={() => {
-                  setSelectedRestaurant(trip);
+                  setSelectedTrip(trip);
                   setItemsNavbar("explore");
                 }}
               >
