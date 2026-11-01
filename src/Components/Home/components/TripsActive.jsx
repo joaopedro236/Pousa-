@@ -30,7 +30,7 @@ export default function TripsActive({
     if (selectedTrip || !tripId) return;
 
 
-    tripsActiveRequisition(setSelectedTrip, setNotFound)
+    tripsActiveRequisition(setSelectedTrip, setNotFound, tripId)
   }, [tripId])
   useEffect(() => {
       setComments(selectedTrip?.comments || []);
