@@ -401,7 +401,7 @@ export default function TripsActive({
 
                   <DayPicker
                     mode="multiple"
-                    disabled={{ before: new Date() }}
+                    hidden={{ before: new Date() }}
                     selected={selectedDate}
                     onSelect={(days) => {
                       const validDays = (days || []).filter(isDateAvailable);
