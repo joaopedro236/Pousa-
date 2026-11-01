@@ -6,6 +6,6 @@ export default defineConfig({
   plugins: [react()],
   build: {
     cssCodeSplit: true,
-    minify: 'esbuild',
+    minify: 'oxc',
     },
   })
