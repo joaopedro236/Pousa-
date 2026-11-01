@@ -23,6 +23,7 @@ export default function TripsActive({
   const [notFound, setNotFound] = useState(false);
   const [message, setMessage] = useState("");
   const [note, setNote] = useState(5);
+  const [showAllComments, setShowAllComments] = useState(false )
   const { tripId } = useParams();
   const navigate = useNavigate();
   useEffect(() => {
@@ -57,8 +58,6 @@ export default function TripsActive({
     );
   }
 
-  const [showAllComments, setShowAllComments] = useState(false);
-  
   const locationItems = [
     { key: "cep", label: "CEP", value: selectedTrip?.cep || "No cep" },
     {
