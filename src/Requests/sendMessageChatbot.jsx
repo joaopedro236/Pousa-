@@ -2,7 +2,7 @@
 export default async function sendMessage(e, setMessage, setMessages, setLoading, message, userData, selectedTrip, quantityMessage, setQuantityMessage, messages){
     e.preventDefault()
     try{
-        setMessages([...messages, { role: "user", content: message.trim() }])
+        setMessages(prev => [...prev, { role: "user", content: message.trim() }])
         setMessage("")
         setLoading(true)
         const response = await fetch(`${import.meta.env.VITE_API_URL}/chatbot`,{
