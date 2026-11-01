@@ -19,3 +19,4 @@ export default async function addStar(selectedTrip, setStarActive){
         console.error(error)
 
 }
+}
