@@ -44,7 +44,7 @@ export default async function sendMessage(e, setMessage, setMessages, setLoading
               role: "assistant",
                 content: "Unable to connect to the chatbot."
                 }]);
-        }])
+        
     }
     }catch(error){
         console.error(error)
@@ -52,7 +52,7 @@ export default async function sendMessage(e, setMessage, setMessages, setLoading
               role: "assistant",
                 content: "Unable to connect to the chatbot."
                 }]);
-        }])
+        
     }finally{
         setLoading(false)
     }
