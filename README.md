@@ -1,8 +1,8 @@
-# 🏨 PousaÊ
+# 🏨 PousaE
 
 > A modern platform to discover, book, and manage memorable travel experiences.
 
-PousaÊ is a full-stack application built with React on the frontend and FastAPI on the backend, using PostgreSQL for data persistence. The platform allows users to explore trips, manage their profiles, and handle bookings securely.
+Pousa is a full-stack travel platform developed independently, built with React on the frontend and FastAPI on the backend, using PostgreSQL for data persistence. It allows users to explore trips, manage their profiles, save favorites, purchase trips, review experiences, and interact with an AI assistant.
 
 ---
 
@@ -22,11 +22,14 @@ PousaÊ is a full-stack application built with React on the frontend and FastAPI
 
 | Aspect | Status |
 |---|---:|
-| **Overall Rating** | 8.5 / 10 ⭐ |
+| **Overall Rating** | 8.0 / 10 ⭐ |
 | **Frontend** | ✅ Functional |
 | **Backend** | ✅ Operational |
 | **Database** | ✅ PostgreSQL configured |
 | **Deployment** | ✅ Vercel (frontend) |
+| **Development** | 👤 Independently maintained |
+
+> The rating is a qualitative project assessment, not a benchmark or production-readiness certification.
 
 ---
 
@@ -45,24 +48,28 @@ PousaÊ is a full-stack application built with React on the frontend and FastAPI
 ## ✨ Main Features
 
 - User registration and login with email validation, CPF validation, and secure password handling
-- Secure session management using HTTP-only cookies
+- Session management using HTTP-only cookies
 - User profile with avatar, balance, and trip history
 - Trip listing, search, and filtering
 - Detailed trip pages with dates, pricing, traveler limits, and pet policy
 - Purchase flow with balance verification and self-purchase protection
 - Favorites system for saving preferred trips
-- Reviews and ratings with automatic moderation powered by Gemini
+- Reviews and ratings with moderation powered by Gemini
 - AI virtual assistant for user support and recommendations
+- User history and trip-related information
 
 ---
 
 ## 🔐 Security and Best Practices
 
-- Passwords are stored with Argon2 hashing
-- Cookies use `HttpOnly` and `Secure` in production, with `SameSite` settings
+- Passwords are hashed with Argon2
+- Cookies use `HttpOnly` and `Secure` in production, with `SameSite` configuration
 - IP-based rate limiting is configured on the backend
-- CORS is configured with necessary exposed headers
-- Automatic moderation helps detect and filter inappropriate content
+- CORS is configured for the frontend origins
+- Input validation is handled with Pydantic and backend validation
+- Automated moderation helps detect and filter inappropriate content
+
+> Security controls are continuously evolving. The project should not be considered security-audited or production-ready for real financial transactions.
 
 ---
 
@@ -80,7 +87,7 @@ POST   /upload-image    - Upload a profile image
 ### Trips and Purchases
 ```bash
 POST   /trips           - Create a new trip
-GET    /getTrips        - List all trips
+GET    /getTrips        - List trips
 POST   /buyTrip         - Purchase a trip
 POST   /addStar         - Add a trip to favorites
 POST   /removeStar      - Remove a trip from favorites
@@ -89,7 +96,7 @@ GET    /getStar         - List favorite trips
 
 ### Reviews and AI
 ```bash
-POST   /createComment   - Create a review comment (moderated)
+POST   /createComment   - Create a review/comment (moderated)
 POST   /getComment      - Retrieve comments
 POST   /chatbot         - Chat with the AI assistant
 ```
@@ -125,18 +132,9 @@ Pousa-/
 │   ├── SQL/
 │   ├── Validation/
 │   ├── main.py
-│   ├── requirements.txt
-│   └── .env.example
+│   └── requirements.txt
 ├── public/
 ├── previews/              # Project screenshots and visual assets
-│   ├── screenshot_08.png
-│   ├── screenshot_09.png
-│   ├── screenshot_11.png
-│   ├── screenshot_12.png
-│   ├── screenshot_14.png
-│   ├── screenshot_15.png
-│   ├── screenshot_16.png
-│   └── screenshot_17.png
 ├── src/
 │   ├── App.jsx
 │   ├── main.jsx
@@ -151,6 +149,7 @@ Pousa-/
 ├── pnpm-lock.yaml
 ├── vite.config.js
 ├── vercel.json
+├── CONTRIBUTING.md
 └── README.md
 ```
 
@@ -255,10 +254,13 @@ pnpm dev
 ```bash
 cd API
 python -m venv .venv
+
 # Windows
 .venv\Scripts\activate
+
 # macOS/Linux
 source .venv/bin/activate
+
 pip install -r requirements.txt
 uvicorn main:app --reload
 # API docs: http://localhost:8000/docs
@@ -267,6 +269,7 @@ uvicorn main:app --reload
 4. Configure the database:
 - Use `.env.example` as a reference
 - Create the required PostgreSQL databases
+- Configure the environment variables before starting the backend
 
 ---
 
@@ -306,16 +309,17 @@ pnpm lint      # Run the linter
 
 ## 📈 Project Notes
 
-- **Rate limit:** 30 requests/second per IP
+- **Rate limit:** 30 requests/second per IP (configured limit)
 - **Session expiry:** 7 days
 - **Upload limit:** 5 MB (JPG, PNG, WEBP)
+- **Maintenance:** Developed and maintained independently
 
 ---
 
 ## 🛠️ Troubleshooting
 
 - **Port 5173 already in use:** `pnpm dev -- --port 3000`
-- **Module errors:** `rm -rf node_modules pnpm-lock.yaml && pnpm install`
+- **Module errors:** reinstall dependencies with `pnpm install`
 - **Database connection issues:** Check your `.env` values and ensure PostgreSQL is running
 - **Gemini API errors:** Verify your API key and request format
 
@@ -329,7 +333,6 @@ MIT
 
 ## 📞 Contact
 
-- **Email:** joaopedrooliveiradearaujo416@gmail.com
 - **Issues:** https://github.com/joaopedro236/Pousa-/issues
 - **Live Demo:** https://pousa.vercel.app
 
