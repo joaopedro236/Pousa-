@@ -60,7 +60,7 @@ export default function Home({
   
   useEffect(() => {
     getTrips(setJson)
-    const interval = setInterval(getTrips, 300000);
+    const interval = setInterval(getTrips(setJson), 300000);
 
     return () => clearInterval(interval);
   }, []);

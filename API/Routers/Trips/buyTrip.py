@@ -27,7 +27,7 @@ def buy_trip(tripId: validation, request: Request):
             return {"Status": False, "Error": "Not exists trip"}
         tripPriceMultiplied = tripPrice[0] * tripId.quantity
         cursorUser.execute(
-            "select money from usersPousae where session_token = %s",
+            "select money from usersPousae where session_token = %s for update",
             (session_token_user,),
         )
         userMoney = cursorUser.fetchone()

@@ -19,7 +19,7 @@ def database():
         review numeric(3,2) default 5,
         usersPurchased uuid[],
         cep int,
-        streettext, 
+        street text, 
         complement text,
         neighborhood text, 
         city text,

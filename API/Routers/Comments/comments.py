@@ -32,15 +32,7 @@ def createComment(Data: data, request: Request):
                 "Status": False,
                 "Error": "Unfortunately, you've already commented!",
             }
-        cursor.execute("select endDate from trips where id = %s", (Data.tripId,))
-        endDate = cursor.fetchone()
-        if not endDate:
-            return {"Status": False, "Error": "The end date was not found."}
-        if date.today() < date.fromisoformat(endDate[0]):
-            return {
-                "Status": False,
-                "Error": "The trip isn't over yet—you can comment once it's finished!",
-            }
+        
         moderation = client.models.generate_content(
             model="gemini-3.1-flash-lite",
             contents=f"""

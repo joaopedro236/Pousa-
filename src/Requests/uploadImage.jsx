@@ -6,16 +6,19 @@ export default async function updateImage(formData,setPhoto, setActiveFile) {
             credentials:"include",
             body: formData,
         },)
+        const data = await response.json()
         if (!response.ok) {
             console.error(data.detail || "Error sending image ")
         }
-        const data = await response.json()
+        
         if (data?.url){
             setPhoto(data?.url)
         }
-        setActiveFile(false)
+    
     } catch (error){
         console.error(error)
     
+    }finally{
+        setActiveFile(false)
     }
 }

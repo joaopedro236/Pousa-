@@ -22,9 +22,9 @@ def registerUserVerification(email, cpf, country, name):
         result = requests.get(
             "https://api.isvalid.dev/v0/vat",
             headers={"Authorization": f"Bearer {IS_VALID_TIN}"},
-            params={"value": cpf, "countryCode": country},
+            params={"value": cpf, "countryCode": country},timeout=10
         ).json()
-        if not result["valid"]:
+        if not result.get("valid"):
             return {"Status": False, "Error": "No TIN"}
         moderation = client.models.generate_content(
             model="gemini-3.1-flash-lite",

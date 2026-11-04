@@ -4,7 +4,7 @@ export default async function banBruteForceRequisition(){
             method:"DELETE",},
         )
         const data = await response.json()
-        if (data?.ban){
+        if (data?.Ban){
             window.location.reload()
         }
     }catch(error){

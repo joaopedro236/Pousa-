@@ -12,4 +12,4 @@ def logout(response: Response):
 
         return {"Status": True}
     except Exception as e:
-        return {"Status": false, "Error": str(e)}
+        return {"Status": False, "Error": str(e)}

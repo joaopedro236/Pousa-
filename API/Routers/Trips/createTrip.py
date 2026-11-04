@@ -6,7 +6,7 @@ from psycopg2.extras import Json
 from ...Databases.Conn.release_database import release_database
 from urllib.parse import urlencode
 from ...Validation.createTripValidation import createTripValidation
-
+from ...Databases.Conn.redis import redis_client
 router = APIRouter()
 import os
 from dotenv import load_dotenv
@@ -120,7 +120,7 @@ async def trips(
             ),
         )
         conn.commit()
-
+        redis_client.delete("trips:getTrips:v1")
         return {"Status": True}
 
     except Exception as e:

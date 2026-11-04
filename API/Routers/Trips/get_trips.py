@@ -44,12 +44,19 @@ def get_trips():
             )
             resultUser = cursorUser.fetchone()
             cursorUser.execute(
-                "select name, image_url from usersPousae where session_token = ANY(%s)",
+                "select name, image_url,session_token from usersPousae where session_token = ANY(%s)",
                 (trip[25],),
             )
 
             usersOwnTheirComments = cursorUser.fetchall()
-
+            users_dict = {
+                    str(user[2]): {
+                            "name": user[0],
+                                    "image_url": user[1]
+                                        }
+                                            for user in users
+                                            }
+            
             trips.append(
                 {
                     "name": trip[0],
@@ -76,8 +83,16 @@ def get_trips():
                     "img_main_url": trip[22],
                     "url_google_maps": trip[23] if trip else None,
                     "comments": [
-                        {"name": user[0], "image_url": user[1], "comment": trip[24]}
-                        for user in usersOwnTheirComments
+                            {
+                                    "name": (users_dict.get(str(token)) or {}).get("name"),
+                                            "image_url": (users_dict.get(str(token)) or {}).get("image_url"),
+                                                    "comment": comment,
+                                                            "note": note
+                                                                }
+                                                                    for comment, token, note in zip(
+                                                                            trip[24] or [], trip[25] or [], trip[26] or []
+                                                                                )
+                                                                                
                     ],
                 }
             )

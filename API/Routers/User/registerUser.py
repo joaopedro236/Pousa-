@@ -45,7 +45,7 @@ def registerUser(data: registerUser, responseCookie: Response):
     except Exception as e:
         if conn is not None and not conn.closed:
             conn.rollback()
-            return {"Status": False, "Error": str(e)}
+        return {"Status": False, "Error": str(e)}
 
     finally:
         if conn is not None and not conn.closed:
