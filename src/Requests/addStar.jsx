@@ -1,6 +1,6 @@
 export default async function addStar(selectedTrip, setStarActive){
     try{
-        const response = await fetch(`${import.meta.env.VITE_API_URL}addStar`, {
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/addStar`, {
             method:"POST",
             credentials:"include",
             headers: {

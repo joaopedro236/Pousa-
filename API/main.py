@@ -4,6 +4,7 @@ from API.Databases.DB.users import database as db_registerUser
 from API.Routers.User.registerUser import router as registerUser
 from API.Schemas.User.checkUser import router as checkUser
 from API.Routers.User.get_user import router as getUser
+from API.Routers.User.logout import router as logout
 from API.Routers.User.updateImage import router as updateImage
 from API.Routers.Trips.createTrip import router as trips
 from API.Routers.Trips.get_trips import router as get_trips
@@ -75,6 +76,7 @@ app.include_router(buyTrip)
 app.include_router(addStar)
 app.include_router(removeStar)
 app.include_router(chatbot)
+app.include_router(logout)
 app.include_router(createComments)
 app.include_router(getComments)
 app.include_router(tripMetrics)

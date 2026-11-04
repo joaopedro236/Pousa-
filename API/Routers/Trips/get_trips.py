@@ -2,9 +2,13 @@ from fastapi import APIRouter
 from ...Databases.Conn.users import connect_database, poolUser
 from ...Databases.Conn.trips import connect_database_trip, poolTrips
 from ...Databases.Conn.release_database import release_database
-
+from fastapi.encoders import jsonable_encoder
+from ...Databases.Conn.redis import redis_client
+import json
 router = APIRouter()
 
+CACHE_KEY = "trips:getTrips:v1"
+CACHE_TTL = 60
 
 @router.get("/getTrips")
 def get_trips():
@@ -13,7 +17,13 @@ def get_trips():
     connUser = None
     cursorUser = None
     try:
-        conn, cursor = connect_database_trip()
+        cached = redis_client.get(CACHE_KEY)
+        if cached:
+            return json.loads(cached)
+    except Exception as e:
+        print(f"Redis Error {str(e)}")
+    try:
+        conn,cursor = connect_database_trip()
         connUser, cursorUser = connect_database()
         cursor.execute("""
     SELECT t.name, t.description,
@@ -37,11 +47,9 @@ def get_trips():
                 "select name, image_url from usersPousae where session_token = ANY(%s)",
                 (trip[25],),
             )
-            
+
             usersOwnTheirComments = cursorUser.fetchall()
 
-        
-            
             trips.append(
                 {
                     "name": trip[0],
@@ -67,20 +75,25 @@ def get_trips():
                     "selected": trip[21],
                     "img_main_url": trip[22],
                     "url_google_maps": trip[23] if trip else None,
-                    
                     "comments": [
-                            {
-                                    "name": user[0],
-                                            "image_url": user[1],
-                                                    "comment": trip[24]
-                                                        }
-                                                            for user in usersOwnTheirComments
-                                                            ]
-                    
+                        {"name": user[0], "image_url": user[1], "comment": trip[24]}
+                        for user in usersOwnTheirComments
+                    ],
                 }
             )
-
-        return {"Status": True, "trips": trips}
+        response = {"Status":True, "trips":trips}
+        try:
+            redis_client.setex(
+                CACHE_KEY,
+                CACHE_TTL,
+                json.dumps(
+                    jsonable_encoder(response),
+                    ensure_ascii = False
+                )
+            )
+        except Exception as e:
+            print(f"Redis save Error: {str(e)}")
+        return response
     except Exception as e:
         return {"Status": False, "Error": "An error occurred"}
     finally:

@@ -42,8 +42,6 @@ async def trips(
         if not tripValidation["Status"]:
             return tripValidation
 
-            
-
         selected_data = json.loads(selected) if isinstance(selected, str) else selected
 
         cepResult = tripValidation["cepVerificationResult"]

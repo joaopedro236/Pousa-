@@ -2,6 +2,7 @@ import "./userDashboard.css";
 import updateImage from "../../Requests/uploadImage";
 import cards from "./cardsUsers";
 import deleteAccount from "../../Requests/deleteAccount";
+import logOut from "../../Requests/logout"
 import { useState, useEffect } from "react";
 import photoUser from "../../assets/user.png";
 import Cookies from "js-cookie"
@@ -9,14 +10,7 @@ export default function User({ user, itemsNavbar, userData }) {
   const [activeFile, setActiveFile] = useState(false);
   const [photo, setPhoto] = useState(null);
 
-  const logOut = () => {
-    try {
-      Cookies.remove("user_session_token")
-      window.location.reload()
-    } catch (error) {
-      console.error(error);
-    }
-  };
+  
 
   const handleFile = async (event) => {
     const file = event.target.files[0];

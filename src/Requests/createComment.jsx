@@ -12,7 +12,7 @@ export default async function createComment(selectedTrip,message, note){
                 note: Number(note)
             })
         })
-        const data = response.json()
+        const data = await response.json()
         if(data?.Error) {
             console.error(data?.Error)
         }
