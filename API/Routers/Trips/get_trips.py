@@ -54,7 +54,7 @@ def get_trips():
                             "name": user[0],
                                     "image_url": user[1]
                                         }
-                                            for user in users
+                                            for user in usersOwnTheirComments
                                             }
             
             trips.append(
